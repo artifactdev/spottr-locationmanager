@@ -130,12 +130,6 @@ function addMarkers(map,json) {
             }
         });
     }
-
-    var options = {
-      map: "#map"
-    };
-        
-    $("#location").geocomplete(options);
         
 }
 

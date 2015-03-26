@@ -4,14 +4,6 @@
             <div class="form-group">
                 <input type="text" class="form-control" id="keyword" placeholder="Enter Keyword">
             </div>
-            <!-- /.form-group -->
-            <div class="form-group">
-                <div class="input-group location">
-                    <input type="text" class="form-control" id="location" placeholder="Enter Location">
-                    <span class="input-group-addon"><i class="fa fa-map-marker geolocation" data-toggle="tooltip" data-placement="bottom" title="Find my position"></i></span>
-                </div>
-            </div>
-            <!-- /.form-group -->
             <div class="form-group">
                 <select name="category" id="category-filter" title="Select Category" data-live-search="true">
                     <option value="industrie">Industrie</option>

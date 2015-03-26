@@ -572,19 +572,6 @@
   animation: fade_in_animation .5s forwards;
 }
 
-@-webkit-keyframes fadeInMarker {
-  from {
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-    opacity: 0;
-    margin-bottom: -10px;
-  }
-  to {
-    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
-    opacity: 1;
-    margin-bottom: 0px;
-  }
-}
-
 @keyframes fadeInMarker {
   from {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
@@ -3562,7 +3549,7 @@ body.map-fullscreen #map {
   width: 94.1%;
 }
 .search-bar.horizontal .main-search.narrow.inputs-2 .input-row > .form-group {
-  width: 46.3%;
+  width: 45.8%;
 }
 .search-bar.horizontal .main-search.narrow.inputs-3 .input-row > .form-group {
   width: 30.5%;
@@ -3581,7 +3568,7 @@ body.map-fullscreen #map {
   width: 95%;
 }
 .search-bar.horizontal .main-search.inputs-2 .input-row > .form-group {
-  width: 47%;
+  width: 45.8%;
 }
 .search-bar.horizontal .main-search.inputs-3 .input-row > .form-group {
   width: 30.2%;
