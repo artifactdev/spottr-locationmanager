@@ -1,0 +1,40 @@
+#page-footer {
+  display: table-row;
+  background-color: $base-white;
+  border-top: 2px solid $base-grey-light;
+  height: 1px;
+  margin-top: 30px;
+  padding-top: 50px;
+  position: relative;
+  .inner {
+    padding-top: 60px;
+    
+    .footer-bottom {
+      border-bottom: 2px solid $base-blue;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      margin-top: 20px;
+      padding: 30px;
+      .left {
+        float: left;
+        line-height: 30px;
+      }
+    }
+  }
+}
+
+#page-content {
+  height: auto;
+}
+
+#outer-wrapper, #inner-wrapper, #page-canvas {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+
+#inner-wrapper {
+  -webkit-transition: 0.4s ease-in-out all;
+  transition: 0.4s ease-in-out all;
+  left: 0;
+  position: relative;
+}

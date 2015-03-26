@@ -1,0 +1,138 @@
+.header {
+  -webkit-transition: 0.4s ease-in-out all;
+  transition: 0.4s ease-in-out all;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+  background-color: $base-white;
+  display: table;
+  width: 100%;
+  z-index: 999;
+  position: relative;
+  .wrapper {
+    display: table;
+    padding: 10px 10px;
+    padding-top: 12px;
+    overflow: visible;
+    width: 100%;
+    .brand {
+      display: table-cell;
+      float: left;
+      vertical-align: middle;
+      a {
+        display: block;
+      }
+    }
+    .navigation-items {
+      display: table-cell;
+      float: right;
+      vertical-align: middle;
+      .wrapper {
+        float: right;
+        top: -2px;
+        ul {
+          list-style: none;
+          margin-bottom: 0;
+          padding-left: 0;
+          li {
+            display: inline-block;
+            margin-left: 10px;
+            a {
+              color: $base-grey;
+              font-size: 14px;
+              &:hover {
+                color: $base-blue;
+              }
+            }
+          }
+        }
+        .submit-item {
+          display: block;
+          margin-left: 5px;
+          position: relative;
+          &:hover .content {
+            visibility: visible;
+            filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+            opacity: 1;
+            right: 40px;
+          }
+          .content {
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+            opacity: 0;
+            -moz-transition: all 0.4s cubic-bezier(0.42, 0, 0.06, 0.99) 0s;
+            -webkit-transition: all 0.4s cubic-bezier(0.42, 0, 0.06, 0.99);
+            -webkit-transition-delay: 0s;
+            -webkit-transition: all 0.4s cubic-bezier(0.42, 0, 0.06, 0.99) 0s;
+            transition: all 0.4s cubic-bezier(0.42, 0, 0.06, 0.99) 0s;
+            background-color: $base-grey;
+            color: $base-white;
+            display: inline-block;
+            font-weight: bold;
+            white-space: nowrap;
+            vertical-align: middle;
+            padding: 5px 10px;
+            position: absolute;
+            right: 30px;
+            top: -2px;
+            visibility: hidden;
+            &:after {
+              content: "";
+              width: 0;
+              height: 0;
+              border-style: solid;
+              border-width: 4px 0 4px 5px;
+              border-color: transparent transparent transparent $base-grey;
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              margin: auto;
+              right: -5px;
+            }
+          }
+          .icon {
+            border-radius: 50%;
+            background-color: $base-blue;
+            display: inline-block;
+            height: 26px;
+            margin-left: 5px;
+            text-align: center;
+            width: 26px;
+            i {
+              color: $base-white;
+              font-size: 10px;
+              line-height: 27px;
+            }
+          }
+        }
+        .user-area {
+          margin-right: 10px;
+          display: inline-block;
+          a, span {
+            -webkit-transition: 0.4s;
+            transition: 0.4s;
+            cursor: pointer;
+            font-size: 12px;
+          }
+          a:hover, span:hover {
+            color: $base-blue;
+          }
+          i {
+            border-radius: 50%;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            color: $base-blue;
+            padding: 5px 6px;
+            vertical-align: middle;
+            &:hover {
+              border-color: rgba(0, 0, 0, 0.2);
+            }
+          }
+        }
+        .main-navigation, .submit-item {
+          display: inline-block;
+        }
+      }
+    }
+    .expandable-content {
+      height: 0;
+      margin-bottom: 0;
+    }
+  }
+}

@@ -1,0 +1,64 @@
+.rating {
+  display: table;
+  font-size: 12px;
+  margin: 3px 0;
+  aside {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+    opacity: 0.6;
+    display: inline-block;
+  }
+  img, .inner img {
+    background-color: $base-blue;
+  }
+  .stars {
+    float: left;
+    .fa {
+      -webkit-transition: 0.4s;
+      transition: 0.4s;
+      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+      opacity: 0.3;
+      color: $base-grey-middle;
+      font-size: 11px;
+      margin-right: 2px;
+      &.active {
+        filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+        opacity: 1;
+        color: $base-blue;
+      }
+    }
+  }
+  &.big {
+    .stars .fa {
+      font-size: 21px;
+    }
+    .reviews {
+      position: relative;
+      top: 3px;
+    }
+  }
+  &.color .stars .fa.active {
+    color: $base-blue;
+  }
+  &.active .stars .fa {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+    opacity: 0.3;
+    color: $base-grey;
+    cursor: pointer;
+    &.hover {
+      filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+      opacity: 1;
+      color: $base-blue;
+    }
+    &.active {
+      filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+      opacity: 1;
+      color: $base-blue !important;
+    }
+  }
+  &.stars-hidden i {
+    display: none;
+    &.active {
+      display: inline-block;
+    }
+  }
+}

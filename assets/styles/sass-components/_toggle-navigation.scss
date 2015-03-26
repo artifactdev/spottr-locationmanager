@@ -1,0 +1,42 @@
+.toggle-navigation {
+  display: inline-block;
+  height: 12px;
+  margin: 0px 0px 5px 10px;
+  position: relative;
+  &:hover {
+    cursor: pointer;
+    .icon .line {
+      background-color: $base-blue;
+      &:first-child {
+        -ms-transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+        position: relative;
+        top: 5px;
+      }
+      &:nth-child(2) {
+        filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+        opacity: 0;
+      }
+      &:last-child {
+        -ms-transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        position: relative;
+        top: -5px;
+      }
+    }
+  }
+  .icon {
+    padding: 7px;
+    .line {
+      -webkit-transition: 0.2s ease-in-out all;
+      transition: 0.2s ease-in-out all;
+      background-color: $base-grey;
+      direction: block;
+      height: 2px;
+      margin-bottom: 3px;
+      width: 15px;
+    }
+  }
+}
