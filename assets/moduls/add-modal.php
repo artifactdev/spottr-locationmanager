@@ -24,6 +24,9 @@
                     <option value="Gebaeude">Gebäude</option>
                     <option value="Fabrik">Fabrik</option>
                     <option value="Denkmal">Denkmal</option>
+                    <option value="Park">Park</option>
+                    <option value="Brücke">Brücke</option>
+                    <option value="Andere">Andere</option>
                 </select>
 
                 <input type="text" placeholder="Rating 1-5" name="rating"/>
