@@ -88,7 +88,8 @@ function fancySelect() {
 
 function showModal() {
     $('body').on('click','.results .item a', function(id) {
-        modalHandler($(this));
+        var metaItem = $(this).closest('.quick-preview');
+        modalHandler(metaItem);
          
     });
 
