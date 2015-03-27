@@ -20,7 +20,7 @@ function drawInfobox(category, infoboxContent, json, i){
         else                            { iso = '' }
     if(json.data[i].rating)             { var rating = json.data[i].rating }
         else                            { rating = '' }
-    if(json.data[i].gallery[0])         { var gallery = json.data[i].gallery[0] }
+    if(json.data[i].gallery)         { var gallery = json.data[i].gallery }
         else                            { gallery[0] = '../img/default-item.jpg' }
     
     var ibContent = '';

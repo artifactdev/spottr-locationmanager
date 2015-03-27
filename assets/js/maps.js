@@ -117,7 +117,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
                         newMarkers[i].content.className = 'marker-active marker-loaded';
                         markerClicked = 1;
                     }
-                    openItemModal();
+                    showModal();
                 }
             })(marker, i));
 
@@ -211,7 +211,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
 
             $.each(json.data, function(a) {
                 if( map.getBounds().contains( new google.maps.LatLng( json.data[a].latitude, json.data[a].longitude ) ) ) {
-                    is_cached(json.data[a].gallery[0], a);
+                    is_cached(json.data[a].gallery, a);
                 }
             });
 
@@ -356,13 +356,11 @@ function pushItemsToArray(json, a, category, visibleItemsArray){
                         '<div class="item-specific">' +
                             drawItemSpecific(category, json, a) +
                         '</div>' +
-                        '<img src="' + json.data[a].gallery[0] + '" alt="">' +
+                        '<img src="' + json.data[a].gallery + '" alt="">' +
                     '</div>' +
                 '</a>' +
                 '<div class="wrapper">' +
                     '<a href="#" id="' + json.data[a].id + '"><h3>' + json.data[a].title + '</h3></a>' +
-                    '<figure>' + json.data[a].location + '</figure>' +
-                    drawPrice(json.data[a].price) +
                     '<div class="info">' +
                         '<div class="type">' +
                             '<i><img src="' + json.data[a].type_icon + '" alt=""></i>' +
@@ -374,16 +372,6 @@ function pushItemsToArray(json, a, category, visibleItemsArray){
             '</div>' +
         '</li>'
     );
-
-    function drawPrice(price){
-        if( price ){
-            itemPrice = '<div class="price">' + price +  '</div>';
-            return itemPrice;
-        }
-        else {
-            return '';
-        }
-    }
 }
 
 // Center map to marker position if function is called (disabled) ------------------------------------------------------

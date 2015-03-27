@@ -8,13 +8,11 @@
                 <input name="datei" type="file" id="file" size="50" maxlength="100000" >
 
                 <select name="category">
-                    <option value="industry">Industrie</option>
-                    <option value="ruine">Ruine</option>
-                    <option value="outdoor">Outdoor</option>
+                    <option value="Industrie">Industrie</option>
+                    <option value="Ruine">Ruine</option>
+                    <option value="Outdoor">Outdoor</option>
                     
                 </select>
-
-                <input type="text" placeholder="Location" name="location"/>
 
                 <input type="text"  id="geocomplete" placeholder="Search Address" name="search_adress"/>
 
@@ -22,16 +20,21 @@
 
                 <input id="lat" name="lat" type="text" value="" placeholder="Latitude">
 
-                <input type="text" placeholder="Titel" name="title"/>
-
                 <select name="type">
-                    <option value="industry">Industrie</option>
-                    <option value="ruine">Ruine</option>
-                    <option value="outdoor">Outdoor</option>
-                    
+                    <option value="Gebaeude">Gebäude</option>
+                    <option value="Fabrik">Fabrik</option>
+                    <option value="Denkmal">Denkmal</option>
                 </select>
 
                 <input type="text" placeholder="Rating 1-5" name="rating"/>
+
+                <input type="hidden" name="aperture"/>
+
+                <input type="hidden" name="date"/>
+
+                <input type="hidden" name="focal"/>
+
+                <input type="hidden" name="iso"/>
 
                 <button type="submit" class="btn btn-default full-width">Eintrag speichern</button>
             </form>

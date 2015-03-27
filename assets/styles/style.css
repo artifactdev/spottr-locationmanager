@@ -2934,7 +2934,7 @@ body.map-fullscreen #map {
   width: auto;
   position: relative;
   top: 100px;
-  z-index: 1;
+  z-index: 1000;
 }
 .modal-window .modal-wrapper > h2, .modal-window .modal-wrapper > h3 {
   color: #fff;
@@ -3097,7 +3097,7 @@ body.map-fullscreen #map {
   background-color: rgba(0, 0, 0, 0.7);
   height: 100%;
   position: fixed;
-  z-index: 0;
+  z-index: -1;
   width: 100%;
   top: 0;
   left: 0;

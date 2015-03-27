@@ -51,11 +51,6 @@
                         <!-- end Map Canvas-->
                     </div>
                     <!-- end Page Canvas-->
-                    <!--Page Footer-->
-                    <?php 
-                        include 'assets/moduls/footer.php';
-                    ?>
-                    <!--end Page Footer-->
                 </div>
                 <!-- end Inner Wrapper -->
             </div>

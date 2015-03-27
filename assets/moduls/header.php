@@ -5,10 +5,6 @@
                 </div>
                 <nav class="navigation-items">
                     <div class="wrapper">
-                        <ul class="main-navigation navigation-top-header"></ul>
-                        <ul class="user-area">
-                            <li><a href="sign-in.html">Sign In</a></li>
-                        </ul>
                         <a href="#" class="submit-item">
                             <div class="content"><span>Submit Your Item</span></div>
                             <div class="icon">

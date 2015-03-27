@@ -4,115 +4,97 @@
             "id": 1,
             "category": "industrie",
             "title": "Location 1",
-            "location": "63 Birch Street",
             "latitude": 51.541216,
             "longitude": -0.094538,
-            "url": "item-detail.html",
-            "type": "Fabrik",
             "type_icon": "assets/icons/store/apparel/umbrella-2.png",
             "rating": 4,
-            "gallery":
-                [
-                    "assets/img/items/1.jpg"
-                ],
+            "gallery": "assets/img/items/1.jpg",
             "date_created": "2014-11-03",
-            "color": "",
-            "rating": 5
+            "rating": 5,
+            "aperture": 4,
+            "focal": 3,
+            "iso": 100,
+            "type": "Fabrik"
         },
         {
             "id": 2,
             "category": "outdoor",
             "title": "Location 2",
-            "location": "63 Birch Street",
             "latitude": 51.541216,
             "longitude": -0.097478,
-            "url": "item-detail.html",
-            "type": "Park",
             "type_icon": "assets/icons/store/apparel/umbrella-2.png",
             "rating": 4,
-            "gallery":
-                [
-                    "assets/img/items/2.jpg"
-                ],
+            "gallery": "assets/img/items/2.jpg",
             "date_created": "2014-11-03",
-            "color": "",
-            "rating": 5
+            "rating": 5,
+            "aperture": 4,
+            "focal": 3,
+            "iso": 100,
+            "type": "Fabrik"
         },
         {
             "id": 3,
             "category": "ruine",
             "title": "Location 3",
-            "location": "63 Birch Street",
             "latitude": 51.541216,
             "longitude": -0.092978,
-            "url": "item-detail.html",
-            "type": "Fabrik",
             "type_icon": "assets/icons/store/apparel/umbrella-2.png",
             "rating": 4,
-            "gallery":
-                [
-                    "assets/img/items/3.jpg"
-                ],
+            "gallery": "assets/img/items/3.jpg",
             "date_created": "2014-11-03",
-            "color": "",
-            "rating": 5
+            "rating": 5,
+            "aperture": 4,
+            "focal": 3,
+            "iso": 100,
+            "type": "Fabrik"
         },
         {
             "id": 4,
             "category": "outdoor",
             "title": "Location 4",
-            "location": "63 Birch Street",
             "latitude": 51.541216,
             "longitude": -0.095348,
-            "url": "item-detail.html",
-            "type": "Park",
             "type_icon": "assets/icons/store/apparel/umbrella-2.png",
             "rating": 4,
-            "gallery":
-                [
-                    "assets/img/items/4.jpg"
-                ],
+            "gallery": "assets/img/items/4.jpg",
             "date_created": "2014-11-03",
-            "color": "",
-            "rating": 5
+            "rating": 5,
+            "aperture": 4,
+            "focal": 3,
+            "iso": 100,
+            "type": "Fabrik"
         },
         {
             "id": 5,
             "category": "outdoor",
             "title": "Location 5",
-            "location": "63 Birch Street",
             "latitude": 51.541216,
             "longitude": -0.086678,
-            "url": "item-detail.html",
-            "type": "Park",
             "type_icon": "assets/icons/store/apparel/umbrella-2.png",
             "rating": 4,
-            "gallery":
-                [
-                    "assets/img/items/5.jpg"
-                ],
+            "gallery": "assets/img/items/5.jpg",
             "date_created": "2014-11-03",
-            "color": "",
-            "rating": 5
+            "rating": 5,
+            "aperture": 4,
+            "focal": 3,
+            "iso": 100,
+            "type": "Fabrik"
         },
         {
             "id": 6,
             "category": "outdoor",
             "title": "Location 6",
-            "location": "63 Birch Street",
             "latitude": 51.541576,
             "longitude": -0.095678,
-            "url": "item-detail.html",
-            "type": "Park",
             "type_icon": "assets/icons/store/apparel/umbrella-2.png",
             "rating": 4,
-            "gallery":
-                [
-                    "assets/img/items/6.jpg"
-                ],
+            "gallery": "assets/img/items/6.jpg",
             "date_created": "2014-11-03",
-            "color": "",
-            "rating": 5
+            "rating": 5,
+            "aperture": 4,
+            "focal": 3,
+            "iso": 100,
+            "type": "Fabrik"
         }
 
     ]

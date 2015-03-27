@@ -254,12 +254,12 @@ function pushItemsToArray(json, a, category, visibleItemsArray){
                         '<div class="item-specific">' +
                             drawItemSpecific(category, json, a) +
                         '</div>' +
-                        '<img src="' + json.data[a].gallery[0] + '" alt="">' +
+                        '<img src="' + json.data[a].gallery + '" alt="">' +
                     '</div>' +
                 '</a>' +
                 '<div class="wrapper">' +
                     '<a href="#" class="quick-preview" id="' + json.data[a].id + '" data-gallery="' + json.data[a].gallery + '" data-title="' + json.data[a].title +'" data-type="' + json.data[a].type +'"  data-category="' + json.data[a].category +'" data-location="' + json.data[a].location +'" data-aperture="' + json.data[a].aperture +'" data-date="' + json.data[a].date +'" data-focal="' + json.data[a].focal +'" data-iso="' + json.data[a].iso +'" data-rating="' + json.data[a].rating +'"><h3>' + json.data[a].title + '</h3></a>' +
-                    '<figure>' + json.data[a].location + '</figure>' +
+                    '<figure>' + json.data[a].category + '</figure>' +
                     '<div class="info">' +
                         '<div class="type">' +
                             '<i><img src="' + json.data[a].type_icon + '" alt=""></i>' +
