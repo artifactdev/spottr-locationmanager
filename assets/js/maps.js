@@ -47,7 +47,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
             var markerContent = document.createElement('DIV');
             if( json.data[i].featured == 1 ) {
                 markerContent.innerHTML =
-                    '<div class="map-marker featured' + color + '">' +
+                    '<div class="map-marker featured">' +
                         '<div class="icon">' +
                         '<img src="' + json.data[i].type_icon +  '">' +
                         '</div>' +
@@ -55,7 +55,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
             }
             else {
                 markerContent.innerHTML =
-                    '<div class="map-marker ' + json.data[i].color + '">' +
+                    '<div class="map-marker">' +
                         '<div class="icon">' +
                         '<img src="' + json.data[i].type_icon +  '">' +
                         '</div>' +
@@ -117,6 +117,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
                         newMarkers[i].content.className = 'marker-active marker-loaded';
                         markerClicked = 1;
                     }
+                    openItemModal();
                 }
             })(marker, i));
 
@@ -169,10 +170,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
         ];
 
         var markerCluster = new MarkerClusterer(map, newMarkers, { styles: clusterStyles, maxZoom: 19 });
-        markerCluster.onClick = function(clickedClusterIcon, sameLatitude, sameLongitude) {
-            return multiChoice(sameLatitude, sameLongitude, json);
-        };
-
+        
         // Dynamic loading markers and data from JSON ----------------------------------------------------------------------
 
         google.maps.event.addListener(map, 'idle', function() {
@@ -252,71 +250,6 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
                 });
             }
         }
-
-        // Geolocation of user -----------------------------------------------------------------------------------------
-
-        $('.geolocation').on("click", function() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(success);
-            } else {
-                console.log('Geo Location is not supported');
-            }
-        });
-
-        function success(position) {
-            var locationCenter = new google.maps.LatLng( position.coords.latitude, position.coords.longitude);
-            map.setCenter( locationCenter );
-            map.setZoom(14);
-
-            var geocoder = new google.maps.Geocoder();
-            geocoder.geocode({
-                "latLng": locationCenter
-            }, function (results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    var lat = results[0].geometry.location.lat(),
-                        lng = results[0].geometry.location.lng(),
-                        placeName = results[0].address_components[0].long_name,
-                        latlng = new google.maps.LatLng(lat, lng);
-
-                    $("#location").val(results[0].formatted_address);
-                }
-            });
-
-        }
-
-        // Autocomplete address ----------------------------------------------------------------------------------------
-
-        var input = document.getElementById('location') ;
-        var autocomplete = new google.maps.places.Autocomplete(input, {
-            types: ["geocode"]
-        });
-        autocomplete.bindTo('bounds', map);
-        google.maps.event.addListener(autocomplete, 'place_changed', function() {
-            var place = autocomplete.getPlace();
-            if (!place.geometry) {
-                return;
-            }
-            if (place.geometry.viewport) {
-                map.fitBounds(place.geometry.viewport);
-                map.setZoom(14);
-            } else {
-                map.setCenter(place.geometry.location);
-                map.setZoom(14);
-            }
-
-            //marker.setPosition(place.geometry.location);
-            //marker.setVisible(true);
-
-            var address = '';
-            if (place.address_components) {
-                address = [
-                    (place.address_components[0] && place.address_components[0].short_name || ''),
-                    (place.address_components[1] && place.address_components[1].short_name || ''),
-                    (place.address_components[2] && place.address_components[2].short_name || '')
-                ].join(' ');
-            }
-        });
-
 
     }
 }
@@ -464,29 +397,6 @@ function centerMapToMarker(){
             map.setCenter(mapCenter);
         }
     });
-}
-
-// Create modal if more items are on the same location (example: one building with floors) -----------------------------
-
-function multiChoice(sameLatitude, sameLongitude, json) {
-    //if (clickedCluster.getMarkers().length > 1){
-        var multipleItems = [];
-        $.each(json.data, function(a) {
-            if( json.data[a].latitude == sameLatitude && json.data[a].longitude == sameLongitude ) {
-                pushItemsToArray(json, a, json.data[a].category, multipleItems);
-            }
-        });
-        $('body').append('<div class="modal-window multichoice fade_in"></div>');
-        $('.modal-window').load( 'assets/external/_modal-multichoice.html', function() {
-            $('.modal-window .modal-wrapper .items').html( multipleItems );
-        });
-        $('.modal-window .modal-background, .modal-close').live('click',  function(e){
-            $('.modal-window').addClass('fade_out');
-            setTimeout(function() {
-                $('.modal-window').remove();
-            }, 300);
-        });
-    //}
 }
 
 // Redraw map after item list is closed --------------------------------------------------------------------------------

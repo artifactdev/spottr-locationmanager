@@ -88,8 +88,20 @@ function fancySelect() {
 
 function showModal() {
     $('body').on('click','.results .item a', function(id) {
-        $('#modal').removeClass('hide');
-        $('#modal').addClass('fade-in');
+        var metaElement = $(this);
+        
+        fillModal(metaElement);
+
+        var modal = $('#modal');
+
+        modal.removeClass('hide');
+        modal.addClass('fade-in');
+
+        $('#modal .modal-close').on('click', function(){
+
+            modal.addClass('hide');
+            modal.removeClass('fade-in');
+        });
          
     });
 
@@ -144,35 +156,6 @@ function drawItemSpecific(category, json, a){
 
 function addMap(_longitude,_latitude,json) {
     createHomepageGoogleMap(_latitude,_longitude,json);
-
-/*function createSidebar(json) {
-    for (var i = 0; i < json.data.length; i++) {
-        $('.items-list .results').append(
-            '<li data-category="' + json.data[i].category + '">' +
-                '<div class="item" id="' + json.data[i].id + '">' +
-                    '<a href="#" class="image">' +
-                        '<div class="inner">' +
-                            '<div class="item-specific">' +
-                                //drawItemSpecific(category, json, a) +
-                            '</div>' +
-                            '<img src="' + json.data[i].gallery[0] + '" alt="">' +
-                        '</div>' +
-                    '</a>' +
-                    '<div class="wrapper">' +
-                        '<a href="#" id="' + json.data[i].id + '"><h3>' + json.data[i].title + '</h3></a>' +
-                        '<figure>' + json.data[i].location + '</figure>' +
-                        '<div class="info">' +
-                            '<div class="type">' +
-                                '<i><img src="' + json.data[i].type_icon + '" alt=""></i>' +
-                                '<span>' + json.data[i].type + '</span>' +
-                            '</div>' +
-                            '<div class="rating" data-rating="' + json.data[i].rating + '"></div>' +
-                        '</div>' +
-                    '</div>' +
-                '</div>' +
-            '</li>'
-        );
-    } */
 }
 
 function setInputsWidth(){
@@ -275,9 +258,8 @@ function pushItemsToArray(json, a, category, visibleItemsArray){
                     '</div>' +
                 '</a>' +
                 '<div class="wrapper">' +
-                    '<a href="#" id="' + json.data[a].id + '"><h3>' + json.data[a].title + '</h3></a>' +
+                    '<a href="#" class="quick-preview" id="' + json.data[a].id + '" data-gallery="' + json.data[a].gallery + '" data-title="' + json.data[a].title +'" data-type="' + json.data[a].type +'"  data-category="' + json.data[a].category +'" data-location="' + json.data[a].location +'" data-aperture="' + json.data[a].aperture +'" data-date="' + json.data[a].date +'" data-focal="' + json.data[a].focal +'" data-iso="' + json.data[a].iso +'" data-rating="' + json.data[a].rating +'"><h3>' + json.data[a].title + '</h3></a>' +
                     '<figure>' + json.data[a].location + '</figure>' +
-                    drawPrice(json.data[a].price) +
                     '<div class="info">' +
                         '<div class="type">' +
                             '<i><img src="' + json.data[a].type_icon + '" alt=""></i>' +
@@ -299,4 +281,18 @@ function pushItemsToArray(json, a, category, visibleItemsArray){
             return '';
         }
     }
+}
+
+// Create modal with item-detauls -----------------------------
+
+function fillModal(metaElement) {
+
+    var modal = $('#modal');
+
+    var title = metaElement.data('title');
+    var gallery = metaElement.data('gallery')
+
+    modal.find('.title').text(title);
+    modal.find('.gallery-image').attr('src', gallery);
+
 }
