@@ -34,7 +34,6 @@ function initMap() {
 
     $.getJSON(jsonPath)
         .done(function(json) {
-            createSidebar(json);
             addMap(_longitude,_latitude,json);
         })
         .fail(function( jqxhr, textStatus, error ) {
@@ -107,170 +106,46 @@ function showModal() {
         });
 }
 
+function drawItemSpecific(category, json, a){
+    var itemSpecific = '';
+    if( category ){
+        if( category == 'real_estate' ){
+            if( json.data[a].item_specific ){
+                if( json.data[a].item_specific.bedrooms ){
+                    itemSpecific += '<span title="Bedrooms"><img src="assets/img/bedrooms.png">' + json.data[a].item_specific.bedrooms + '</span>';
+                }
+                if( json.data[a].item_specific.bathrooms ){
+                    itemSpecific += '<span title="Bathrooms"><img src="assets/img/bathrooms.png">' + json.data[a].item_specific.bathrooms + '</span>';
+                }
+                if( json.data[a].item_specific.area ){
+                    itemSpecific += '<span title="Area"><img src="assets/img/area.png">' + json.data[a].item_specific.area + '<sup>2</sup></span>';
+                }
+                if( json.data[a].item_specific.garages ){
+                    itemSpecific += '<span title="Garages"><img src="assets/img/garages.png">' + json.data[a].item_specific.garages + '</span>';
+                }
+                return itemSpecific;
+            }
+        }
+        else if ( category == 'bar_restaurant' ){
+            if( json.data[a].item_specific ){
+                if( json.data[a].item_specific.menu ){
+                    itemSpecific += '<span>Menu from: ' + json.data[a].item_specific.menu + '</span>';
+                }
+                return itemSpecific;
+            }
+            return itemSpecific;
+        }
+    }
+    else {
+        return '';
+    }
+    return '';
+}
+
 function addMap(_longitude,_latitude,json) {
-    $.get("assets/external/_infobox.js", function() {
-        gMap();
-    });
+    createHomepageGoogleMap(_latitude,_longitude,json);
 
-    function gMap() {
-        var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visibility":"simplified"},{"lightness":20}]},{"featureType":"administrative.land_parcel","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"landscape.man_made","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"transit","elementType":"all","stylers":[{"saturation":-100},{"visibility":"on"},{"lightness":10}]},{"featureType":"road.local","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"road.local","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"labels","stylers":[{"visibility":"simplified"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":50}]},{"featureType":"water","elementType":"all","stylers":[{"hue":"#a1cdfc"},{"saturation":30},{"lightness":49}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"hue":"#f49935"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"hue":"#fad959"}]}, {featureType:'road.highway',elementType:'all',stylers:[{hue:'#dddbd7'},{saturation:-92},{lightness:60},{visibility:'on'}]}, {featureType:'landscape.natural',elementType:'all',stylers:[{hue:'#c8c6c3'},{saturation:-71},{lightness:-18},{visibility:'on'}]},  {featureType:'poi',elementType:'all',stylers:[{hue:'#d9d5cd'},{saturation:-70},{lightness:20},{visibility:'on'}]} ];
-
-        var mapCenter = new google.maps.LatLng(_latitude,_longitude);
-        var mapOptions = {
-            zoom: 14,
-            center: mapCenter,
-            disableDefaultUI: false,
-            scrollwheel: false,
-            styles: mapStyles,
-            mapTypeControlOptions: {
-                style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-                position: google.maps.ControlPosition.BOTTOM_CENTER
-            },
-            panControl: false,
-            zoomControl: true,
-            zoomControlOptions: {
-                style: google.maps.ZoomControlStyle.LARGE,
-                position: google.maps.ControlPosition.RIGHT_TOP
-            }
-        };
-        var mapElement = document.getElementById('map');
-        var map = new google.maps.Map(mapElement, mapOptions);
-        var newMarkers = [];
-        var markerClicked = 0;
-        var activeMarker = false;
-        var lastClicked = false;
-
-       addMarkers(map,newMarkers,json);
-    }
-}
-
-function addMarkers(map,newMarkers,json) {
-    for (var i = 0; i < json.data.length; i++) {
-        if( json.data[i].color ) var color = json.data[i].color;
-        else color = '';
-
-        var markerContent = document.createElement('DIV');
-        if( json.data[i].featured == 1 ) {
-            markerContent.innerHTML =
-                '<div class="map-marker featured' + color + '">' +
-                    '<div class="icon">' +
-                    '<img src="' + json.data[i].type_icon +  '">' +
-                    '</div>' +
-                '</div>';
-        }
-        else {
-            markerContent.innerHTML =
-                '<div class="map-marker ' + json.data[i].color + '">' +
-                    '<div class="icon">' +
-                    '<img src="' + json.data[i].type_icon +  '">' +
-                    '</div>' +
-                '</div>';
-        }
-
-        var marker = new RichMarker({
-                position: new google.maps.LatLng( json.data[i].latitude, json.data[i].longitude ),
-                map: map,
-                draggable: false,
-                content: markerContent,
-                flat: true
-            });
-
-            newMarkers.push(marker);
-
-            if( json.data[i].color ) var color = json.data[i].color;
-            else color = '';
-
-            var markerContent = document.createElement('DIV');
-            if( json.data[i].featured == 1 ) {
-                markerContent.innerHTML =
-                    '<div class="map-marker featured' + color + '">' +
-                        '<div class="icon">' +
-                        '<img src="' + json.data[i].type_icon +  '">' +
-                        '</div>' +
-                    '</div>';
-            }
-            else {
-                markerContent.innerHTML =
-                    '<div class="map-marker ' + json.data[i].color + '">' +
-                        '<div class="icon">' +
-                        '<img src="' + json.data[i].type_icon +  '">' +
-                        '</div>' +
-                    '</div>';
-            }
-
-            // Create marker on the map ------------------------------------------------------------------------------------
-
-            var marker = new RichMarker({
-                position: new google.maps.LatLng( json.data[i].latitude, json.data[i].longitude ),
-                map: map,
-                draggable: false,
-                content: markerContent,
-                flat: true
-            });
-
-            newMarkers.push(marker);
-
-            // Create infobox for marker -----------------------------------------------------------------------------------
-
-            var infoboxContent = document.createElement("div");
-            var infoboxOptions = {
-                content: infoboxContent,
-                disableAutoPan: false,
-                pixelOffset: new google.maps.Size(-18, -42),
-                zIndex: null,
-                alignBottom: true,
-                boxClass: "infobox",
-                enableEventPropagation: true,
-                closeBoxMargin: "0px 0px -30px 0px",
-                closeBoxURL: "assets/img/close.png",
-                infoBoxClearance: new google.maps.Size(1, 1)
-            };
-
-            // Infobox HTML element ----------------------------------------------------------------------------------------
-
-            var category = json.data[i].category;
-            infoboxContent.innerHTML = drawInfobox(category, infoboxContent, json, i);
-
-            // Create new markers ------------------------------------------------------------------------------------------
-
-            newMarkers[i].infobox = new InfoBox(infoboxOptions);
-
-            // Show infobox after click ------------------------------------------------------------------------------------
-
-            google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                return function() {
-                    google.maps.event.addListener(map, 'click', function(event) {
-                        lastClicked = newMarkers[i];
-                    });
-                    activeMarker = newMarkers[i];
-                    if( activeMarker != lastClicked ){
-                        for (var h = 0; h < newMarkers.length; h++) {
-                            newMarkers[h].content.className = 'marker-loaded';
-                            newMarkers[h].infobox.close();
-                        }
-                        newMarkers[i].infobox.open(map, this);
-                        newMarkers[i].infobox.setOptions({ boxClass:'fade-in-marker'});
-                        newMarkers[i].content.className = 'marker-active marker-loaded';
-                        markerClicked = 1;
-                    }
-                }
-            })(marker, i));
-
-            // Fade infobox after close is clicked -------------------------------------------------------------------------
-
-            google.maps.event.addListener(newMarkers[i].infobox, 'closeclick', (function(marker, i) {
-                return function() {
-                    activeMarker = 0;
-                    newMarkers[i].content.className = 'marker-loaded';
-                    newMarkers[i].infobox.setOptions({ boxClass:'fade-out-marker' });
-                }
-            })(marker, i));
-
-    }
-        
-}
-
-function createSidebar(json) {
+/*function createSidebar(json) {
     for (var i = 0; i < json.data.length; i++) {
         $('.items-list .results').append(
             '<li data-category="' + json.data[i].category + '">' +
@@ -297,7 +172,7 @@ function createSidebar(json) {
                 '</div>' +
             '</li>'
         );
-    }
+    } */
 }
 
 function setInputsWidth(){
@@ -384,4 +259,44 @@ function loadExifData() {
       catch (e) {
         console.log(e);
       }
+}
+
+function pushItemsToArray(json, a, category, visibleItemsArray){
+    var itemPrice;
+    visibleItemsArray.push(
+        '<li>' +
+            '<div class="item" id="' + json.data[a].id + '">' +
+                '<a href="#" class="image">' +
+                    '<div class="inner">' +
+                        '<div class="item-specific">' +
+                            drawItemSpecific(category, json, a) +
+                        '</div>' +
+                        '<img src="' + json.data[a].gallery[0] + '" alt="">' +
+                    '</div>' +
+                '</a>' +
+                '<div class="wrapper">' +
+                    '<a href="#" id="' + json.data[a].id + '"><h3>' + json.data[a].title + '</h3></a>' +
+                    '<figure>' + json.data[a].location + '</figure>' +
+                    drawPrice(json.data[a].price) +
+                    '<div class="info">' +
+                        '<div class="type">' +
+                            '<i><img src="' + json.data[a].type_icon + '" alt=""></i>' +
+                            '<span>' + json.data[a].type + '</span>' +
+                        '</div>' +
+                        '<div class="rating" data-rating="' + json.data[a].rating + '"></div>' +
+                    '</div>' +
+                '</div>' +
+            '</div>' +
+        '</li>'
+    );
+
+    function drawPrice(price){
+        if( price ){
+            itemPrice = '<div class="price">' + price +  '</div>';
+            return itemPrice;
+        }
+        else {
+            return '';
+        }
+    }
 }

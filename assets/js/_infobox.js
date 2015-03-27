@@ -22,7 +22,7 @@ function drawInfobox(category, infoboxContent, json, i){
     '<div class="infobox ' + color + '">' +
         '<div class="inner">' +
             '<div class="image">' +
-                '<div class="item-specific">' /*+ drawItemSpecific(category, json, i) + */'</div>' +
+                '<div class="item-specific">' + drawItemSpecific(category, json, i) + '</div>' +
                 '<div class="overlay">' +
                     '<div class="wrapper">' +
                         '<a href="#" class="quick-view" data-toggle="modal" data-target="#modal" id="' + id + '">Quick View</a>' +
@@ -38,7 +38,7 @@ function drawInfobox(category, infoboxContent, json, i){
                         '<i class="fa fa-angle-right"></i>' +
                     '</div>' +
                 '</a>' +
-                '<img src="' + gallery +  '">' +
+                '<img src="' + gallery +  '" width="50px">' +
             '</div>' +
         '</div>' +
     '</div>';

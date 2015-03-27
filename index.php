@@ -68,6 +68,9 @@
             <script type="text/javascript" src="./assets/js/jquery.exif.js"></script>
             <script type="text/javascript" src="./assets/js/gmaps.js"></script>
             <script type="text/javascript" src="./assets/js/richmarker.js"></script>
+            <script type="text/javascript" src="./assets/js/infobox.js"></script>
+            <script type="text/javascript" src="./assets/js/markerclusterer.js"></script>
+            <script type="text/javascript" src="./assets/js/maps.js"></script>
             <script type="text/javascript" src="./assets/js/main.js"></script>
  
             
