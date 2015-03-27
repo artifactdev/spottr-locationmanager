@@ -88,7 +88,18 @@ function fancySelect() {
 
 function showModal() {
     $('body').on('click','.results .item a', function(id) {
-        var metaElement = $(this);
+        modalHandler($(this));
+         
+    });
+
+    $('body').on('click','.infobox a', function(e) {
+        e.preventDefault;
+        modalHandler($(this));
+         
+    });
+
+    function modalHandler(item) {
+        var metaElement = item;
         
         fillModal(metaElement);
 
@@ -102,15 +113,7 @@ function showModal() {
             modal.addClass('hide');
             modal.removeClass('fade-in');
         });
-         
-    });
-
-    $('body').find('.results .item a').on('click', function(e) {
-        e.preventDefault;
-        $('#modal').removeClass('hide');
-        $('#modal').addClass('fade-in');
-         
-    });
+    }
 
     $("#geocomplete").geocomplete({
           details: "#add-form",
@@ -119,38 +122,6 @@ function showModal() {
 }
 
 function drawItemSpecific(category, json, a){
-    var itemSpecific = '';
-    if( category ){
-        if( category == 'real_estate' ){
-            if( json.data[a].item_specific ){
-                if( json.data[a].item_specific.bedrooms ){
-                    itemSpecific += '<span title="Bedrooms"><img src="assets/img/bedrooms.png">' + json.data[a].item_specific.bedrooms + '</span>';
-                }
-                if( json.data[a].item_specific.bathrooms ){
-                    itemSpecific += '<span title="Bathrooms"><img src="assets/img/bathrooms.png">' + json.data[a].item_specific.bathrooms + '</span>';
-                }
-                if( json.data[a].item_specific.area ){
-                    itemSpecific += '<span title="Area"><img src="assets/img/area.png">' + json.data[a].item_specific.area + '<sup>2</sup></span>';
-                }
-                if( json.data[a].item_specific.garages ){
-                    itemSpecific += '<span title="Garages"><img src="assets/img/garages.png">' + json.data[a].item_specific.garages + '</span>';
-                }
-                return itemSpecific;
-            }
-        }
-        else if ( category == 'bar_restaurant' ){
-            if( json.data[a].item_specific ){
-                if( json.data[a].item_specific.menu ){
-                    itemSpecific += '<span>Menu from: ' + json.data[a].item_specific.menu + '</span>';
-                }
-                return itemSpecific;
-            }
-            return itemSpecific;
-        }
-    }
-    else {
-        return '';
-    }
     return '';
 }
 
