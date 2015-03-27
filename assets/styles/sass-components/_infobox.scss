@@ -1,0 +1,180 @@
+.infobox {
+  font-family: 'Arial', sans-serif;
+  display: block;
+  width: 295px;
+  position: relative;
+  > img {
+    z-index: 1 !important;
+  }
+  .inner {
+    border-bottom: 35px solid $base-blue;
+    .image {
+      width: 100%;
+      position: relative;
+      .imageWrapper {
+        max-height: 220px;
+        overflow: hidden;
+      }
+      img {
+        width: 100%;
+      }
+      .description {
+        &:hover .meta h2 {
+          color: $base-blue;
+        }
+        .meta {
+          -moz-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+          -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+          background-color: $base-white;
+          bottom: -60px;
+          min-width: 259px;
+          right: 0;
+          padding: 22px;
+          position: absolute;
+          z-index: 1;
+          figure {
+            color: #474747;
+            font-size: 12px;
+          }
+          h2 {
+            -moz-transition: 0.4s;
+            -webkit-transition: 0.4s;
+            transition: 0.4s;
+            color: #474747;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 2px;
+            margin-bottom: 2px;
+            padding: 0;
+            text-transform: none;
+          }
+          i {
+            color: $base-blue;
+            bottom: 0;
+            height: 10px;
+            margin: auto;
+            position: absolute;
+            top: 0;
+            right: 15px;
+          }
+          .type {
+            color: $base-grey-middle;
+            font-size: 11px;
+          }
+        }
+      }
+      .item-specific {
+        filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=95);
+        opacity: 0.95;
+        background-color: rgba(0, 0, 0, 0.8);
+        bottom: 20px;
+        color: $base-white;
+        left: 36px;
+        margin-top: 3px;
+        padding: 5px;
+        position: absolute;
+        height: inherit;
+        width: initial;
+        span {
+          font-size: 11px;
+          margin-right: 10px;
+          img {
+            margin-right: 5px;
+            vertical-align: baseline;
+            width: auto;
+          }
+        }
+      }
+      .overlay {
+        filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+        opacity: 0;
+        -moz-transition: 0.4s;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+        background-color: rgba(0, 0, 0, 0.7);
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        text-align: center;
+        width: 100%;
+        &:hover {
+          filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+          opacity: 1;
+          .wrapper {
+            hr {
+              filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+              opacity: 1;
+              width: 140px;
+            }
+            .detail {
+              filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+              opacity: 1;
+              -moz-transition-delay: 0.1s;
+              -webkit-transition-delay: 0.1s;
+              transition-delay: 0.1s;
+            }
+            .quick-view {
+              filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+              opacity: 1;
+            }
+          }
+        }
+        .wrapper {
+          bottom: 0;
+          left: 0;
+          height: 80px;
+          margin: auto;
+          position: absolute;
+          right: 0;
+          top: 0;
+          width: 100%;
+          a {
+            -moz-transition: 0.2s;
+            -webkit-transition: 0.2s;
+            transition: 0.2s;
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+            opacity: 0;
+            color: $base-white;
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 1;
+            &:hover {
+              color: $base-blue;
+            }
+          }
+          hr {
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+            opacity: 0;
+            -moz-transition: 0.2s;
+            -webkit-transition: 0.2s;
+            transition: 0.2s;
+            border-color: $base-blue;
+            border-width: 2px;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            width: 0px;
+          }
+        }
+      }
+      .price {
+        -moz-border-radius: 0px;
+        -webkit-border-radius: 0px;
+        border-radius: 0px;
+        -moz-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+        -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+        background-color: $base-blue;
+        color: $base-white;
+        font-size: 12px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+        left: 22px;
+        padding: 3px 8px;
+        position: absolute;
+        top: -4px;
+      }
+    }
+  }
+}
