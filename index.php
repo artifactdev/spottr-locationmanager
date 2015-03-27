@@ -60,7 +60,7 @@
                 <!-- end Inner Wrapper -->
             </div>
             <!-- end Outer Wrapper-->
-            <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;libraries=places"></script>
+            <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&amp;libraries=places"></script>
             <script type="text/javascript" src="./assets/js/jquery-2.1.0.min.js"></script>
             <script type="text/javascript" src="./assets/js/bootstrap.min.js"></script>
             <script type="text/javascript" src="./assets/js/bootstrap-select.min.js"></script>
