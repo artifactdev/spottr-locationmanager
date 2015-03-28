@@ -262,9 +262,19 @@ function fillModal(metaElement) {
     var modal = $('#modal');
 
     var title = metaElement.data('title');
-    var gallery = metaElement.data('gallery')
+    var gallery = metaElement.data('gallery');
+    var category = metaElement.data('category');
+    var date = metaElement.data('date_created');
+    var aperture = metaElement.data('aperture');
+    var focal = metaElement.data('focal');
+    var iso = metaElement.data('iso');
 
     modal.find('.title').text(title);
     modal.find('.gallery-image').attr('src', gallery);
+    modal.find('.category').text(category);
+    modal.find('.date').text(date);
+    modal.find('.aperture').text(aperture);
+    modal.find('.focal').text(focal);
+    modal.find('.iso').text(iso);
 
 }
