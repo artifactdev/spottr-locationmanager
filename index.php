@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="./assets/styles/font-awesome.css" type="text/css">
         <link rel="stylesheet" href="./assets/styles/style.css" type="text/css">
         <title>Spottr</title>
-    <body onunload="" class="map-fullscreen page-homepage navigation-off-canvas page-fade-in" id="page-top" data-feedly-mini="yes">
+    <body onunload="" class="map-fullscreen page-homepage navigation-off-canvas page-fade-in login" id="page-top" data-feedly-mini="yes">
         <!-- Outer Wrapper-->
         <div id="outer-wrapper">
             <!-- Inner Wrapper -->

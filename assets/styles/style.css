@@ -1080,13 +1080,9 @@ ul.bullets li a:hover {
   padding-top: 50px;
   position: relative;
 }
-#page-footer .inner {
-  padding-top: 60px;
-}
 #page-footer .inner .footer-bottom {
   border-bottom: 2px solid #4187c9;
   border-top: 1px solid rgba(0, 0, 0, 0.08);
-  margin-top: 20px;
   padding: 30px;
 }
 #page-footer .inner .footer-bottom .left {
@@ -3971,4 +3967,25 @@ body.map-fullscreen #map {
   padding: 3px 8px;
   position: absolute;
   top: -4px;
+}
+
+body.page-login #page-canvas {
+  background: #f4f4f2;
+}
+body.page-login #page-canvas #page-content .login-box {
+  margin: 100px 0 100px -250px;
+  background: #fff;
+  border: 1px solid #f4f4f2;
+  width: 500px;
+  padding: 20px;
+  left: 50%;
+  position: relative;
+}
+body.page-login #page-canvas #page-content .login-box input {
+  margin: 10px 0;
+  box-shadow: 0 0 0;
+  -webkit-box-shadow: 0 0 0;
+  -moz-box-shadow: 0 0 0;
+  border: 1px solid #8d8d8d;
+  width: 100%;
 }

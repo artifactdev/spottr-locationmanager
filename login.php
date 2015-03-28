@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="./assets/styles/font-awesome.css" type="text/css">
         <link rel="stylesheet" href="./assets/styles/style.css" type="text/css">
         <title>Spottr</title>
-    <body onunload="" class="map-fullscreen page-homepage navigation-off-canvas page-fade-in" id="page-top" data-feedly-mini="yes">
+    <body onunload="" class="page-login navigation-off-canvas page-fade-in" id="page-top" data-feedly-mini="yes">
         <!-- Outer Wrapper-->
         <div id="outer-wrapper">
             <!-- Inner Wrapper -->
@@ -24,7 +24,11 @@
                 <div id="page-canvas">
                     <!--Page Content-->
                     <div id="page-content">
-                        
+                        <div class="login-box">
+                            <input type="text" placeholder="Username" />
+                            <input type="password" placeholder="Password" />
+                            <input type="button" class="btn btn-default" value="Login"/>
+                        </div>
                     </div>
                     <!-- end Page Canvas-->
                     <!--Page Footer-->
@@ -40,16 +44,7 @@
             <script type="text/javascript" src="./assets/js/jquery-2.1.0.min.js"></script>
             <script type="text/javascript" src="./assets/js/bootstrap.min.js"></script>
             <script type="text/javascript" src="./assets/js/bootstrap-select.min.js"></script>
-            <script type="text/javascript" src="./assets/js/jquery.geocomplete.min.js"></script>
-            <script type="text/javascript" src="./assets/js/jquery.exif.js"></script>
-            <script type="text/javascript" src="./assets/js/gmaps.js"></script>
-            <script type="text/javascript" src="./assets/js/richmarker.js"></script>
-            <script type="text/javascript" src="./assets/js/infobox.js"></script>
-            <script type="text/javascript" src="./assets/js/markerclusterer.js"></script>
-            <script type="text/javascript" src="./assets/js/maps.js"></script>
-            <script type="text/javascript" src="./assets/js/main.js"></script>
- 
-            
+            <script type="text/javascript" src="./assets/js/login.js"></script>
         </div>
         <div class="pac-container hdpi" style="display: none;"></div>
         <?php 

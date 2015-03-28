@@ -1,0 +1,28 @@
+body {
+    &.page-login {
+        #page-canvas {
+            background: $base-grey-light;
+            #page-content {
+                .login-box {
+                    margin: 100px 0 100px -250px ;
+                    background: $base-white;
+                    border: 1px solid $base-grey-light;
+                    width: 500px;
+                    padding: 20px;
+                    left: 50%;
+                    position: relative;
+
+                    input {
+                        margin: 10px 0;
+                        box-shadow: 0 0 0;
+                        -webkit-box-shadow: 0 0 0;
+                        -moz-box-shadow: 0 0 0;
+                        border: 1px solid $base-grey-middle;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
