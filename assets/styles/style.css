@@ -3916,6 +3916,8 @@ body.map-fullscreen #map {
 .infobox .inner .image .overlay:hover .wrapper .quick-view {
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
+  padding: 36px 0;
+  display: inline-block;
 }
 .infobox .inner .image .overlay .wrapper {
   bottom: 0;
