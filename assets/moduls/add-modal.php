@@ -31,13 +31,13 @@
 
                 <input type="text" placeholder="Rating 1-5" name="rating"/>
 
-                <input type="hidden" name="aperture"/>
+                <input id="aperture" type="hidden" name="aperture"/>
 
-                <input type="hidden" name="date"/>
+                <input id="date" type="hidden" name="date"/>
 
-                <input type="hidden" name="focal"/>
+                <input id="focal" type="hidden" name="focal"/>
 
-                <input type="hidden" name="iso"/>
+                <input id="iso" type="hidden" name="iso"/>
 
                 <button type="submit" class="btn btn-default full-width">Eintrag speichern</button>
             </form>

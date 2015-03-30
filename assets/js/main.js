@@ -195,10 +195,18 @@ function loadExifData() {
     var someCallback = function(exifObject) {
 
             var latitude = exifObject.GPSLatitude;
-            var longitude = exifObject.GPSLongitude;            
+            var longitude = exifObject.GPSLongitude;
+            var aperture = exifObject.ApertureValue;
+            var date = exifObject.DateTimeOriginal;
+            var focal = exifObject.FocalLength;
+            var iso = exifObject.ISOSpeedRatings;         
 
             $('#lng').val(longitude);
             $('#lat').val(latitude);
+            $('#aperture').val(aperture);
+            $('#date').val(date);
+            $('#focal').val(focal);
+            $('#iso').val(iso);
 
             // Uncomment the line below to examine the
             // EXIF object in console to read other values
