@@ -35,6 +35,10 @@ function initMap() {
     $.getJSON(jsonPath)
         .done(function(json) {
             addMap(_longitude,_latitude,json);
+            if($('body').hasClass('.page-verwaltung')) {
+                console.log('passed');
+                fillVerwaltung(json);
+            }
         })
         .fail(function( jqxhr, textStatus, error ) {
             console.log(error);
@@ -251,16 +255,6 @@ function pushItemsToArray(json, a, category, visibleItemsArray){
             '</div>' +
         '</li>'
     );
-
-    function drawPrice(price){
-        if( price ){
-            itemPrice = '<div class="price">' + price +  '</div>';
-            return itemPrice;
-        }
-        else {
-            return '';
-        }
-    }
 }
 
 // Create modal with item-detauls -----------------------------
@@ -285,4 +279,8 @@ function fillModal(metaElement) {
     modal.find('.focal').text(focal);
     modal.find('.iso').text(iso);
 
+}
+
+function fillVerwaltung(json) {
+    console.log(json);
 }
