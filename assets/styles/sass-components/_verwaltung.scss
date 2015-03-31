@@ -3,31 +3,59 @@ body.page-verwaltung {
         background: $base-grey-light;
     }
     ul.items-list {
-        width: 80%;
-        left: 50%;
-        margin-left: -40%;
+        width: 100%;
         display: inline-block;
         clear: both;
         float: none;
-        padding: 20px;
         position: relative;
         list-style: none;
-
+        li {
+            width: 20%;
+            float: left;
+            padding: 15px;
+            position: relative;
+        }
         .item {
             display: inline-block;
-
+            margin-bottom: 0;
             .image {
-                width: 20%;
-                float: left;
+                width: 100%;
                 display: inline-block;
                 overflow: hidden;
-                max-height: 200px;
+                height: 350px;
             }
-
             .wrapper {
-                width: 80%;
+                width: 100%;
                 display: inline-block;
-                height: 100%;
+                position: absolute;
+                z-index: 999;
+                background: rgba(255, 255, 255, 0.8);
+                top: 0;
+                left: 0;
+            }
+            &:hover {
+                .wrapper,
+                .item-footer {
+                    background: rgba(255, 255, 255, 1);
+                }
+            }
+            .item-footer {
+                width: 100%;
+                display: inline-block;
+                position: absolute;
+                z-index: 999;
+                background: rgba(255, 255, 255, 1);
+                bottom: 0;
+                left: 0;
+                .col-md-6 {
+                    padding: 0;
+                }
+                a {
+                    &.btn {
+                        margin: 5px 0;
+                        width: 100%;
+                    }
+                }
             }
         }
     }
