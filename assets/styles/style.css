@@ -3989,3 +3989,33 @@ body.page-login #page-canvas #page-content .login-box input {
   border: 1px solid #8d8d8d;
   width: 100%;
 }
+
+body.page-verwaltung #outer-wrapper {
+  background: #f4f4f2;
+}
+body.page-verwaltung ul.items-list {
+  width: 80%;
+  left: 50%;
+  margin-left: -40%;
+  display: inline-block;
+  clear: both;
+  float: none;
+  padding: 20px;
+  position: relative;
+  list-style: none;
+}
+body.page-verwaltung ul.items-list .item {
+  display: inline-block;
+}
+body.page-verwaltung ul.items-list .item .image {
+  width: 20%;
+  float: left;
+  display: inline-block;
+  overflow: hidden;
+  max-height: 200px;
+}
+body.page-verwaltung ul.items-list .item .wrapper {
+  width: 80%;
+  display: inline-block;
+  height: 100%;
+}
