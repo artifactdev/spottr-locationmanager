@@ -2429,6 +2429,8 @@ body.map-fullscreen #map {
       right: 0;
       top: 0;
       z-index: 3; }
+      .modal-window .modal-wrapper .modal-close:hover {
+        background: #4187c9 !important; }
   .modal-window.multichoice .modal-wrapper > h3 {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
     opacity: 0.6;

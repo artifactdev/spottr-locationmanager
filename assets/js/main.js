@@ -257,7 +257,7 @@ function pushItemsToArray(json, a, category, visibleItemsArray){
     );
 }
 
-// Create modal with item-detauls -----------------------------
+// Create modal with item-details -----------------------------
 
 function fillModal(metaElement) {
 

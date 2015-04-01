@@ -1,6 +1,6 @@
-<div id="add-modal" class="modal-window hide">
+<div id="edit-modal" class="modal-window hide">
     <div class="modal-wrapper">
-        <h2>Location hinzufügen</h2>
+        <h2>Location bearbeiten</h2>
         <div class="modal-body">
             <form action="#" id="add-form" class="add-location">
                 <input id="title" type="text" placeholder="Titel" name="title"/>
@@ -33,7 +33,7 @@
 
                 <input id="aperture" type="hidden" name="aperture"/>
 
-                <input id="date" type="hidden" name="date"/>
+                <input id="date" type="date" name="date"/>
 
                 <input id="focal" type="hidden" name="focal"/>
 
