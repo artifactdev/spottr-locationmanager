@@ -2071,7 +2071,7 @@ textarea.form-control:focus, textarea.form-control:active {
   width: 100% !important; }
 
 body.map-fullscreen #map {
-  height: 858px !important; }
+  height: 100% !important; }
 
 .map-canvas {
   position: relative;

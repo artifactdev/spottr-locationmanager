@@ -2,7 +2,7 @@
     <div class="modal-wrapper">
         <h2>Location <span class="location"></span> wirklich löschen?</h2>
         <div class="modal-body">
-            <form action="#" id="add-form" class="add-location">
+            <form action="#" id="delete-form" class="delete-location">
                 <input type="hidden" id="id" />
                <div class="col-md-6">
                     <button class="btn btn-default full-width modal-close">Abbrechen</button>
