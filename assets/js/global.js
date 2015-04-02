@@ -132,6 +132,34 @@ function submitItem() {
         $('body').find('#add-modal').addClass('hide').removeClass('fade-in');
     });
 
+    $('#type').change(function(event) {
+        var value = $(this).val();
+        var typeIcon = $('.type-icon');
+        if (value === 'Gebäude') {
+            typeIcon.val('assets/icons/house.png');
+        }
+
+        if (value === 'Denkmal') {
+            typeIcon.val('assets/icons/denkmal.png');
+        }
+
+        if (value === 'Fabrik') {
+            typeIcon.val('assets/icons/industry.png');
+        }
+
+        if (value === 'Park') {
+            typeIcon.val('assets/icons/park.png');
+        }
+
+        if (value === 'Brücke') {
+            typeIcon.val('assets/icons/bridge.png');
+        }
+
+        if (value === 'Andere') {
+            typeIcon.val('assets/icons/other.png');
+        }
+    });
+
     loadExifData();
 }
 

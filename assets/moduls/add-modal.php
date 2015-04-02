@@ -20,7 +20,7 @@
 
                 <input id="lat" name="lat" type="text" value="" placeholder="Latitude">
 
-                <select name="type">
+                <select name="type" id="type">
                     <option value="Gebaeude">Gebäude</option>
                     <option value="Fabrik">Fabrik</option>
                     <option value="Denkmal">Denkmal</option>
@@ -28,6 +28,8 @@
                     <option value="Brücke">Brücke</option>
                     <option value="Andere">Andere</option>
                 </select>
+                
+                <input class="type-icon" value="assets/icons/store/apparel/umbrella-2.png" type="hidden">
 
                 <input id="rating" type="text" placeholder="Rating 1-5" name="rating"/>
 
