@@ -1,3 +1,5 @@
+
+
 function showEditModal() {
     $('body').on('click','.btn-edit', function(id) {
         var metaItem = $(this).closest('.item').find('.meta-element');
@@ -131,4 +133,38 @@ function submitItem() {
     });
 
     loadExifData();
+}
+
+function setInputsWidth(){
+    var $inputRow = $('.search-bar.horizontal .input-row');
+    for( var i=0; i<$inputRow.length; i++ ){
+        if( $inputRow.find( $('button[type="submit"]') ).length ){
+            $inputRow.find('.form-group:last').css('width','initial');
+        }
+    }
+
+    var searchBar =  $('.search-bar.horizontal .form-group');
+    for( var a=0; a<searchBar.length; a++ ){
+        if( searchBar.length <= ( 1 + 1 ) ){
+            $('.main-search').addClass('inputs-1');
+        }
+        else if( searchBar.length <= ( 2 + 1 ) ){
+            $('.main-search').addClass('inputs-2');
+        }
+        else if( searchBar.length <= ( 3 + 1 ) ){
+            $('.main-search').addClass('inputs-3');
+        }
+        else if( searchBar.length <= ( 4 + 1 ) ){
+            $('.main-search').addClass('inputs-4');
+        }
+        else if( searchBar.length <= ( 5 + 1 ) ){
+            $('.main-search').addClass('inputs-5');
+        }
+        else {
+            $('.main-search').addClass('inputs-4');
+        }
+        if( $('.search-bar.horizontal .form-group label').length > 0 ){
+            $('.search-bar.horizontal .form-group:last-child button').css('margin-top', 25)
+        }
+    }
 }

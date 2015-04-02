@@ -2810,6 +2810,11 @@ body.map-fullscreen #map {
     margin-right: 0;
     width: initial; }
 
+.page-verwaltung .search-bar.horizontal .main-search {
+  background: #8d8d8d; }
+  .page-verwaltung .search-bar.horizontal .main-search.inputs-2 .input-row > .form-group {
+    width: 47.4%; }
+
 .toggle-navigation {
   display: inline-block;
   height: 12px;

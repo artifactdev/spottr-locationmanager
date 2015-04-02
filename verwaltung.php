@@ -27,6 +27,9 @@
                 <div id="page-canvas">
                     <!--Page Content-->
                     <div id="page-content">
+                        <?php 
+                            include 'assets/moduls/searchbar.php';
+                        ?>
                         <div class="col-md-12 search-bar">
                         </div>
                         <div class="col-md-12">

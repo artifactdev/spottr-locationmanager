@@ -5,6 +5,8 @@ $( document ).ready(function() {
     showDeleteModal();
     menuItemHandler();
     submitItem();
+    setInputsWidth();
+    fancySelect();
 
 });
 
@@ -22,9 +24,10 @@ function initItems() {
     });
 }
 
-
 function fillVerwaltung(json) {
     var itemsList = $('body').find('.items-list');
+
+    console.log(json);
 
     for (var i = 0; i < json.data.length; i++) {
         itemsList.append(
