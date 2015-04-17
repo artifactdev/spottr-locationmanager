@@ -123,13 +123,15 @@ function searchFilter() {
 }
 
 function submitItem() {
+    var addModal = $('body').find('#add-modal');
+
     $('.submit-item').on('click', function(){
-        $('body').find('#add-modal').removeClass('hide').addClass('fade-in');
+        addModal.removeClass('hide').addClass('fade-in');
         fancySelect();
     });
 
     $('body').find('#add-modal .modal-close').on('click', function(){
-        $('body').find('#add-modal').addClass('hide').removeClass('fade-in');
+        addModal.addClass('hide').removeClass('fade-in');
     });
 
     $('#type').change(function(event) {
@@ -161,6 +163,21 @@ function submitItem() {
     });
 
     loadExifData();
+
+    addModal.find('form').on('submit',function(e){
+        e.preventDefault();
+        $.ajax({
+            type     : "POST",
+            cache    : false,
+            url      : $(this).attr('action'),
+            data     : $(this).serialize(),
+            success  : function(data) {
+                console.log(data);
+                //location.reload(true);
+            }
+        });
+
+    });
 }
 
 function setInputsWidth(){

@@ -37,19 +37,19 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
         var activeMarker = false;
         var lastClicked = false;
 
-        for (var i = 0; i < json.data.length; i++) {
+        for (var i = 0; i < json.items.length; i++) {
 
             // Google map marker content -----------------------------------------------------------------------------------
 
-            if( json.data[i].color ) var color = json.data[i].color;
+            if( json.items[i].color ) var color = json.items[i].color;
             else color = '';
 
             var markerContent = document.createElement('DIV');
-            if( json.data[i].featured == 1 ) {
+            if( json.items[i].featured == 1 ) {
                 markerContent.innerHTML =
                     '<div class="map-marker featured">' +
                         '<div class="icon">' +
-                        '<img src="' + json.data[i].type_icon +  '">' +
+                        '<img src="' + json.items[i].type_icon +  '">' +
                         '</div>' +
                     '</div>';
             }
@@ -57,7 +57,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
                 markerContent.innerHTML =
                     '<div class="map-marker">' +
                         '<div class="icon">' +
-                        '<img src="' + json.data[i].type_icon +  '">' +
+                        '<img src="' + json.items[i].type_icon +  '">' +
                         '</div>' +
                     '</div>';
             }
@@ -65,7 +65,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
             // Create marker on the map ------------------------------------------------------------------------------------
 
             var marker = new RichMarker({
-                position: new google.maps.LatLng( json.data[i].latitude, json.data[i].longitude ),
+                position: new google.maps.LatLng( json.items[i].latitude, json.items[i].longitude ),
                 map: map,
                 draggable: false,
                 content: markerContent,
@@ -92,7 +92,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
 
             // Infobox HTML element ----------------------------------------------------------------------------------------
 
-            var category = json.data[i].category;
+            var category = json.items[i].category;
             infoboxContent.innerHTML = drawInfobox(category, infoboxContent, json, i);
 
             // Create new markers ------------------------------------------------------------------------------------------
@@ -175,7 +175,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
 
         google.maps.event.addListener(map, 'idle', function() {
             var visibleArray = [];
-            for (var i = 0; i < json.data.length; i++) {
+            for (var i = 0; i < json.items.length; i++) {
                 if ( map.getBounds().contains(newMarkers[i].getPosition()) ){
                     visibleArray.push(newMarkers[i]);
                     $.each( visibleArray, function (i) {
@@ -196,9 +196,9 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
             }
 
             var visibleItemsArray = [];
-            $.each(json.data, function(a) {
-                if( map.getBounds().contains( new google.maps.LatLng( json.data[a].latitude, json.data[a].longitude ) ) ) {
-                    var category = json.data[a].category;
+            $.each(json.items, function(a) {
+                if( map.getBounds().contains( new google.maps.LatLng( json.items[a].latitude, json.items[a].longitude ) ) ) {
+                    var category = json.items[a].category;
                     pushItemsToArray(json, a, category, visibleItemsArray);
                 }
             });
@@ -209,9 +209,9 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
 
             // Check if images are cached, so will not be loaded again
 
-            $.each(json.data, function(a) {
-                if( map.getBounds().contains( new google.maps.LatLng( json.data[a].latitude, json.data[a].longitude ) ) ) {
-                    is_cached(json.data[a].gallery, a);
+            $.each(json.items, function(a) {
+                if( map.getBounds().contains( new google.maps.LatLng( json.items[a].latitude, json.items[a].longitude ) ) ) {
+                    is_cached(json.items[a].gallery, a);
                 }
             });
 
@@ -232,7 +232,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
 
         function is_cached(src, a) {
             var image = new Image();
-            var loadedImage = $('.results li #' + json.data[a].id + ' .image');
+            var loadedImage = $('.results li #' + json.items[a].id + ' .image');
             image.src = src;
             if( image.complete ){
                 $(".results").each(function() {
@@ -242,7 +242,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
             }
             else {
                 $(".results").each(function() {
-                    $('.results li #' + json.data[a].id + ' .image').addClass('loading');
+                    $('.results li #' + json.items[a].id + ' .image').addClass('loading');
                 });
                 $(image).load(function(){
                     loadedImage.removeClass('loading');
@@ -350,23 +350,23 @@ function pushItemsToArray(json, a, category, visibleItemsArray){
     var itemPrice;
     visibleItemsArray.push(
         '<li>' +
-            '<div class="item" id="' + json.data[a].id + '">' +
+            '<div class="item" id="' + json.items[a].id + '">' +
                 '<a href="#" class="image">' +
                     '<div class="inner">' +
                         '<div class="item-specific">' +
                             drawItemSpecific(category, json, a) +
                         '</div>' +
-                        '<img src="' + json.data[a].gallery + '" alt="">' +
+                        '<img src="' + json.items[a].gallery + '" alt="">' +
                     '</div>' +
                 '</a>' +
                 '<div class="wrapper">' +
-                    '<a href="#" id="' + json.data[a].id + '"><h3>' + json.data[a].title + '</h3></a>' +
+                    '<a href="#" id="' + json.items[a].id + '"><h3>' + json.items[a].title + '</h3></a>' +
                     '<div class="info">' +
                         '<div class="type">' +
-                            '<i><img src="' + json.data[a].type_icon + '" alt=""></i>' +
-                            '<span>' + json.data[a].type + '</span>' +
+                            '<i><img src="' + json.items[a].type_icon + '" alt=""></i>' +
+                            '<span>' + json.items[a].type + '</span>' +
                         '</div>' +
-                        '<div class="rating" data-rating="' + json.data[a].rating + '"></div>' +
+                        '<div class="rating" data-rating="' + json.items[a].rating + '"></div>' +
                     '</div>' +
                 '</div>' +
             '</div>' +
@@ -377,10 +377,10 @@ function pushItemsToArray(json, a, category, visibleItemsArray){
 // Center map to marker position if function is called (disabled) ------------------------------------------------------
 
 function centerMapToMarker(){
-    $.each(json.data, function(a) {
-        if( json.data[a].id == id ) {
-            var _latitude = json.data[a].latitude;
-            var _longitude = json.data[a].longitude;
+    $.each(json.items, function(a) {
+        if( json.items[a].id == id ) {
+            var _latitude = json.items[a].latitude;
+            var _longitude = json.items[a].longitude;
             var mapCenter = new google.maps.LatLng(_latitude,_longitude);
             map.setCenter(mapCenter);
         }

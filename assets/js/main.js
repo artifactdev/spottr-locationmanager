@@ -30,19 +30,26 @@ function initMap() {
 
     var _latitude = 51.541216;
     var _longitude = -0.095678;
-    var jsonPath = 'assets/json/items.json.txt';
 
-    $.getJSON(jsonPath)
-        .done(function(json) {
-            addMap(_longitude,_latitude,json);
-            if($('body').hasClass('.page-verwaltung')) {
-                console.log('passed');
-                fillVerwaltung(json);
-            }
-        })
-        .fail(function( jqxhr, textStatus, error ) {
-            console.log(error);
-    });
+    jQuery.ajax({
+            url: "http://localhost:8888/spottr/rest-api/locations",
+            type: "GET",
+
+            contentType: 'application/json; charset=utf-8',
+            success: function(json) {
+                addMap(_longitude,_latitude,json);
+                if($('body').hasClass('.page-verwaltung')) {
+                    console.log('passed');
+                    fillVerwaltung(json);
+                }
+
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+                console.log(errorThrownr);
+            },
+
+            timeout: 120000,
+        });
 }
 
 function mobileNavigation(){
@@ -103,24 +110,24 @@ function pushItemsToArray(json, a, category, visibleItemsArray){
     var itemPrice;
     visibleItemsArray.push(
         '<li>' +
-            '<div class="item" id="' + json.data[a].id + '">' +
+            '<div class="item" id="' + json.items[a].id + '">' +
                 '<a href="#" class="image">' +
                     '<div class="inner">' +
                         '<div class="item-specific">' +
                             drawItemSpecific(category, json, a) +
                         '</div>' +
-                        '<img src="' + json.data[a].gallery + '" alt="">' +
+                        '<img src="' + json.items[a].gallery + '" alt="">' +
                     '</div>' +
                 '</a>' +
                 '<div class="wrapper">' +
-                    '<a href="#" class="quick-preview" id="' + json.data[a].id + '" data-gallery="' + json.data[a].gallery + '" data-title="' + json.data[a].title +'" data-type="' + json.data[a].type +'"  data-category="' + json.data[a].category +'" data-location="' + json.data[a].location +'" data-aperture="' + json.data[a].aperture +'" data-date="' + json.data[a].date +'" data-focal="' + json.data[a].focal +'" data-iso="' + json.data[a].iso +'" data-rating="' + json.data[a].rating +'"><h3>' + json.data[a].title + '</h3></a>' +
-                    '<figure>' + json.data[a].category + '</figure>' +
+                    '<a href="#" class="quick-preview" id="' + json.items[a].id + '" data-gallery="' + json.items[a].gallery + '" data-title="' + json.items[a].title +'" data-type="' + json.items[a].type +'"  data-category="' + json.items[a].category +'" data-location="' + json.items[a].location +'" data-aperture="' + json.items[a].aperture +'" data-date="' + json.items[a].date +'" data-focal="' + json.items[a].focal +'" data-iso="' + json.items[a].iso +'" data-rating="' + json.items[a].rating +'"><h3>' + json.items[a].title + '</h3></a>' +
+                    '<figure>' + json.items[a].category + '</figure>' +
                     '<div class="info">' +
                         '<div class="type">' +
-                            '<i><img src="' + json.data[a].type_icon + '" alt=""></i>' +
-                            '<span>' + json.data[a].type + '</span>' +
+                            '<i><img src="' + json.items[a].type_icon + '" alt=""></i>' +
+                            '<span>' + json.items[a].type + '</span>' +
                         '</div>' +
-                        '<div class="rating" data-rating="' + json.data[a].rating + '"></div>' +
+                        '<div class="rating" data-rating="' + json.items[a].rating + '"></div>' +
                     '</div>' +
                 '</div>' +
             '</div>' +

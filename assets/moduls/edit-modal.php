@@ -2,7 +2,8 @@
     <div class="modal-wrapper">
         <h2>Location bearbeiten</h2>
         <div class="modal-body">
-            <form action="#" id="edit-form" class="edit-location">
+            <form action="http://localhost:8888/spottr/rest-api/locations/" id="edit-form" method="put" class="edit-location">
+
                 <input id="title" type="text" placeholder="Titel" name="title"/>
 
                 <input name="datei" type="file" id="file" size="50" maxlength="100000" >

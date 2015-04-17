@@ -1,26 +1,26 @@
 function drawInfobox(category, infoboxContent, json, i){
 
-    if(json.data[i].id)                 { var id = json.data[i].id }
+    if(json.items[i].id)                 { var id = json.items[i].id }
         else                            { id = '' }
-    if(json.data[i].type)               { var type = json.data[i].type }
+    if(json.items[i].type)               { var type = json.items[i].type }
         else                            { type = '' }
-    if(json.data[i].title)              { var title = json.data[i].title }
+    if(json.items[i].title)              { var title = json.items[i].title }
         else                            { title = '' }
-    if(json.data[i].category)           { var category = json.data[i].category }
+    if(json.items[i].category)           { var category = json.items[i].category }
         else                            { category = '' }
-    if(json.data[i].location)           { var location = json.data[i].location }
+    if(json.items[i].location)           { var location = json.items[i].location }
         else                            { location = '' }
-    if(json.data[i].aperture)           { var aperture = json.data[i].aperture }
+    if(json.items[i].aperture)           { var aperture = json.items[i].aperture }
         else                            { aperture = '' }
-    if(json.data[i].date)               { var date = json.data[i].date }
+    if(json.items[i].date)               { var date = json.items[i].date }
         else                            { date = '' }
-    if(json.data[i].focal)              { var focal = json.data[i].focal }
+    if(json.items[i].focal)              { var focal = json.items[i].focal }
         else                            { focal = '' }
-    if(json.data[i].iso)                { var iso = json.data[i].iso }
+    if(json.items[i].iso)                { var iso = json.items[i].iso }
         else                            { iso = '' }
-    if(json.data[i].rating)             { var rating = json.data[i].rating }
+    if(json.items[i].rating)             { var rating = json.items[i].rating }
         else                            { rating = '' }
-    if(json.data[i].gallery)         { var gallery = json.data[i].gallery }
+    if(json.items[i].gallery)         { var gallery = json.items[i].gallery }
         else                            { gallery[0] = '../img/default-item.jpg' }
     
     var ibContent = '';

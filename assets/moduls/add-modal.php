@@ -2,7 +2,7 @@
     <div class="modal-wrapper">
         <h2>Location hinzufügen</h2>
         <div class="modal-body">
-            <form action="#" id="add-form" class="add-location">
+            <form action="http://localhost:8888/spottr/rest-api/locations" id="add-form" class="add-location">
                 <input id="title" type="text" placeholder="Titel" name="title"/>
 
                 <input name="datei" type="file" id="file" size="50" maxlength="100000" >
@@ -21,7 +21,7 @@
                 <input id="lat" name="lat" type="text" value="" placeholder="Latitude">
 
                 <select name="type" id="type">
-                    <option value="Gebaeude">Gebäude</option>
+                    <option value="Gebäude">Gebäude</option>
                     <option value="Fabrik">Fabrik</option>
                     <option value="Denkmal">Denkmal</option>
                     <option value="Park">Park</option>
