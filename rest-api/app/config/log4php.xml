@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns="http://logging.apache.org/log4php/">
+    
+    <appender name="system" class="LoggerAppenderFile">
+        <layout class="LoggerLayoutPattern">
+            <param name="conversionPattern" value="%date [%level] - [%logger] %message%newline" />
+        </layout>
+        <param name="file" value="log/system.log" />
+    </appender>
+    
+    <root>
+        <level value="WARN" />
+        <appender_ref ref="system" />
+    </root>
+</configuration>

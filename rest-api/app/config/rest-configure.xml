@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <host>http://192.168.2.104</host>
+    <application_path>/Privat/artifact/Spottr/rest-api/</application_path>
+    <routes>
+        <!-- Authentication - Login -->
+        <route>
+            <url>authentication</url>
+            <http_method>POST</http_method>
+            <controller>AuthenticationController</controller>
+            <controller_method>authenticate</controller_method>
+            <secure>false</secure>
+        </route>
+        
+        <!-- Locations-->
+        <route>
+            <url>locations</url>
+            <http_method>GET</http_method>
+            <controller>LocationController</controller>
+            <controller_method>listLocations</controller_method>
+            <secure>false</secure>
+        </route>
+        <route>
+            <url>locations</url>
+            <http_method>POST</http_method>
+            <controller>LocationController</controller>
+            <controller_method>createLocation</controller_method>
+            <secure>false</secure>
+        </route>
+        <route>
+            <url>locations/{:id}</url>
+            <http_method>GET</http_method>
+            <controller>LocationController</controller>
+            <controller_method>getLocation</controller_method>
+            <secure>false</secure>
+        </route>
+        <route>
+            <url>locations/{:id}</url>
+            <http_method>DELETE</http_method>
+            <controller>LocationController</controller>
+            <controller_method>deleteLocation</controller_method>
+            <secure>false</secure>
+        </route>
+        
+        <!-- Nutzerverwaltung -->
+        <route>
+            <url>users</url>
+            <http_method>GET</http_method>
+            <controller>UserController</controller>
+            <controller_method>listUsers</controller_method>
+            <secure>true</secure>
+        </route>
+        <route>
+            <url>users</url>
+            <http_method>POST</http_method>
+            <controller>UserController</controller>
+            <controller_method>createUser</controller_method>
+            <secure>true</secure>
+        </route>
+        <route>
+            <url>users/{:id}</url>
+            <http_method>GET</http_method>
+            <controller>UserController</controller>
+            <controller_method>findUser</controller_method>
+            <secure>true</secure>
+        </route>
+        <route>
+            <url>users/{:id}</url>
+            <http_method>PUT</http_method>
+            <controller>UserController</controller>
+            <controller_method>updateUser</controller_method>
+            <secure>true</secure>
+        </route>
+        <route>
+            <url>users/{:id}</url>
+            <http_method>DELETE</http_method>
+            <controller>UserController</controller>
+            <controller_method>deleteUser</controller_method>
+            <secure>true</secure>
+        </route>
+    </routes>
+</configuration>

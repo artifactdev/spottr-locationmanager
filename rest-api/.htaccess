@@ -1,0 +1,12 @@
+# X-Cache must be deactivated!!
+# The httpful framework can't work the activated x-cache. 
+php_flag xcache.cacher Off
+php_flag display_errors On
+php_value error_reporting -1
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_URI} !restFacade\.php$
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule .* restFacade.php [L,QSA]
+</IfModule>
