@@ -49,7 +49,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
             var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
         
             markerContent.innerHTML =
-                '<div class="map-marker">' +
+                '<div class="map-marker" data-id="' + json.items[i].id +'">' +
                     '<div class="icon">' +
                     '<img src="' + path + json.items[i].type +  '">' +
                     '</div>' +
@@ -210,7 +210,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
 
             // Call Rating function ----------------------------------------------------------------------------------------
 
-            var $singleItem = $('.results .item');
+            /*var $singleItem = $('.results .item');
             $singleItem.hover(
                 function(){
                     newMarkers[ $(this).attr('id') - 1 ].content.className = 'marker-active marker-loaded';
@@ -218,7 +218,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
                 function() {
                     newMarkers[ $(this).attr('id') - 1 ].content.className = 'marker-loaded';
                 }
-            );
+            );*/
         });
 
         redrawMap('google', map);
@@ -293,79 +293,9 @@ function itemDetailMap(json){
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Simple Google Map (contat, submit...)
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function simpleMap(_latitude, _longitude, draggableMarker){
-    var mapCenter = new google.maps.LatLng(_latitude, _longitude);
-    var mapOptions = {
-        zoom: 14,
-        center: mapCenter,
-        disableDefaultUI: true,
-        scrollwheel: false,
-        styles: mapStyles,
-        panControl: false,
-        zoomControl: false,
-        draggable: true
-    };
-    var mapElement = document.getElementById('map-simple');
-    var map = new google.maps.Map(mapElement, mapOptions);
-
-    // Google map marker content -----------------------------------------------------------------------------------
-
-    var markerContent = document.createElement('DIV');
-    markerContent.innerHTML =
-        '<div class="map-marker">' +
-            '<div class="icon"></div>' +
-        '</div>';
-
-    // Create marker on the map ------------------------------------------------------------------------------------
-
-    var marker = new RichMarker({
-        //position: mapCenter,
-        position: new google.maps.LatLng( _latitude, _longitude ),
-        map: map,
-        draggable: draggableMarker,
-        content: markerContent,
-        flat: true
-    });
-
-    marker.content.className = 'marker-loaded';
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Functions
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Push items to array and create <li> element in Results sidebar ------------------------------------------------------
-
-function pushItemsToArray(json, a, category, visibleItemsArray){
-    var itemPrice;
-    visibleItemsArray.push(
-        '<li>' +
-            '<div class="item" id="' + json.items[a].id + '">' +
-                '<a href="#" class="image">' +
-                    '<div class="inner">' +
-                        '<div class="item-specific">' +
-                            drawItemSpecific(category, json, a) +
-                        '</div>' +
-                        '<img src="' + json.items[a].gallery + '" alt="">' +
-                    '</div>' +
-                '</a>' +
-                '<div class="wrapper">' +
-                    '<a href="#" id="' + json.items[a].id + '"><h3>' + json.items[a].title + '</h3></a>' +
-                    '<div class="info">' +
-                        '<div class="type">' +
-                            '<i><img src="' + json.items[a].type + '" alt=""></i>' +
-                            '<span>' + json.items[a].type + '</span>' +
-                        '</div>' +
-                        '<div class="rating" data-rating="' + json.items[a].rating + '"></div>' +
-                    '</div>' +
-                '</div>' +
-            '</div>' +
-        '</li>'
-    );
-}
 
 // Center map to marker position if function is called (disabled) ------------------------------------------------------
 

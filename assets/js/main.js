@@ -59,10 +59,25 @@ function mobileNavigation(){
 }
 
 function showModal() {
-    $('body').on('click','.results .item a', function(id) {
-        var metaItem = $(this).closest('.quick-preview');
+    var metaItem = $(this).find('.quick-preview');
+
+    $('body').on('click','.results li', function(id) {
+        var metaItem = $(this).find('.quick-preview');
         modalHandler(metaItem);
          
+    });
+
+    $('body').on('mouseover','.results li', function(id) {
+        var metaItem = $(this).find('.quick-preview');
+        var id = metaItem.attr('id');
+        highlightMarker(id, 'add');
+         
+    });
+
+    $('body').on('mouseout','.results li', function(id) {
+        var metaItem = $(this).find('.item');
+        var id = metaItem.attr('id');
+        highlightMarker(id, 'remove');
     });
 
     $('body').on('click','.infobox a', function(e) {
@@ -70,6 +85,16 @@ function showModal() {
         modalHandler($(this));
          
     });
+
+    function highlightMarker(id,action) {
+        var markerElement = $('#map').find("[data-id='" + id + "']").parent('.marker-loaded');
+        if (action === 'add') {
+            markerElement.addClass('marker-active');
+        } 
+        if (action === 'remove') {
+            markerElement.removeClass('marker-active');
+        }
+    }
 
     function modalHandler(item) {
         var metaElement = item;
