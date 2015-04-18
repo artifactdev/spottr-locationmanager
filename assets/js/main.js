@@ -28,28 +28,25 @@ function initMap() {
         }
     }
 
-    var _latitude = 51.541216;
-    var _longitude = -0.095678;
+    var _latitude = 51.0545032;
+    var _longitude = 13.7416008;
+
+    var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
 
     jQuery.ajax({
-            url: "http://localhost:8888/spottr/rest-api/locations",
-            type: "GET",
+        url: path + "rest-api/locations",
+        type: "GET",
 
-            contentType: 'application/json; charset=utf-8',
-            success: function(json) {
-                addMap(_longitude,_latitude,json);
-                if($('body').hasClass('.page-verwaltung')) {
-                    console.log('passed');
-                    fillVerwaltung(json);
-                }
+        contentType: 'application/json; charset=utf-8',
+        success: function(json) {
+            createHomepageGoogleMap(_latitude,_longitude,json);
+        },
+        error : function(jqXHR, textStatus, errorThrown) {
+            console.log(errorThrownr);
+        },
 
-            },
-            error : function(jqXHR, textStatus, errorThrown) {
-                console.log(errorThrownr);
-            },
-
-            timeout: 120000,
-        });
+        timeout: 120000,
+    });
 }
 
 function mobileNavigation(){
@@ -90,24 +87,19 @@ function showModal() {
             modal.removeClass('fade-in');
         });
     }
-
-    $("#geocomplete").geocomplete({
-          details: "#add-form",
-          types: ["geocode", "establishment"],
-        });
 }
 
 function drawItemSpecific(category, json, a){
     return '';
 }
 
-function addMap(_longitude,_latitude,json) {
-    createHomepageGoogleMap(_latitude,_longitude,json);
-}
-
-
 function pushItemsToArray(json, a, category, visibleItemsArray){
     var itemPrice;
+    var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
+        
+     if(json.items[a].gallery)         { var gallery = json.items[a].gallery }
+        else                            { gallery = 'assets/img/default-item.png' }
+
     visibleItemsArray.push(
         '<li>' +
             '<div class="item" id="' + json.items[a].id + '">' +
@@ -116,7 +108,7 @@ function pushItemsToArray(json, a, category, visibleItemsArray){
                         '<div class="item-specific">' +
                             drawItemSpecific(category, json, a) +
                         '</div>' +
-                        '<img src="' + json.items[a].gallery + '" alt="">' +
+                        '<img src="' + path + gallery + '" alt="">' +
                     '</div>' +
                 '</a>' +
                 '<div class="wrapper">' +
@@ -124,8 +116,7 @@ function pushItemsToArray(json, a, category, visibleItemsArray){
                     '<figure>' + json.items[a].category + '</figure>' +
                     '<div class="info">' +
                         '<div class="type">' +
-                            '<i><img src="' + json.items[a].type_icon + '" alt=""></i>' +
-                            '<span>' + json.items[a].type + '</span>' +
+                            '<i><img src="' + path + json.items[a].type + '" alt=""></i>' +
                         '</div>' +
                         '<div class="rating" data-rating="' + json.items[a].rating + '"></div>' +
                     '</div>' +

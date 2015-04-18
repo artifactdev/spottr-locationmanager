@@ -8,7 +8,7 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function createHomepageGoogleMap(_latitude,_longitude,json){
-    $.get("assets/js/_infobox.js", function() {
+    $.get("./assets/js/_infobox.js", function() {
         gMap();
     });
     function gMap(){
@@ -45,22 +45,15 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
             else color = '';
 
             var markerContent = document.createElement('DIV');
-            if( json.items[i].featured == 1 ) {
-                markerContent.innerHTML =
-                    '<div class="map-marker featured">' +
-                        '<div class="icon">' +
-                        '<img src="' + json.items[i].type_icon +  '">' +
-                        '</div>' +
-                    '</div>';
-            }
-            else {
-                markerContent.innerHTML =
-                    '<div class="map-marker">' +
-                        '<div class="icon">' +
-                        '<img src="' + json.items[i].type_icon +  '">' +
-                        '</div>' +
-                    '</div>';
-            }
+
+            var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
+        
+            markerContent.innerHTML =
+                '<div class="map-marker">' +
+                    '<div class="icon">' +
+                    '<img src="' + path + json.items[i].type +  '">' +
+                    '</div>' +
+                '</div>';
 
             // Create marker on the map ------------------------------------------------------------------------------------
 
@@ -273,7 +266,7 @@ function itemDetailMap(json){
     };
     var mapElement = document.getElementById('map-detail');
     var map = new google.maps.Map(mapElement, mapOptions);
-    if( json.type_icon ) var icon = '<img src="' + json.type_icon +  '">';
+    if( json.type ) var icon = '<img src="' + json.type +  '">';
     else icon = '';
 
     // Google map marker content -----------------------------------------------------------------------------------
@@ -363,7 +356,7 @@ function pushItemsToArray(json, a, category, visibleItemsArray){
                     '<a href="#" id="' + json.items[a].id + '"><h3>' + json.items[a].title + '</h3></a>' +
                     '<div class="info">' +
                         '<div class="type">' +
-                            '<i><img src="' + json.items[a].type_icon + '" alt=""></i>' +
+                            '<i><img src="' + json.items[a].type + '" alt=""></i>' +
                             '<span>' + json.items[a].type + '</span>' +
                         '</div>' +
                         '<div class="rating" data-rating="' + json.items[a].rating + '"></div>' +

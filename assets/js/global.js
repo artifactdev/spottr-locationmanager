@@ -23,11 +23,6 @@ function showEditModal() {
             modal.removeClass('fade-in');
         });
     }
-
-    $("#geocomplete").geocomplete({
-          details: "#add-form",
-          types: ["geocode", "establishment"],
-        });
 }
 
 function fancySelect() {
@@ -134,35 +129,12 @@ function submitItem() {
         addModal.addClass('hide').removeClass('fade-in');
     });
 
-    $('#type').change(function(event) {
-        var value = $(this).val();
-        var typeIcon = $('.type-icon');
-        if (value === 'Gebäude') {
-            typeIcon.val('assets/icons/house.png');
-        }
-
-        if (value === 'Denkmal') {
-            typeIcon.val('assets/icons/denkmal.png');
-        }
-
-        if (value === 'Fabrik') {
-            typeIcon.val('assets/icons/industry.png');
-        }
-
-        if (value === 'Park') {
-            typeIcon.val('assets/icons/park.png');
-        }
-
-        if (value === 'Brücke') {
-            typeIcon.val('assets/icons/bridge.png');
-        }
-
-        if (value === 'Andere') {
-            typeIcon.val('assets/icons/other.png');
-        }
-    });
-
     loadExifData();
+
+    $("#geocomplete-search").geocomplete({
+      details: "#add-form",
+      types: ["geocode", "establishment"],
+    });
 
     addModal.find('form').on('submit',function(e){
         e.preventDefault();
@@ -172,8 +144,7 @@ function submitItem() {
             url      : $(this).attr('action'),
             data     : $(this).serialize(),
             success  : function(data) {
-                console.log(data);
-                //location.reload(true);
+                location.reload(true);
             }
         });
 

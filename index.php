@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0030)http://localhost:8888/spotter/ -->
 <html lang="en-US" style="height: auto;">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -55,7 +54,7 @@
                 <!-- end Inner Wrapper -->
             </div>
             <!-- end Outer Wrapper-->
-            <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&amp;libraries=places"></script>
+            <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true&amp;libraries=places"></script>
             <script type="text/javascript" src="./assets/js/jquery-2.1.0.min.js"></script>
             <script type="text/javascript" src="./assets/js/bootstrap.min.js"></script>
             <script type="text/javascript" src="./assets/js/bootstrap-select.min.js"></script>

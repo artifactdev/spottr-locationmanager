@@ -15,19 +15,24 @@ function initItems() {
     var _longitude = -0.095678;
 
     jQuery.ajax({
-            url: "http://localhost:8888/spottr/rest-api/locations",
-            type: "GET",
+        url: "http://localhost:8888/spottr/rest-api/locations",
+        type: "GET",
 
-            contentType: 'application/json; charset=utf-8',
-            success: function(json) {
-                fillVerwaltung(json);
-            },
-            error : function(jqXHR, textStatus, errorThrown) {
-                console.log(errorThrownr);
-            },
+        contentType: 'application/json; charset=utf-8',
+        success: function(json) {
+            fillVerwaltung(json);
+        },
+        error : function(jqXHR, textStatus, errorThrown) {
+            console.log(errorThrownr);
+        },
 
-            timeout: 120000,
-        });
+        timeout: 120000,
+    });
+
+    $("#geocomplete").geocomplete({
+      details: "#edit-form",
+      types: ["geocode", "establishment"],
+    });
 }
 
 function fillVerwaltung(json) {
@@ -36,11 +41,14 @@ function fillVerwaltung(json) {
     console.log(json);
 
     for (var i = 0; i < json.items.length; i++) {
+        var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
+        if(json.items[i].gallery)         { var gallery = json.items[i].gallery }
+        else                            { gallery = path + '/assets/img/default-item.png' }
         itemsList.append(
             '<li>' +
             '<div class="item" id="' + json.items[i].id + '">' +
                 '<a href="#" class="image">' +
-                    '<img src="' + json.items[i].gallery + '" alt="">' +
+                    '<img src="' + gallery + '" alt="">' +
                 '</a>' +
                 '<div class="wrapper">' +
                     '<figure>' + json.items[i].category + '</figure>' +
@@ -129,13 +137,16 @@ function editModal(metaElement) {
             url      : $(this).attr('action'),
             data     : $(this).serialize(),
             success  : function(data) {
-                console.log(data);
                 location.reload(true);
             }
         });
 
     });
 
+    $("#geocomplete-edit").geocomplete({
+      details: "#edit-form",
+      types: ["geocode", "establishment"],
+    });
 }
 
 function deleteModal(metaElement) {

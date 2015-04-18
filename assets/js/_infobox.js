@@ -21,7 +21,9 @@ function drawInfobox(category, infoboxContent, json, i){
     if(json.items[i].rating)             { var rating = json.items[i].rating }
         else                            { rating = '' }
     if(json.items[i].gallery)         { var gallery = json.items[i].gallery }
-        else                            { gallery[0] = '../img/default-item.jpg' }
+        else                            { gallery = 'assets/img/default-item.png' }
+
+    var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
     
     var ibContent = '';
     ibContent =
@@ -31,7 +33,7 @@ function drawInfobox(category, infoboxContent, json, i){
                 '<div class="item-specific">' + drawItemSpecific(category, json, i) + '</div>' +
                 '<div class="overlay">' +
                     '<div class="wrapper">' +
-                        '<a href="#test" class="quick-view" data-id="' + id + '" data-gallery="' + gallery + '" data-title="' + title +'" data-type="' + type +'"  data-category="' + category +'" data-location="' + location +'" data-aperture="' + aperture +'" data-date="' + date +'" data-focal="' + focal +'" data-iso="' + iso +'" data-rating="' + rating +'">Quick View</a>' +
+                        '<a href="#test" class="quick-view" data-id="' + id + '" data-gallery="' + path + gallery + '" data-title="' + title +'" data-type="' + type +'"  data-category="' + category +'" data-location="' + location +'" data-aperture="' + aperture +'" data-date="' + date +'" data-focal="' + focal +'" data-iso="' + iso +'" data-rating="' + rating +'">Quick View</a>' +
                     '</div>' +
                 '</div>' +
                 '<a href="#" class="quick-view">' +
