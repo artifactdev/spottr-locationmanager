@@ -4,7 +4,7 @@
             <div class="form-group">
                 <input type="text" class="form-control" id="keyword" placeholder="Enter Keyword">
             </div>
-            <div class="form-group">
+            <div class="form-group category-filter">
                 <select name="category" id="category-filter" title="Select Category" data-live-search="true">
                     <option value="industrie">Industrie</option>
                     <option value="ruine">Ruine</option>
