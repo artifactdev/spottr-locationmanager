@@ -6,7 +6,8 @@
         <nav class="navigation-items">
             <div class="wrapper">
    
-                <a href="verwaltung.php" class="btn btn-default" id="admin-link">Verwaltung</a>
+                <a href="verwaltung.php" class="btn btn-default hide" id="admin-link">Verwaltung</a>
+                <a href="#" class="btn btn-default hide" id="useradmin-link">Users</a>
                 <a href="#" class="submit-item">
                     <div class="content"><span>Submit Your Item</span></div>
                     <div class="icon">

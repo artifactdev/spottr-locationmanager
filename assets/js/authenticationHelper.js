@@ -14,8 +14,7 @@
              if (cookieValue === undefined || cookieValue == null || cookieValue == "null") {
                 // wenn nicht eingeloggt weiterleitung auf Login
 
-                 //GuiHandler.show("authentication");
-                 //GuiHandler.remove("initialize");
+                 goToLogin();
                  return;
              }
              cookieValue = $.parseJSON(cookieValue);
@@ -76,11 +75,8 @@
          factory.runAuthenticationCheck = function(token) {
  
              if (token == null || token.userUUId == undefined) {
-                 // weiterleiten auf login
-                  
-                 //GuiHandler.show("authentication");
-                 //GuiHandler.remove("initialize");
-                 return;
+                goToLogin();
+                return;
              }
  
              this.setAuthenticationToken(token);

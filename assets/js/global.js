@@ -50,10 +50,14 @@ function fancySelect() {
 }
 
 function menuItemHandler() {
-    var isVerwaltung = $('body.page-verwaltung');
+    var isVerwaltung = $('body.page-verwaltung').length;
+    var isHome = $('body.page-homepage').length;
 
     if (isVerwaltung) {
-        $('#admin-link').hide();
+        $('#useradmin-link').removeClass('hide');
+    }
+    if (isHome) {
+        $('#admin-link').removeClass('hide');
     }
 }
 
@@ -194,5 +198,13 @@ function goToIndex() {
     var loginPath = path + 'login.php';
     if (currentPage === loginPath) {
         window.location.replace(indexPath);
+    }
+}
+
+function goToLogin() {
+    var currentPage = window.location.href;
+    var loginPath = path + 'login.php';
+    if (currentPage != loginPath) {
+        window.location.replace(loginPath);
     }
 }
