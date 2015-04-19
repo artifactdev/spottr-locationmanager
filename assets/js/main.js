@@ -14,6 +14,8 @@ $( document ).ready(function() {
 
     submitItem();
 
+    menuItemHandler()
+
 });
 
 function initMap() {
@@ -28,20 +30,20 @@ function initMap() {
         }
     }
 
-    var _latitude = 51.541216;
-    var _longitude = -0.095678;
-    var jsonPath = 'assets/json/items.json.txt';
+    var _latitude = 51.0545032;
+    var _longitude = 13.7416008;
 
-    $.getJSON(jsonPath)
-        .done(function(json) {
-            addMap(_longitude,_latitude,json);
-            if($('body').hasClass('.page-verwaltung')) {
-                console.log('passed');
-                fillVerwaltung(json);
-            }
-        })
-        .fail(function( jqxhr, textStatus, error ) {
-            console.log(error);
+    var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
+
+    AjaxHandler.request({
+        url: "locations",
+        method: "GET",
+        success: function(json) {
+            createHomepageGoogleMap(_latitude,_longitude,json);
+        },
+        error : function(jqXHR, textStatus, errorThrown) {
+            console.log(errorThrownr);
+        }
     });
 }
 
@@ -55,10 +57,25 @@ function mobileNavigation(){
 }
 
 function showModal() {
-    $('body').on('click','.results .item a', function(id) {
-        var metaItem = $(this).closest('.quick-preview');
+    var metaItem = $(this).find('.quick-preview');
+
+    $('body').on('click','.results li', function(id) {
+        var metaItem = $(this).find('.quick-preview');
         modalHandler(metaItem);
          
+    });
+
+    $('body').on('mouseover','.results li', function(id) {
+        var metaItem = $(this).find('.quick-preview');
+        var id = metaItem.attr('id');
+        highlightMarker(id, 'add');
+         
+    });
+
+    $('body').on('mouseout','.results li', function(id) {
+        var metaItem = $(this).find('.item');
+        var id = metaItem.attr('id');
+        highlightMarker(id, 'remove');
     });
 
     $('body').on('click','.infobox a', function(e) {
@@ -66,6 +83,16 @@ function showModal() {
         modalHandler($(this));
          
     });
+
+    function highlightMarker(id,action) {
+        var markerElement = $('#map').find("[data-id='" + id + "']").parent('.marker-loaded');
+        if (action === 'add') {
+            markerElement.addClass('marker-active');
+        } 
+        if (action === 'remove') {
+            markerElement.removeClass('marker-active');
+        }
+    }
 
     function modalHandler(item) {
         var metaElement = item;
@@ -83,44 +110,38 @@ function showModal() {
             modal.removeClass('fade-in');
         });
     }
-
-    $("#geocomplete").geocomplete({
-          details: "#add-form",
-          types: ["geocode", "establishment"],
-        });
 }
 
 function drawItemSpecific(category, json, a){
     return '';
 }
 
-function addMap(_longitude,_latitude,json) {
-    createHomepageGoogleMap(_latitude,_longitude,json);
-}
-
-
 function pushItemsToArray(json, a, category, visibleItemsArray){
     var itemPrice;
+    var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
+        
+     if(json.items[a].gallery)         { var gallery = json.items[a].gallery }
+        else                            { gallery = 'assets/img/default-item.png' }
+
     visibleItemsArray.push(
         '<li>' +
-            '<div class="item" id="' + json.data[a].id + '">' +
+            '<div class="item" id="' + json.items[a].id + '">' +
                 '<a href="#" class="image">' +
                     '<div class="inner">' +
                         '<div class="item-specific">' +
                             drawItemSpecific(category, json, a) +
                         '</div>' +
-                        '<img src="' + json.data[a].gallery + '" alt="">' +
+                        '<img src="' + path + gallery + '" alt="">' +
                     '</div>' +
                 '</a>' +
                 '<div class="wrapper">' +
-                    '<a href="#" class="quick-preview" id="' + json.data[a].id + '" data-gallery="' + json.data[a].gallery + '" data-title="' + json.data[a].title +'" data-type="' + json.data[a].type +'"  data-category="' + json.data[a].category +'" data-location="' + json.data[a].location +'" data-aperture="' + json.data[a].aperture +'" data-date="' + json.data[a].date +'" data-focal="' + json.data[a].focal +'" data-iso="' + json.data[a].iso +'" data-rating="' + json.data[a].rating +'"><h3>' + json.data[a].title + '</h3></a>' +
-                    '<figure>' + json.data[a].category + '</figure>' +
+                    '<a href="#" class="quick-preview" id="' + json.items[a].id + '" data-gallery="' + json.items[a].gallery + '" data-title="' + json.items[a].title +'" data-type="' + json.items[a].type +'"  data-category="' + json.items[a].category +'" data-location="' + json.items[a].location +'" data-aperture="' + json.items[a].aperture +'" data-date="' + json.items[a].date +'" data-focal="' + json.items[a].focal +'" data-iso="' + json.items[a].iso +'" data-rating="' + json.items[a].rating +'"><h3>' + json.items[a].title + '</h3></a>' +
+                    '<figure>' + json.items[a].category + '</figure>' +
                     '<div class="info">' +
                         '<div class="type">' +
-                            '<i><img src="' + json.data[a].type_icon + '" alt=""></i>' +
-                            '<span>' + json.data[a].type + '</span>' +
+                            '<i><img src="' + path + json.items[a].type + '" alt=""></i>' +
                         '</div>' +
-                        '<div class="rating" data-rating="' + json.data[a].rating + '"></div>' +
+                        '<div class="rating" data-rating="' + json.items[a].rating + '"></div>' +
                     '</div>' +
                 '</div>' +
             '</div>' +

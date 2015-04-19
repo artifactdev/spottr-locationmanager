@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <host>http://192.168.2.104</host>
-    <application_path>/Privat/artifact/Spottr/rest-api/</application_path>
+    <host>http://localhost:8888</host>
+    <application_path>/spottr/rest-api/</application_path>
     <routes>
         <!-- Authentication - Login -->
         <route>
@@ -18,21 +18,21 @@
             <http_method>GET</http_method>
             <controller>LocationController</controller>
             <controller_method>listLocations</controller_method>
-            <secure>false</secure>
+            <secure>true</secure>
         </route>
         <route>
             <url>locations</url>
             <http_method>POST</http_method>
             <controller>LocationController</controller>
             <controller_method>createLocation</controller_method>
-            <secure>false</secure>
+            <secure>true</secure>
         </route>
         <route>
             <url>locations/{:id}</url>
             <http_method>GET</http_method>
             <controller>LocationController</controller>
             <controller_method>getLocation</controller_method>
-            <secure>false</secure>
+            <secure>true</secure>
         </route>
         <route>
             <url>locations/{:locationId}</url>
@@ -46,7 +46,7 @@
             <http_method>DELETE</http_method>
             <controller>LocationController</controller>
             <controller_method>deleteLocation</controller_method>
-            <secure>false</secure>
+            <secure>true</secure>
         </route>
         <route>
             <url>locations/{:locationId}/image</url>
