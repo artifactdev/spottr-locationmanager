@@ -25,8 +25,8 @@ if (! ini_get('date.timezone')) {
 }
 
 // Import system configuration
-require_once dirname(__FILE__) . '/app/config/configure.php';
 require_once dirname(__FILE__) . '/core/config/configure.php';
+require_once dirname(__FILE__) . '/app/config/configure.php';
 
 require_once CONF_FS_CORE_SYSTEM . "class.RestFacade.php";
 

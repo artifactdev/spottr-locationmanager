@@ -1,5 +1,6 @@
 <?php
 use FlorianWolters\Component\Core\StringUtils;
+use FlorianWolters\Component\Core\RandomStringUtils;
 
 /**
  * All rights reserved - (c) 2013 Markus Jahn
@@ -16,11 +17,31 @@ class LocationManager
     public function createLocation(Location $location)
     {
         DatabaseUtils::query(
-            "INSERT INTO `locations` (`category`, `title`, `latitude`, `longitude`, `rating`, `gallery`, `date_created`, `aperture`, `focal`, `iso`, `type`) VALUES
-            ('{CATEGORY}', '{TITLE}', '{LATITUDE}', '{LONGITUDE}', '{RATING}', '{GALLERY}', '" . date("Y-m-d") .
-                 "', '{APERTURE}', '{FOCAL}', '{ISO}', '{TYPE}');", $location->wrapModelToDatabase());
+            "INSERT INTO `locations` (`category`, `title`, `latitude`, `longitude`, `rating`, `date_created`, `gallery`, `aperture`, `focal`, `iso`, `type`) VALUES
+            ('{CATEGORY}', '{TITLE}', '{LATITUDE}', '{LONGITUDE}', '{RATING}', '" .
+                 date("Y-m-d") . "', '', '{APERTURE}', '{FOCAL}', '{ISO}', '{TYPE}');", $location->wrapModelToDatabase());
         $lastId = DatabaseUtils::insertId();
         return $this->findLocation($lastId);
+    }
+
+    /**
+     * Updates the given location in the database.
+     *
+     * @param Location $location
+     */
+    public function updateLocation(Location $location)
+    {
+        DatabaseUtils::query(
+            "UPDATE `locations` SET
+                `category` = '{CATEGORY}',
+                `title` = '{TITLE}',
+                `rating` = '{RATING}',
+                `gallery` = '{GALLERY}',
+                `aperture` = '{APERTURE}',
+                `focal` = '{FOCAL}',
+                `iso` = '{ISO}',
+                `type` = '{TYPE}' WHERE `id`='{ID}';", $location->wrapModelToDatabase());
+        return $this->findLocation($location->id);
     }
 
     /**
@@ -57,9 +78,54 @@ class LocationManager
         if (StringUtils::isBlank($id)) {
             return true;
         }
+        $location = $this->findLocation($id);
+        
         DatabaseUtils::query("DELETE FROM `locations` WHERE `id` = {ID}", array(
             "ID" => $id
         ));
+        
+        if (StringUtils::isNotBlank($location->gallery)) {
+            unlink(CONF_FS_MEDIA_LOCATIONS . $location->gallery);
+        }
         return true;
+    }
+
+    /**
+     *
+     * @param int $locationId
+     * @param string $attachment
+     *            File name of the temporary saved attachment.
+     * @return boolean.
+     */
+    public function addImage($locationId, $file)
+    {
+        $location = $this->findLocation($locationId);
+        if (StringUtils::isNotBlank($location->gallery)) {
+            unlink(CONF_FS_MEDIA_LOCATIONS . $location->gallery);
+        }
+        $fileName = $this->getRandomFileName($file);
+        
+        if (rename(CONF_FS_TMP . $file, CONF_FS_MEDIA_LOCATIONS . $fileName)) {
+            $location->gallery = $fileName;
+            $this->updateLocation($location);
+        }
+        unlink(CONF_FS_TMP . $file);
+        return true;
+    }
+    
+    /**
+     *
+     * @param string $filePath
+     * @return string
+     */
+    private function getRandomFileName($filePath) {
+        $fileType = substr($filePath, strrpos($filePath, "."), strlen($filePath));
+        $randomPath = rand(100);
+        $fileName = md5($filePath . $randomPath) . $fileType;
+        
+        if (file_exists(CONF_FS_MEDIA_LOCATIONS . $fileName)) {
+            return $this->getRandomFileName($filePath);
+        }
+        return $fileName;
     }
 }

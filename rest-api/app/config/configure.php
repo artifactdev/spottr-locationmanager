@@ -18,6 +18,8 @@ define("CONF_DATABASE_USERNAME", "root");
 define("CONF_DATABASE_PASSWORD", "root");
 define("CONF_DATABASE_SCHEMA", "spottr");
 
+define("CONF_FS_MEDIA_LOCATIONS", CONF_FS_ROOT . "media/locations/");
+
 /**
  * ***********************************************************
  * Application configuration values.

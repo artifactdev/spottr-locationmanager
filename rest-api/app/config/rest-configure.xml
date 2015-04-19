@@ -35,10 +35,24 @@
             <secure>false</secure>
         </route>
         <route>
+            <url>locations/{:locationId}</url>
+            <http_method>PUT</http_method>
+            <controller>LocationController</controller>
+            <controller_method>updateLocation</controller_method>
+            <secure>false</secure>
+        </route>
+        <route>
             <url>locations/{:id}</url>
             <http_method>DELETE</http_method>
             <controller>LocationController</controller>
             <controller_method>deleteLocation</controller_method>
+            <secure>false</secure>
+        </route>
+        <route>
+            <url>locations/{:locationId}/image</url>
+            <http_method>POST</http_method>
+            <controller>LocationController</controller>
+            <controller_method>addImage</controller_method>
             <secure>false</secure>
         </route>
         

@@ -42,7 +42,11 @@ class Location extends AbstractDatabaseModel
         $this->latitude = $dbRow['latitude'];
         $this->longitude = $dbRow['longitude'];
         $this->rating = $dbRow['rating'];
-        $this->gallery = $dbRow['gallery'];
+        
+        if (StringUtils::isNotBlank($dbRow['gallery'])) {
+            $this->gallery = "rest-api/media/locations/" . $dbRow['gallery'];
+        }
+        
         $this->dateCreated = $dbRow['date_created'];
         $this->aperture = $dbRow['aperture'];
         $this->focal = $dbRow['focal'];

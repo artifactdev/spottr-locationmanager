@@ -34,6 +34,21 @@ class LocationController
         $location = HTTPRequestHelper::getParamAsModel(new Location());
         return $this->locationManager->createLocation($location);
     }
+    
+    /**
+     * Controller method to update an existsing location.
+     *
+     * @return Location
+     */
+    public function updateLocation($locationId)
+    {
+        $oldLocation = $this->locationManager->findLocation($locationId);
+        $location = HTTPRequestHelper::getParamAsModel(new Location());
+        $location->gallery = $oldLocation->gallery;
+        $location->id = $locationId;
+        
+        return $this->locationManager->updateLocation($location);
+    }
 
     /**
      * Controller method to get a speicfied location.
@@ -53,5 +68,20 @@ class LocationController
     public function deleteLocation($id)
     {
         return $this->locationManager->deleteLocation($id);
+    }
+    
+    /**
+     * Controller method to add an attachment.
+     *
+     * @param string $locationId
+     *            Id of the Location.
+     * @return boolean
+     */
+    public function addImage($locationId)
+    {
+        HTTPResponseHelper::setContentType("text/html; charset=utf-8");
+    
+        $files = HTTPRequestHelper::getUploadedFiles();
+        return $this->locationManager->addImage($locationId, $files[0]);
     }
 }
