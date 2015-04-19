@@ -95,7 +95,7 @@
                    
                 }
                
-                // weiterleiten auf index bzw jetzt isser angemeldet
+                goToIndex();
             })
          };
  

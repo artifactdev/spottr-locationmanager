@@ -188,3 +188,11 @@ function setInputsWidth(){
     }
 }
 
+function goToIndex() {
+    var currentPage = window.location.href;
+    var indexPath = path + 'index.php';
+    var loginPath = path + 'login.php';
+    if (currentPage === loginPath) {
+        window.location.replace(indexPath);
+    }
+}
