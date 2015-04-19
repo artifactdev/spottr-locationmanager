@@ -33,19 +33,15 @@ function initMap() {
 
     var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
 
-    jQuery.ajax({
-        url: path + "rest-api/locations",
-        type: "GET",
-
-        contentType: 'application/json; charset=utf-8',
+    AjaxHandler.request({
+        url: "locations",
+        method: "GET",
         success: function(json) {
             createHomepageGoogleMap(_latitude,_longitude,json);
         },
         error : function(jqXHR, textStatus, errorThrown) {
             console.log(errorThrownr);
-        },
-
-        timeout: 120000,
+        }
     });
 }
 

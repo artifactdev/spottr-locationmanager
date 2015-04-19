@@ -14,19 +14,15 @@ function initItems() {
     var _latitude = 51.541216;
     var _longitude = -0.095678;
 
-    jQuery.ajax({
-        url: "http://localhost:8888/spottr/rest-api/locations",
-        type: "GET",
-
-        contentType: 'application/json; charset=utf-8',
+    AjaxHandler.request({
+        url: "locations",
+        method: "GET",
         success: function(json) {
             fillVerwaltung(json);
         },
         error : function(jqXHR, textStatus, errorThrown) {
             console.log(errorThrownr);
-        },
-
-        timeout: 120000,
+        }
     });
 
     $("#geocomplete").geocomplete({

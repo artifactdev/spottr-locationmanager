@@ -1,4 +1,4 @@
-
+var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
 
 function showEditModal() {
     $('body').on('click','.btn-edit', function(id) {
@@ -187,3 +187,4 @@ function setInputsWidth(){
         }
     }
 }
+
