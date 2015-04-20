@@ -51,11 +51,12 @@
             <script type="text/javascript" src="./assets/js/jquery-2.1.0.min.js"></script>
             <script type="text/javascript" src="./assets/js/jqueryExtensions.js"></script>
             <script type="text/javascript" src="./assets/js/jquery.cookie.js"></script>
+            <script type="text/javascript" src="./assets/js/jquery.exif.js"></script>
+            <script type="text/javascript" src="./assets/js/bootstrap.min.js"></script>
+            <script type="text/javascript" src="./assets/js/bootstrap-select.min.js"></script>
             <script type="text/javascript" src="./assets/js/global.js"></script>
             <script type="text/javascript" src="./assets/js/ajaxHandler.js"></script>
             <script type="text/javascript" src="./assets/js/authenticationHelper.js"></script>
-            <script type="text/javascript" src="./assets/js/bootstrap.min.js"></script>
-            <script type="text/javascript" src="./assets/js/bootstrap-select.min.js"></script>
             <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&amp;libraries=places"></script>
             <script type="text/javascript" src="./assets/js/jquery.geocomplete.min.js"></script>
             <script type="text/javascript" src="./assets/js/administration.js"></script>

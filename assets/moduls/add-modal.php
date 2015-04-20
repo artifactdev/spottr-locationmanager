@@ -2,7 +2,7 @@
     <div class="modal-wrapper">
         <h2>Location hinzufügen</h2>
         <div class="modal-body">
-            <form action="http://localhost:8888/spottr/rest-api/locations" id="add-form" class="add-location">
+            <form action="locations" id="add-form" class="add-location">
                 <input id="title" type="text" placeholder="Titel" name="title"/>
 
                 <input name="datei" type="file" id="file" size="50" maxlength="100000" >
@@ -47,4 +47,5 @@
         <div class="modal-close"><img src="assets/img/close.png"></div>
     </div>
     <div class="modal-background fade-in"></div>
+    <iframe class="hide" name="fnJS_iframe_location_attachment" id="fnJS_iframe_location_attachment"></iframe>
 </div>

@@ -145,17 +145,40 @@ function submitItem() {
 
     addModal.find('form').on('submit',function(e){
         e.preventDefault();
-        $.ajax({
-            type     : "POST",
+        AjaxHandler.request({
+            method   : "POST",
             cache    : false,
             url      : $(this).attr('action'),
             data     : $(this).serialize(),
             success  : function(data) {
-                location.reload(true);
+                //location.reload(true);
+                submitImage(data.id);
             }
         });
 
     });
+
+    function submitImage(locationID) {
+        var $attForm = $("#add-modal form");
+        var $file = $attForm.find("input[type='file']");
+        if ($file.val() == "") {
+            if (typeof callback == "function") {
+                callback();
+            }
+            return;
+        }
+
+        $attForm.attr("action", path + "/locations/" + locationID + "/image");
+        var $iframe = $("#fnJS_iframe_location_attachment");
+        $iframe.unbind().load(function(event) {
+            event.preventDefault();
+             //console.log($(this).contents());
+             callback($(this).contents());
+        });
+ 
+
+        $attForm.submit();
+    }
 }
 
 function setInputsWidth(){
