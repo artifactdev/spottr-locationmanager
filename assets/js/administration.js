@@ -139,6 +139,48 @@ function editModal(metaElement) {
 
     });
 
+    modal.find('form').on('submit',function(e){
+        e.preventDefault();
+        AjaxHandler.request({
+            method   : "PUT",
+            cache    : false,
+            url      : $(this).attr('action'),
+            data     : $(this).serializeObject(),
+            success  : function(data) {
+                submitImage(data.id);
+                location.reload(true);
+
+            },
+
+            error    : function(data) {
+                console.log(data);
+            } 
+        });
+
+    });
+
+    function submitImage(locationID) {
+        var $attForm = $("#edit-modal form");
+        var $file = $attForm.find("input[type='file']");
+        if ($file.val() == "") {
+            if (typeof callback == "function") {
+                callback();
+            }
+            return;
+        }
+
+        $attForm.attr("action", "locations/" + locationID + "/image");
+        var $iframe = $("#fnJS_iframe_location_attachment");
+        $iframe.unbind().load(function(event) {
+            event.preventDefault();
+             //console.log($(this).contents());
+             callback($(this).contents());
+        });
+     
+        $attForm.submit();
+
+    }
+
     $("#geocomplete-edit").geocomplete({
       details: "#edit-form",
       types: ["geocode", "establishment"],

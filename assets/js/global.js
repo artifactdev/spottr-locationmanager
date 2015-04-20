@@ -22,6 +22,8 @@ function showEditModal() {
             modal.addClass('hide');
             modal.removeClass('fade-in');
         });
+
+        
     }
 }
 
@@ -141,6 +143,7 @@ function submitItem() {
     $("#geocomplete-search").geocomplete({
       details: "#add-form",
       types: ["geocode", "establishment"],
+      detailsAttribute: "data-geo"
     });
 
     addModal.find('form').on('submit',function(e){
@@ -149,11 +152,15 @@ function submitItem() {
             method   : "POST",
             cache    : false,
             url      : $(this).attr('action'),
-            data     : $(this).serialize(),
+            data     : $(this).serializeObject(),
             success  : function(data) {
                 //location.reload(true);
                 submitImage(data.id);
-            }
+            },
+
+            error    : function(data) {
+                console.log(data);
+            } 
         });
 
     });
@@ -168,7 +175,7 @@ function submitItem() {
             return;
         }
 
-        $attForm.attr("action", path + "/locations/" + locationID + "/image");
+        $attForm.attr("action", "locations/" + locationID + "/image");
         var $iframe = $("#fnJS_iframe_location_attachment");
         $iframe.unbind().load(function(event) {
             event.preventDefault();

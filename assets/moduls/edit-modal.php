@@ -2,7 +2,7 @@
     <div class="modal-wrapper">
         <h2>Location bearbeiten</h2>
         <div class="modal-body">
-            <form action="http://localhost:8888/spottr/rest-api/locations/" id="edit-form" method="put" class="edit-location">
+            <form action="locations/" id="edit-form" method="put" class="edit-location">
 
                 <input id="title" type="text" placeholder="Titel" name="title"/>
 
@@ -22,12 +22,12 @@
                 <input id="lat" name="lat" type="text" value="" placeholder="Latitude">
 
                 <select name="type">
-                    <option value="/assets/icons/house.png">Gebäude</option>
-                    <option value="/assets/icons/fabrik.png">Fabrik</option>
-                    <option value="/assets/icons/denkmal.png">Denkmal</option>
-                    <option value="/assets/icons/park.png">Park</option>
-                    <option value="/assets/icons/bridge.png">Brücke</option>
-                    <option value="/assets/icons/other.png" selected="selected">Andere</option>
+                    <option value="assets/icons/house.png">Gebäude</option>
+                    <option value="assets/icons/fabrik.png">Fabrik</option>
+                    <option value="assets/icons/denkmal.png">Denkmal</option>
+                    <option value="assets/icons/park.png">Park</option>
+                    <option value="assets/icons/bridge.png">Brücke</option>
+                    <option value="assets/icons/other.png" selected="selected">Andere</option>
                 </select>
 
                 <input id="rating" type="text" placeholder="Rating 1-5" name="rating"/>
