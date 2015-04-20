@@ -349,7 +349,11 @@ function userAdministration() {
                     url      : $(this).attr('action') + "/" + id,
                     data     : $(this).serializeObject(),
                     success  : function(data) {
-                        
+                        $('#user-modal').find('.add-user').addClass('hide');
+                        var editUserForm = $('#user-modal').find('.edit-user');
+                        var addUserForm = $('#user-modal').find('.add-user');
+                        editUserForm.addClass('hide');
+                        addUserForm.removeClass('hide');
                         loadUsers();
 
                     },
