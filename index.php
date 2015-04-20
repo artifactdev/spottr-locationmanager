@@ -37,7 +37,7 @@
                                 <div id="map" class="has-parallax"></div>
                                 <!--/#map-->
                                 <?php 
-                                    include 'assets/moduls/searchbar.php';
+                                    #include 'assets/moduls/searchbar.php';
                                 ?>
                             </div>
                             <!-- end Map -->
