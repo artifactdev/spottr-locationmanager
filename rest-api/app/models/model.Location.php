@@ -47,7 +47,7 @@ class Location extends AbstractDatabaseModel
             $this->gallery = "rest-api/media/locations/" . $dbRow['gallery'];
         }
         
-        $this->dateCreated = $dbRow['date_created'];
+        $this->date = $dbRow['date_created'];
         $this->aperture = $dbRow['aperture'];
         $this->focal = $dbRow['focal'];
         $this->iso = $dbRow['iso'];

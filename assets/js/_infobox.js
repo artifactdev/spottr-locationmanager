@@ -12,7 +12,7 @@ function drawInfobox(category, infoboxContent, json, i){
         else                            { location = '' }
     if(json.items[i].aperture)           { var aperture = json.items[i].aperture }
         else                            { aperture = '' }
-    if(json.items[i].date)               { var date = json.items[i].date }
+    if(json.items[i].date)               { var date = json.items[i].dateCreated }
         else                            { date = '' }
     if(json.items[i].focal)              { var focal = json.items[i].focal }
         else                            { focal = '' }

@@ -7,6 +7,7 @@ $( document ).ready(function() {
     submitItem();
     setInputsWidth();
     fancySelect();
+    userAdministration();
 
 });
 
@@ -52,7 +53,7 @@ function fillVerwaltung(json) {
                 '</div>' +
                 '<div class="col-md-12 item-footer">' +
                     '<div class="col-md-6">' +
-                        '<span class="meta-element hidden" id="' + json.items[i].id + '" data-gallery="' + json.items[i].gallery + '" data-longitude="' + json.items[i].longitude + '" data-latitude="' + json.items[i].latitude + '" data-title="' + json.items[i].title +'" data-type="' + json.items[i].type +'"  data-category="' + json.items[i].category +'" data-location="' + json.items[i].location +'" data-aperture="' + json.items[i].aperture +'" data-date="' + json.items[i].date +'" data-focal="' + json.items[i].focal +'" data-iso="' + json.items[i].iso +'" data-rating="' + json.items[i].rating +'"><h3>' + json.items[i].title + '</h3></span>' +
+                        '<span class="meta-element hidden" id="' + json.items[i].id + '" data-gallery="' + json.items[i].gallery + '" data-longitude="' + json.items[i].longitude + '" data-latitude="' + json.items[i].latitude + '" data-title="' + json.items[i].title +'" data-type="' + json.items[i].type +'"  data-category="' + json.items[i].category +'" data-location="' + json.items[i].location +'" data-aperture="' + json.items[i].aperture +'" data-date="' + json.items[i].dateCreated +'" data-focal="' + json.items[i].focal +'" data-iso="' + json.items[i].iso +'" data-rating="' + json.items[i].rating +'"><h3>' + json.items[i].title + '</h3></span>' +
                     
                         '<a href="#" class="btn btn-default btn-edit">Edit</a>' +
                     '</div>' +
@@ -106,7 +107,7 @@ function editModal(metaElement) {
     var longitude = metaElement.data('longitude');
     var gallery = metaElement.data('gallery');
     var category = metaElement.data('category');
-    var date = metaElement.data('date_created');
+    var date = metaElement.data('date');
     var aperture = metaElement.data('aperture');
     var focal = metaElement.data('focal');
     var iso = metaElement.data('iso');
@@ -124,20 +125,6 @@ function editModal(metaElement) {
     modal.find('#lng').val(longitude);
     modal.find('#lat').val(latitude);
     modal.find('#rating').val(rating);
-
-    modal.find('form').on('submit',function(e){
-        e.preventDefault();
-        $.ajax({
-            type     : "PUT",
-            cache    : false,
-            url      : $(this).attr('action'),
-            data     : $(this).serialize(),
-            success  : function(data) {
-                location.reload(true);
-            }
-        });
-
-    });
 
     modal.find('form').on('submit',function(e){
         e.preventDefault();
@@ -201,8 +188,8 @@ function deleteModal(metaElement) {
 
     modal.find('form').on('submit',function(e){
         e.preventDefault();
-        $.ajax({
-            type     : "DELETE",
+        AjaxHandler.request({
+            method     : "DELETE",
             cache    : false,
             url      : $(this).attr('action'),
             data     : $(this).serialize(),
@@ -213,4 +200,74 @@ function deleteModal(metaElement) {
         });
     });
 
+}
+
+function userAdministration() {
+
+    $('body').on('click','#useradmin-link', function(id) {
+        modalHandler();
+    });
+
+    function modalHandler() {
+        var modal = $('#user-modal');
+
+        modal.removeClass('hide');
+        modal.addClass('fade-in');
+
+        $('#user-modal .modal-close').on('click', function(){
+
+            modal.addClass('hide');
+            modal.removeClass('fade-in');
+        });
+
+        loadUsers();
+
+        saveUser(modal);
+    }
+
+    function saveUser(modal) {
+        modal.find('form').on('submit',function(e){
+            e.preventDefault();
+            AjaxHandler.request({
+                method     : "POST",
+                cache    : false,
+                url      : $(this).attr('action'),
+                data     : $(this).serializeObject(),
+                success  : function(data) {
+                    loadUsers();
+                }
+            });
+        });
+    }
+
+    function loadUsers() {
+        AjaxHandler.request({
+            method     : "GET",
+            cache    : false,
+            url      : "users",
+            data     : $(this).serialize(),
+            success  : function(data) {
+                fillTable(data);
+            }
+        });
+
+        function fillTable(json) {
+            console.log(json);
+            for (var i = 0; i < json.items.length; i++) {
+                var userTable = $('#user-modal table.userlist tbody');
+                userTable.empty();
+                userTable.append(
+                    '<tr>' +
+                        '<td class="id">' + json.items[i].id + '</td>' +
+                        '<td class="id">' + json.items[i].email + '</td>' +
+                        '<td class="id">' + json.items[i].password + '</td>' +
+                        '<td class="id">' + json.items[i].firstName + '</td>' +
+                        '<td class="id">' + json.items[i].lastName + '</td>' +
+                        '<td class="id">' + json.items[i].companyName + '</td>' +
+                        '<td class="id">' + json.items[i].roles + '</td>' +
+                    '</tr>'
+                );
+            }
+        }
+    }
 }

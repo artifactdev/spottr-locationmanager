@@ -23,7 +23,7 @@ function showEditModal() {
             modal.removeClass('fade-in');
         });
 
-        
+
     }
 }
 
@@ -154,8 +154,8 @@ function submitItem() {
             url      : $(this).attr('action'),
             data     : $(this).serializeObject(),
             success  : function(data) {
-                //location.reload(true);
                 submitImage(data.id);
+                location.reload(true);
             },
 
             error    : function(data) {

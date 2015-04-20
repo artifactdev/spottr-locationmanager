@@ -1,0 +1,38 @@
+#user-modal {
+    table {
+        width: 100%;
+
+        tbody {
+            margin-top: 8px;
+        }
+
+        thead {
+            tr {
+                background-color: $base-grey-light;
+                font-weight: bold;
+
+                td:not(:last-child) {
+                    border-right: 1px solid $base-white;
+                }
+            }
+        }
+
+        td {
+            padding: 3px 8px;
+            border: 1px solid $base-grey-light;
+
+            input {
+                background:  $base-grey-light;
+            }
+        }
+    }   
+
+    #user-form {
+        margin-top: 12px;
+
+        td {
+            border: none;
+        }
+    }  
+}
+

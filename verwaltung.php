@@ -66,6 +66,8 @@
             include 'assets/moduls/add-modal.php';
             include 'assets/moduls/edit-modal.php';
             include 'assets/moduls/delete-modal.php';
+            
+            include 'assets/moduls/user-modal.php';
             include 'assets/moduls/item-modal.php';
         ?>
     </body>

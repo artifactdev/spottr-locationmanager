@@ -34,8 +34,6 @@
 
                 <input id="aperture" type="hidden" name="aperture"/>
 
-                <input id="date" type="date" name="date"/>
-
                 <input id="focal" type="hidden" name="focal"/>
 
                 <input id="iso" type="hidden" name="iso"/>

@@ -36,6 +36,7 @@ class LocationManager
                 `category` = '{CATEGORY}',
                 `title` = '{TITLE}',
                 `rating` = '{RATING}',
+                `date_created` = '" . date("Y-m-d") . "',
                 `gallery` = '{GALLERY}',
                 `aperture` = '{APERTURE}',
                 `focal` = '{FOCAL}',

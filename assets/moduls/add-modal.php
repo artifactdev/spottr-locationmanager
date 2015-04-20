@@ -14,7 +14,7 @@
                     
                 </select>
 
-                <input type="text"  id="geocomplete-search" placeholder="Search Address" name="search_adress"/>
+                <input type="text"  id="geocomplete-search" placeholder="Search Address" name="search_adress" autocomplete="false"/>
 
                 <input id="lng" name="longitude" data-geo="lng" type="text" value="" placeholder="Longitude">
 
@@ -34,8 +34,6 @@
                 <input id="rating" type="text" placeholder="Rating 1-5" name="rating"/>
 
                 <input id="aperture" type="hidden" name="aperture"/>
-
-                <input id="date" type="hidden" name="date"/>
 
                 <input id="focal" type="hidden" name="focal"/>
 
