@@ -2,13 +2,12 @@
     <div class="modal-wrapper">
         <h2>Users</h2>
         <div class="modal-body">
-            <form action="users" class="add-user" enctype='multipart/form-data'>
+            <form action="users" class="list-user" enctype='multipart/form-data'>
                 <table class="userlist">
                     <thead>
                         <tr>
                             <td>ID</td>
                             <td>E-Mail</td>
-                            <td>Passwort</td>
                             <td>Vorname</td>
                             <td>Nachname</td>
                             <td>Firmenname</td>
@@ -31,7 +30,12 @@
                             <td><input type="text" name="firstname" placeholder="Vorname"/></td>
                             <td><input type="text" name="lastname" placeholder="Nachname"/></td>
                             <td><input type="text" name="companyname" placeholder="Firmenname"/></td>
-                            <td><input type="text" name="roles" placeholder="Rolle (1 Admin,2 Consumer)"/></td>
+                            <td>
+                                <select multiple name="roles"> 
+                                    <option value="1">Administrator</option>
+                                    <option value="2">User</option>
+                                </select>
+                            </td>
 
                         </tr>
                     </tbody>
@@ -41,6 +45,31 @@
                 </table>
 
                 <button type="submit" class="btn btn-default full-width">Nutzer anlegen</button>
+            </form>
+            <form action="users" id="edit-user-form" class="edit-user hide" enctype='multipart/form-data'>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><input id="id" type="hidden" name="id"/><input id="email" type="text" name="email" placeholder="E-Mail"/></td>
+                            <td><input type="password" name="password" placeholder="Passwort"/></td>
+                            <td><input id="firstname" type="text" name="firstname" placeholder="Vorname"/></td>
+                            <td><input id="lastname" type="text" name="lastname" placeholder="Nachname"/></td>
+                            <td><input id="companyname" type="text" name="companyname" placeholder="Firmenname"/></td>
+                            <td>
+                                <select multiple name="roles"> 
+                                    <option value="1">Administrator</option>
+                                    <option value="2">User</option>
+                                </select>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+
+                <button type="submit" class="btn btn-default full-width">Nutzer ändern</button>
             </form>
         </div>
         <div class="modal-close"><img src="assets/img/close.png"></div>
