@@ -14,7 +14,7 @@
              if (cookieValue === undefined || cookieValue == null || cookieValue == "null") {
                 // wenn nicht eingeloggt weiterleitung auf Login
 
-                 goToLogin();
+                 spottr.global.goToLogin();
                  return;
              }
              cookieValue = $.parseJSON(cookieValue);
@@ -75,7 +75,7 @@
          factory.runAuthenticationCheck = function(token) {
  
              if (token == null || token.userUUId == undefined) {
-                goToLogin();
+                spottr.global.goToLogin();
                 return;
              }
  
@@ -91,7 +91,7 @@
                    
                 }
                
-                goToIndex();
+                spottr.global.goToIndex();
             })
          };
  
