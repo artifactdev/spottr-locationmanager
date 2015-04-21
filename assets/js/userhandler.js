@@ -6,7 +6,9 @@
             var modal = $('#user-modal');
 
             $('body').on('click','#useradmin-link', function(id) {
+                var modal = $('#user-modal');
                 spottr.global.modalHandler(modal);
+                spottr.global.fancySelect();
 
                 $('#user-modal .modal-close').on('click', function(){
                     modal.find('input').val('');
