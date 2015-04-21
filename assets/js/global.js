@@ -6,20 +6,19 @@ var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.
             $('body').on('click','.btn-edit', function(id) {
                 var metaItem = $(this).closest('.item').find('.meta-element');
                 var modal = $('#edit-modal');
-                Global.modalHandler(metaItem,modal);
-                Administration.editModal(metaElement);
+                spottr.global.modalHandler(modal);
+                spottr.administration.editModal(metaElement);
                  
             });
         },
 
-        modalHandler: function (item,modalID) {
-            var metaElement = item;
-            var modal = $(modalID);
+        modalHandler: function (modalID) {
+            var modal = modalID;
 
             modal.removeClass('hide');
             modal.addClass('fade-in');
-
-            $('#edit-modal .modal-close').on('click', function(){
+            
+            modal.find('.modal-close').on('click', function(){
 
                 modal.addClass('hide');
                 modal.removeClass('fade-in');

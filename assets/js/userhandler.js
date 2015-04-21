@@ -1,63 +1,59 @@
-function userAdministration() {
+;(function ($, window, undefined) {
 
-    $('body').on('click','#useradmin-link', function(id) {
-        modalHandler();
-    });
+    spottr.userAdministration = {
+        init: function () {
 
-    function modalHandler() {
-        var modal = $('#user-modal');
+            var modal = $('#user-modal');
 
-        modal.removeClass('hide');
-        modal.addClass('fade-in');
+            $('body').on('click','#useradmin-link', function(id) {
+                spottr.global.modalHandler(modal);
 
-        $('#user-modal .modal-close').on('click', function(){
+                $('#user-modal .modal-close').on('click', function(){
+                    modal.find('input').val('');
+                    modal.find('select').val('');
+                    modal.find('select').selectpicker('render');
+                });
+            });
 
-            modal.addClass('hide');
-            modal.removeClass('fade-in');
-            modal.find('input').val('');
-            modal.find('select').val('');
-            modal.find('select').selectpicker('render');
-        });
+            spottr.userAdministration.loadUsers();
 
-        loadUsers();
+            spottr.userAdministration.saveUser(modal);
 
-        saveUser(modal);
+            spottr.userAdministration.deleteUser();
 
-        deleteUser();
+            spottr.userAdministration.editUser();
+        },
 
-        editUser();
-    }
+        saveUser: function (modal) {
+            modal.find('form').on('submit',function(e){
+                e.preventDefault();
+                AjaxHandler.request({
+                    method     : "POST",
+                    cache    : false,
+                    url      : $(this).attr('action'),
+                    data     : $(this).serializeObject(),
+                    success  : function(data) {
+                        spottr.userAdministation.loadUsers();
+                    }
+                });
+            });
+        },
 
-    function saveUser(modal) {
-        modal.find('form').on('submit',function(e){
-            e.preventDefault();
+        loadUsers: function () {
             AjaxHandler.request({
-                method     : "POST",
+                method     : "GET",
                 cache    : false,
-                url      : $(this).attr('action'),
-                data     : $(this).serializeObject(),
+                url      : "users",
+                data     : $(this).serialize(),
                 success  : function(data) {
-                    loadUsers();
+                    var userTable = $('#user-modal table.userlist tbody');
+                    userTable.empty();   
+                    spottr.userAdministration.fillTable(data); 
                 }
             });
-        });
-    }
+        },
 
-    function loadUsers() {
-        AjaxHandler.request({
-            method     : "GET",
-            cache    : false,
-            url      : "users",
-            data     : $(this).serialize(),
-            success  : function(data) {
-                var userTable = $('#user-modal table.userlist tbody');
-                userTable.empty();   
-                fillTable(data); 
-            }
-        });
-
-        function fillTable(json) {
-            console.log(json);
+        fillTable: function (json) {
             for (var i = 0; i < json.items.length; i++) {
                 var userTable = $('#user-modal table.userlist tbody');
                 
@@ -80,62 +76,60 @@ function userAdministration() {
                     '</tr>'
                 );
             }
-        }
-    }
+        },
 
-    function deleteUser() {
-        $('body').on('click','.delete-user', function() {
-            var id = $(this).data('id');
+        deleteUser: function () {
+            $('body').on('click','.delete-user', function() {
+                var id = $(this).data('id');
 
-            AjaxHandler.request({
-                method     : "DELETE",
-                cache    : false,
-                url      : "users/" + id,
-                data     : $(this).serialize(),
-                success  : function(data) {
-                    var userTable = $('#user-modal table.userlist tbody');
-                    userTable.empty();   
-                    loadUsers(); 
-                }
+                AjaxHandler.request({
+                    method     : "DELETE",
+                    cache    : false,
+                    url      : "users/" + id,
+                    data     : $(this).serialize(),
+                    success  : function(data) {
+                        var userTable = $('#user-modal table.userlist tbody');
+                        userTable.empty();   
+                        spottr.userAdministation.loadUsers(); 
+                    }
+                });
+
+
             });
+        },
+
+        editUser: function () {
+            $('body').on('click','.edit-user', function() {
+                var id = $(this).data('id');
+
+                AjaxHandler.request({
+                    method     : "GET",
+                    cache    : false,
+                    url      : "users/" + id,
+                    data     : $(this).serializeObject(),
+                    success  : function(data) {
+                        $('#user-modal').find('.add-user').addClass('hide');
+                        var editUserForm = $('#user-modal').find('.edit-user');
+                        editUserForm.removeClass('hide');
+
+                        editUserForm.find('#id').val(data.id);
+                        editUserForm.find('#email').val(data.email);
+                        editUserForm.find('#firstname').val(data.firstName);
+                        editUserForm.find('#lastname').val(data.lastName);
+                        editUserForm.find('#companyname').val(data.companyName);
+                        editUserForm.find('select').val(data.roles);
+                        editUserForm.find('select').selectpicker('render');
+
+                        spottr.userAdministation.editHandler(data.id);
+
+                    }
+                });
 
 
-        });
-    }
-
-    function editUser() {
-        $('body').on('click','.edit-user', function() {
-            var id = $(this).data('id');
-
-            console.log(id);
-
-            AjaxHandler.request({
-                method     : "GET",
-                cache    : false,
-                url      : "users/" + id,
-                data     : $(this).serializeObject(),
-                success  : function(data) {
-                    $('#user-modal').find('.add-user').addClass('hide');
-                    var editUserForm = $('#user-modal').find('.edit-user');
-                    editUserForm.removeClass('hide');
-
-                    editUserForm.find('#id').val(data.id);
-                    editUserForm.find('#email').val(data.email);
-                    editUserForm.find('#firstname').val(data.firstName);
-                    editUserForm.find('#lastname').val(data.lastName);
-                    editUserForm.find('#companyname').val(data.companyName);
-                    editUserForm.find('select').val(data.roles);
-                    editUserForm.find('select').selectpicker('render');
-
-                    editHandler(data.id);
-
-                }
             });
+        },
 
-
-        });
-
-        function editHandler(id) {
+        editHandler: function (id) {
 
             $('#user-modal').find('.edit-user').on('submit',function(e){
                 e.preventDefault();
@@ -161,5 +155,9 @@ function userAdministration() {
 
             });
         }
-    }
-}
+    };
+
+})(jQuery, this);
+
+spottr.userAdministration.init();
+

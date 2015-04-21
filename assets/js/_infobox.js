@@ -30,7 +30,7 @@ function drawInfobox(category, infoboxContent, json, i){
     '<div class="infobox">' +
         '<div class="inner">' +
             '<div class="image">' +
-                '<div class="item-specific">' + drawItemSpecific(category, json, i) + '</div>' +
+                '<div class="item-specific">' + spottr.main.drawItemSpecific(category, json, i) + '</div>' +
                 '<div class="overlay">' +
                     '<div class="wrapper">' +
                         '<a href="#test" class="quick-view" data-id="' + id + '" data-gallery="' + path + gallery + '" data-title="' + title +'" data-type="' + type +'"  data-category="' + category +'" data-location="' + location +'" data-aperture="' + aperture +'" data-date="' + date +'" data-focal="' + focal +'" data-iso="' + iso +'" data-rating="' + rating +'">Quick View</a>' +

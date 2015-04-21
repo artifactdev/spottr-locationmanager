@@ -110,7 +110,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
                         newMarkers[i].content.className = 'marker-active marker-loaded';
                         markerClicked = 1;
                     }
-                    showModal();
+                    spottr.main.showModal();
                 }
             })(marker, i));
 
@@ -192,7 +192,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
             $.each(json.items, function(a) {
                 if( map.getBounds().contains( new google.maps.LatLng( json.items[a].latitude, json.items[a].longitude ) ) ) {
                     var category = json.items[a].category;
-                    pushItemsToArray(json, a, category, visibleItemsArray);
+                    spottr.main.pushItemsToArray(json, a, category, visibleItemsArray);
                 }
             });
 
