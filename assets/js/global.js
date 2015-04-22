@@ -7,7 +7,7 @@ var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.
                 var metaItem = $(this).closest('.item').find('.meta-element');
                 var modal = $('#edit-modal');
                 spottr.global.modalHandler(modal);
-                spottr.administration.editModal(metaElement);
+                spottr.administration.editModal(metaItem);
                  
             });
         },
