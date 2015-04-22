@@ -50,13 +50,13 @@
                 <table>
                     <tbody>
                         <tr>
-                            <td><input id="id" type="hidden" name="id"/><input id="email" type="text" name="email" placeholder="E-Mail"/></td>
-                            <td><input type="password" name="password" placeholder="Passwort"/></td>
-                            <td><input id="firstname" type="text" name="firstname" placeholder="Vorname"/></td>
-                            <td><input id="lastname" type="text" name="lastname" placeholder="Nachname"/></td>
-                            <td><input id="companyname" type="text" name="companyname" placeholder="Firmenname"/></td>
+                            <td><input id="id" type="hidden" name="id"/><input id="email" type="text" name="email" placeholder="E-Mail" required/></td>
+                            <td><input type="password" name="password" placeholder="Passwort" required/></td>
+                            <td><input id="firstname" type="text" name="firstname" placeholder="Vorname" required/></td>
+                            <td><input id="lastname" type="text" name="lastname" placeholder="Nachname" required/></td>
+                            <td><input id="companyname" type="text" name="companyname" placeholder="Firmenname" required/></td>
                             <td>
-                                <select multiple name="roles"> 
+                                <select multiple name="roles" required> 
                                     <option value="1">Administrator</option>
                                     <option value="2">User</option>
                                 </select>

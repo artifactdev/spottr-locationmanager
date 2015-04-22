@@ -17,11 +17,23 @@ var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.
 
             modal.removeClass('hide');
             modal.addClass('fade-in');
+
+            var modalForm = modal.find('form');
+            var hasForm = modalForm.length;
+
+            if (hasForm >= 1) {
+                modalForm.validate();
+            }
             
             modal.find('.modal-close').on('click', function(){
 
                 modal.addClass('hide');
                 modal.removeClass('fade-in');
+
+                if (hasForm >= 1) {
+                    modalForm.validate().resetForm();
+                    modalForm.find('.tooltip').addClass('hide');
+                }
             });
         },
 
@@ -126,14 +138,11 @@ var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.
 
         submitItem: function () {
             var addModal = $('body').find('#add-modal');
+            var addForm = $('#add-form');
 
             $('.submit-item').on('click', function(){
-                addModal.removeClass('hide').addClass('fade-in');
-                fancySelect();
-            });
-
-            $('body').find('#add-modal .modal-close').on('click', function(){
-                addModal.addClass('hide').removeClass('fade-in');
+                spottr.global.modalHandler(addModal);
+                spottr.global.fancySelect();
             });
 
             spottr.global.loadExifData();
@@ -146,21 +155,23 @@ var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.
 
             addModal.find('form').on('submit',function(e){
                 e.preventDefault();
-                AjaxHandler.request({
-                    method   : "POST",
-                    cache    : false,
-                    url      : $(this).attr('action'),
-                    data     : $(this).serializeObject(),
-                    success  : function(data) {
-                        var modal = $('#add-modal form');
-                        Global.submitImage(data.id,modal);
-                        location.reload(true);
-                    },
+                if (addForm.valid()) {
+                    AjaxHandler.request({
+                        method   : "POST",
+                        cache    : false,
+                        url      : $(this).attr('action'),
+                        data     : $(this).serializeObject(),
+                        success  : function(data) {
+                            var modal = $('#add-modal form');
+                            Global.submitImage(data.id,modal);
+                            location.reload(true);
+                        },
 
-                    error    : function(data) {
-                        console.log(data);
-                    } 
-                });
+                        error    : function(data) {
+                            console.log(data);
+                        } 
+                    });
+                }
 
             });
         },

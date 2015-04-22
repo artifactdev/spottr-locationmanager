@@ -2,7 +2,7 @@
     <div class="modal-wrapper">
         <h2>Location <span class="location"></span> wirklich löschen?</h2>
         <div class="modal-body">
-            <form action="http://localhost:8888/spottr/rest-api/locations/" method="delete" id="delete-form" class="delete-location">
+            <form action="locations/" method="delete" id="delete-form" class="delete-location">
                <div class="col-md-6">
                     <button class="btn btn-default full-width modal-close">Abbrechen</button>
                </div>

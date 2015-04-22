@@ -54,7 +54,8 @@
             <script type="text/javascript" src="./assets/js/plugins/gmaps.js"></script>
             <script type="text/javascript" src="./assets/js/plugins/jqueryExtensions.js"></script>
             <script type="text/javascript" src="./assets/js/plugins/jquery.cookie.js"></script>
-            <script type="text/javascript" src="./assets/js/plugins/jquery.exif.js"></script>
+            <script type="text/javascript" src="./assets/js/plugins/jquery.validate.js"></script>
+            <script type="text/javascript" src="./assets/js/plugins/jquery.validate.bootstrap.js"></script>
 
             <!-- end plugins -->
 
