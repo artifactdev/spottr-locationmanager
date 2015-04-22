@@ -21,7 +21,7 @@
                 </table>
 
             </form>
-            <form action="users" id="user-form" class="add-user" enctype='multipart/form-data'>
+            <form action="rest-api/users" id="user-form" class="add-user" enctype='multipart/form-data'>
                 <table>
                     <tbody>
                         <tr>
@@ -46,7 +46,7 @@
 
                 <button type="submit" class="btn btn-default full-width">Nutzer anlegen</button>
             </form>
-            <form action="users" id="edit-user-form" class="edit-user hide" enctype='multipart/form-data'>
+            <form action="rest-api/users" id="edit-user-form" class="edit-user hide" enctype='multipart/form-data'>
                 <table>
                     <tbody>
                         <tr>
