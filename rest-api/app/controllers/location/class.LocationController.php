@@ -32,6 +32,7 @@ class LocationController
     public function createLocation()
     {
         $location = HTTPRequestHelper::getParamAsModel(new Location());
+        ValidationUtils::validate($location);
         return $this->locationManager->createLocation($location);
     }
     

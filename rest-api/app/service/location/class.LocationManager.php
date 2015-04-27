@@ -18,8 +18,8 @@ class LocationManager
     {
         DatabaseUtils::query(
             "INSERT INTO `locations` (`category`, `title`, `latitude`, `longitude`, `rating`, `date_created`, `gallery`, `aperture`, `focal`, `iso`, `type`) VALUES
-            ('{CATEGORY}', '{TITLE}', '{LATITUDE}', '{LONGITUDE}', '{RATING}', '" .
-                 date("Y-m-d") . "', '', '{APERTURE}', '{FOCAL}', '{ISO}', '{TYPE}');", $location->wrapModelToDatabase());
+            ('{CATEGORY}', '{TITLE}', '{LATITUDE}', '{LONGITUDE}', '{RATING}', '" . date("Y-m-d") .
+                 "', '', '{APERTURE}', '{FOCAL}', '{ISO}', '{TYPE}');", $location->wrapModelToDatabase());
         $lastId = DatabaseUtils::insertId();
         return $this->findLocation($lastId);
     }
@@ -41,7 +41,8 @@ class LocationManager
                 `aperture` = '{APERTURE}',
                 `focal` = '{FOCAL}',
                 `iso` = '{ISO}',
-                `type` = '{TYPE}' WHERE `id`='{ID}';", $location->wrapModelToDatabase());
+                `type` = '{TYPE}' WHERE `id`='{ID}';",
+            $location->wrapModelToDatabase());
         return $this->findLocation($location->id);
     }
 
@@ -52,7 +53,10 @@ class LocationManager
      */
     public function findLocations()
     {
-        return DatabaseUtils::fetchResultList("SELECT * FROM `locations`", "Location");
+        $locations = DatabaseUtils::fetchResultList("SELECT * FROM `locations` WHERE 1", "Location");
+        $locations->numberOfItems = count($locations->items);
+        return $locations;
+        
     }
 
     /**
@@ -63,10 +67,14 @@ class LocationManager
      */
     public function findLocation($id)
     {
-        return DatabaseUtils::fetchResult("SELECT * FROM `locations` WHERE `id` = '{ID}'", new Location(),
+        $location = DatabaseUtils::fetchResult("SELECT * FROM `locations` WHERE `id` = '{ID}'", new Location(),
             array(
                 "ID" => $id
             ));
+        if ($location == null) {
+            throw new LocationException(LocationErrorType::THROW_LOCATION_NOT_FOUND);
+        }
+        return $location;
     }
 
     /**
@@ -113,19 +121,20 @@ class LocationManager
         unlink(CONF_FS_TMP . $file);
         return true;
     }
-    
+
     /**
      *
      * @param string $filePath
      * @return string
      */
-    private function getRandomFileName($filePath) {
+    private function getRandomFileName($filePath)
+    {
         $fileType = substr($filePath, strrpos($filePath, "."), strlen($filePath));
         $randomPath = rand(100);
         $fileName = md5($filePath . $randomPath) . $fileType;
         
         if (file_exists(CONF_FS_MEDIA_LOCATIONS . $fileName)) {
-            return $this->getRandomFileName($filePath);
+            return $this->getRandomFileName($fileName);
         }
         return $fileName;
     }

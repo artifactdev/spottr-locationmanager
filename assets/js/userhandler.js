@@ -27,7 +27,7 @@
         },
 
         saveUser: function (modal) {
-            modal.find('form').on('submit',function(e){
+            modal.find('#user-form').on('submit',function(e){
                 e.preventDefault();
                 AjaxHandler.request({
                     method     : "POST",
@@ -35,6 +35,9 @@
                     url      : $(this).attr('action'),
                     data     : $(this).serializeObject(),
                     success  : function(data) {
+                        spottr.userAdministation.loadUsers();
+                    },
+                    error : function() {
                         spottr.userAdministation.loadUsers();
                     }
                 });

@@ -82,6 +82,7 @@ class DatabaseUtils
                 $sql = str_replace('{' . $key . '}', $item, $sql);
             }
         }
+        
         if (defined("CONF_DATABASE_LOG_QUERIES") && CONF_DATABASE_LOG_QUERIES) {
             $logger = Logger::getLogger("database");
             $logger->info($sql);

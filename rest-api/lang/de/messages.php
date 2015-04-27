@@ -27,3 +27,6 @@ define('LANG_APP_USER_ERROR_USER_NOT_FOUND', 'Der angefragte Benutzer konnte nic
 define('LANG_APP_USER_ERROR_EMAIL_ADDRESS_ALREADY_EXISTS', 'Die angegebene Email-Adresse existiert bereits im System.');
 define('LANG_APP_USER_ERROR_USERROLE_NOT_EXISTS', 'Die angegebene Benutzerrolle existiert nicht.');
 define('LANG_APP_USER_ERROR_PERMISSION_DENIED', 'Die ausgeführte Aktion, ist für diesen Nutzer nicht freigeschalten.');
+
+define('LANG_APP_LOCATION_ERROR_DEFAULT', 'Mit der Location stimmt was nicht.');
+define('LANG_APP_LOCATION_NOT_FOUND', 'Die angefrage Location existiert nicht.');
