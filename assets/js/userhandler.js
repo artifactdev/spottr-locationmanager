@@ -146,7 +146,7 @@
                         var addUserForm = $('#user-modal').find('.add-user');
                         editUserForm.addClass('hide');
                         addUserForm.removeClass('hide');
-                        loadUsers();
+                        spottr.userAdministration.loadUsers();
 
                     },
 
