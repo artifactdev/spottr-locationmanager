@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `locations` (
   `rating` int(1) NOT NULL,
   `gallery` varchar(255) NOT NULL,
   `date_created` date NOT NULL,
-  `aperture` int(1) NOT NULL,
+  `aperture` DECIMAL(11,6) NOT NULL,
   `focal` int(1) NOT NULL,
   `iso` int(7) NOT NULL,
   `type` varchar(255) NOT NULL,

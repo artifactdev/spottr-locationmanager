@@ -76,7 +76,7 @@ class Location extends AbstractDatabaseModel
     public function isValidAperture()
     {
         $this->aperture = StringUtils::isBlank($this->aperture) ? 0 : $this->aperture;
-        if ($this->isInteger($this->aperture)) {
+        if (is_numeric($this->aperture)) {
             return true;
         }
         return TranslationUtils::translate("Die Aperture muss numerisch sein.");
