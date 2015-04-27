@@ -4,11 +4,11 @@
         <div class="modal-body">
             <form action="locations/" id="edit-form" method="put" class="edit-location">
 
-                <input id="title" type="text" placeholder="Titel" name="title"/>
+                <input id="title" type="text" placeholder="Titel" name="title" required/>
 
-                <input name="datei" type="file" id="file" size="50" maxlength="100000">
+                <input name="datei" type="file" id="file" size="50" maxlength="100000" required>
 
-                <select name="category">
+                <select name="category" required>
                     <option value="Industrie">Industrie</option>
                     <option value="Ruine">Ruine</option>
                     <option value="Outdoor">Outdoor</option>
@@ -17,11 +17,11 @@
 
                 <input type="text"  id="geocomplete-edit" placeholder="Search Address" name="search_adress"/>
 
-                <input id="lng" name="lng" type="text" value="" placeholder="Longitude">
+                <input id="lng" name="lng" type="text" value="" placeholder="Longitude" required>
 
-                <input id="lat" name="lat" type="text" value="" placeholder="Latitude">
+                <input id="lat" name="lat" type="text" value="" placeholder="Latitude" required>
 
-                <select name="type">
+                <select name="type" required>
                     <option value="assets/icons/house.png">Gebäude</option>
                     <option value="assets/icons/fabrik.png">Fabrik</option>
                     <option value="assets/icons/denkmal.png">Denkmal</option>
@@ -30,7 +30,7 @@
                     <option value="assets/icons/other.png" selected="selected">Andere</option>
                 </select>
 
-                <input id="rating" type="text" placeholder="Rating 1-5" name="rating"/>
+                <input id="rating" type="text" placeholder="Rating 1-5" name="rating" required min="1" max="5" maxlength="1"/>
 
                 <input id="aperture" type="hidden" name="aperture"/>
 

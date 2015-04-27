@@ -63,7 +63,7 @@
             $('body').on('click','.btn-delete', function(id) {
                 var metaItem = $(this).closest('.item').find('.meta-element');
                 var modal = $('#delete-modal');
-                spottr.global.modalHandler(modal);
+                spottr.administration.deleteModal(metaItem);
                  
             });
         },
@@ -154,6 +154,8 @@
 
             var modal = $('#delete-modal');
 
+            spottr.global.modalHandler(modal);
+
             var id = metaElement.attr('id');
             var title = metaElement.data('title');
 
@@ -179,11 +181,14 @@
     };
 })(jQuery, this);
 
-spottr.administration.initItems();
-spottr.global.showEditModal();
-spottr.administration.showDeleteModal();
-spottr.global.menuItemHandler();
-spottr.global.submitItem();
-spottr.global.setInputsWidth();
-spottr.global.fancySelect();
+$(document).ready(function(){
+    spottr.administration.initItems();
+    spottr.global.showEditModal();
+    spottr.administration.showDeleteModal();
+    spottr.global.menuItemHandler();
+    spottr.global.submitItem();
+    spottr.global.setInputsWidth();
+    spottr.global.fancySelect();    
+})
+
     

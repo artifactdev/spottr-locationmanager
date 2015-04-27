@@ -7,7 +7,7 @@ var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.
                 var metaItem = $(this).closest('.item').find('.meta-element');
                 var modal = $('#edit-modal');
                 spottr.global.modalHandler(modal);
-                spottr.administration.editModal(metaElement);
+                spottr.administration.editModal(metaItem);
                  
             });
         },
@@ -17,11 +17,23 @@ var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.
 
             modal.removeClass('hide');
             modal.addClass('fade-in');
+
+            var modalForm = modal.find('form');
+            var hasForm = modalForm.length;
+
+            if (hasForm >= 1) {
+                modalForm.validate();
+            }
             
             modal.find('.modal-close').on('click', function(){
 
                 modal.addClass('hide');
                 modal.removeClass('fade-in');
+
+                if (hasForm >= 1) {
+                    modalForm.validate().resetForm();
+                    modalForm.find('.tooltip').addClass('hide');
+                }
             });
         },
 
@@ -129,14 +141,11 @@ var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.
 
         submitItem: function () {
             var addModal = $('body').find('#add-modal');
+            var addForm = $('#add-form');
 
             $('.submit-item').on('click', function(){
-                addModal.removeClass('hide').addClass('fade-in');
+                spottr.global.modalHandler(addModal);
                 spottr.global.fancySelect();
-            });
-
-            $('body').find('#add-modal .modal-close').on('click', function(){
-                addModal.addClass('hide').removeClass('fade-in');
             });
 
             spottr.global.loadExifData();
@@ -158,10 +167,11 @@ var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.
                         var form = $('#add-form-image');
                         spottr.global.submitImage(data.id,form);
                     },
-                    error    : function(data) {
-                        console.log(data);
-                    } 
-                });
+                        error    : function(data) {
+                            console.log(data);
+                        } 
+                    });
+                }
             });
         },
 
