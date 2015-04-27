@@ -9,6 +9,7 @@
                 var modal = $('#user-modal');
                 spottr.global.modalHandler(modal);
                 spottr.global.fancySelect();
+                spottr.userAdministration.loadUsers();
 
                 $('#user-modal .modal-close').on('click', function(){
                     modal.find('input').val('');
@@ -27,18 +28,18 @@
         },
 
         saveUser: function (modal) {
-            modal.find('#user-form').on('submit',function(e){
+            modal.find('.add-user').on('submit',function(e){
                 e.preventDefault();
                 AjaxHandler.request({
-                    method     : "POST",
+                    method   : "POST",
                     cache    : false,
                     url      : $(this).attr('action'),
                     data     : $(this).serializeObject(),
                     success  : function(data) {
-                        spottr.userAdministation.loadUsers();
+                        spottr.userAdministration.loadUsers();
                     },
                     error : function() {
-                        spottr.userAdministation.loadUsers();
+                        spottr.userAdministration.loadUsers();
                     }
                 });
             });
@@ -49,7 +50,7 @@
                 method     : "GET",
                 cache    : false,
                 url      : "users",
-                data     : $(this).serialize(),
+                data     : $(this).serializeObject(),
                 success  : function(data) {
                     var userTable = $('#user-modal table.userlist tbody');
                     userTable.empty();   
@@ -95,7 +96,7 @@
                     success  : function(data) {
                         var userTable = $('#user-modal table.userlist tbody');
                         userTable.empty();   
-                        spottr.userAdministation.loadUsers(); 
+                        spottr.userAdministration.loadUsers(); 
                     }
                 });
 
@@ -125,7 +126,7 @@
                         editUserForm.find('select').val(data.roles);
                         editUserForm.find('select').selectpicker('render');
 
-                        spottr.userAdministation.editHandler(data.id);
+                        spottr.userAdministration.editHandler(data.id);
 
                     }
                 });

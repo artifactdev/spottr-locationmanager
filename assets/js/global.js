@@ -170,8 +170,7 @@ var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.
                         error    : function(data) {
                             console.log(data);
                         } 
-                    });
-                }
+                });
             });
         },
 

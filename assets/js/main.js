@@ -64,7 +64,7 @@ $( document ).ready(function() {
 
             $('body').on('click','.results li', function(id) {
                 var metaItem = $(this).find('.quick-preview');
-                spottr.global.modalHandler(metaItem, modal);
+                spottr.global.modalHandler(modal);
                 spottr.main.fillModal(metaItem);
                  
             });
@@ -84,7 +84,7 @@ $( document ).ready(function() {
 
             $('body').on('click','.infobox a', function(e) {
                 e.preventDefault;
-                spottr.global.modalHandler($(this), modal);
+                spottr.global.modalHandler(modal);
                 spottr.main.fillModal($(this));
                  
             });

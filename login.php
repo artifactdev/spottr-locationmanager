@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0030)http://localhost:8888/spotter/ -->
 <html lang="en-US" style="height: auto;">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

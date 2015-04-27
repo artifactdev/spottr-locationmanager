@@ -9,8 +9,6 @@
             <form action="locations" id="add-form" class="add-location" enctype='multipart/form-data'>
                 <input id="title" type="text" placeholder="Titel" name="title"/>
 
-                <input name="datei" type="file" id="file" size="50" maxlength="100000" required>
-
                 <select name="category" required>
                     <option value="Industrie">Industrie</option>
                     <option value="Ruine">Ruine</option>
