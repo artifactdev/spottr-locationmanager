@@ -2,10 +2,12 @@
     <div class="modal-wrapper">
         <h2>Location hinzufügen</h2>
         <div class="modal-body">
+
+            <form action="#" id="add-form-image" class="add-location" enctype='multipart/form-data' method="post" target="js_iframe_location_attachment">
+                <input name="datei" type="file" id="file" size="50" maxlength="100000" >
+            </form><iframe id="js_iframe_location_attachment" name="js_iframe_location_attachment" style="display:none"></iframe>
             <form action="locations" id="add-form" class="add-location" enctype='multipart/form-data'>
                 <input id="title" type="text" placeholder="Titel" name="title"/>
-
-                <input name="datei" type="file" id="file" size="50" maxlength="100000" >
 
                 <select name="category">
                     <option value="Industrie">Industrie</option>
@@ -33,11 +35,11 @@
 
                 <input id="rating" type="text" placeholder="Rating 1-5" name="rating"/>
 
-                <input id="aperture" type="hidden" name="aperture"/>
+                <input id="aperture" type="hidden" name="aperture" value="0"/>
 
-                <input id="focal" type="hidden" name="focal"/>
+                <input id="focal" type="hidden" name="focal" value="0"/>
 
-                <input id="iso" type="hidden" name="iso"/>
+                <input id="iso" type="hidden" name="iso" value="0"/>
 
                 <button type="submit" class="btn btn-default full-width">Eintrag speichern</button>
             </form>

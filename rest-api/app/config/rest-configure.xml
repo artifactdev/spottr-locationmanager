@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <host>http://localhost:8888</host>
-    <application_path>/spottr/rest-api/</application_path>
+    <application_path>/Privat/artifact/Spottr/rest-api/</application_path>
     <routes>
         <!-- Authentication - Login -->
         <route>

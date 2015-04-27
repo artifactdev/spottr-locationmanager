@@ -63,35 +63,38 @@ var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.
 
         loadExifData: function () {
             var someCallback = function(exifObject) {
-
-                    var latitude = exifObject.GPSLatitude;
-                    var longitude = exifObject.GPSLongitude;
-                    var aperture = exifObject.ApertureValue;
-                    var date = exifObject.DateTimeOriginal;
-                    var focal = exifObject.FocalLength;
-                    var iso = exifObject.ISOSpeedRatings;         
-
-                    $('#lng').val(longitude);
-                    $('#lat').val(latitude);
-                    $('#aperture').val(aperture);
-                    $('#date').val(date);
-                    $('#focal').val(focal);
-                    $('#iso').val(iso);
-
-                    // Uncomment the line below to examine the
-                    // EXIF object in console to read other values
-                    console.log(exifObject);
-
+                    
+                if (!exifObject) {
+                    return
                 }
+                var latitude = exifObject.GPSLatitude;
+                var longitude = exifObject.GPSLongitude;
+                var aperture = exifObject.ApertureValue;
+                var date = exifObject.DateTimeOriginal;
+                var focal = exifObject.FocalLength;
+                var iso = exifObject.ISOSpeedRatings;
 
-              try {
+                $('#lng').val(longitude);
+                $('#lat').val(latitude);
+                $('#aperture').val(aperture);
+                $('#date').val(date);
+                $('#focal').val(focal);
+                $('#iso').val(iso);
+
+                // Uncomment the line below to examine the
+                // EXIF object in console to read other values
+                console.log(exifObject);
+
+            };
+
+            try {
                 $('#file').change(function() {
                     $(this).fileExif(someCallback);
                 });
-              }
-              catch (e) {
+            }
+            catch (e) {
                 console.log(e);
-              }
+            }
         },
 
         searchFilter: function () {
@@ -129,7 +132,7 @@ var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.
 
             $('.submit-item').on('click', function(){
                 addModal.removeClass('hide').addClass('fade-in');
-                fancySelect();
+                spottr.global.fancySelect();
             });
 
             $('body').find('#add-modal .modal-close').on('click', function(){
@@ -144,7 +147,7 @@ var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.
               detailsAttribute: "data-geo"
             });
 
-            addModal.find('form').on('submit',function(e){
+            addModal.find('#add-form').on('submit',function(e){
                 e.preventDefault();
                 AjaxHandler.request({
                     method   : "POST",
@@ -152,37 +155,31 @@ var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.
                     url      : $(this).attr('action'),
                     data     : $(this).serializeObject(),
                     success  : function(data) {
-                        var modal = $('#add-modal form');
-                        Global.submitImage(data.id,modal);
-                        location.reload(true);
+                        var form = $('#add-form-image');
+                        spottr.global.submitImage(data.id,form);
                     },
-
                     error    : function(data) {
                         console.log(data);
                     } 
                 });
-
             });
         },
 
-        submitImage: function (locationID, attForm) {
+        submitImage: function (locationId, attForm) {
             var $file = attForm.find("input[type='file']");
-            if ($file.val() == "") {
-                if (typeof callback == "function") {
-                    callback();
-                }
+            if ($file.val() == "" || locationId == undefined) {
+                location.reload(true);
                 return;
             }
 
-            attForm.attr("action", "locations/" + locationID + "/image");
-            var $iframe = $("#fnJS_iframe_location_attachment");
+            attForm.attr("action", "rest-api/locations/" + locationId + "/image");
+            
+            var $iframe = $("#js_iframe_location_attachment");
             $iframe.unbind().load(function(event) {
                 event.preventDefault();
-                 //console.log($(this).contents());
-                 callback($(this).contents());
+                location.reload(true);
             });
          
-
             attForm.submit();
         },
 
