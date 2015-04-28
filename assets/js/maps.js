@@ -14,7 +14,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
     function gMap(){
         var mapCenter = new google.maps.LatLng(_latitude,_longitude);
         var mapOptions = {
-            zoom: 14,
+            zoom: 12,
             center: mapCenter,
             disableDefaultUI: false,
             scrollwheel: false,
