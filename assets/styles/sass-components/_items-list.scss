@@ -15,8 +15,20 @@
     margin-bottom: 10px;
     h3 {
       margin-bottom: 20px;
-      margin-top: 3px;
+      margin-top: 14px;
+      margin-right: 8px;
       text-transform: uppercase;
+    }
+
+    .bootstrap-select {
+      &.open {
+        .selectpicker {
+          background: $base-white;
+        }
+      }
+      .selectpicker {
+        background: #F7F7F7;
+      }
     }
   }
   .inner {

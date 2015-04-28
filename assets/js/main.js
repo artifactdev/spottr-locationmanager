@@ -12,6 +12,8 @@ $( document ).ready(function() {
 
     spottr.global.submitItem();
 
+    spottr.main.categoryFilter();
+
     spottr.global.menuItemHandler();
 
 });
@@ -187,28 +189,28 @@ $( document ).ready(function() {
         },
 
         categoryFilter: function () {
-            $("#category-filter-search").on('click', function(e){
+            $("#category-filter").change(function(e){
                 e.preventDefault();
                 var filter = $('.category-filter').find('button').attr('title');
-                spottr.main.loadFilteredItems(filter,'category');
-            });
-
-            $("#reset-filter").on('click', function(e){
-                spottr.main.initMap();
+                if(filter != 'Kein Filter gesetzt') {
+                    spottr.main.loadFilteredItems(filter,'category');
+                } else {
+                    spottr.main.initMap();
+                }
+                
             });
            
         },
 
-        loadFilteredItems: function (filter,property) {
+        loadFilteredItems: function (filter,searchProperty) {
             
-
-
             AjaxHandler.request({
                 url: "locations",
                 method: "GET",
-                success: function(json) {                        
+                success: function(json) {  
+                    console.log(json);                      
                     var config = {
-                        property: property,
+                        property: searchProperty,
                         wrapper: true,
                         value: filter,
                         checkContains: false,
@@ -218,6 +220,7 @@ $( document ).ready(function() {
                     },
 
                     itemsToload = $.fn.filterJSON(json, config);
+                    console.log(itemsToload);
                     var items = {};
                     items['items'] = itemsToload;
                     console.log(items);
