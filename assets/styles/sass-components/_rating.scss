@@ -1,64 +1,203 @@
-.rating {
-  display: table;
-  font-size: 12px;
-  margin: 3px 0;
-  aside {
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
-    opacity: 0.6;
-    display: inline-block;
+/*!
+ * @copyright &copy; Kartik Visweswaran, Krajee.com, 2013 - 2015
+ * @version 3.5.2
+ *
+ * A simple yet powerful JQuery star rating plugin that allows rendering
+ * fractional star ratings and supports Right to Left (RTL) input.
+ *
+ * For more JQuery/Bootstrap plugins and demos visit http://plugins.krajee.com
+ * For more Yii related demos visit http://demos.krajee.com
+ */
+
+.rating-loading {
+  width: 25px;
+  height: 25px;
+  font-size: 0px;
+  color: #fff;
+  background: transparent url('../img/loading.gif') top left no-repeat;
+  border: none;
+}
+
+/*
+ * Stars
+ */
+
+.modal-window {
+  .star-rating {
+    margin-top: -10px;
   }
-  img, .inner img {
-    background-color: $base-blue;
+}
+
+.rating-fa {
+  font-family: 'FontAwesome';
+  padding-left: 1px;
+  .rating-stars:before {
+    padding-left: 1px;
   }
-  .stars {
-    float: left;
-    .fa {
-      -webkit-transition: 0.4s;
-      transition: 0.4s;
-      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
-      opacity: 0.3;
-      color: $base-grey-middle;
-      font-size: 11px;
-      margin-right: 2px;
-      &.active {
-        filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
-        opacity: 1;
-        color: $base-blue;
-      }
-    }
+}
+
+.rating-gly {
+  font-family: 'Glyphicons Halflings';
+}
+
+.rating-gly-star {
+  font-family: 'Glyphicons Halflings';
+  padding-left: 2px;
+  .rating-stars:before {
+    padding-left: 2px;
   }
-  &.big {
-    .stars .fa {
-      font-size: 21px;
-    }
-    .reviews {
-      position: relative;
-      top: 3px;
-    }
+}
+
+.rating-lg .rating-gly-star {
+  padding-left: 4px;
+  .rating-stars:before {
+    padding-left: 4px;
   }
-  &.color .stars .fa.active {
+}
+
+.rating-xl .rating-gly-star {
+  padding-left: 2px;
+  .rating-stars:before {
+    padding-left: 2px;
+  }
+}
+
+.rating-active {
+  cursor: default;
+}
+
+.rating-disabled {
+  cursor: not-allowed;
+}
+
+.rating-uni {
+  font-size: 1.2em;
+  margin-top: -5px;
+}
+
+.rating-container {
+  position: relative;
+  vertical-align: middle;
+  display: inline-block;
+  color: #e3e3e3;
+  overflow: hidden;
+  &:before {
+    content: attr(data-content);
+  }
+  .rating-stars {
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+    overflow: hidden;
     color: $base-blue;
-  }
-  &.active .stars .fa {
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
-    opacity: 0.3;
-    color: $base-grey;
-    cursor: pointer;
-    &.hover {
-      filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
-      opacity: 1;
-      color: $base-blue;
-    }
-    &.active {
-      filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
-      opacity: 1;
-      color: $base-blue !important;
+    transition: all 0.25s ease-out;
+    -o-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    -webkit-transition: all 0.25s ease-out;
+    &:before {
+      content: attr(data-content);
     }
   }
-  &.stars-hidden i {
-    display: none;
-    &.active {
-      display: inline-block;
+}
+
+.rating-container-rtl {
+  position: relative;
+  vertical-align: middle;
+  display: inline-block;
+  overflow: hidden;
+  color: #fde16d;
+  &:before {
+    content: attr(data-content);
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.7);
+  }
+  .rating-stars {
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #e3e3e3;
+    transition: all 0.25s ease-out;
+    -o-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    -webkit-transition: all 0.25s ease-out;
+    &:before {
+      content: attr(data-content);
     }
   }
+}
+
+/**
+ * Rating sizes
+ */
+
+.rating-xl {
+  font-size: 4.89em;
+}
+
+.rating-lg {
+  font-size: 3.91em;
+}
+
+.rating-md {
+  font-size: 3.13em;
+}
+
+.rating-sm {
+  font-size: 2.5em;
+}
+
+.rating-xs {
+  font-size: 1.5em;
+}
+
+/**
+ * Clear rating button
+ */
+
+.star-rating .clear-rating, .star-rating-rtl .clear-rating {
+  color: #aaa;
+  cursor: not-allowed;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 60%;
+}
+
+.clear-rating-active {
+  cursor: pointer !important;
+  &:hover {
+    color: #843534;
+  }
+}
+
+.star-rating {
+  .clear-rating {
+    padding-right: 5px;
+  }
+  .caption {
+    color: #999;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 55%;
+  }
+}
+
+/**
+ * Caption
+ */
+
+.star-rating-rtl .caption {
+  color: #999;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 55%;
+}
+
+.star-rating .caption {
+  padding-left: 5px;
+}
+
+.star-rating-rtl .caption {
+  padding-right: 5px;
 }

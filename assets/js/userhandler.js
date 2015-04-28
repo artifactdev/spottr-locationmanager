@@ -10,6 +10,7 @@
                 spottr.global.modalHandler(modal);
                 spottr.global.fancySelect();
                 spottr.userAdministration.loadUsers();
+                spottr.userAdministration.saveUser(modal);
 
                 $('#user-modal .modal-close').on('click', function(){
                     modal.find('input').val('');
@@ -19,8 +20,6 @@
             });
 
             spottr.userAdministration.loadUsers();
-
-            spottr.userAdministration.saveUser(modal);
 
             spottr.userAdministration.deleteUser();
 

@@ -67,7 +67,8 @@
         opacity: 0.6;
         display: inline-block;
         img {
-          width: 20px;
+            width: 35px;
+            margin-top: -3px;
         }
       }
       span {
@@ -255,6 +256,13 @@
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
       opacity: 0.6;
       font-size: 12px;
+      display: inline-block;
+
+      &.rating-label {
+        float: left;
+        margin-right: 8px;
+        margin-top: 9px;
+      }
     }
     .info {
       &:after {

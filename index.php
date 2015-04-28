@@ -71,7 +71,7 @@
             <script type="text/javascript" src="./assets/js/plugins/richmarker.js"></script>
             <script type="text/javascript" src="./assets/js/plugins/markerclusterer.js"></script>
             <script type="text/javascript" src="./assets/js/plugins/jquery.validate.js"></script>
-            <script type="text/javascript" src="./assets/js/plugins/jquery.validate.bootstrap.js"></script>
+            <script type="text/javascript" src="./assets/js/plugins/star-rating.js"></script>    
 
             <!-- end plugins -->
 

@@ -21,7 +21,7 @@
                 </table>
 
             </form>
-            <form action="rest-api/users" id="user-form" class="add-user" enctype='multipart/form-data'>
+            <form action="users" id="user-form" class="add-user" enctype='multipart/form-data'>
                 <table>
                     <tbody>
                         <tr>

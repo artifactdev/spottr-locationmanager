@@ -210,15 +210,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
 
             // Call Rating function ----------------------------------------------------------------------------------------
 
-            /*var $singleItem = $('.results .item');
-            $singleItem.hover(
-                function(){
-                    newMarkers[ $(this).attr('id') - 1 ].content.className = 'marker-active marker-loaded';
-                },
-                function() {
-                    newMarkers[ $(this).attr('id') - 1 ].content.className = 'marker-loaded';
-                }
-            );*/
+            spottr.main.rating();
         });
 
         redrawMap('google', map);

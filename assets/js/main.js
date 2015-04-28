@@ -14,7 +14,7 @@ $( document ).ready(function() {
 
     spottr.global.submitItem();
 
-    spottr.global.menuItemHandler()
+    spottr.global.menuItemHandler();
 
 });
 
@@ -56,6 +56,21 @@ $( document ).ready(function() {
                 $("body").removeClass("navigation-top-header");
                 $("body").addClass("navigation-off-canvas");
             }
+        },
+
+        rating: function (element,size,showCaption,showClear) {
+            element = typeof element !== 'undefined' ? element : $(".rating");
+            size = typeof size !== 'undefined' ? size : 'xs';
+            showCaption = typeof showCaption !== 'undefined' ? showCaption : false;
+            showClear = typeof showClear !== 'undefined' ? showClear : false;
+
+            console.log("rating");
+            
+            element.rating({
+                'size':size,
+                'showCaption':showCaption,
+                'showClear':showClear
+            });
         },
 
         showModal: function () {
@@ -125,13 +140,18 @@ $( document ).ready(function() {
                             '</div>' +
                         '</a>' +
                         '<div class="wrapper">' +
-                            '<a href="#" class="quick-preview" id="' + json.items[a].id + '" data-gallery="' + json.items[a].gallery + '" data-title="' + json.items[a].title +'" data-type="' + json.items[a].type +'"  data-category="' + json.items[a].category +'" data-location="' + json.items[a].location +'" data-aperture="' + json.items[a].aperture +'" data-date="' + json.items[a].dateCreated +'" data-focal="' + json.items[a].focal +'" data-iso="' + json.items[a].iso +'" data-rating="' + json.items[a].rating +'"><h3>' + json.items[a].title + '</h3></a>' +
-                            '<figure>' + json.items[a].category + '</figure>' +
+                            '<a href="#" class="quick-preview" id="' + json.items[a].id + '" data-gallery="' + json.items[a].gallery + '" data-title="' + json.items[a].title +'" data-type="' + json.items[a].type +'"  data-category="' + json.items[a].category +'" data-location="' + json.items[a].location +'" data-aperture="' + json.items[a].aperture +'" data-date="' + json.items[a].date +'" data-focal="' + json.items[a].focal +'" data-iso="' + json.items[a].iso +'" data-rating="' + json.items[a].rating +'"><h3>' + json.items[a].title + '</h3></a>' +
                             '<div class="info">' +
-                                '<div class="type">' +
-                                    '<i><img src="' + path + json.items[a].type + '" alt=""></i>' +
+                                '<div class="col-md-12 no-padding">' +
+                                    '<figure>' + json.items[a].category + '</figure>' +
+                                    '<div class="type">' +
+                                        '<i><img src="' + path + json.items[a].type + '" alt=""></i>' +
+                                    '</div>' +
                                 '</div>' +
-                                '<div class="rating" data-rating="' + json.items[a].rating + '"></div>' +
+                                '<div class="col-md-12 no-padding">' +
+                                    '<figure class="rating-label">Zugänglichkeit</figure>' +
+                                    '<input class="rating" type="number" readonly value="' + json.items[a].rating + '"/>' +
+                                '</div>' +
                             '</div>' +
                         '</div>' +
                     '</div>' +
@@ -148,10 +168,13 @@ $( document ).ready(function() {
             var title = metaElement.data('title');
             var gallery = metaElement.data('gallery');
             var category = metaElement.data('category');
-            var date = metaElement.data('date_created');
+            var date = metaElement.data('date');
             var aperture = metaElement.data('aperture');
             var focal = metaElement.data('focal');
             var iso = metaElement.data('iso');
+            var rating = metaElement.data('rating');
+
+            var ratingItem = modal.find('.rating-item-modal');
 
             modal.find('.title').text(title);
             modal.find('.gallery-image').attr('src', gallery);
@@ -160,6 +183,11 @@ $( document ).ready(function() {
             modal.find('.aperture').text(aperture);
             modal.find('.focal').text(focal);
             modal.find('.iso').text(iso);
+            ratingItem.attr('value',rating);
+
+
+
+            spottr.main.rating(ratingItem);
 
         }
     };

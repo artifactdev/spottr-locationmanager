@@ -11,19 +11,22 @@
             <div class="modal-content">
                 <section>
                     <div class="row">
-                        <span class="col-md-4 control-label">Kategorie:</span><span class="category col-md-8"></span>
+                        <span class="col-md-5 control-label">Kategorie:</span><span class="category col-md-7"></span>
                     </div>
                     <div class="row">
-                        <span class="col-md-4 control-label">Datum:</span><span class="date col-md-8"></span>
+                        <span class="col-md-5 control-label">Datum:</span><span class="date col-md-7"></span>
                     </div>
                     <div class="row">
-                        <span class="col-md-4 control-label">Aperture:</span><span class="aperture col-md-8"></span>
+                        <span class="col-md-5 control-label">Aperture:</span><span class="aperture col-md-7"></span>
                     </div>
                     <div class="row">
-                        <span class="col-md-4 control-label">Focal:</span><span class="focal col-md-8"></span>
+                        <span class="col-md-5 control-label">Focal:</span><span class="focal col-md-7"></span>
                     </div>
                     <div class="row">
-                        <span class="col-md-4 control-label">ISO:</span><span class="iso col-md-8"></span>
+                        <span class="col-md-5 control-label">ISO:</span><span class="iso col-md-7"></span>
+                    </div>
+                    <div class="row">
+                        <span class="col-md-5 control-label">Zugänglichkeit:</span><span class="col-md-7"><input type="nubmer" class="rating-item-modal" readonly/></span>
                     </div>
                     
                 </section>
