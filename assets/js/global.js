@@ -84,14 +84,14 @@ var _longitude = 13.7416008;
                 var latitude = exifObject.GPSLatitude;
                 var longitude = exifObject.GPSLongitude;
                 var aperture = exifObject.ApertureValue;
-                var date = exifObject.DateTimeOriginal;
+                //var date = exifObject.DateTimeOriginal;
                 var focal = exifObject.FocalLength;
                 var iso = exifObject.ISOSpeedRatings;
 
                 $('#lng').val(longitude);
                 $('#lat').val(latitude);
                 $('#aperture').val(aperture);
-                $('#date').val(date);
+                //$('#date').val(date);
                 $('#focal').val(focal);
                 $('#iso').val(iso);
 

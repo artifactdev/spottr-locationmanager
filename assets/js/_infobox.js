@@ -12,7 +12,7 @@ function drawInfobox(category, infoboxContent, json, i){
         else                            { location = '' }
     if(json.items[i].aperture)           { var aperture = json.items[i].aperture }
         else                            { aperture = '' }
-    if(json.items[i].date)               { var date = json.items[i].dateCreated }
+    if(json.items[i].date)               { var date = json.items[i].date }
         else                            { date = '' }
     if(json.items[i].focal)              { var focal = json.items[i].focal }
         else                            { focal = '' }
@@ -30,7 +30,6 @@ function drawInfobox(category, infoboxContent, json, i){
     '<div class="infobox">' +
         '<div class="inner">' +
             '<div class="image">' +
-                '<div class="item-specific">' + spottr.main.drawItemSpecific(category, json, i) + '</div>' +
                 '<div class="overlay">' +
                     '<div class="wrapper">' +
                         '<a href="#test" class="quick-view" data-id="' + id + '" data-gallery="' + path + gallery + '" data-title="' + title +'" data-type="' + type +'"  data-category="' + category +'" data-location="' + location +'" data-aperture="' + aperture +'" data-date="' + date +'" data-focal="' + focal +'" data-iso="' + iso +'" data-rating="' + rating +'">Quick View</a>' +
@@ -40,7 +39,6 @@ function drawInfobox(category, infoboxContent, json, i){
                     '<div class="meta">' +
                         '<h2>' + title +  '</h2>' +
                         '<figure>' + location +  '</figure>' +
-                        '<i class="fa fa-angle-right"></i>' +
                     '</div>' +
                 '</a>' +
                 '<div class="imageWrapper">' +

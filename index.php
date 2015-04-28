@@ -37,7 +37,7 @@
                                 <div id="map" class="has-parallax"></div>
                                 <!--/#map-->
                                 <?php 
-                                    include 'assets/moduls/searchbar.php';
+                                    #include 'assets/moduls/searchbar.php';
                                 ?>
                             </div>
                             <!-- end Map -->
@@ -71,8 +71,7 @@
             <script type="text/javascript" src="./assets/js/plugins/richmarker.js"></script>
             <script type="text/javascript" src="./assets/js/plugins/markerclusterer.js"></script>
             <script type="text/javascript" src="./assets/js/plugins/jquery.validate.js"></script>
-            <script type="text/javascript" src="./assets/js/plugins/jquery.validate.bootstrap.js"></script>
-            <script type="text/javascript" src="./assets/js/plugins/filterJSON.plugin.js"></script>
+            <script type="text/javascript" src="./assets/js/plugins/star-rating.js"></script>    
 
             <!-- end plugins -->
 

@@ -14,7 +14,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
     function gMap(){
         var mapCenter = new google.maps.LatLng(_latitude,_longitude);
         var mapOptions = {
-            zoom: 14,
+            zoom: 12,
             center: mapCenter,
             disableDefaultUI: false,
             scrollwheel: false,
@@ -210,15 +210,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
 
             // Call Rating function ----------------------------------------------------------------------------------------
 
-            /*var $singleItem = $('.results .item');
-            $singleItem.hover(
-                function(){
-                    newMarkers[ $(this).attr('id') - 1 ].content.className = 'marker-active marker-loaded';
-                },
-                function() {
-                    newMarkers[ $(this).attr('id') - 1 ].content.className = 'marker-loaded';
-                }
-            );*/
+            spottr.main.rating();
         });
 
         redrawMap('google', map);
