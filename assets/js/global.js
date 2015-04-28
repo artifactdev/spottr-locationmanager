@@ -1,4 +1,6 @@
 var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
+var _latitude = 51.0545032;
+var _longitude = 13.7416008;
 ;var spottr = {};
 ;(function ($, window, undefined) {
     spottr.global = {
@@ -110,33 +112,7 @@ var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.
         },
 
         searchFilter: function () {
-            $("#category-filter-search").on('click', function(e){
-                e.preventDefault();
-                var filter = $('.category-filter').find('button').attr('title');
-
-                console.log(filter);
-
-                $('.items-list .results').find('li').each(function(element) {
-                    $(this).removeClass('hide');
-                    var itemCategory = $(this).find('.quick-preview').data('category');
-                    console.log(itemCategory);
-                    if (itemCategory != filter) {
-                        $(this).addClass('hide');
-                    }
-                });
-            });
-
-            $("#reset-filter").on('click', function(e){
-                e.preventDefault();
-
-                $('.items-list .results').find('li').each(function(element) {
-                    $(this).removeClass('hide');
-                });
-
-                $('#location').val('');
-
-                initMap();
-            });
+            
         },
 
         submitItem: function () {

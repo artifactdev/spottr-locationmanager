@@ -10,8 +10,6 @@ $( document ).ready(function() {
 
     spottr.global.setInputsWidth();
 
-    spottr.global.searchFilter();
-
     spottr.global.submitItem();
 
     spottr.global.menuItemHandler()
@@ -31,9 +29,6 @@ $( document ).ready(function() {
                     $('.map-canvas #map').height( $(window).height() - $('.header').height() );
                 }
             }
-
-            var _latitude = 51.0545032;
-            var _longitude = 13.7416008;
 
             var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
 
@@ -161,6 +156,49 @@ $( document ).ready(function() {
             modal.find('.focal').text(focal);
             modal.find('.iso').text(iso);
 
+        },
+
+        categoryFilter: function () {
+            $("#category-filter-search").on('click', function(e){
+                e.preventDefault();
+                var filter = $('.category-filter').find('button').attr('title');
+                spottr.main.loadFilteredItems(filter,'category');
+            });
+
+            $("#reset-filter").on('click', function(e){
+                spottr.main.initMap();
+            });
+           
+        },
+
+        loadFilteredItems: function (filter,property) {
+            
+
+
+            AjaxHandler.request({
+                url: "locations",
+                method: "GET",
+                success: function(json) {                        
+                    var config = {
+                        property: property,
+                        wrapper: true,
+                        value: filter,
+                        checkContains: false,
+                        startsWith: false,
+                        matchCase: true,
+                        avoidDuplicates: false
+                    },
+
+                    itemsToload = $.fn.filterJSON(json, config);
+                    var items = {};
+                    items['items'] = itemsToload;
+                    console.log(items);
+                    createHomepageGoogleMap(_latitude,_longitude,items);
+                },
+                error : function(jqXHR, textStatus, errorThrown) {
+                    console.log(errorThrownr);
+                }
+            });
         }
     };
 })(jQuery, this);

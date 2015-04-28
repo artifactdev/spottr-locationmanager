@@ -1,9 +1,6 @@
 <div class="search-bar horizontal">
     <form class="main-search border-less-inputs" role="form" method="post">
         <div class="input-row">
-            <div class="form-group">
-                <input type="text" class="form-control" id="keyword" placeholder="Enter Keyword">
-            </div>
             <div class="form-group category-filter">
                 <select name="category" id="category-filter" title="Select Category" data-live-search="true">
                     <option value="industrie">Industrie</option>
