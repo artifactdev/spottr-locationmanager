@@ -31,7 +31,7 @@
                     <option value="assets/icons/other.png" selected="selected">Andere</option>
                 </select>
 
-                <input id="rating" type="text" placeholder="Rating 1-5" name="rating" required min="1" max="5" maxlength="1" />
+                <input type="number" placeholder="Zugänglichkeit 1-5" name="rating" required min="1" max="5" maxlength="1"/>
 
                 <input id="aperture" type="hidden" name="aperture" value="0"/>
 

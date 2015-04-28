@@ -55,21 +55,6 @@ $( document ).ready(function() {
             }
         },
 
-        rating: function (element,size,showCaption,showClear) {
-            element = typeof element !== 'undefined' ? element : $(".rating");
-            size = typeof size !== 'undefined' ? size : 'xs';
-            showCaption = typeof showCaption !== 'undefined' ? showCaption : false;
-            showClear = typeof showClear !== 'undefined' ? showClear : false;
-
-            console.log("rating");
-            
-            element.rating({
-                'size':size,
-                'showCaption':showCaption,
-                'showClear':showClear
-            });
-        },
-
         showModal: function () {
             var metaItem = $(this).find('.quick-preview');
             var modal = $('#modal');
@@ -182,9 +167,7 @@ $( document ).ready(function() {
             modal.find('.iso').text(iso);
             ratingItem.attr('value',rating);
 
-
-
-            spottr.main.rating(ratingItem);
+            spottr.global.rating(ratingItem);
 
         },
 

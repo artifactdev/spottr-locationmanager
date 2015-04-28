@@ -111,6 +111,19 @@ var _longitude = 13.7416008;
             }
         },
 
+        rating: function (element,size,showCaption,showClear) {
+            element = typeof element !== 'undefined' ? element : $(".rating");
+            size = typeof size !== 'undefined' ? size : 'xs';
+            showCaption = typeof showCaption !== 'undefined' ? showCaption : false;
+            showClear = typeof showClear !== 'undefined' ? showClear : false;
+            
+            element.rating({
+                'size':size,
+                'showCaption':showCaption,
+                'showClear':showClear
+            });
+        },
+
         searchFilter: function () {
             
         },

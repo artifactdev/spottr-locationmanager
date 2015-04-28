@@ -210,7 +210,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
 
             // Call Rating function ----------------------------------------------------------------------------------------
 
-            spottr.main.rating();
+            spottr.global.rating();
         });
 
         redrawMap('google', map);
