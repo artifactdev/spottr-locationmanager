@@ -125,13 +125,14 @@ var _longitude = 13.7416008;
             });
 
             spottr.global.loadExifData();
-            spottr.global.markerToPosition(addForm,'#map-add');
 
             $("#geocomplete-search").geocomplete({
               details: "#add-form",
               types: ["geocode", "establishment"],
               detailsAttribute: "data-geo"
             });
+
+            spottr.global.markerToPosition(addForm,'#map-add');
 
             addModal.find('#add-form').on('submit',function(e){
                 e.preventDefault();
@@ -148,6 +149,13 @@ var _longitude = 13.7416008;
                             console.log(data);
                         } 
                 });
+            });
+
+            // fix for strange loading issue
+            $('body').find('.submit-item').on('click', function(){
+                setTimeout(function(){
+                    spottr.global.markerToPosition(addForm,'#map-add'); 
+                }, 500);
             });
         },
 
@@ -181,6 +189,7 @@ var _longitude = 13.7416008;
                     width: '500px',
                     height: '250px',
                     zoom: 12,
+                    styles: mapStyles,
                     zoomControl: true,
                     zoomControlOpt: {
                         style: 'SMALL',
