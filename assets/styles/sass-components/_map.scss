@@ -2,6 +2,11 @@ body.map-fullscreen #map {
     height: 100% !important;
 }
 
+#map-add {
+    width: 100% !important;
+    height: 200px !important;
+}
+
 .map-canvas {
     position: relative;
     overflow: hidden;

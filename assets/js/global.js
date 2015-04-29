@@ -148,6 +148,8 @@ var _longitude = 13.7416008;
               detailsAttribute: "data-geo"
             });
 
+            spottr.global.markerToPosition(addForm,'#map-add');
+
             addModal.find('#add-form').on('submit',function(e){
                 e.preventDefault();
                 AjaxHandler.request({
@@ -163,6 +165,13 @@ var _longitude = 13.7416008;
                             console.log(data);
                         } 
                 });
+            });
+
+            // fix for strange loading issue
+            $('body').find('.submit-item').on('click', function(){
+                setTimeout(function(){
+                    spottr.global.markerToPosition(addForm,'#map-add'); 
+                }, 500);
             });
         },
 
@@ -182,6 +191,72 @@ var _longitude = 13.7416008;
             });
          
             attForm.submit();
+        },
+
+        markerToPosition: function (form,element) {
+            var map;
+
+            $(document).ready(function(){
+
+                var map = new GMaps({
+                    div: element,
+                    lat: _latitude,
+                    lng: _longitude,
+                    width: '500px',
+                    height: '250px',
+                    zoom: 12,
+                    styles: mapStyles,
+                    zoomControl: true,
+                    zoomControlOpt: {
+                        style: 'SMALL',
+                        position: 'TOP_RIGHT'
+                    },
+                    panControl: false
+                });
+
+              GMaps.on('click', map.map, function(event) {
+                var index = map.markers.length;
+                var lat = event.latLng.lat();
+                var lng = event.latLng.lng();
+                var formLat = $(form).find('#lat');
+                var formLng = $(form).find('#lng');
+                var completeInput = $(form).find('#geocomplete-search');
+
+                console.log(lat);
+                console.log(lng);
+
+                if (index <= 0) {
+                    var marker;
+                    marker = map.addMarker({
+                      lat: lat,
+                      lng: lng,
+                      draggable: true
+                    });
+                    formLat.attr('value', lat);
+                    formLng.attr('value', lng);
+                    completeInput.attr('disabled', 'disabled');
+                } else {
+                    alert('Bitte den Marker an gewünschte Position ziehen.');
+                }
+
+                google.maps.event.addListener(
+                    marker,
+                    'drag',
+                    function() {
+                        formLat.attr('value', marker.position.lat());
+                        formLng.attr('value', marker.position.lng());
+                    }
+                );
+
+                $('body').find('.modal-close').on('click', function(){
+                    completeInput.removeAttr('disabled');
+                    map.removeMarkers();
+                    formLat.attr('value','');
+                    formLng.attr('value','');
+                });
+              });
+            });
+                 
         },
 
         setInputsWidth: function (){
@@ -231,8 +306,23 @@ var _longitude = 13.7416008;
             var loginPath = path + 'login.php';
             if (currentPage != loginPath) {
                 window.location.replace(loginPath);
+            };
+            spottr.global.logout();
+        },
+
+        logout: function () {
+            var currentPage = window.location.href;
+            var loginPath = path + 'login.php';
+            if (currentPage != loginPath) {
+                var logoutButton = $('body').find('#logout');
+                logoutButton.removeClass('hide');
+                logoutButton.on('click', function(){
+                    AuthenticationHelper.deleteAuthenticationToken();
+                    window.location.reload();
+                });
+
             }
-        }
+        },
     
   };
 })(jQuery, this);
