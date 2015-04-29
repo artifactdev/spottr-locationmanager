@@ -16,6 +16,8 @@
                     
                 </select>
 
+                <div class="full-width" id="map-add" style="height:150px"></div>
+
                 <input type="text"  id="geocomplete-search" placeholder="Search Address" name="search_adress" autocomplete="false"/>
 
                 <input id="lng" name="longitude" data-geo="lng" type="text" value="" placeholder="Longitude" required>

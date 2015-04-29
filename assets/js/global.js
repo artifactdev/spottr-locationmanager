@@ -125,6 +125,7 @@ var _longitude = 13.7416008;
             });
 
             spottr.global.loadExifData();
+            spottr.global.markerToPosition(addForm,'#map-add');
 
             $("#geocomplete-search").geocomplete({
               details: "#add-form",
@@ -166,6 +167,71 @@ var _longitude = 13.7416008;
             });
          
             attForm.submit();
+        },
+
+        markerToPosition: function (form,element) {
+            var map;
+
+            $(document).ready(function(){
+
+                var map = new GMaps({
+                    div: element,
+                    lat: _latitude,
+                    lng: _longitude,
+                    width: '500px',
+                    height: '250px',
+                    zoom: 12,
+                    zoomControl: true,
+                    zoomControlOpt: {
+                        style: 'SMALL',
+                        position: 'TOP_RIGHT'
+                    },
+                    panControl: false
+                });
+
+              GMaps.on('click', map.map, function(event) {
+                var index = map.markers.length;
+                var lat = event.latLng.lat();
+                var lng = event.latLng.lng();
+                var formLat = $(form).find('#lat');
+                var formLng = $(form).find('#lng');
+                var completeInput = $(form).find('#geocomplete-search');
+
+                console.log(lat);
+                console.log(lng);
+
+                if (index <= 0) {
+                    var marker;
+                    marker = map.addMarker({
+                      lat: lat,
+                      lng: lng,
+                      draggable: true
+                    });
+                    formLat.attr('value', lat);
+                    formLng.attr('value', lng);
+                    completeInput.attr('disabled', 'disabled');
+                } else {
+                    console.log('Bitte den Marker an gewünschte Position ziehen.');
+                }
+
+                google.maps.event.addListener(
+                    marker,
+                    'drag',
+                    function() {
+                        formLat.attr('value', marker.position.lat());
+                        formLng.attr('value', marker.position.lng());
+                    }
+                );
+
+                $('body').find('.modal-close').on('click', function(){
+                    completeInput.removeAttr('disabled');
+                    map.removeMarkers();
+                    formLat.attr('value','');
+                    formLng.attr('value','');
+                });
+              });
+            });
+                 
         },
 
         setInputsWidth: function (){

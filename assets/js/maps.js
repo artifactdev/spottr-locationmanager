@@ -17,7 +17,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
             zoom: 12,
             center: mapCenter,
             disableDefaultUI: false,
-            scrollwheel: false,
+            scrollwheel: true,
             styles: mapStyles,
             mapTypeControlOptions: {
                 style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
@@ -27,7 +27,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
             zoomControl: true,
             zoomControlOptions: {
                 style: google.maps.ZoomControlStyle.LARGE,
-                position: google.maps.ControlPosition.RIGHT_TOP
+                position: google.maps.ControlPosition.RIGHT_BOTTOM
             }
         };
         var mapElement = document.getElementById('map');
