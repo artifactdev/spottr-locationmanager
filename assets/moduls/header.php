@@ -8,7 +8,7 @@
    
                 <a href="verwaltung.php" class="btn btn-default hide" id="admin-link">Verwaltung</a>
                 <a href="#" class="btn btn-default hide" id="useradmin-link">Users</a>
-                <a href="#" class="submit-item">
+                <a href="#" class="submit-item hide">
                     <div class="content"><span>Submit Your Item</span></div>
                     <div class="icon">
                         <i class="fa fa-plus"></i>

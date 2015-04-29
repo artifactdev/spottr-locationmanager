@@ -73,6 +73,9 @@ var _longitude = 13.7416008;
             if (isHome) {
                 $('#admin-link').removeClass('hide');
             }
+            if (isHome && isVerwaltung) {
+                $('.submit-item ').removeClass('hide');
+            }
         },
 
         loadExifData: function () {
