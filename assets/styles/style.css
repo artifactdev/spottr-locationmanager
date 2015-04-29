@@ -1508,6 +1508,8 @@ textarea.form-control:focus, textarea.form-control:active {
               font-size: 14px; }
               .header .wrapper .navigation-items .wrapper ul li a:hover {
                 color: #4187c9; }
+        .header .wrapper .navigation-items .wrapper #logout {
+          margin-right: 8px; }
         .header .wrapper .navigation-items .wrapper .submit-item {
           display: block;
           margin-left: 5px;

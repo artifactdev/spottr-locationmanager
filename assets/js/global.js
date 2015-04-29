@@ -220,7 +220,7 @@ var _longitude = 13.7416008;
                     formLng.attr('value', lng);
                     completeInput.attr('disabled', 'disabled');
                 } else {
-                    console.log('Bitte den Marker an gewünschte Position ziehen.');
+                    alert('Bitte den Marker an gewünschte Position ziehen.');
                 }
 
                 google.maps.event.addListener(
@@ -290,8 +290,23 @@ var _longitude = 13.7416008;
             var loginPath = path + 'login.php';
             if (currentPage != loginPath) {
                 window.location.replace(loginPath);
+            };
+            spottr.global.logout();
+        },
+
+        logout: function () {
+            var currentPage = window.location.href;
+            var loginPath = path + 'login.php';
+            if (currentPage != loginPath) {
+                var logoutButton = $('body').find('#logout');
+                logoutButton.removeClass('hide');
+                logoutButton.on('click', function(){
+                    AuthenticationHelper.deleteAuthenticationToken();
+                    window.location.reload();
+                });
+
             }
-        }
+        },
     
   };
 })(jQuery, this);

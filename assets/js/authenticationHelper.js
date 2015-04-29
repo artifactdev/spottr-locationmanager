@@ -68,6 +68,13 @@
                  path : "/"
              });
          };
+
+         /**
+          * löscht Authenticationtoken
+          */
+         factory.deleteAuthenticationToken = function() {
+            $.removeCookie("X-MJRestApi-AuthInfo", { path: '/' });
+         };
  
         /**
          * Setze Authenticationtoken
@@ -92,6 +99,7 @@
                 }
                
                 spottr.global.goToIndex();
+                spottr.global.logout();
             })
          };
  
