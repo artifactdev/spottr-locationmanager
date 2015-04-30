@@ -1,6 +1,9 @@
 ;(function ($, window, undefined) {
 
     spottr.userAdministration = {
+        /**
+         * initialises all needed functions by clicking the useradmin-link
+         */
         init: function () {
 
             var modal = $('#user-modal');
@@ -26,6 +29,10 @@
             spottr.userAdministration.editUser();
         },
 
+        /**
+         * saves a new user
+         * @param  {Object} modal the modal there the form can be find
+         */
         saveUser: function (modal) {
             var form = modal.find('.add-user');
             
@@ -50,6 +57,9 @@
             });
         },
 
+        /**
+         * loads all existing users
+         */
         loadUsers: function () {
             AjaxHandler.request({
                 method     : "GET",
@@ -64,6 +74,10 @@
             });
         },
 
+        /**
+         * adds existing users to the usertable
+         * @param  {JSON} json the JSON of existing users
+         */
         fillTable: function (json) {
             for (var i = 0; i < json.items.length; i++) {
                 var userTable = $('#user-modal table.userlist tbody');
@@ -89,6 +103,9 @@
             }
         },
 
+        /**
+         * handles user delete if deletebutton is clicked
+         */
         deleteUser: function () {
             $('body').on('click','.delete-user', function() {
                 var id = $(this).data('id');
@@ -109,6 +126,9 @@
             });
         },
 
+        /**
+         * handles editUser form and fills the data of the user which should be edited
+         */
         editUser: function () {
             $('body').on('click','.edit-user', function() {
                 var id = $(this).data('id');
@@ -140,6 +160,10 @@
             });
         },
 
+        /**
+         * handles the update of a given user to the backend
+         * @param  {ID} id The userID
+         */
         editHandler: function (id) {
             var form = $('#user-modal').find('#edit-user-form');
 

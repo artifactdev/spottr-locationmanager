@@ -1,3 +1,11 @@
+/**
+ * drawInfobox adds the infobox to each marker
+ * @param  {string} category       gets the category of item
+ * @param  {} infoboxContent 
+ * @param  {json} json           gets the json for each item
+ * @param  {int} i              gets the number of the item in the json tree
+ * @return {html}                returns html to add to the marker
+ */
 function drawInfobox(category, infoboxContent, json, i){
 
     if(json.items[i].id)                 { var id = json.items[i].id }

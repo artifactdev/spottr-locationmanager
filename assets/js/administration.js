@@ -1,6 +1,9 @@
 ;(function ($, window, undefined) {
 
     spottr.administration = {
+        /**
+         * init of administration page which loads every thing which is needed
+         */
         initItems: function () {
             var _latitude = 51.541216;
             var _longitude = -0.095678;
@@ -22,6 +25,10 @@
             });
         },
 
+        /**
+         * adds each item to the item-list in administrationpage
+         * @param  {json} json gets json which each item in it
+         */
         fillVerwaltung: function (json) {
             var itemsList = $('body').find('.items-list');
 
@@ -58,7 +65,9 @@
         },
 
 
-
+        /**
+         * shows the delete modal on each click on a btn-delete of location and find it's meta element to fill the data on deleteModal call
+         */
         showDeleteModal: function () {
             $('body').on('click','.btn-delete', function(id) {
                 var metaItem = $(this).closest('.item').find('.meta-element');
@@ -68,8 +77,9 @@
             });
         },
 
-        // Create modal with item-details -----------------------------
-
+        /**
+         * shows the edit-modal and loads the location data to it
+         */
         editModal: function () {
             $('body').on('click','.btn-edit', function(id) {
                 var metaElement = $(this).closest('.item').find('.meta-element');
@@ -143,7 +153,10 @@
                  
             });
         },
-
+        /**
+         * Shows the delete modal and adds metaElement id to its form on submit the location will be deleted and the page will reload
+         * @param  {Object} metaElement [description]
+         */
         deleteModal: function (metaElement) {
 
             var modal = $('#delete-modal');
@@ -175,6 +188,16 @@
     };
 })(jQuery, this);
 
+/**
+ * initial function calls
+ * spottr.administration.initItems()
+ * spottr.administration.editModal()
+ * spottr.administration.showDeleteModal()
+ * spottr.global.menuItemHandler()
+ * spottr.global.submitItem()
+ * spottr.global.setInputsWidth()
+ * spottr.global.fancySelect();} 
+ */
 $(document).ready(function(){
     spottr.administration.initItems();
     spottr.administration.editModal();

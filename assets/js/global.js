@@ -6,6 +6,10 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
 ;var spottr = {};
 ;(function ($, window, undefined) {
     spottr.global = {
+        /**
+         * general modal handling opens the modal with the given modalID
+         * @param  {ID} modalID the given modal ID
+         */
         modalHandler: function (modalID) {
             var modal = modalID;
 
@@ -35,6 +39,9 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
             });
         },
 
+        /**
+         * converts select elements to bootstrap selects
+         */
         fancySelect: function () {
             var select = $('select');
             if (select.length > 0 ){
@@ -59,6 +66,9 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
             });
         },
 
+        /**
+         * handles the menuItems and shows them where they should appear
+         */
         menuItemHandler: function () {
             var isVerwaltung = $('body.page-verwaltung').length;
             var isHome = $('body.page-homepage').length;
@@ -74,6 +84,9 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
             }
         },
 
+        /**
+         * loads the exif data of location image in formelements on location edit and add
+         */
         loadExifData: function () {
             var someCallback = function(exifObject) {
                     
@@ -110,6 +123,13 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
             }
         },
 
+        /**
+         * converts rating input to stars
+         * @param  {DOM Element} element     The element which should be converted
+         * @param  {String} size        the size of the stars
+         * @param  {Boolean} showCaption Should the stars have an caption
+         * @param  {Boolean} showClear   should the stars have an clear button
+         */
         rating: function (element,size,showCaption,showClear) {
             element = typeof element !== 'undefined' ? element : $(".rating");
             size = typeof size !== 'undefined' ? size : 'xs';
@@ -127,6 +147,10 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
             
         },
 
+        /**
+         * shows the add location modal and initialises all data and functions which are needed there
+         * also it handles the submit of a new location
+         */
         submitItem: function () {
             var addModal = $('body').find('#add-modal');
             var addForm = $('#add-form');
@@ -174,6 +198,11 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
             });
         },
 
+        /**
+         * submits the location image to the backend on success the window will be reloaded
+         * @param  {ID} locationId the given locationID where image should be added to
+         * @param  {ID} attForm    The form where it gets the image from
+         */
         submitImage: function (locationId, attForm) {
             var $file = attForm.find("input[type='file']");
             if ($file.val() == "" || locationId == undefined) {
@@ -192,6 +221,13 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
             attForm.submit();
         },
 
+        /**
+         * adds a marker to a given map or handles the setting of a marker
+         * @param  {Object} form      The form where it should fired
+         * @param  {ID} element   The element where the map should be added
+         * @param  {String} latitude  The Latitude if an marker should be shown on initialize
+         * @param  {String} longitude The Longitude if an marker should be shown on initialize
+         */
         markerToPosition: function (form,element,latitude,longitude) {
             var map;
 
@@ -270,6 +306,9 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
                  
         },
 
+        /**
+         * Sets input widths for searchbar
+         */
         setInputsWidth: function (){
             var $inputRow = $('.search-bar.horizontal .input-row');
             for( var i=0; i<$inputRow.length; i++ ){
@@ -303,6 +342,10 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
                 }
             }
         },
+
+        /**
+         * goes to index page
+         */
         goToIndex: function () {
             var currentPage = window.location.href;
             var indexPath = path + 'index.php';
@@ -312,6 +355,9 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
             }
         },
 
+        /**
+         * goes to login page
+         */
         goToLogin: function () {
             var currentPage = window.location.href;
             var loginPath = path + 'login.php';
@@ -321,6 +367,9 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
             spottr.global.logout();
         },
 
+        /**
+         * deletes the authentication cookie if logout button is clicked and reloads the page
+         */
         logout: function () {
             var currentPage = window.location.href;
             var loginPath = path + 'login.php';
