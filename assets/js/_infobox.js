@@ -21,7 +21,7 @@ function drawInfobox(category, infoboxContent, json, i){
     if(json.items[i].rating)             { var rating = json.items[i].rating }
         else                            { rating = '' }
     if(json.items[i].gallery)         { var gallery = json.items[i].gallery }
-        else                            { gallery = 'assets/img/default-item.png' }
+        else                            { gallery = 'rest-api/media/locations/default-item.png' }
 
     var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
     

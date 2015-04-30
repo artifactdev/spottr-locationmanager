@@ -30,7 +30,7 @@
             for (var i = 0; i < json.items.length; i++) {
                 var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
                 if(json.items[i].gallery)         { var gallery = json.items[i].gallery }
-                else                            { gallery = path + '/assets/img/default-item.png' }
+                else                            { gallery = path + '/rest-api/media/locations/default-item.png' }
                 itemsList.append(
                     '<li>' +
                     '<div class="item" id="' + json.items[i].id + '">' +
@@ -105,9 +105,9 @@
 
                 spottr.global.markerToPosition(modal.find('#edit-form'),'#map-edit',latitude,longitude);
                 
-                modal.find('form').on('submit',function(e){
+                modal.find('#edit-form').on('submit',function(e){
                     e.preventDefault();
-                    if(modal.find('form').valid()) {
+                    if(modal.find('#edit-form').valid()) {
                        AjaxHandler.request({
                             method   : "PUT",
                             cache    : false,
