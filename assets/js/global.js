@@ -1,19 +1,11 @@
 var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
 var _latitude = 51.0545032;
 var _longitude = 13.7416008;
+var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visibility":"simplified"},{"lightness":20}]},{"featureType":"administrative.land_parcel","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"landscape.man_made","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"transit","elementType":"all","stylers":[{"saturation":-100},{"visibility":"on"},{"lightness":10}]},{"featureType":"road.local","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"road.local","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"labels","stylers":[{"visibility":"simplified"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":50}]},{"featureType":"water","elementType":"all","stylers":[{"hue":"#a1cdfc"},{"saturation":30},{"lightness":49}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"hue":"#f49935"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"hue":"#fad959"}]}, {featureType:'road.highway',elementType:'all',stylers:[{hue:'#dddbd7'},{saturation:-92},{lightness:60},{visibility:'on'}]}, {featureType:'landscape.natural',elementType:'all',stylers:[{hue:'#c8c6c3'},{saturation:-71},{lightness:-18},{visibility:'on'}]},  {featureType:'poi',elementType:'all',stylers:[{hue:'#d9d5cd'},{saturation:-70},{lightness:20},{visibility:'on'}]} ];
+
 ;var spottr = {};
 ;(function ($, window, undefined) {
     spottr.global = {
-        showEditModal: function () {
-            $('body').on('click','.btn-edit', function(id) {
-                var metaItem = $(this).closest('.item').find('.meta-element');
-                var modal = $('#edit-modal');
-                spottr.global.modalHandler(modal);
-                spottr.administration.editModal(metaItem);
-                 
-            });
-        },
-
         modalHandler: function (modalID) {
             var modal = modalID;
 
@@ -31,6 +23,10 @@ var _longitude = 13.7416008;
 
                 modal.addClass('hide');
                 modal.removeClass('fade-in');
+
+                modal.find('input').each(function(){
+                    $(this).val('');
+                });
 
                 if (hasForm >= 1) {
                     modalForm.validate().resetForm();
@@ -73,7 +69,7 @@ var _longitude = 13.7416008;
             if (isHome) {
                 $('#admin-link').removeClass('hide');
             }
-            if (isHome && isVerwaltung) {
+            if (isHome || isVerwaltung) {
                 $('.submit-item ').removeClass('hide');
             }
         },
@@ -152,19 +148,22 @@ var _longitude = 13.7416008;
 
             addModal.find('#add-form').on('submit',function(e){
                 e.preventDefault();
-                AjaxHandler.request({
-                    method   : "POST",
-                    cache    : false,
-                    url      : $(this).attr('action'),
-                    data     : $(this).serializeObject(),
-                    success  : function(data) {
-                        var form = $('#add-form-image');
-                        spottr.global.submitImage(data.id,form);
-                    },
-                        error    : function(data) {
-                            console.log(data);
-                        } 
-                });
+                addForm.validate();
+                if(addForm.valid()) {
+                    AjaxHandler.request({
+                        method   : "POST",
+                        cache    : false,
+                        url      : $(this).attr('action'),
+                        data     : $(this).serializeObject(),
+                        success  : function(data) {
+                            var form = $('#add-form-image');
+                            spottr.global.submitImage(data.id,form);
+                        },
+                            error    : function(data) {
+                                console.log(data);
+                            } 
+                    });
+                }
             });
 
             // fix for strange loading issue
@@ -193,10 +192,15 @@ var _longitude = 13.7416008;
             attForm.submit();
         },
 
-        markerToPosition: function (form,element) {
+        markerToPosition: function (form,element,latitude,longitude) {
             var map;
 
             $(document).ready(function(){
+
+                if (latitude != undefined && longitude != undefined) {
+                    _latitude = latitude;
+                    _longitude = longitude;
+                }
 
                 var map = new GMaps({
                     div: element,
@@ -214,47 +218,54 @@ var _longitude = 13.7416008;
                     panControl: false
                 });
 
-              GMaps.on('click', map.map, function(event) {
-                var index = map.markers.length;
-                var lat = event.latLng.lat();
-                var lng = event.latLng.lng();
-                var formLat = $(form).find('#lat');
-                var formLng = $(form).find('#lng');
-                var completeInput = $(form).find('#geocomplete-search');
+                if (latitude === undefined && longitude === undefined) {
+                    GMaps.on('click', map.map, function(event) {
+                        var index = map.markers.length;
+                        var lat = event.latLng.lat();
+                        var lng = event.latLng.lng();
+                        var formLat = $(form).find('#lat');
+                        var formLng = $(form).find('#lng');
+                        var completeInput = $(form).find('#geocomplete-search');
 
-                console.log(lat);
-                console.log(lng);
+                        if (index <= 0) {
+                            var marker;
+                            marker = map.addMarker({
+                              lat: lat,
+                              lng: lng,
+                              draggable: true
+                            });
+                            formLat.attr('value', lat);
+                            formLng.attr('value', lng);
+                            completeInput.attr('disabled', 'disabled');
+                        } else {
+                            alert('Bitte den Marker an gewünschte Position ziehen.');
+                        }
 
-                if (index <= 0) {
+                        google.maps.event.addListener(
+                            marker,
+                            'drag',
+                            function() {
+                                formLat.attr('value', marker.position.lat());
+                                formLng.attr('value', marker.position.lng());
+                            }
+                        );
+
+                        $('body').find('.modal-close').on('click', function(){
+                            completeInput.removeAttr('disabled');
+                            map.removeMarkers();
+                            formLat.attr('value','');
+                            formLng.attr('value','');
+                        });
+                      });
+
+                } else {
                     var marker;
                     marker = map.addMarker({
-                      lat: lat,
-                      lng: lng,
-                      draggable: true
+                      lat: latitude,
+                      lng: longitude,
+                      draggable: false
                     });
-                    formLat.attr('value', lat);
-                    formLng.attr('value', lng);
-                    completeInput.attr('disabled', 'disabled');
-                } else {
-                    alert('Bitte den Marker an gewünschte Position ziehen.');
                 }
-
-                google.maps.event.addListener(
-                    marker,
-                    'drag',
-                    function() {
-                        formLat.attr('value', marker.position.lat());
-                        formLng.attr('value', marker.position.lng());
-                    }
-                );
-
-                $('body').find('.modal-close').on('click', function(){
-                    completeInput.removeAttr('disabled');
-                    map.removeMarkers();
-                    formLat.attr('value','');
-                    formLng.attr('value','');
-                });
-              });
             });
                  
         },

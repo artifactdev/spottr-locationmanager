@@ -27,20 +27,26 @@
         },
 
         saveUser: function (modal) {
-            modal.find('.add-user').on('submit',function(e){
+            var form = modal.find('.add-user');
+            
+
+            form.on('submit',function(e){
                 e.preventDefault();
-                AjaxHandler.request({
-                    method   : "POST",
-                    cache    : false,
-                    url      : $(this).attr('action'),
-                    data     : $(this).serializeObject(),
-                    success  : function(data) {
-                        spottr.userAdministration.loadUsers();
-                    },
-                    error : function() {
-                        spottr.userAdministration.loadUsers();
-                    }
-                });
+                form.validate();
+                if(form.valid()) {
+                    AjaxHandler.request({
+                        method   : "POST",
+                        cache    : false,
+                        url      : $(this).attr('action'),
+                        data     : $(this).serializeObject(),
+                        success  : function(data) {
+                            spottr.userAdministration.loadUsers();
+                        },
+                        error : function() {
+                            spottr.userAdministration.loadUsers();
+                        }
+                    });
+                }
             });
         },
 
@@ -135,28 +141,32 @@
         },
 
         editHandler: function (id) {
+            var form = $('#user-modal').find('#edit-user-form');
 
-            $('#user-modal').find('.edit-user').on('submit',function(e){
+            form.on('submit',function(e){
                 e.preventDefault();
-                AjaxHandler.request({
-                    method   : "PUT",
-                    cache    : false,
-                    url      : $(this).attr('action') + "/" + id,
-                    data     : $(this).serializeObject(),
-                    success  : function(data) {
-                        $('#user-modal').find('.add-user').addClass('hide');
-                        var editUserForm = $('#user-modal').find('.edit-user');
-                        var addUserForm = $('#user-modal').find('.add-user');
-                        editUserForm.addClass('hide');
-                        addUserForm.removeClass('hide');
-                        spottr.userAdministration.loadUsers();
+                form.validate();
+                if(form.valid()) {
+                    AjaxHandler.request({
+                        method   : "PUT",
+                        cache    : false,
+                        url      : $(this).attr('action') + "/" + id,
+                        data     : $(this).serializeObject(),
+                        success  : function(data) {
+                            $('#user-modal').find('.add-user').addClass('hide');
+                            var editUserForm = $('#user-modal').find('.edit-user');
+                            var addUserForm = $('#user-modal').find('.add-user');
+                            editUserForm.addClass('hide');
+                            addUserForm.removeClass('hide');
+                            spottr.userAdministration.loadUsers();
 
-                    },
+                        },
 
-                    error    : function(data) {
-                        console.log(data);
-                    } 
-                });
+                        error    : function(data) {
+                            console.log(data);
+                        } 
+                    });
+                }
 
             });
         }

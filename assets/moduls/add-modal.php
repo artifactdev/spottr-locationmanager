@@ -4,19 +4,18 @@
         <div class="modal-body">
 
             <form action="#" id="add-form-image" class="add-location" enctype='multipart/form-data' method="post" target="js_iframe_location_attachment">
-                <input name="datei" type="file" id="file" size="50" maxlength="100000" >
+                <input name="datei" type="file" id="file" size="50" maxlength="100000" required>
             </form><iframe id="js_iframe_location_attachment" name="js_iframe_location_attachment" style="display:none"></iframe>
             <form action="locations" id="add-form" class="add-location" enctype='multipart/form-data'>
-                <input id="title" type="text" placeholder="Titel" name="title"/>
+                <input id="title" type="text" placeholder="Titel" name="title" required/>
 
                 <select name="category" required>
                     <option value="Industrie">Industrie</option>
                     <option value="Ruine">Ruine</option>
                     <option value="Outdoor">Outdoor</option>
-                    
                 </select>
 
-                <div class="full-width" id="map-add" style="height:150px"></div>
+                <div class="full-width" id="map-add"></div>
 
                 <input type="text"  id="geocomplete-search" placeholder="Search Address" name="search_adress" autocomplete="false"/>
 

@@ -4,7 +4,7 @@
         <div class="modal-body">
             <form action="locations/" method="delete" id="delete-form" class="delete-location">
                <div class="col-md-6">
-                    <button class="btn btn-default full-width modal-close">Abbrechen</button>
+                    <a href="#" class="btn btn-default full-width modal-close mt5 relative">Abbrechen</a>
                </div>
                <div class="col-md-6">
                     <button type="submit" class="btn btn-red full-width">Ja</button>
