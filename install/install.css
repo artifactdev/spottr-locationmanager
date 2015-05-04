@@ -1,5 +1,6 @@
 .install-box,
-.adminuser-box {
+.adminuser-box,
+.success-box {
     width: 80%;
     margin: 12px auto;
     padding: 16px;
