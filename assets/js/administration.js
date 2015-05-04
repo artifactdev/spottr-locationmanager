@@ -84,6 +84,9 @@
             $('body').on('click','.btn-edit', function(id) {
                 var metaElement = $(this).closest('.item').find('.meta-element');
                 var modal = $('#edit-modal');
+                var actionURL = 'locations/';
+
+                console.log(actionURL);
 
                 modal.validate();
 
@@ -101,8 +104,7 @@
                 var rating = metaElement.data('rating');
                 var id = metaElement.attr('id');
 
-                var actionURL = modal.find('form').attr('action');
-                modal.find('#edit-form').attr('action', actionURL + id);
+                modal.find('#edit-location-form').attr('action', actionURL + id);
                 modal.find('#title').val(title);
                 modal.find('#category').val(category);
                 modal.find('#date').val(date);
@@ -113,11 +115,11 @@
                 modal.find('#lat').val(latitude);
                 modal.find('#rating').val(rating);
 
-                spottr.global.markerToPosition(modal.find('#edit-form'),'#map-edit',latitude,longitude);
+                spottr.global.markerToPosition(modal.find('#edit-location-form'),'#map-edit',latitude,longitude);
                 
-                modal.find('#edit-form').on('submit',function(e){
+                modal.find('#edit-location-form').on('submit',function(e){
                     e.preventDefault();
-                    if(modal.find('#edit-form').valid()) {
+                    if(modal.find('#edit-location-form').valid()) {
                        AjaxHandler.request({
                             method   : "PUT",
                             cache    : false,

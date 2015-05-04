@@ -5,7 +5,7 @@
             <form action="#" id="edit-form-image" class="edit-location" enctype='multipart/form-data' method="post" target="js_iframe_location_attachment">
                 <input name="datei" type="file" id="file" size="50" maxlength="100000" required>
             </form><iframe id="js_iframe_location_attachment" name="js_iframe_location_attachment" style="display:none"></iframe>
-            <form action="locations/" id="edit-form" method="put" class="edit-location">
+            <form action="locations/" id="edit-location-form" method="put" class="edit-location">
 
                 <input id="title" type="text" placeholder="Titel" name="title" required/>
 
