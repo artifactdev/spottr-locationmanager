@@ -1,6 +1,9 @@
 ;(function ($, window, undefined) {
 
     spottr.administration = {
+        /**
+         * init of administration page which loads every thing which is needed
+         */
         initItems: function () {
             var _latitude = 51.541216;
             var _longitude = -0.095678;
@@ -22,6 +25,10 @@
             });
         },
 
+        /**
+         * adds each item to the item-list in administrationpage
+         * @param  {json} json gets json which each item in it
+         */
         fillVerwaltung: function (json) {
             var itemsList = $('body').find('.items-list');
 
@@ -30,7 +37,7 @@
             for (var i = 0; i < json.items.length; i++) {
                 var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
                 if(json.items[i].gallery)         { var gallery = json.items[i].gallery }
-                else                            { gallery = path + '/assets/img/default-item.png' }
+                else                            { gallery = path + '/rest-api/media/locations/default-item.png' }
                 itemsList.append(
                     '<li>' +
                     '<div class="item" id="' + json.items[i].id + '">' +
@@ -58,7 +65,9 @@
         },
 
 
-
+        /**
+         * shows the delete modal on each click on a btn-delete of location and find it's meta element to fill the data on deleteModal call
+         */
         showDeleteModal: function () {
             $('body').on('click','.btn-delete', function(id) {
                 var metaItem = $(this).closest('.item').find('.meta-element');
@@ -68,88 +77,88 @@
             });
         },
 
-        // Create modal with item-details -----------------------------
+        /**
+         * shows the edit-modal and loads the location data to it
+         */
+        editModal: function () {
+            $('body').on('click','.btn-edit', function(id) {
+                var metaElement = $(this).closest('.item').find('.meta-element');
+                var modal = $('#edit-modal');
+                var actionURL = 'locations/';
 
-        editModal: function (metaElement) {
+                console.log(actionURL);
 
-            spottr.global.fancySelect();
+                modal.validate();
 
-            var modal = $('#edit-modal');
+                spottr.global.fancySelect();
 
-            var title = metaElement.data('title');
-            var latitude = metaElement.data('latitude');
-            var longitude = metaElement.data('longitude');
-            var gallery = metaElement.data('gallery');
-            var category = metaElement.data('category');
-            var date = metaElement.data('date');
-            var aperture = metaElement.data('aperture');
-            var focal = metaElement.data('focal');
-            var iso = metaElement.data('iso');
-            var rating = metaElement.data('rating');
-            var id = metaElement.attr('id');
+                var title = metaElement.data('title');
+                var latitude = metaElement.data('latitude');
+                var longitude = metaElement.data('longitude');
+                var gallery = metaElement.data('gallery');
+                var category = metaElement.data('category');
+                var date = metaElement.data('date');
+                var aperture = metaElement.data('aperture');
+                var focal = metaElement.data('focal');
+                var iso = metaElement.data('iso');
+                var rating = metaElement.data('rating');
+                var id = metaElement.attr('id');
 
-            var actionURL = modal.find('form').attr('action');
-            modal.find('form').attr('action', actionURL + id);
-            modal.find('#title').val(title);
-            modal.find('#category').val(category);
-            modal.find('#date').val(date);
-            modal.find('#aperture').val(aperture);
-            modal.find('#focal').val(focal);
-            modal.find('#iso').val(iso);
-            modal.find('#lng').val(longitude);
-            modal.find('#lat').val(latitude);
-            modal.find('#rating').val(rating);
+                modal.find('#edit-location-form').attr('action', actionURL + id);
+                modal.find('#title').val(title);
+                modal.find('#category').val(category);
+                modal.find('#date').val(date);
+                modal.find('#aperture').val(aperture);
+                modal.find('#focal').val(focal);
+                modal.find('#iso').val(iso);
+                modal.find('#lng').val(longitude);
+                modal.find('#lat').val(latitude);
+                modal.find('#rating').val(rating);
 
-            modal.find('form').on('submit',function(e){
-                e.preventDefault();
-                AjaxHandler.request({
-                    method   : "PUT",
-                    cache    : false,
-                    url      : $(this).attr('action'),
-                    data     : $(this).serializeObject(),
-                    success  : function(data) {
-                        submitImage(data.id);
-                        location.reload(true);
+                spottr.global.markerToPosition(modal.find('#edit-location-form'),'#map-edit',latitude,longitude);
+                
+                modal.find('#edit-location-form').on('submit',function(e){
+                    e.preventDefault();
+                    if(modal.find('#edit-location-form').valid()) {
+                       AjaxHandler.request({
+                            method   : "PUT",
+                            cache    : false,
+                            url      : $(this).attr('action'),
+                            data     : $(this).serializeObject(),
+                            success  : function(data) {
+                                var form = $('#edit-form-image');
+                                spottr.global.submitImage(data.id,form);
+                                location.reload(true);
 
-                    },
+                            },
 
-                    error    : function(data) {
-                        console.log(data);
-                    } 
+                            error    : function(data) {
+                                console.log(data);
+                            } 
+                        }); 
+                    }
                 });
 
-            });
+                spottr.global.modalHandler(modal);
 
-            spottr.administration.submitImage(locationID);
+                $("#geocomplete-edit").geocomplete({
+                  details: "#edit-form",
+                  types: ["geocode", "establishment"],
+                });
 
-            $("#geocomplete-edit").geocomplete({
-              details: "#edit-form",
-              types: ["geocode", "establishment"],
+                // fix for strange loading issue
+                
+                setTimeout(function(){
+                    spottr.global.markerToPosition(modal.find('#edit-form'),'#map-edit',latitude,longitude); 
+                }, 500);
+                
+                 
             });
         },
-
-        submitImage: function (locationID) {
-            var $attForm = $("#edit-modal form");
-            var $file = $attForm.find("input[type='file']");
-            if ($file.val() == "") {
-                if (typeof callback == "function") {
-                    callback();
-                }
-                return;
-            }
-
-            $attForm.attr("action", "locations/" + locationID + "/image");
-            var $iframe = $("#fnJS_iframe_location_attachment");
-            $iframe.unbind().load(function(event) {
-                event.preventDefault();
-                 //console.log($(this).contents());
-                 callback($(this).contents());
-            });
-             
-            $attForm.submit();
-
-        },
-
+        /**
+         * Shows the delete modal and adds metaElement id to its form on submit the location will be deleted and the page will reload
+         * @param  {Object} metaElement [description]
+         */
         deleteModal: function (metaElement) {
 
             var modal = $('#delete-modal');
@@ -181,9 +190,19 @@
     };
 })(jQuery, this);
 
+/**
+ * initial function calls
+ * spottr.administration.initItems()
+ * spottr.administration.editModal()
+ * spottr.administration.showDeleteModal()
+ * spottr.global.menuItemHandler()
+ * spottr.global.submitItem()
+ * spottr.global.setInputsWidth()
+ * spottr.global.fancySelect();} 
+ */
 $(document).ready(function(){
     spottr.administration.initItems();
-    spottr.global.showEditModal();
+    spottr.administration.editModal();
     spottr.administration.showDeleteModal();
     spottr.global.menuItemHandler();
     spottr.global.submitItem();

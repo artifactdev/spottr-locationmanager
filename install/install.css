@@ -1,0 +1,12 @@
+.install-box,
+.adminuser-box {
+    width: 80%;
+    margin: 12px auto;
+    padding: 16px;
+    background: rgb(231, 231, 231);
+}
+
+.install-box input,
+.adminuser-box input {
+    margin: 8px 0;
+}

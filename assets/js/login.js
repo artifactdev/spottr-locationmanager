@@ -11,6 +11,9 @@ $(document).ready(function() {
 
 ;(function ($, window, undefined) {
     spottr.login = {
+        /**
+         * handles the loginform and calls AuthenticationHelper.runAuthenticationCheck(data)
+         */
         authenticateUser: function () {
             $('.login-box').find('form').on('submit',function(e){
                 e.preventDefault();

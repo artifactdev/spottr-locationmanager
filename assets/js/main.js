@@ -20,6 +20,9 @@ $( document ).ready(function() {
 
 ;(function ($, window, undefined) {
     spottr.main = {
+        /**
+         * initialoses the map and calls createHomepageGoogleMap(_latitude,_longitude,json) which loads items to the map as markers and to the results as list
+         */
         initMap: function () {
             var $body = $('body');
             if( $body.hasClass('map-fullscreen') ) {
@@ -46,6 +49,9 @@ $( document ).ready(function() {
             });
         },
 
+        /**
+         * handles the mobile navigation which closes the result list on screens < 979 px
+         */
         mobileNavigation: function (){
             if( $(window).width() < 979 ){
                 $(".main-navigation.navigation-top-header").remove();
@@ -55,6 +61,9 @@ $( document ).ready(function() {
             }
         },
 
+        /**
+         * shows item modal and gets the metaItem to get the data from when clicked on a location(quick-link)
+         */
         showModal: function () {
             var metaItem = $(this).find('.quick-preview');
             var modal = $('#modal');
@@ -93,6 +102,11 @@ $( document ).ready(function() {
             return '';
         },
 
+        /**
+         * highlights the marker on map if the marker is clicked
+         * @param  {ID} id     the marker id
+         * @param  {action} action the given action
+         */
         highlightMarker: function (id,action) {
             var markerElement = $('#map').find("[data-id='" + id + "']").parent('.marker-loaded');
             if (action === 'add') {
@@ -103,8 +117,14 @@ $( document ).ready(function() {
             }
         },
 
+        /**
+         * creates html for each item to push it in the result list later
+         * @param  {JSON} json              the given JSON
+         * @param  {INT} a                 the given item in json
+         * @param  {STRING} category          the item category
+         * @param  {ARRAY} visibleItemsArray the Array where the filled template will be pushed to
+         */
         pushItemsToArray: function (json, a, category, visibleItemsArray){
-            var itemPrice;
             var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
                 
             if(json.items[a].gallery)         { var gallery = json.items[a].gallery }
@@ -140,9 +160,11 @@ $( document ).ready(function() {
                 '</li>'
             );
         },
-
-        // Create modal with item-details -----------------------------
-
+        
+        /**
+         * Create modal with item-details
+         * @param  {ELEMENT} metaElement the element the function gets the data from to fill the modal
+         */
         fillModal: function (metaElement) {
 
             var modal = $('#modal');
@@ -171,6 +193,9 @@ $( document ).ready(function() {
 
         },
 
+        /**
+         * checks the category filter if changed and a category is selected it calls the loadFilteredItems function
+         */
         categoryFilter: function () {
             $("#category-filter").change(function(e){
                 e.preventDefault();
@@ -185,6 +210,11 @@ $( document ).ready(function() {
            
         },
 
+        /**
+         * gets all locations and filteres them after filtering the fitting json will be loaded to the map again createHomepageGoogleMap(_latitude,_longitude,items)
+         * @param  {String} filter         what should be searched for
+         * @param  {String} searchProperty where in the json should be searched
+         */
         loadFilteredItems: function (filter,searchProperty) {
             
             AjaxHandler.request({

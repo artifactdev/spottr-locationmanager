@@ -1,4 +1,14 @@
 /* 2. Universal Classes */
+.full-width {
+  width: 100% !important; }
+
+.mt5 {
+  margin-top: 5px; }
+
+.relative {
+  display: inline-block !important;
+  position: relative !important; }
+
 .dark-inputs .form-group input[type="text"], .dark-inputs .form-group input[type="date"], .dark-inputs .form-group input[type="email"], .dark-inputs .form-group input[type="search"], .dark-inputs .form-group input[type="password"], .dark-inputs .form-group input[type="number"], .dark-inputs .form-group input[type="tel"] {
   background-color: #474747;
   color: white; }
@@ -2090,7 +2100,8 @@ textarea.form-control:focus, textarea.form-control:active {
 body.map-fullscreen #map {
   height: 100% !important; }
 
-#map-add {
+#map-add,
+#map-edit {
   width: 100% !important;
   height: 200px !important; }
 

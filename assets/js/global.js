@@ -1,19 +1,15 @@
 var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
 var _latitude = 51.0545032;
 var _longitude = 13.7416008;
+var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visibility":"simplified"},{"lightness":20}]},{"featureType":"administrative.land_parcel","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"landscape.man_made","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"transit","elementType":"all","stylers":[{"saturation":-100},{"visibility":"on"},{"lightness":10}]},{"featureType":"road.local","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"road.local","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"labels","stylers":[{"visibility":"simplified"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":50}]},{"featureType":"water","elementType":"all","stylers":[{"hue":"#a1cdfc"},{"saturation":30},{"lightness":49}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"hue":"#f49935"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"hue":"#fad959"}]}, {featureType:'road.highway',elementType:'all',stylers:[{hue:'#dddbd7'},{saturation:-92},{lightness:60},{visibility:'on'}]}, {featureType:'landscape.natural',elementType:'all',stylers:[{hue:'#c8c6c3'},{saturation:-71},{lightness:-18},{visibility:'on'}]},  {featureType:'poi',elementType:'all',stylers:[{hue:'#d9d5cd'},{saturation:-70},{lightness:20},{visibility:'on'}]} ];
+
 ;var spottr = {};
 ;(function ($, window, undefined) {
     spottr.global = {
-        showEditModal: function () {
-            $('body').on('click','.btn-edit', function(id) {
-                var metaItem = $(this).closest('.item').find('.meta-element');
-                var modal = $('#edit-modal');
-                spottr.global.modalHandler(modal);
-                spottr.administration.editModal(metaItem);
-                 
-            });
-        },
-
+        /**
+         * general modal handling opens the modal with the given modalID
+         * @param  {ID} modalID the given modal ID
+         */
         modalHandler: function (modalID) {
             var modal = modalID;
 
@@ -32,6 +28,10 @@ var _longitude = 13.7416008;
                 modal.addClass('hide');
                 modal.removeClass('fade-in');
 
+                modal.find('input').each(function(){
+                    $(this).val('');
+                });
+
                 if (hasForm >= 1) {
                     modalForm.validate().resetForm();
                     modalForm.find('.tooltip').addClass('hide');
@@ -39,6 +39,9 @@ var _longitude = 13.7416008;
             });
         },
 
+        /**
+         * converts select elements to bootstrap selects
+         */
         fancySelect: function () {
             var select = $('select');
             if (select.length > 0 ){
@@ -63,6 +66,9 @@ var _longitude = 13.7416008;
             });
         },
 
+        /**
+         * handles the menuItems and shows them where they should appear
+         */
         menuItemHandler: function () {
             var isVerwaltung = $('body.page-verwaltung').length;
             var isHome = $('body.page-homepage').length;
@@ -78,6 +84,9 @@ var _longitude = 13.7416008;
             }
         },
 
+        /**
+         * loads the exif data of location image in formelements on location edit and add
+         */
         loadExifData: function () {
             var someCallback = function(exifObject) {
                     
@@ -114,6 +123,13 @@ var _longitude = 13.7416008;
             }
         },
 
+        /**
+         * converts rating input to stars
+         * @param  {DOM Element} element     The element which should be converted
+         * @param  {String} size        the size of the stars
+         * @param  {Boolean} showCaption Should the stars have an caption
+         * @param  {Boolean} showClear   should the stars have an clear button
+         */
         rating: function (element,size,showCaption,showClear) {
             element = typeof element !== 'undefined' ? element : $(".rating");
             size = typeof size !== 'undefined' ? size : 'xs';
@@ -131,6 +147,10 @@ var _longitude = 13.7416008;
             
         },
 
+        /**
+         * shows the add location modal and initialises all data and functions which are needed there
+         * also it handles the submit of a new location
+         */
         submitItem: function () {
             var addModal = $('body').find('#add-modal');
             var addForm = $('#add-form');
@@ -152,19 +172,22 @@ var _longitude = 13.7416008;
 
             addModal.find('#add-form').on('submit',function(e){
                 e.preventDefault();
-                AjaxHandler.request({
-                    method   : "POST",
-                    cache    : false,
-                    url      : $(this).attr('action'),
-                    data     : $(this).serializeObject(),
-                    success  : function(data) {
-                        var form = $('#add-form-image');
-                        spottr.global.submitImage(data.id,form);
-                    },
-                        error    : function(data) {
-                            console.log(data);
-                        } 
-                });
+                addForm.validate();
+                if(addForm.valid()) {
+                    AjaxHandler.request({
+                        method   : "POST",
+                        cache    : false,
+                        url      : $(this).attr('action'),
+                        data     : $(this).serializeObject(),
+                        success  : function(data) {
+                            var form = $('#add-form-image');
+                            spottr.global.submitImage(data.id,form);
+                        },
+                            error    : function(data) {
+                                console.log(data);
+                            } 
+                    });
+                }
             });
 
             // fix for strange loading issue
@@ -175,6 +198,11 @@ var _longitude = 13.7416008;
             });
         },
 
+        /**
+         * submits the location image to the backend on success the window will be reloaded
+         * @param  {ID} locationId the given locationID where image should be added to
+         * @param  {ID} attForm    The form where it gets the image from
+         */
         submitImage: function (locationId, attForm) {
             var $file = attForm.find("input[type='file']");
             if ($file.val() == "" || locationId == undefined) {
@@ -193,10 +221,22 @@ var _longitude = 13.7416008;
             attForm.submit();
         },
 
-        markerToPosition: function (form,element) {
+        /**
+         * adds a marker to a given map or handles the setting of a marker
+         * @param  {Object} form      The form where it should fired
+         * @param  {ID} element   The element where the map should be added
+         * @param  {String} latitude  The Latitude if an marker should be shown on initialize
+         * @param  {String} longitude The Longitude if an marker should be shown on initialize
+         */
+        markerToPosition: function (form,element,latitude,longitude) {
             var map;
 
             $(document).ready(function(){
+
+                if (latitude != undefined && longitude != undefined) {
+                    _latitude = latitude;
+                    _longitude = longitude;
+                }
 
                 var map = new GMaps({
                     div: element,
@@ -214,51 +254,61 @@ var _longitude = 13.7416008;
                     panControl: false
                 });
 
-              GMaps.on('click', map.map, function(event) {
-                var index = map.markers.length;
-                var lat = event.latLng.lat();
-                var lng = event.latLng.lng();
-                var formLat = $(form).find('#lat');
-                var formLng = $(form).find('#lng');
-                var completeInput = $(form).find('#geocomplete-search');
+                if (latitude === undefined && longitude === undefined) {
+                    GMaps.on('click', map.map, function(event) {
+                        var index = map.markers.length;
+                        var lat = event.latLng.lat();
+                        var lng = event.latLng.lng();
+                        var formLat = $(form).find('#lat');
+                        var formLng = $(form).find('#lng');
+                        var completeInput = $(form).find('#geocomplete-search');
 
-                console.log(lat);
-                console.log(lng);
+                        if (index <= 0) {
+                            var marker;
+                            marker = map.addMarker({
+                              lat: lat,
+                              lng: lng,
+                              draggable: true
+                            });
+                            formLat.attr('value', lat);
+                            formLng.attr('value', lng);
+                            completeInput.attr('disabled', 'disabled');
+                        } else {
+                            alert('Bitte den Marker an gewünschte Position ziehen.');
+                        }
 
-                if (index <= 0) {
+                        google.maps.event.addListener(
+                            marker,
+                            'drag',
+                            function() {
+                                formLat.attr('value', marker.position.lat());
+                                formLng.attr('value', marker.position.lng());
+                            }
+                        );
+
+                        $('body').find('.modal-close').on('click', function(){
+                            completeInput.removeAttr('disabled');
+                            map.removeMarkers();
+                            formLat.attr('value','');
+                            formLng.attr('value','');
+                        });
+                      });
+
+                } else {
                     var marker;
                     marker = map.addMarker({
-                      lat: lat,
-                      lng: lng,
-                      draggable: true
+                      lat: latitude,
+                      lng: longitude,
+                      draggable: false
                     });
-                    formLat.attr('value', lat);
-                    formLng.attr('value', lng);
-                    completeInput.attr('disabled', 'disabled');
-                } else {
-                    alert('Bitte den Marker an gewünschte Position ziehen.');
                 }
-
-                google.maps.event.addListener(
-                    marker,
-                    'drag',
-                    function() {
-                        formLat.attr('value', marker.position.lat());
-                        formLng.attr('value', marker.position.lng());
-                    }
-                );
-
-                $('body').find('.modal-close').on('click', function(){
-                    completeInput.removeAttr('disabled');
-                    map.removeMarkers();
-                    formLat.attr('value','');
-                    formLng.attr('value','');
-                });
-              });
             });
                  
         },
 
+        /**
+         * Sets input widths for searchbar
+         */
         setInputsWidth: function (){
             var $inputRow = $('.search-bar.horizontal .input-row');
             for( var i=0; i<$inputRow.length; i++ ){
@@ -292,6 +342,10 @@ var _longitude = 13.7416008;
                 }
             }
         },
+
+        /**
+         * goes to index page
+         */
         goToIndex: function () {
             var currentPage = window.location.href;
             var indexPath = path + 'index.php';
@@ -301,6 +355,9 @@ var _longitude = 13.7416008;
             }
         },
 
+        /**
+         * goes to login page
+         */
         goToLogin: function () {
             var currentPage = window.location.href;
             var loginPath = path + 'login.php';
@@ -310,6 +367,9 @@ var _longitude = 13.7416008;
             spottr.global.logout();
         },
 
+        /**
+         * deletes the authentication cookie if logout button is clicked and reloads the page
+         */
         logout: function () {
             var currentPage = window.location.href;
             var loginPath = path + 'login.php';

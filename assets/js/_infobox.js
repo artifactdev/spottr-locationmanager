@@ -1,3 +1,11 @@
+/**
+ * drawInfobox adds the infobox to each marker
+ * @param  {string} category       gets the category of item
+ * @param  {} infoboxContent 
+ * @param  {json} json           gets the json for each item
+ * @param  {int} i              gets the number of the item in the json tree
+ * @return {html}                returns html to add to the marker
+ */
 function drawInfobox(category, infoboxContent, json, i){
 
     if(json.items[i].id)                 { var id = json.items[i].id }
@@ -21,7 +29,7 @@ function drawInfobox(category, infoboxContent, json, i){
     if(json.items[i].rating)             { var rating = json.items[i].rating }
         else                            { rating = '' }
     if(json.items[i].gallery)         { var gallery = json.items[i].gallery }
-        else                            { gallery = 'assets/img/default-item.png' }
+        else                            { gallery = 'rest-api/media/locations/default-item.png' }
 
     var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
     
