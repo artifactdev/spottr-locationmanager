@@ -292,6 +292,7 @@ var spottr = {};;
 
             addModal.find('#add-form').on('submit', function(e) {
                 e.preventDefault();
+                spottr.global.loading();
                 addForm.validate();
                 if (addForm.valid()) {
                     AjaxHandler.request({
@@ -304,6 +305,7 @@ var spottr = {};;
                             spottr.global.submitImage(data.id, form);
                         },
                         error: function(data) {
+                            spottr.global.error('Fehler beim hinzufügen');
                             console.log(data);
                         }
                     });
@@ -335,6 +337,7 @@ var spottr = {};;
             var $iframe = $("#js_iframe_location_attachment");
             $iframe.unbind().load(function(event) {
                 event.preventDefault();
+                spottr.global.loading();
                 location.reload(true);
             });
 
