@@ -218,6 +218,7 @@ function createHomepageGoogleMap(_latitude, _longitude, json) {
             // Call Rating function ----------------------------------------------------------------------------------------
 
             spottr.global.rating();
+            spottr.global.hideAlert();
         });
 
         redrawMap('google', map);

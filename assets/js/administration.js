@@ -8,6 +8,7 @@
         initItems: function() {
             var _latitude = 51.541216;
             var _longitude = -0.095678;
+            spottr.global.loading();
 
             AjaxHandler.request({
                 url: "locations",
@@ -16,6 +17,7 @@
                     spottr.administration.fillVerwaltung(json);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
+                    spottr.global.error(errorThrownr);
                     console.log(errorThrownr);
                 }
             });
@@ -32,8 +34,6 @@
          */
         fillVerwaltung: function(json) {
             var itemsList = $('body').find('.items-list');
-
-            console.log(json);
 
             for (var i = 0; i < json.items.length; i++) {
                 var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
@@ -65,7 +65,8 @@
                     '</div>' +
                     '</li>'
                 );
-            }
+            };
+            spottr.global.hideAlert();
         },
 
 
@@ -130,13 +131,16 @@
                             url: $(this).attr('action'),
                             data: $(this).serializeObject(),
                             success: function(data) {
+                                spottr.global.loading();
                                 var form = $('#edit-form-image');
                                 spottr.global.submitImage(data.id, form);
+                                spottr.global.success('Location angelegt!');
                                 location.reload(true);
 
                             },
 
                             error: function(data) {
+                                spottr.global.error('Fehler beim Editieren der Location!');
                                 console.log(data);
                             }
                         });
@@ -185,7 +189,7 @@
                     url: $(this).attr('action'),
                     data: $(this).serialize(),
                     success: function(data) {
-                        console.log('deleted');
+                        spottr.global.success('Location gelöscht!');
                         location.reload(true);
                     }
                 });

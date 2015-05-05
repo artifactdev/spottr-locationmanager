@@ -51,6 +51,7 @@
                             spottr.userAdministration.loadUsers();
                         },
                         error: function() {
+                            spottr.global.error('Fehler beim anlegen des Users!');
                             spottr.userAdministration.loadUsers();
                         }
                     });
@@ -68,6 +69,7 @@
                 url: "users",
                 data: $(this).serializeObject(),
                 success: function(data) {
+                    spottr.global.loading();
                     var userTable = $('#user-modal table.userlist tbody');
                     userTable.empty();
                     spottr.userAdministration.fillTable(data);
@@ -102,6 +104,8 @@
                     '</tr>'
                 );
             }
+            spottr.global.success('User wurden geladen');
+            spottr.global.hideAlert();
         },
 
         /**
@@ -119,6 +123,7 @@
                     success: function(data) {
                         var userTable = $('#user-modal table.userlist tbody');
                         userTable.empty();
+                        spottr.global.success('User wurde gelöscht!');
                         spottr.userAdministration.loadUsers();
                     }
                 });
@@ -140,6 +145,7 @@
                     url: "users/" + id,
                     data: $(this).serializeObject(),
                     success: function(data) {
+                        spottr.global.loading();
                         $('#user-modal').find('.add-user').addClass('hide');
                         var editUserForm = $('#user-modal').find('.edit-user');
                         editUserForm.removeClass('hide');
@@ -153,6 +159,8 @@
                         editUserForm.find('select').selectpicker('render');
 
                         spottr.userAdministration.editHandler(data.id);
+
+                        spottr.global.hideAlert();
 
                     }
                 });
@@ -178,6 +186,7 @@
                         url: $(this).attr('action') + "/" + id,
                         data: $(this).serializeObject(),
                         success: function(data) {
+                            spottr.global.success('User wurde editiert!');
                             $('#user-modal').find('.add-user').addClass('hide');
                             var editUserForm = $('#user-modal').find('.edit-user');
                             var addUserForm = $('#user-modal').find('.add-user');
@@ -188,6 +197,7 @@
                         },
 
                         error: function(data) {
+                            spottr.global.error('Fehler beim editieren des Users');
                             console.log(data);
                         }
                     });

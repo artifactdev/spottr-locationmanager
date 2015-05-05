@@ -41,9 +41,11 @@ $(document).ready(function() {
                 url: "locations",
                 method: "GET",
                 success: function(json) {
+                    spottr.global.loading();
                     createHomepageGoogleMap(_latitude, _longitude, json);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
+                    spottr.global.error(errorThrownr,'5e3')                 
                     console.log(errorThrownr);
                 }
             });

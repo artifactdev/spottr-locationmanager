@@ -1,7 +1,127 @@
 var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
 var _latitude = 51.0545032;
 var _longitude = 13.7416008;
-var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visibility":"simplified"},{"lightness":20}]},{"featureType":"administrative.land_parcel","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"landscape.man_made","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"transit","elementType":"all","stylers":[{"saturation":-100},{"visibility":"on"},{"lightness":10}]},{"featureType":"road.local","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"road.local","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"labels","stylers":[{"visibility":"simplified"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":50}]},{"featureType":"water","elementType":"all","stylers":[{"hue":"#a1cdfc"},{"saturation":30},{"lightness":49}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"hue":"#f49935"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"hue":"#fad959"}]}, {featureType:'road.highway',elementType:'all',stylers:[{hue:'#dddbd7'},{saturation:-92},{lightness:60},{visibility:'on'}]}, {featureType:'landscape.natural',elementType:'all',stylers:[{hue:'#c8c6c3'},{saturation:-71},{lightness:-18},{visibility:'on'}]},  {featureType:'poi',elementType:'all',stylers:[{hue:'#d9d5cd'},{saturation:-70},{lightness:20},{visibility:'on'}]} ];
+var mapStyles = [{
+    "featureType": "road",
+    "elementType": "labels",
+    "stylers": [{
+        "visibility": "simplified"
+    }, {
+        "lightness": 20
+    }]
+}, {
+    "featureType": "administrative.land_parcel",
+    "elementType": "all",
+    "stylers": [{
+        "visibility": "off"
+    }]
+}, {
+    "featureType": "landscape.man_made",
+    "elementType": "all",
+    "stylers": [{
+        "visibility": "on"
+    }]
+}, {
+    "featureType": "transit",
+    "elementType": "all",
+    "stylers": [{
+        "saturation": -100
+    }, {
+        "visibility": "on"
+    }, {
+        "lightness": 10
+    }]
+}, {
+    "featureType": "road.local",
+    "elementType": "all",
+    "stylers": [{
+        "visibility": "on"
+    }]
+}, {
+    "featureType": "road.local",
+    "elementType": "all",
+    "stylers": [{
+        "visibility": "on"
+    }]
+}, {
+    "featureType": "road.highway",
+    "elementType": "labels",
+    "stylers": [{
+        "visibility": "simplified"
+    }]
+}, {
+    "featureType": "poi",
+    "elementType": "labels",
+    "stylers": [{
+        "visibility": "off"
+    }]
+}, {
+    "featureType": "road.arterial",
+    "elementType": "labels",
+    "stylers": [{
+        "visibility": "on"
+    }, {
+        "lightness": 50
+    }]
+}, {
+    "featureType": "water",
+    "elementType": "all",
+    "stylers": [{
+        "hue": "#a1cdfc"
+    }, {
+        "saturation": 30
+    }, {
+        "lightness": 49
+    }]
+}, {
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [{
+        "hue": "#f49935"
+    }]
+}, {
+    "featureType": "road.arterial",
+    "elementType": "geometry",
+    "stylers": [{
+        "hue": "#fad959"
+    }]
+}, {
+    featureType: 'road.highway',
+    elementType: 'all',
+    stylers: [{
+        hue: '#dddbd7'
+    }, {
+        saturation: -92
+    }, {
+        lightness: 60
+    }, {
+        visibility: 'on'
+    }]
+}, {
+    featureType: 'landscape.natural',
+    elementType: 'all',
+    stylers: [{
+        hue: '#c8c6c3'
+    }, {
+        saturation: -71
+    }, {
+        lightness: -18
+    }, {
+        visibility: 'on'
+    }]
+}, {
+    featureType: 'poi',
+    elementType: 'all',
+    stylers: [{
+        hue: '#d9d5cd'
+    }, {
+        saturation: -70
+    }, {
+        lightness: 20
+    }, {
+        visibility: 'on'
+    }]
+}];
 
 ;
 var spottr = {};;
@@ -379,7 +499,99 @@ var spottr = {};;
             }
         },
 
+        /**
+         * adds a loadingspinner
+         */
+        loading: function(duration) {
+            var durationTime = null;
+
+            if (duration != undefined) {
+                durationTime = duration;
+            }
+
+            var opts = {
+                lines: 13, // The number of lines to draw
+                length: 11, // The length of each line
+                width: 5, // The line thickness
+                radius: 17, // The radius of the inner circle
+                corners: 1, // Corner roundness (0..1)
+                rotate: 0, // The rotation offset
+                color: '#FFF', // #rgb or #rrggbb
+                speed: 1, // Rounds per second
+                trail: 60, // Afterglow percentage
+                shadow: false, // Whether to render a shadow
+                hwaccel: false, // Whether to use hardware acceleration
+                className: 'spinner', // The CSS class to assign to the spinner
+                zIndex: 2e9, // The z-index (defaults to 2000000000)
+                top: 'auto', // Top position relative to parent in px
+                left: 'auto' // Left position relative to parent in px
+            };
+            var target = document.createElement("div");
+            document.body.appendChild(target);
+            var spinner = new Spinner(opts).spin(target);
+            iosOverlay({
+                text: "Loading",
+                duration: durationTime,
+                spinner: spinner
+            });
+            return false;
+        },
+
+        /**
+         * shows an error alert
+         */
+
+        error: function(message,duration) {
+            var errorMessage = 'Error!',
+                durationTime = 5e3;
+
+            if (message != undefined) {
+                errorMessage = message;
+            }
+
+            if (duration != undefined) {
+                durationTime = duration;
+            }
+
+            iosOverlay({
+                text: errorMessage,
+                duration: durationTime,
+                icon: "assets/img/cross.png"
+            });
+            return false;
+        },
+
+        /**
+         * shows a success alert
+         */
+
+        success: function(message,duration) {
+            var successMessage = 'Success!',
+                durationTime = 5e3;
+
+            if (message != undefined) {
+                successMessage = message;
+            }
+
+            if (duration != undefined) {
+                durationTime = duration;
+            }
+
+            iosOverlay({
+                text: successMessage,
+                duration: durationTime,
+                icon: "assets/img/check.png"
+            });
+            return false;
+        },
+
+        /**
+         * hide alert
+         */
+        
+        hideAlert: function() {
+            $('.ui-ios-overlay').hide();
+        },
+
     };
 })(jQuery, this);
-
-

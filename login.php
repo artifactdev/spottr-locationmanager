@@ -55,6 +55,8 @@
             <script type="text/javascript" src="./assets/js/plugins/jquery.cookie.js"></script>
             <script type="text/javascript" src="./assets/js/plugins/jquery.validate.js"></script>
             <script type="text/javascript" src="./assets/js/plugins/jquery.validate.bootstrap.js"></script>
+            <script type="text/javascript" src="./assets/js/plugins/spin.min.js"></script>
+            <script type="text/javascript" src="./assets/js/plugins/iosOverlay.js"></script>
 
             <!-- end plugins -->
 

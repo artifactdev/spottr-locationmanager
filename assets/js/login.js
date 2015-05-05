@@ -25,6 +25,7 @@ $(document).ready(function() {
                     url: url,
                     data: $(this).serializeObject(),
                     success: function(data) {
+                        spottr.global.success();
                         AuthenticationHelper.runAuthenticationCheck(data);
                     }
                 });
