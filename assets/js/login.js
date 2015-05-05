@@ -27,6 +27,9 @@ $(document).ready(function() {
                     success: function(data) {
                         spottr.global.success();
                         AuthenticationHelper.runAuthenticationCheck(data);
+                    },
+                    error: function() {
+                        spottr.global.error('Fehler beim Login!');
                     }
                 });
 
