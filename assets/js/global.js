@@ -394,7 +394,7 @@ var spottr = {};;
                             formLng.attr('value', lng);
                             completeInput.attr('disabled', 'disabled');
                         } else {
-                            alert('Bitte den Marker an gewünschte Position ziehen.');
+                            spottr.global.error('Bitte den Marker zur Position ziehen.',3e3);
                         }
 
                         google.maps.event.addListener(
