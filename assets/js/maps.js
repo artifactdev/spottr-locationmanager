@@ -5,12 +5,13 @@ var $ = jQuery.noConflict();
 // Homepage map - Google
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function createHomepageGoogleMap(_latitude,_longitude,json){
+function createHomepageGoogleMap(_latitude, _longitude, json) {
     $.get("./assets/js/_infobox.js", function() {
         gMap();
     });
-    function gMap(){
-        var mapCenter = new google.maps.LatLng(_latitude,_longitude);
+
+    function gMap() {
+        var mapCenter = new google.maps.LatLng(_latitude, _longitude);
         var mapOptions = {
             zoom: 12,
             center: mapCenter,
@@ -39,24 +40,24 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
 
             // Google map marker content -----------------------------------------------------------------------------------
 
-            if( json.items[i].color ) var color = json.items[i].color;
+            if (json.items[i].color) var color = json.items[i].color;
             else color = '';
 
             var markerContent = document.createElement('DIV');
 
             var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
-        
+
             markerContent.innerHTML =
-                '<div class="map-marker" data-id="' + json.items[i].id +'">' +
-                    '<div class="icon">' +
-                    '<img src="' + path + json.items[i].type +  '">' +
-                    '</div>' +
+                '<div class="map-marker" data-id="' + json.items[i].id + '">' +
+                '<div class="icon">' +
+                '<img src="' + path + json.items[i].type + '">' +
+                '</div>' +
                 '</div>';
 
             // Create marker on the map ------------------------------------------------------------------------------------
 
             var marker = new RichMarker({
-                position: new google.maps.LatLng( json.items[i].latitude, json.items[i].longitude ),
+                position: new google.maps.LatLng(json.items[i].latitude, json.items[i].longitude),
                 map: map,
                 draggable: false,
                 content: markerContent,
@@ -98,13 +99,15 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
                         lastClicked = newMarkers[i];
                     });
                     activeMarker = newMarkers[i];
-                    if( activeMarker != lastClicked ){
+                    if (activeMarker != lastClicked) {
                         for (var h = 0; h < newMarkers.length; h++) {
                             newMarkers[h].content.className = 'marker-loaded';
                             newMarkers[h].infobox.close();
                         }
                         newMarkers[i].infobox.open(map, this);
-                        newMarkers[i].infobox.setOptions({ boxClass:'fade-in-marker'});
+                        newMarkers[i].infobox.setOptions({
+                            boxClass: 'fade-in-marker'
+                        });
                         newMarkers[i].content.className = 'marker-active marker-loaded';
                         markerClicked = 1;
                     }
@@ -118,7 +121,9 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
                 return function() {
                     activeMarker = 0;
                     newMarkers[i].content.className = 'marker-loaded';
-                    newMarkers[i].infobox.setOptions({ boxClass:'fade-out-marker' });
+                    newMarkers[i].infobox.setOptions({
+                        boxClass: 'fade-out-marker'
+                    });
                 }
             })(marker, i));
         }
@@ -126,15 +131,18 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
         // Close infobox after click on map --------------------------------------------------------------------------------
 
         google.maps.event.addListener(map, 'click', function(event) {
-            if( activeMarker != false && lastClicked != false ){
-                if( markerClicked == 1 ){
+            if (activeMarker != false && lastClicked != false) {
+                if (markerClicked == 1) {
                     activeMarker.infobox.open(map);
-                    activeMarker.infobox.setOptions({ boxClass:'fade-in-marker'});
+                    activeMarker.infobox.setOptions({
+                        boxClass: 'fade-in-marker'
+                    });
                     activeMarker.content.className = 'marker-active marker-loaded';
-                }
-                else {
+                } else {
                     markerClicked = 0;
-                    activeMarker.infobox.setOptions({ boxClass:'fade-out-marker' });
+                    activeMarker.infobox.setOptions({
+                        boxClass: 'fade-out-marker'
+                    });
                     activeMarker.content.className = 'marker-loaded';
                     setTimeout(function() {
                         activeMarker.infobox.close();
@@ -142,7 +150,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
                 }
                 markerClicked = 0;
             }
-            if( activeMarker != false ){
+            if (activeMarker != false) {
                 google.maps.event.addListener(activeMarker, 'click', function(event) {
                     markerClicked = 1;
                 });
@@ -152,27 +160,28 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
 
         // Create marker clusterer -----------------------------------------------------------------------------------------
 
-        var clusterStyles = [
-            {
-                url: 'assets/img/cluster.png',
-                height: 34,
-                width: 34
-            }
-        ];
+        var clusterStyles = [{
+            url: 'assets/img/cluster.png',
+            height: 34,
+            width: 34
+        }];
 
-        var markerCluster = new MarkerClusterer(map, newMarkers, { styles: clusterStyles, maxZoom: 19 });
-        
+        var markerCluster = new MarkerClusterer(map, newMarkers, {
+            styles: clusterStyles,
+            maxZoom: 19
+        });
+
         // Dynamic loading markers and data from JSON ----------------------------------------------------------------------
 
         google.maps.event.addListener(map, 'idle', function() {
             var visibleArray = [];
             for (var i = 0; i < json.items.length; i++) {
-                if ( map.getBounds().contains(newMarkers[i].getPosition()) ){
+                if (map.getBounds().contains(newMarkers[i].getPosition())) {
                     visibleArray.push(newMarkers[i]);
-                    $.each( visibleArray, function (i) {
-                        setTimeout(function(){
-                            if ( map.getBounds().contains(visibleArray[i].getPosition()) ){
-                                if( !visibleArray[i].content.className ){
+                    $.each(visibleArray, function(i) {
+                        setTimeout(function() {
+                            if (map.getBounds().contains(visibleArray[i].getPosition())) {
+                                if (!visibleArray[i].content.className) {
                                     visibleArray[i].setMap(map);
                                     visibleArray[i].content.className += 'bounce-animation marker-loaded';
                                     markerCluster.repaint();
@@ -188,7 +197,7 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
 
             var visibleItemsArray = [];
             $.each(json.items, function(a) {
-                if( map.getBounds().contains( new google.maps.LatLng( json.items[a].latitude, json.items[a].longitude ) ) ) {
+                if (map.getBounds().contains(new google.maps.LatLng(json.items[a].latitude, json.items[a].longitude))) {
                     var category = json.items[a].category;
                     spottr.main.pushItemsToArray(json, a, category, visibleItemsArray);
                 }
@@ -196,12 +205,12 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
 
             // Create list of items in Results sidebar ---------------------------------------------------------------------
 
-            $('.items-list .results').html( visibleItemsArray );
+            $('.items-list .results').html(visibleItemsArray);
 
             // Check if images are cached, so will not be loaded again
 
             $.each(json.items, function(a) {
-                if( map.getBounds().contains( new google.maps.LatLng( json.items[a].latitude, json.items[a].longitude ) ) ) {
+                if (map.getBounds().contains(new google.maps.LatLng(json.items[a].latitude, json.items[a].longitude))) {
                     is_cached(json.items[a].gallery, a);
                 }
             });
@@ -217,17 +226,16 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
             var image = new Image();
             var loadedImage = $('.results li #' + json.items[a].id + ' .image');
             image.src = src;
-            if( image.complete ){
+            if (image.complete) {
                 $(".results").each(function() {
                     loadedImage.removeClass('loading');
                     loadedImage.addClass('loaded');
                 });
-            }
-            else {
+            } else {
                 $(".results").each(function() {
                     $('.results li #' + json.items[a].id + ' .image').addClass('loading');
                 });
-                $(image).load(function(){
+                $(image).load(function() {
                     loadedImage.removeClass('loading');
                     loadedImage.addClass('loaded');
                 });
@@ -242,8 +250,8 @@ function createHomepageGoogleMap(_latitude,_longitude,json){
 // Item Detail Map - Google
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function itemDetailMap(json){
-    var mapCenter = new google.maps.LatLng(json.latitude,json.longitude);
+function itemDetailMap(json) {
+    var mapCenter = new google.maps.LatLng(json.latitude, json.longitude);
     var mapOptions = {
         zoom: 14,
         center: mapCenter,
@@ -256,7 +264,7 @@ function itemDetailMap(json){
     };
     var mapElement = document.getElementById('map-detail');
     var map = new google.maps.Map(mapElement, mapOptions);
-    if( json.type ) var icon = '<img src="' + json.type +  '">';
+    if (json.type) var icon = '<img src="' + json.type + '">';
     else icon = '';
 
     // Google map marker content -----------------------------------------------------------------------------------
@@ -264,15 +272,15 @@ function itemDetailMap(json){
     var markerContent = document.createElement('DIV');
     markerContent.innerHTML =
         '<div class="map-marker">' +
-            '<div class="icon">' +
-            icon +
-            '</div>' +
+        '<div class="icon">' +
+        icon +
+        '</div>' +
         '</div>';
 
     // Create marker on the map ------------------------------------------------------------------------------------
 
     var marker = new RichMarker({
-        position: new google.maps.LatLng( json.latitude, json.longitude ),
+        position: new google.maps.LatLng(json.latitude, json.longitude),
         map: map,
         draggable: false,
         content: markerContent,
@@ -289,12 +297,12 @@ function itemDetailMap(json){
 
 // Center map to marker position if function is called (disabled) ------------------------------------------------------
 
-function centerMapToMarker(){
+function centerMapToMarker() {
     $.each(json.items, function(a) {
-        if( json.items[a].id == id ) {
+        if (json.items[a].id == id) {
             var _latitude = json.items[a].latitude;
             var _longitude = json.items[a].longitude;
-            var mapCenter = new google.maps.LatLng(_latitude,_longitude);
+            var mapCenter = new google.maps.LatLng(_latitude, _longitude);
             map.setCenter(mapCenter);
         }
     });
@@ -302,11 +310,11 @@ function centerMapToMarker(){
 
 // Redraw map after item list is closed --------------------------------------------------------------------------------
 
-function redrawMap(mapProvider, map){
+function redrawMap(mapProvider, map) {
     $('.map .toggle-navigation').click(function() {
         $('.map-canvas').toggleClass('results-collapsed');
-        $('.map-canvas .map').one("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(){
-            if( mapProvider == 'google' ){
+        $('.map-canvas .map').one("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function() {
+            if (mapProvider == 'google') {
                 google.maps.event.trigger(map, 'resize');
             }
         });

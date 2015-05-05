@@ -1,10 +1,11 @@
-;(function ($, window, undefined) {
+;
+(function($, window, undefined) {
 
     spottr.administration = {
         /**
          * init of administration page which loads every thing which is needed
          */
-        initItems: function () {
+        initItems: function() {
             var _latitude = 51.541216;
             var _longitude = -0.095678;
 
@@ -14,14 +15,14 @@
                 success: function(json) {
                     spottr.administration.fillVerwaltung(json);
                 },
-                error : function(jqXHR, textStatus, errorThrown) {
+                error: function(jqXHR, textStatus, errorThrown) {
                     console.log(errorThrownr);
                 }
             });
 
             $("#geocomplete").geocomplete({
-              details: "#edit-form",
-              types: ["geocode", "establishment"],
+                details: "#edit-form",
+                types: ["geocode", "establishment"],
             });
         },
 
@@ -29,37 +30,40 @@
          * adds each item to the item-list in administrationpage
          * @param  {json} json gets json which each item in it
          */
-        fillVerwaltung: function (json) {
+        fillVerwaltung: function(json) {
             var itemsList = $('body').find('.items-list');
 
             console.log(json);
 
             for (var i = 0; i < json.items.length; i++) {
                 var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
-                if(json.items[i].gallery)         { var gallery = json.items[i].gallery }
-                else                            { gallery = path + '/rest-api/media/locations/default-item.png' }
+                if (json.items[i].gallery) {
+                    var gallery = json.items[i].gallery
+                } else {
+                    gallery = path + '/rest-api/media/locations/default-item.png'
+                }
                 itemsList.append(
                     '<li>' +
                     '<div class="item" id="' + json.items[i].id + '">' +
-                        '<a href="#" class="image">' +
-                            '<img src="' + gallery + '" alt="">' +
-                        '</a>' +
-                        '<div class="wrapper">' +
-                            '<figure>' + json.items[i].category + '</figure>' +
-                            '<h3>' + json.items[i].title + '</h3>' +
-                        '</div>' +
-                        '<div class="col-md-12 item-footer">' +
-                            '<div class="col-md-6">' +
-                                '<span class="meta-element hidden" id="' + json.items[i].id + '" data-gallery="' + json.items[i].gallery + '" data-longitude="' + json.items[i].longitude + '" data-latitude="' + json.items[i].latitude + '" data-title="' + json.items[i].title +'" data-type="' + json.items[i].type +'"  data-category="' + json.items[i].category +'" data-location="' + json.items[i].location +'" data-aperture="' + json.items[i].aperture +'" data-date="' + json.items[i].dateCreated +'" data-focal="' + json.items[i].focal +'" data-iso="' + json.items[i].iso +'" data-rating="' + json.items[i].rating +'"><h3>' + json.items[i].title + '</h3></span>' +
-                            
-                                '<a href="#" class="btn btn-default btn-edit">Edit</a>' +
-                            '</div>' +
-                            '<div class="col-md-6">' +
-                                '<a href="#" class="btn btn-red btn-delete">Delete</a>' +
-                            '</div>' +
-                        '</div>' +
+                    '<a href="#" class="image">' +
+                    '<img src="' + gallery + '" alt="">' +
+                    '</a>' +
+                    '<div class="wrapper">' +
+                    '<figure>' + json.items[i].category + '</figure>' +
+                    '<h3>' + json.items[i].title + '</h3>' +
                     '</div>' +
-                '</li>'
+                    '<div class="col-md-12 item-footer">' +
+                    '<div class="col-md-6">' +
+                    '<span class="meta-element hidden" id="' + json.items[i].id + '" data-gallery="' + json.items[i].gallery + '" data-longitude="' + json.items[i].longitude + '" data-latitude="' + json.items[i].latitude + '" data-title="' + json.items[i].title + '" data-type="' + json.items[i].type + '"  data-category="' + json.items[i].category + '" data-location="' + json.items[i].location + '" data-aperture="' + json.items[i].aperture + '" data-date="' + json.items[i].dateCreated + '" data-focal="' + json.items[i].focal + '" data-iso="' + json.items[i].iso + '" data-rating="' + json.items[i].rating + '"><h3>' + json.items[i].title + '</h3></span>' +
+
+                    '<a href="#" class="btn btn-default btn-edit">Edit</a>' +
+                    '</div>' +
+                    '<div class="col-md-6">' +
+                    '<a href="#" class="btn btn-red btn-delete">Delete</a>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</li>'
                 );
             }
         },
@@ -68,20 +72,20 @@
         /**
          * shows the delete modal on each click on a btn-delete of location and find it's meta element to fill the data on deleteModal call
          */
-        showDeleteModal: function () {
-            $('body').on('click','.btn-delete', function(id) {
+        showDeleteModal: function() {
+            $('body').on('click', '.btn-delete', function(id) {
                 var metaItem = $(this).closest('.item').find('.meta-element');
                 var modal = $('#delete-modal');
                 spottr.administration.deleteModal(metaItem);
-                 
+
             });
         },
 
         /**
          * shows the edit-modal and loads the location data to it
          */
-        editModal: function () {
-            $('body').on('click','.btn-edit', function(id) {
+        editModal: function() {
+            $('body').on('click', '.btn-edit', function(id) {
                 var metaElement = $(this).closest('.item').find('.meta-element');
                 var modal = $('#edit-modal');
                 var actionURL = 'locations/';
@@ -115,51 +119,51 @@
                 modal.find('#lat').val(latitude);
                 modal.find('#rating').val(rating);
 
-                spottr.global.markerToPosition(modal.find('#edit-location-form'),'#map-edit',latitude,longitude);
-                
-                modal.find('#edit-location-form').on('submit',function(e){
+                spottr.global.markerToPosition(modal.find('#edit-location-form'), '#map-edit', latitude, longitude);
+
+                modal.find('#edit-location-form').on('submit', function(e) {
                     e.preventDefault();
-                    if(modal.find('#edit-location-form').valid()) {
-                       AjaxHandler.request({
-                            method   : "PUT",
-                            cache    : false,
-                            url      : $(this).attr('action'),
-                            data     : $(this).serializeObject(),
-                            success  : function(data) {
+                    if (modal.find('#edit-location-form').valid()) {
+                        AjaxHandler.request({
+                            method: "PUT",
+                            cache: false,
+                            url: $(this).attr('action'),
+                            data: $(this).serializeObject(),
+                            success: function(data) {
                                 var form = $('#edit-form-image');
-                                spottr.global.submitImage(data.id,form);
+                                spottr.global.submitImage(data.id, form);
                                 location.reload(true);
 
                             },
 
-                            error    : function(data) {
+                            error: function(data) {
                                 console.log(data);
-                            } 
-                        }); 
+                            }
+                        });
                     }
                 });
 
                 spottr.global.modalHandler(modal);
 
                 $("#geocomplete-edit").geocomplete({
-                  details: "#edit-form",
-                  types: ["geocode", "establishment"],
+                    details: "#edit-form",
+                    types: ["geocode", "establishment"],
                 });
 
                 // fix for strange loading issue
-                
-                setTimeout(function(){
-                    spottr.global.markerToPosition(modal.find('#edit-form'),'#map-edit',latitude,longitude); 
+
+                setTimeout(function() {
+                    spottr.global.markerToPosition(modal.find('#edit-form'), '#map-edit', latitude, longitude);
                 }, 500);
-                
-                 
+
+
             });
         },
         /**
          * Shows the delete modal and adds metaElement id to its form on submit the location will be deleted and the page will reload
          * @param  {Object} metaElement [description]
          */
-        deleteModal: function (metaElement) {
+        deleteModal: function(metaElement) {
 
             var modal = $('#delete-modal');
 
@@ -173,14 +177,14 @@
 
             modal.find('.location').text(title);
 
-            modal.find('form').on('submit',function(e){
+            modal.find('form').on('submit', function(e) {
                 e.preventDefault();
                 AjaxHandler.request({
-                    method     : "DELETE",
-                    cache    : false,
-                    url      : $(this).attr('action'),
-                    data     : $(this).serialize(),
-                    success  : function(data) {
+                    method: "DELETE",
+                    cache: false,
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    success: function(data) {
                         console.log('deleted');
                         location.reload(true);
                     }
@@ -200,14 +204,12 @@
  * spottr.global.setInputsWidth()
  * spottr.global.fancySelect();} 
  */
-$(document).ready(function(){
+$(document).ready(function() {
     spottr.administration.initItems();
     spottr.administration.editModal();
     spottr.administration.showDeleteModal();
     spottr.global.menuItemHandler();
     spottr.global.submitItem();
     spottr.global.setInputsWidth();
-    spottr.global.fancySelect();    
+    spottr.global.fancySelect();
 })
-
-    

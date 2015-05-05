@@ -3,14 +3,15 @@ var _latitude = 51.0545032;
 var _longitude = 13.7416008;
 var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visibility":"simplified"},{"lightness":20}]},{"featureType":"administrative.land_parcel","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"landscape.man_made","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"transit","elementType":"all","stylers":[{"saturation":-100},{"visibility":"on"},{"lightness":10}]},{"featureType":"road.local","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"road.local","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"labels","stylers":[{"visibility":"simplified"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":50}]},{"featureType":"water","elementType":"all","stylers":[{"hue":"#a1cdfc"},{"saturation":30},{"lightness":49}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"hue":"#f49935"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"hue":"#fad959"}]}, {featureType:'road.highway',elementType:'all',stylers:[{hue:'#dddbd7'},{saturation:-92},{lightness:60},{visibility:'on'}]}, {featureType:'landscape.natural',elementType:'all',stylers:[{hue:'#c8c6c3'},{saturation:-71},{lightness:-18},{visibility:'on'}]},  {featureType:'poi',elementType:'all',stylers:[{hue:'#d9d5cd'},{saturation:-70},{lightness:20},{visibility:'on'}]} ];
 
-;var spottr = {};
-;(function ($, window, undefined) {
+;
+var spottr = {};;
+(function($, window, undefined) {
     spottr.global = {
         /**
          * general modal handling opens the modal with the given modalID
          * @param  {ID} modalID the given modal ID
          */
-        modalHandler: function (modalID) {
+        modalHandler: function(modalID) {
             var modal = modalID;
 
             modal.removeClass('hide');
@@ -22,13 +23,13 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
             if (hasForm >= 1) {
                 modalForm.validate();
             }
-            
-            modal.find('.modal-close').on('click', function(){
+
+            modal.find('.modal-close').on('click', function() {
 
                 modal.addClass('hide');
                 modal.removeClass('fade-in');
 
-                modal.find('input').each(function(){
+                modal.find('input').each(function() {
                     $(this).val('');
                 });
 
@@ -42,22 +43,22 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
         /**
          * converts select elements to bootstrap selects
          */
-        fancySelect: function () {
+        fancySelect: function() {
             var select = $('select');
-            if (select.length > 0 ){
+            if (select.length > 0) {
                 select.selectpicker();
             }
             var bootstrapSelect = $('.bootstrap-select');
             var dropDownMenu = $('.dropdown-menu');
-            bootstrapSelect.on('shown.bs.dropdown', function () {
+            bootstrapSelect.on('shown.bs.dropdown', function() {
                 dropDownMenu.removeClass('animation-fade-out');
                 dropDownMenu.addClass('animation-fade-in');
             });
-            bootstrapSelect.on('hide.bs.dropdown', function () {
+            bootstrapSelect.on('hide.bs.dropdown', function() {
                 dropDownMenu.removeClass('animation-fade-in');
                 dropDownMenu.addClass('animation-fade-out');
             });
-            bootstrapSelect.on('hidden.bs.dropdown', function () {
+            bootstrapSelect.on('hidden.bs.dropdown', function() {
                 var _this = $(this);
                 $(_this).addClass('open');
                 setTimeout(function() {
@@ -69,7 +70,7 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
         /**
          * handles the menuItems and shows them where they should appear
          */
-        menuItemHandler: function () {
+        menuItemHandler: function() {
             var isVerwaltung = $('body.page-verwaltung').length;
             var isHome = $('body.page-homepage').length;
 
@@ -87,9 +88,9 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
         /**
          * loads the exif data of location image in formelements on location edit and add
          */
-        loadExifData: function () {
+        loadExifData: function() {
             var someCallback = function(exifObject) {
-                    
+
                 if (!exifObject) {
                     return
                 }
@@ -117,8 +118,7 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
                 $('#file').change(function() {
                     $(this).fileExif(someCallback);
                 });
-            }
-            catch (e) {
+            } catch (e) {
                 console.log(e);
             }
         },
@@ -130,32 +130,32 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
          * @param  {Boolean} showCaption Should the stars have an caption
          * @param  {Boolean} showClear   should the stars have an clear button
          */
-        rating: function (element,size,showCaption,showClear) {
+        rating: function(element, size, showCaption, showClear) {
             element = typeof element !== 'undefined' ? element : $(".rating");
             size = typeof size !== 'undefined' ? size : 'xs';
             showCaption = typeof showCaption !== 'undefined' ? showCaption : false;
             showClear = typeof showClear !== 'undefined' ? showClear : false;
-            
+
             element.rating({
-                'size':size,
-                'showCaption':showCaption,
-                'showClear':showClear
+                'size': size,
+                'showCaption': showCaption,
+                'showClear': showClear
             });
         },
 
-        searchFilter: function () {
-            
+        searchFilter: function() {
+
         },
 
         /**
          * shows the add location modal and initialises all data and functions which are needed there
          * also it handles the submit of a new location
          */
-        submitItem: function () {
+        submitItem: function() {
             var addModal = $('body').find('#add-modal');
             var addForm = $('#add-form');
 
-            $('.submit-item').on('click', function(){
+            $('.submit-item').on('click', function() {
                 spottr.global.modalHandler(addModal);
                 spottr.global.fancySelect();
             });
@@ -163,37 +163,37 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
             spottr.global.loadExifData();
 
             $("#geocomplete-search").geocomplete({
-              details: "#add-form",
-              types: ["geocode", "establishment"],
-              detailsAttribute: "data-geo"
+                details: "#add-form",
+                types: ["geocode", "establishment"],
+                detailsAttribute: "data-geo"
             });
 
-            spottr.global.markerToPosition(addForm,'#map-add');
+            spottr.global.markerToPosition(addForm, '#map-add');
 
-            addModal.find('#add-form').on('submit',function(e){
+            addModal.find('#add-form').on('submit', function(e) {
                 e.preventDefault();
                 addForm.validate();
-                if(addForm.valid()) {
+                if (addForm.valid()) {
                     AjaxHandler.request({
-                        method   : "POST",
-                        cache    : false,
-                        url      : $(this).attr('action'),
-                        data     : $(this).serializeObject(),
-                        success  : function(data) {
+                        method: "POST",
+                        cache: false,
+                        url: $(this).attr('action'),
+                        data: $(this).serializeObject(),
+                        success: function(data) {
                             var form = $('#add-form-image');
-                            spottr.global.submitImage(data.id,form);
+                            spottr.global.submitImage(data.id, form);
                         },
-                            error    : function(data) {
-                                console.log(data);
-                            } 
+                        error: function(data) {
+                            console.log(data);
+                        }
                     });
                 }
             });
 
             // fix for strange loading issue
-            $('body').find('.submit-item').on('click', function(){
-                setTimeout(function(){
-                    spottr.global.markerToPosition(addForm,'#map-add'); 
+            $('body').find('.submit-item').on('click', function() {
+                setTimeout(function() {
+                    spottr.global.markerToPosition(addForm, '#map-add');
                 }, 500);
             });
         },
@@ -203,7 +203,7 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
          * @param  {ID} locationId the given locationID where image should be added to
          * @param  {ID} attForm    The form where it gets the image from
          */
-        submitImage: function (locationId, attForm) {
+        submitImage: function(locationId, attForm) {
             var $file = attForm.find("input[type='file']");
             if ($file.val() == "" || locationId == undefined) {
                 location.reload(true);
@@ -211,13 +211,13 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
             }
 
             attForm.attr("action", "rest-api/locations/" + locationId + "/image");
-            
+
             var $iframe = $("#js_iframe_location_attachment");
             $iframe.unbind().load(function(event) {
                 event.preventDefault();
                 location.reload(true);
             });
-         
+
             attForm.submit();
         },
 
@@ -228,10 +228,10 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
          * @param  {String} latitude  The Latitude if an marker should be shown on initialize
          * @param  {String} longitude The Longitude if an marker should be shown on initialize
          */
-        markerToPosition: function (form,element,latitude,longitude) {
+        markerToPosition: function(form, element, latitude, longitude) {
             var map;
 
-            $(document).ready(function(){
+            $(document).ready(function() {
 
                 if (latitude != undefined && longitude != undefined) {
                     _latitude = latitude;
@@ -266,9 +266,9 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
                         if (index <= 0) {
                             var marker;
                             marker = map.addMarker({
-                              lat: lat,
-                              lng: lng,
-                              draggable: true
+                                lat: lat,
+                                lng: lng,
+                                draggable: true
                             });
                             formLat.attr('value', lat);
                             formLng.attr('value', lng);
@@ -286,58 +286,53 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
                             }
                         );
 
-                        $('body').find('.modal-close').on('click', function(){
+                        $('body').find('.modal-close').on('click', function() {
                             completeInput.removeAttr('disabled');
                             map.removeMarkers();
-                            formLat.attr('value','');
-                            formLng.attr('value','');
+                            formLat.attr('value', '');
+                            formLng.attr('value', '');
                         });
-                      });
+                    });
 
                 } else {
                     var marker;
                     marker = map.addMarker({
-                      lat: latitude,
-                      lng: longitude,
-                      draggable: false
+                        lat: latitude,
+                        lng: longitude,
+                        draggable: false
                     });
                 }
             });
-                 
+
         },
 
         /**
          * Sets input widths for searchbar
          */
-        setInputsWidth: function (){
+        setInputsWidth: function() {
             var $inputRow = $('.search-bar.horizontal .input-row');
-            for( var i=0; i<$inputRow.length; i++ ){
-                if( $inputRow.find( $('button[type="submit"]') ).length ){
-                    $inputRow.find('.form-group:last').css('width','initial');
+            for (var i = 0; i < $inputRow.length; i++) {
+                if ($inputRow.find($('button[type="submit"]')).length) {
+                    $inputRow.find('.form-group:last').css('width', 'initial');
                 }
             }
 
-            var searchBar =  $('.search-bar.horizontal .form-group');
-            for( var a=0; a<searchBar.length; a++ ){
-                if( searchBar.length <= ( 1 + 1 ) ){
+            var searchBar = $('.search-bar.horizontal .form-group');
+            for (var a = 0; a < searchBar.length; a++) {
+                if (searchBar.length <= (1 + 1)) {
                     $('.main-search').addClass('inputs-1');
-                }
-                else if( searchBar.length <= ( 2 + 1 ) ){
+                } else if (searchBar.length <= (2 + 1)) {
                     $('.main-search').addClass('inputs-2');
-                }
-                else if( searchBar.length <= ( 3 + 1 ) ){
+                } else if (searchBar.length <= (3 + 1)) {
                     $('.main-search').addClass('inputs-3');
-                }
-                else if( searchBar.length <= ( 4 + 1 ) ){
+                } else if (searchBar.length <= (4 + 1)) {
                     $('.main-search').addClass('inputs-4');
-                }
-                else if( searchBar.length <= ( 5 + 1 ) ){
+                } else if (searchBar.length <= (5 + 1)) {
                     $('.main-search').addClass('inputs-5');
-                }
-                else {
+                } else {
                     $('.main-search').addClass('inputs-4');
                 }
-                if( $('.search-bar.horizontal .form-group label').length > 0 ){
+                if ($('.search-bar.horizontal .form-group label').length > 0) {
                     $('.search-bar.horizontal .form-group:last-child button').css('margin-top', 25)
                 }
             }
@@ -346,7 +341,7 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
         /**
          * goes to index page
          */
-        goToIndex: function () {
+        goToIndex: function() {
             var currentPage = window.location.href;
             var indexPath = path + 'index.php';
             var loginPath = path + 'login.php';
@@ -358,7 +353,7 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
         /**
          * goes to login page
          */
-        goToLogin: function () {
+        goToLogin: function() {
             var currentPage = window.location.href;
             var loginPath = path + 'login.php';
             if (currentPage != loginPath) {
@@ -370,20 +365,21 @@ var mapStyles = [ {"featureType":"road","elementType":"labels","stylers":[{"visi
         /**
          * deletes the authentication cookie if logout button is clicked and reloads the page
          */
-        logout: function () {
+        logout: function() {
             var currentPage = window.location.href;
             var loginPath = path + 'login.php';
             if (currentPage != loginPath) {
                 var logoutButton = $('body').find('#logout');
                 logoutButton.removeClass('hide');
-                logoutButton.on('click', function(){
+                logoutButton.on('click', function() {
                     AuthenticationHelper.deleteAuthenticationToken();
                     window.location.reload();
                 });
 
             }
         },
-    
-  };
+
+    };
 })(jQuery, this);
+
 

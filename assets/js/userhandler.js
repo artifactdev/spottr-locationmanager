@@ -1,21 +1,22 @@
-;(function ($, window, undefined) {
+;
+(function($, window, undefined) {
 
     spottr.userAdministration = {
         /**
          * initialises all needed functions by clicking the useradmin-link
          */
-        init: function () {
+        init: function() {
 
             var modal = $('#user-modal');
 
-            $('body').on('click','#useradmin-link', function(id) {
+            $('body').on('click', '#useradmin-link', function(id) {
                 var modal = $('#user-modal');
                 spottr.global.modalHandler(modal);
                 spottr.global.fancySelect();
                 spottr.userAdministration.loadUsers();
                 spottr.userAdministration.saveUser(modal);
 
-                $('#user-modal .modal-close').on('click', function(){
+                $('#user-modal .modal-close').on('click', function() {
                     modal.find('input').val('');
                     modal.find('select').val('');
                     modal.find('select').selectpicker('render');
@@ -33,23 +34,23 @@
          * saves a new user
          * @param  {Object} modal the modal there the form can be find
          */
-        saveUser: function (modal) {
+        saveUser: function(modal) {
             var form = modal.find('.add-user');
-            
 
-            form.on('submit',function(e){
+
+            form.on('submit', function(e) {
                 e.preventDefault();
                 form.validate();
-                if(form.valid()) {
+                if (form.valid()) {
                     AjaxHandler.request({
-                        method   : "POST",
-                        cache    : false,
-                        url      : $(this).attr('action'),
-                        data     : $(this).serializeObject(),
-                        success  : function(data) {
+                        method: "POST",
+                        cache: false,
+                        url: $(this).attr('action'),
+                        data: $(this).serializeObject(),
+                        success: function(data) {
                             spottr.userAdministration.loadUsers();
                         },
-                        error : function() {
+                        error: function() {
                             spottr.userAdministration.loadUsers();
                         }
                     });
@@ -60,16 +61,16 @@
         /**
          * loads all existing users
          */
-        loadUsers: function () {
+        loadUsers: function() {
             AjaxHandler.request({
-                method     : "GET",
-                cache    : false,
-                url      : "users",
-                data     : $(this).serializeObject(),
-                success  : function(data) {
+                method: "GET",
+                cache: false,
+                url: "users",
+                data: $(this).serializeObject(),
+                success: function(data) {
                     var userTable = $('#user-modal table.userlist tbody');
-                    userTable.empty();   
-                    spottr.userAdministration.fillTable(data); 
+                    userTable.empty();
+                    spottr.userAdministration.fillTable(data);
                 }
             });
         },
@@ -78,26 +79,26 @@
          * adds existing users to the usertable
          * @param  {JSON} json the JSON of existing users
          */
-        fillTable: function (json) {
+        fillTable: function(json) {
             for (var i = 0; i < json.items.length; i++) {
                 var userTable = $('#user-modal table.userlist tbody');
-                
+
                 userTable.append(
                     '<tr>' +
-                        '<td class="id">' + json.items[i].id + '</td>' +
-                        '<td class="id">' + json.items[i].email + '</td>' +
-                        '<td class="id">' + json.items[i].firstName + '</td>' +
-                        '<td class="id">' + json.items[i].lastName + '</td>' +
-                        '<td class="id">' + json.items[i].companyName + '</td>' +
-                        '<td class="id">' + json.items[i].roles + '</td>' +
-                        '<td class="id">' + 
-                            '<button type="button" class="btn btn-default edit-user" data-id="' + json.items[i].id + '" aria-label="Left Align">' + 
-                                '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
-                            '</button>' +
-                            '<button type="button" class="btn btn-red delete-user" data-id="' + json.items[i].id + '" aria-label="Left Align">' + 
-                                '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>' +
-                            '</button>' +
-                        '</td>' +
+                    '<td class="id">' + json.items[i].id + '</td>' +
+                    '<td class="id">' + json.items[i].email + '</td>' +
+                    '<td class="id">' + json.items[i].firstName + '</td>' +
+                    '<td class="id">' + json.items[i].lastName + '</td>' +
+                    '<td class="id">' + json.items[i].companyName + '</td>' +
+                    '<td class="id">' + json.items[i].roles + '</td>' +
+                    '<td class="id">' +
+                    '<button type="button" class="btn btn-default edit-user" data-id="' + json.items[i].id + '" aria-label="Left Align">' +
+                    '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
+                    '</button>' +
+                    '<button type="button" class="btn btn-red delete-user" data-id="' + json.items[i].id + '" aria-label="Left Align">' +
+                    '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>' +
+                    '</button>' +
+                    '</td>' +
                     '</tr>'
                 );
             }
@@ -106,19 +107,19 @@
         /**
          * handles user delete if deletebutton is clicked
          */
-        deleteUser: function () {
-            $('body').on('click','.delete-user', function() {
+        deleteUser: function() {
+            $('body').on('click', '.delete-user', function() {
                 var id = $(this).data('id');
 
                 AjaxHandler.request({
-                    method     : "DELETE",
-                    cache    : false,
-                    url      : "users/" + id,
-                    data     : $(this).serialize(),
-                    success  : function(data) {
+                    method: "DELETE",
+                    cache: false,
+                    url: "users/" + id,
+                    data: $(this).serialize(),
+                    success: function(data) {
                         var userTable = $('#user-modal table.userlist tbody');
-                        userTable.empty();   
-                        spottr.userAdministration.loadUsers(); 
+                        userTable.empty();
+                        spottr.userAdministration.loadUsers();
                     }
                 });
 
@@ -129,16 +130,16 @@
         /**
          * handles editUser form and fills the data of the user which should be edited
          */
-        editUser: function () {
-            $('body').on('click','.edit-user', function() {
+        editUser: function() {
+            $('body').on('click', '.edit-user', function() {
                 var id = $(this).data('id');
 
                 AjaxHandler.request({
-                    method     : "GET",
-                    cache    : false,
-                    url      : "users/" + id,
-                    data     : $(this).serializeObject(),
-                    success  : function(data) {
+                    method: "GET",
+                    cache: false,
+                    url: "users/" + id,
+                    data: $(this).serializeObject(),
+                    success: function(data) {
                         $('#user-modal').find('.add-user').addClass('hide');
                         var editUserForm = $('#user-modal').find('.edit-user');
                         editUserForm.removeClass('hide');
@@ -164,19 +165,19 @@
          * handles the update of a given user to the backend
          * @param  {ID} id The userID
          */
-        editHandler: function (id) {
+        editHandler: function(id) {
             var form = $('#user-modal').find('#edit-user-form');
 
-            form.on('submit',function(e){
+            form.on('submit', function(e) {
                 e.preventDefault();
                 form.validate();
-                if(form.valid()) {
+                if (form.valid()) {
                     AjaxHandler.request({
-                        method   : "PUT",
-                        cache    : false,
-                        url      : $(this).attr('action') + "/" + id,
-                        data     : $(this).serializeObject(),
-                        success  : function(data) {
+                        method: "PUT",
+                        cache: false,
+                        url: $(this).attr('action') + "/" + id,
+                        data: $(this).serializeObject(),
+                        success: function(data) {
                             $('#user-modal').find('.add-user').addClass('hide');
                             var editUserForm = $('#user-modal').find('.edit-user');
                             var addUserForm = $('#user-modal').find('.add-user');
@@ -186,9 +187,9 @@
 
                         },
 
-                        error    : function(data) {
+                        error: function(data) {
                             console.log(data);
-                        } 
+                        }
                     });
                 }
 
@@ -199,4 +200,3 @@
 })(jQuery, this);
 
 spottr.userAdministration.init();
-

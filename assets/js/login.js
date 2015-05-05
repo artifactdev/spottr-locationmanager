@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var documentHeight = $( document ).height();
+    var documentHeight = $(document).height();
     var header = $('.header').height();
     var pageCanvas = documentHeight - header;
 
@@ -9,22 +9,23 @@ $(document).ready(function() {
 
 });
 
-;(function ($, window, undefined) {
+;
+(function($, window, undefined) {
     spottr.login = {
         /**
          * handles the loginform and calls AuthenticationHelper.runAuthenticationCheck(data)
          */
-        authenticateUser: function () {
-            $('.login-box').find('form').on('submit',function(e){
+        authenticateUser: function() {
+            $('.login-box').find('form').on('submit', function(e) {
                 e.preventDefault();
                 var url = $(this).attr('action');
                 AjaxHandler.request({
-                    method     : "POST",
-                    cache    : false,
-                    url      : url,
-                    data     : $(this).serializeObject(),
-                    success  : function(data) {
-                       AuthenticationHelper.runAuthenticationCheck(data);
+                    method: "POST",
+                    cache: false,
+                    url: url,
+                    data: $(this).serializeObject(),
+                    success: function(data) {
+                        AuthenticationHelper.runAuthenticationCheck(data);
                     }
                 });
 
@@ -32,4 +33,3 @@ $(document).ready(function() {
         }
     };
 })(jQuery, this);
-
