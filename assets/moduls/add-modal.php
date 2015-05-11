@@ -4,7 +4,7 @@
         <div class="modal-body">
 
             <form action="#" id="add-form-image" class="add-location" enctype='multipart/form-data' method="post" target="js_iframe_location_attachment">
-                <input name="datei" type="file" id="file" size="50" maxlength="100000" required>
+                <input name="datei" type="file" id="file" size="50" maxlength="100000" required accept="image/*;capture=camera">
             </form><iframe id="js_iframe_location_attachment" name="js_iframe_location_attachment" style="display:none"></iframe>
             <form action="locations" id="add-form" class="add-location" enctype='multipart/form-data'>
                 <input id="title" type="text" placeholder="Titel" name="title" required/>

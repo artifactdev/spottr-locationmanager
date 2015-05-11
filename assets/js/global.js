@@ -221,11 +221,13 @@ var spottr = {};;
                 var focal = exifObject.FocalLength;
                 var iso = exifObject.ISOSpeedRatings;
 
+                var focalRounded = Math.round(focal);
+
                 $('#lng').val(longitude);
                 $('#lat').val(latitude);
                 $('#aperture').val(aperture);
                 //$('#date').val(date);
-                $('#focal').val(focal);
+                $('#focal').val(focalRounded);
                 $('#iso').val(iso);
 
                 // Uncomment the line below to examine the
