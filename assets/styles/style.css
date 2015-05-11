@@ -1596,6 +1596,11 @@ textarea.form-control:focus, textarea.form-control:active {
       height: 0;
       margin-bottom: 0; }
 
+@media screen and (max-width: 640px) {
+  .header .btn {
+    font-size: 12px; }
+  .header #useradmin-link {
+    display: none; } }
 .item {
   border-radius: 0px;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
@@ -2098,7 +2103,7 @@ textarea.form-control:focus, textarea.form-control:active {
   width: 100% !important; }
 
 body.map-fullscreen #map {
-  height: 100% !important; }
+  height: 100%; }
 
 #map-add,
 #map-edit {
@@ -2160,6 +2165,8 @@ body.map-fullscreen #map {
       z-index: 1; }
   .map-canvas .items-list {
     width: 35%; }
+    .map-canvas .items-list .toggle-navigation {
+      display: none; }
   .map-canvas .results.list li:last-child {
     margin-bottom: 0; }
   .map-canvas .results.list li .item {
@@ -2222,6 +2229,41 @@ body.map-fullscreen #map {
 .gmnoprint img {
   max-width: initial !important; }
 
+@media screen and (max-width: 640px) {
+  .map-canvas.list-width-30 .map {
+    width: 100%; }
+
+  .map-canvas.list-width-30 .items-list {
+    width: 100%;
+    margin-left: -100%; }
+
+  .map-canvas.list-width-30 .map {
+    width: 100%;
+    z-index: 900; }
+  .map-canvas.list-width-30 .items-list {
+    width: 100%;
+    margin-left: -100%; }
+  .map-canvas.list-width-30.results-collapsed .items-list {
+    margin-left: 0;
+    z-index: 1000;
+    position: absolute; }
+    .map-canvas.list-width-30.results-collapsed .items-list .toggle-navigation {
+      display: inline-block; }
+      .map-canvas.list-width-30.results-collapsed .items-list .toggle-navigation .icon .line:first-child {
+        -ms-transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+        position: relative;
+        top: 5px; }
+      .map-canvas.list-width-30.results-collapsed .items-list .toggle-navigation .icon .line:nth-child(2) {
+        filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+        opacity: 0; }
+      .map-canvas.list-width-30.results-collapsed .items-list .toggle-navigation .icon .line:last-child {
+        -ms-transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        position: relative;
+        top: -5px; } }
 .modal {
   overflow: hidden;
   top: 50px; }
@@ -2496,6 +2538,32 @@ body.map-fullscreen #map {
     width: 100%;
     background: white; }
 
+@media screen and (max-width: 640px) {
+  .modal-window .modal-wrapper {
+    top: 8px !important; }
+    .modal-window .modal-wrapper > h2 {
+      font-size: 22px !important;
+      padding: 0 8px !important; }
+  .modal-window .modal-body {
+    width: 100% !important;
+    overflow: auto !important;
+    display: inline-block !important; }
+    .modal-window .modal-body .gallery {
+      width: 100% !important;
+      overflow: hidden !important; }
+    .modal-window .modal-body .modal-content {
+      padding: 0px !important;
+      width: 100% !important;
+      display: inline-block !important;
+      font-size: 15px !important; }
+      .modal-window .modal-body .modal-content .col-md-5 {
+        width: 41.66666667% !important;
+        float: left !important; }
+      .modal-window .modal-body .modal-content .col-md-7 {
+        width: 58.33333333% !important; }
+        .modal-window .modal-body .modal-content .col-md-7 .star-rating {
+          margin-top: -32px;
+          margin-left: 8px; } }
 /*!
  * @copyright &copy; Kartik Visweswaran, Krajee.com, 2013 - 2015
  * @version 3.5.2
@@ -3376,22 +3444,6 @@ body.map-fullscreen #map {
             margin-bottom: 10px;
             margin-top: 10px;
             width: 0px; }
-      .infobox .inner .image .price {
-        -moz-border-radius: 0px;
-        -webkit-border-radius: 0px;
-        border-radius: 0px;
-        -moz-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
-        -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
-        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
-        background-color: #4187c9;
-        color: white;
-        font-size: 12px;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: bold;
-        left: 22px;
-        padding: 3px 8px;
-        position: absolute;
-        top: -4px; }
 
 body.page-login #page-canvas {
   background: #f4f4f2; }
@@ -3411,6 +3463,12 @@ body.page-login #page-canvas {
       border: 1px solid #8d8d8d;
       width: 100%; }
 
+@media screen and (max-width: 640px) {
+  body.page-login #page-canvas #page-content .login-box {
+    margin: 50px 0 50px 0;
+    width: 100%;
+    padding: 20px;
+    left: 0; } }
 body.page-verwaltung #outer-wrapper {
   background: #f4f4f2; }
 body.page-verwaltung ul.items-list {
@@ -3458,6 +3516,15 @@ body.page-verwaltung ul.items-list {
         margin: 5px 0;
         width: 100%; }
 
+@media screen and (max-width: 640px) {
+  body.page-verwaltung ul.items-list {
+    padding: 0 !important; }
+    body.page-verwaltung ul.items-list li {
+      width: 100%;
+      float: none;
+      clear: both;
+      padding: 15px;
+      position: relative; } }
 #user-modal table {
   width: 100%; }
   #user-modal table tbody {

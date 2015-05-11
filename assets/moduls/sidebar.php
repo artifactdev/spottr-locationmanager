@@ -10,6 +10,13 @@
                     <option value="outdoor">Outdoor</option>
                 </select>
             </div>
+            <div class="toggle-navigation pull-right">
+                <div class="icon">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </div>
         </header>
         <ul class="results list">
 

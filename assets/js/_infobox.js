@@ -40,7 +40,7 @@ function drawInfobox(category, infoboxContent, json, i){
             '<div class="image">' +
                 '<div class="overlay">' +
                     '<div class="wrapper">' +
-                        '<a href="#test" class="quick-view" data-id="' + id + '" data-gallery="' + path + gallery + '" data-title="' + title +'" data-type="' + type +'"  data-category="' + category +'" data-location="' + location +'" data-aperture="' + aperture +'" data-date="' + date +'" data-focal="' + focal +'" data-iso="' + iso +'" data-rating="' + rating +'">Quick View</a>' +
+                        '<a href="#" class="quick-view" data-id="' + id + '" data-gallery="' + path + gallery + '" data-title="' + title +'" data-type="' + type +'"  data-category="' + category +'" data-location="' + location +'" data-aperture="' + aperture +'" data-date="' + date +'" data-focal="' + focal +'" data-iso="' + iso +'" data-rating="' + rating +'">Quick View</a>' +
                     '</div>' +
                 '</div>' +
                 '<a href="#" class="quick-view">' +
@@ -55,6 +55,6 @@ function drawInfobox(category, infoboxContent, json, i){
             '</div>' +
         '</div>' +
     '</div>';
-
+    spottr.main.showModal();
     return ibContent;
 }

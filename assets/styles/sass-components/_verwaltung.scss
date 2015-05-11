@@ -60,3 +60,19 @@ body.page-verwaltung {
         }
     }
 }
+
+@include max-screen($mobile-width) { 
+    body.page-verwaltung {
+        ul.items-list {
+            padding: 0 !important;
+            li {
+                width: 100%;
+                float: none;
+                clear: both;
+                padding: 15px;
+                position: relative;
+            }
+            
+        }
+    }
+}

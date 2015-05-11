@@ -139,3 +139,15 @@
     }
   }
 }
+
+@include max-screen($mobile-width) {
+  .header {
+    .btn {
+      font-size: 12px;
+    }
+
+    #useradmin-link {
+      display: none;
+    }
+  }
+}

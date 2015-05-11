@@ -57,9 +57,13 @@ $(document).ready(function() {
         mobileNavigation: function() {
             if ($(window).width() < 979) {
                 $(".main-navigation.navigation-top-header").remove();
-                $(".toggle-navigation").css("display", "inline-block");
                 $("body").removeClass("navigation-top-header");
                 $("body").addClass("navigation-off-canvas");
+
+                $('.items-list .toggle-navigation').click(function() {
+                    $('.map-canvas').toggleClass('results-collapsed');
+                    
+                });
             }
         },
 

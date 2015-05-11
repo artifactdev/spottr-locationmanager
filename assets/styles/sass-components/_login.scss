@@ -26,3 +26,20 @@ body {
     }
 }
 
+@include max-screen($mobile-width) { 
+    body {
+        &.page-login {
+            #page-canvas {
+                #page-content {
+                    .login-box {
+                        margin: 50px 0 50px 0 ;
+                        width: 100%;
+                        padding: 20px;
+                        left: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
