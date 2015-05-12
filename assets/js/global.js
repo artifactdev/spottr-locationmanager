@@ -221,6 +221,10 @@ var spottr = {};;
                 var focal = exifObject.FocalLength;
                 var iso = exifObject.ISOSpeedRatings;
 
+                if (focal === undefined) {
+                    var focal = 0;
+                }
+
                 var focalRounded = Math.round(focal);
 
                 $('#lng').val(longitude);
