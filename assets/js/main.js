@@ -151,7 +151,7 @@ $(document).ready(function() {
                 '</div>' +
                 '</a>' +
                 '<div class="wrapper">' +
-                '<a href="#" class="quick-preview" id="' + json.items[a].id + '" data-gallery="' + json.items[a].gallery + '" data-title="' + json.items[a].title + '" data-type="' + json.items[a].type + '"  data-category="' + json.items[a].category + '" data-location="' + json.items[a].location + '" data-aperture="' + json.items[a].aperture + '" data-date="' + json.items[a].date + '" data-focal="' + json.items[a].focal + '" data-iso="' + json.items[a].iso + '" data-rating="' + json.items[a].rating + '"><h3>' + json.items[a].title + '</h3></a>' +
+                '<a href="#" class="quick-preview" id="' + json.items[a].id + '" data-gallery="' + json.items[a].gallery + '" data-title="' + json.items[a].title + '" data-type="' + json.items[a].type + '"  data-category="' + json.items[a].category + '" data-location="' + json.items[a].latitude + ','+ json.items[a].longitude + '" data-aperture="' + json.items[a].aperture + '" data-date="' + json.items[a].date + '" data-focal="' + json.items[a].focal + '" data-iso="' + json.items[a].iso + '" data-rating="' + json.items[a].rating + '"><h3>' + json.items[a].title + '</h3></a>' +
                 '<div class="info">' +
                 '<div class="col-md-12 no-padding">' +
                 '<figure>' + json.items[a].category + '</figure>' +
@@ -186,6 +186,9 @@ $(document).ready(function() {
             var focal = metaElement.data('focal');
             var iso = metaElement.data('iso');
             var rating = metaElement.data('rating');
+            var location = metaElement.data('location');
+
+            var navlink = 'http://maps.google.com/?daddr=' + location;
 
             var ratingItem = modal.find('.rating-item-modal');
 
@@ -196,6 +199,7 @@ $(document).ready(function() {
             modal.find('.aperture').text(aperture);
             modal.find('.focal').text(focal);
             modal.find('.iso').text(iso);
+            modal.find('.nav-link').attr('href', navlink);
             ratingItem.attr('value', rating);
 
             spottr.global.rating(ratingItem);

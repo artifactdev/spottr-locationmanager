@@ -28,7 +28,9 @@
                     <div class="row">
                         <span class="col-md-5 control-label">Zugänglichkeit:</span><span class="col-md-7"><input type="nubmer" class="rating-item-modal" readonly/></span>
                     </div>
-                    
+                    <div class="row">
+                        <span class="col-md-5 control-label">Navigationslink:</span><span class="col-md-7"><a class="nav-link" href="" target="blank">In Google Maps öffnen</a></span>
+                    </div>
                 </section>
         </div>
         <div class="modal-close"><img src="assets/img/close.png"></div>
