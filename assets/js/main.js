@@ -94,7 +94,7 @@ $(document).ready(function() {
                 spottr.main.highlightMarker(id, 'remove');
             });
 
-            $('body').on('click', '.infobox a', function(e) {
+            $('body').on('click', '.infobox a:not(.nav-link)', function(e) {
                 e.preventDefault;
                 spottr.global.modalHandler(modal);
                 spottr.main.fillModal($(this));

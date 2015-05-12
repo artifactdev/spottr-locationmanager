@@ -3444,6 +3444,13 @@ body.map-fullscreen #map {
             margin-bottom: 10px;
             margin-top: 10px;
             width: 0px; }
+    .infobox .inner a.nav-link {
+      position: absolute;
+      font-size: 14px;
+      color: white;
+      padding: 4px 8px;
+      bottom: 4px;
+      width: 100%; }
 
 body.page-login #page-canvas {
   background: url(../img/map.gif) no-repeat;

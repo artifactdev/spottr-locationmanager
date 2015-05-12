@@ -18,6 +18,10 @@ function drawInfobox(category, infoboxContent, json, i){
         else                            { category = '' }
     if(json.items[i].location)           { var location = json.items[i].location }
         else                            { location = '' }
+    if(json.items[i].latitude)           { var latitude = json.items[i].latitude }
+        else                            { latitude = '' }
+    if(json.items[i].longitude)           { var longitude = json.items[i].longitude }
+        else                            { longitude = '' }
     if(json.items[i].aperture)           { var aperture = json.items[i].aperture }
         else                            { aperture = '' }
     if(json.items[i].date)               { var date = json.items[i].date }
@@ -53,6 +57,7 @@ function drawInfobox(category, infoboxContent, json, i){
                     '<img src="' + gallery +  '" width="50px">' +
                 '</div>' +
             '</div>' +
+            '<a class="nav-link" target="blank" href="http://maps.google.com/?daddr=' + latitude + ',' + longitude + '">In GoogleMaps öffnen</a>' +
         '</div>' +
     '</div>';
     spottr.main.showModal();
