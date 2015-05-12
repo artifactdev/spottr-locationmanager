@@ -27,7 +27,7 @@
                             <form action="authentication">
                                 <input type="text" id="email" name="email" placeholder="Username" />
                                 <input type="password" id="password" name="password" placeholder="Password" />
-                                <button type="submit" class="btn btn-default">Logins</button>
+                                <button type="submit" class="btn btn-default">Login</button>
                             </form>
                         </div>
                     </div>
