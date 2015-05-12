@@ -2,11 +2,10 @@
 /**
  * This php file contains all application configuration values.
  *
- * @package Fairdesk
  * @subpackage config
  * @version 0.9.0
  * @author Markus Jahn
- * @copyright (c) 2015, fairnet medienagentur
+ * @copyright (c) 2015
  */
 
 /**
