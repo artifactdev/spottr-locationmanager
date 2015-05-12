@@ -1,7 +1,8 @@
 body {
     &.page-login {
         #page-canvas {
-            background: $base-grey-light;
+            background: url(../img/map.gif) no-repeat;
+            background-size: cover;
             #page-content {
                 .login-box {
                     margin: 100px 0 100px -250px ;

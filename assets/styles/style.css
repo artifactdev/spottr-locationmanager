@@ -3446,7 +3446,8 @@ body.map-fullscreen #map {
             width: 0px; }
 
 body.page-login #page-canvas {
-  background: #f4f4f2; }
+  background: url(../img/map.gif) no-repeat;
+  background-size: cover; }
   body.page-login #page-canvas #page-content .login-box {
     margin: 100px 0 100px -250px;
     background: white;
