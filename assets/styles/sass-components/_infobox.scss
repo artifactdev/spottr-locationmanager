@@ -123,5 +123,16 @@
         }
       }
     }
+
+    a {
+      &.nav-link {
+        position: absolute;
+        font-size: 14px;
+        color: $base-white;
+        padding: 4px 8px;
+        bottom: 4px;
+        width: 100%;
+      }
+    }
   }
 }

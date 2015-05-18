@@ -94,7 +94,7 @@ $(document).ready(function() {
                 spottr.main.highlightMarker(id, 'remove');
             });
 
-            $('body').on('click', '.infobox a', function(e) {
+            $('body').on('click', '.infobox a:not(.nav-link)', function(e) {
                 e.preventDefault;
                 spottr.global.modalHandler(modal);
                 spottr.main.fillModal($(this));
@@ -136,7 +136,7 @@ $(document).ready(function() {
             if (json.items[a].gallery) {
                 var gallery = json.items[a].gallery
             } else {
-                gallery = 'assets/img/default-item.png'
+                gallery = 'rest-api/media/locations/default-item.png'
             }
 
             visibleItemsArray.push(
