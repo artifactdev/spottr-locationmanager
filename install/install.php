@@ -1,3 +1,10 @@
+<?php
+if (count($_POST) > 0) {
+    include 'mysqlsetup.php';
+    $test = new mysqlsetup();
+    $test->setup(setup($_POST));
+}
+?>
 <!DOCTYPE html>
 <html lang="en-US" style="height: auto;">
     <head>
@@ -31,6 +38,7 @@
                         <div class="install-box">
                             <h2>Datenbank</h2>
                             <form action="install.php" method="post">
+                                <input type="hidden" name="type" value="dbsetup"/>
                                 <input type="text" id="database" name="database" placeholder="Datenbankname" required/>
                                 <input type="text" id="username" name="username" placeholder="Username" required/>
                                 <input type="password" id="password" name="password" placeholder="Passwort" required/>
