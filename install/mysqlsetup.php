@@ -5,7 +5,16 @@ class mysqlsetup
 
     public function setup($postParams)
     {
-
+        if (!empty($_POST['type'])) {
+            switch ($_POST['type']) {
+                case 'dbsetup':
+                    $this->setupDatabase($_POST);
+                    break;
+                case 'adminsetup':
+                    $this->setupAdminUser($_POST);
+                    break;
+            }
+        }
     }
 
     private function setupDatabase($params)

@@ -1,9 +1,8 @@
 <?php
-if (count($_POST) > 0)
-{
+if (count($_POST) > 0) {
     include 'mysqlsetup.php';
     $test = new mysqlsetup();
-    $test->setup(setup($_POST));
+    $test->setup($_POST);
 }
 ?>
 <!DOCTYPE html>
