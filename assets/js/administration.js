@@ -40,7 +40,7 @@
                 if (json.items[i].gallery) {
                     var gallery = json.items[i].gallery
                 } else {
-                    gallery = path + '/rest-api/media/locations/default-item.png'
+                    gallery = path + 'rest-api/media/locations/default-item.png'
                 }
                 itemsList.append(
                     '<li>' +
