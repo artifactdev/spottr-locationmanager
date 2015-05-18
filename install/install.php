@@ -35,7 +35,7 @@
                                 <input type="text" id="username" name="username" placeholder="Username" required/>
                                 <input type="password" id="password" name="password" placeholder="Passwort" required/>
                                 <input type="text" id="databasehost" name="databasehost" placeholder="Databasehost (localhost)" required/>
-                                <input type="submit" class="btn btn-default">Datenbank anlegen</input>
+                                <input type="submit" class="btn btn-default" value="Datenbank anlegen"/>
                             </form>
                         </div>
                         <div class="adminuser-box hide">
