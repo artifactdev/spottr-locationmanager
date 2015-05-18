@@ -30,17 +30,17 @@
                     <div id="page-content">
                         <div class="install-box">
                             <h2>Datenbank</h2>
-                            <form action="install" id="db-form">
+                            <form action="install.php" method="post">
                                 <input type="text" id="database" name="database" placeholder="Datenbankname" required/>
                                 <input type="text" id="username" name="username" placeholder="Username" required/>
                                 <input type="password" id="password" name="password" placeholder="Passwort" required/>
                                 <input type="text" id="databasehost" name="databasehost" placeholder="Databasehost (localhost)" required/>
-                                <button type="submit" class="btn btn-default">Datenbank anlegen</button>
+                                <input type="submit" class="btn btn-default">Datenbank anlegen</input>
                             </form>
                         </div>
                         <div class="adminuser-box hide">
                             <h2>Administrator Login</h2>
-                            <form action="install" id="admin-form">
+                            <form action="install.php" id="admin-form">
                                 <input type="text" id="email" name="email" placeholder="E-Mail" required/>
                                 <input type="password" id="password" name="password" placeholder="Passwort" required/>
                                 <input type="text" id="vorname" name="vorname" placeholder="Vorname" required/>
@@ -97,7 +97,7 @@
                     $.ajax({
                         type     : 'POST',
                         cache    : false,
-                        url      : $(this).attr('action'),
+                        url      : $(this).attr('action')
                     }).success(function() {
                         $('.install-box').addClass('hide');
                         $('.adminuser-box').removeClass('hide');
