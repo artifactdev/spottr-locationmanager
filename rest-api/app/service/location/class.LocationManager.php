@@ -112,14 +112,38 @@ class LocationManager
         if (StringUtils::isNotBlank($location->gallery)) {
             unlink(CONF_FS_MEDIA_LOCATIONS . $location->gallery);
         }
-        $fileName = $this->getRandomFileName($file);
-        
-        if (rename(CONF_FS_TMP . $file, CONF_FS_MEDIA_LOCATIONS . $fileName)) {
+        $fileName = $this->uploadImage($file);
+        if (StringUtils::isNotBlank($fileName)) {
             $location->gallery = $fileName;
             $this->updateLocation($location);
         }
         unlink(CONF_FS_TMP . $file);
         return true;
+    }
+
+    /**
+     * [uploadImage description]
+     * @param  string $file             [description]
+     * @return string
+     */
+    private function uploadImage($file) {
+        $newFileName = $this->getRandomFileName($file);
+        
+        $imageContent = $this->resizeImage(CONF_FS_TMP . $file, 540, 600);
+        file_put_contents(CONF_FS_MEDIA_LOCATIONS . "org/" . $fileName, $imageContent);
+        $imageContentThumb = $this->resizeImage(CONF_FS_TMP . $file, 54, 60);
+        file_put_contents(CONF_FS_MEDIA_LOCATIONS . "thumb/" . $fileName, $imageContent);
+        return $newFileName;
+    }
+
+    private function resizeImage($imagePath, $width, $height) {
+        $imagick = new \Imagick(realpath($imagePath));
+        $imagick->resizeImage($width, $height, \Imagick::COMPOSITE_SRC, 1);
+
+        $cropWidth = $imagick->getImageWidth();
+        $cropHeight = $imagick->getImageHeight();
+
+        return $imagick->getImageBlob();
     }
 
     /**
@@ -133,7 +157,7 @@ class LocationManager
         $randomPath = rand(100);
         $fileName = md5($filePath . $randomPath) . $fileType;
         
-        if (file_exists(CONF_FS_MEDIA_LOCATIONS . $fileName)) {
+        if (file_exists(CONF_FS_MEDIA_LOCATIONS . "org/" . $fileName)) {
             return $this->getRandomFileName($fileName);
         }
         return $fileName;
