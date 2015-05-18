@@ -1,5 +1,6 @@
 <?php
-if (count($_POST) > 0) {
+if (count($_POST) > 0)
+{
     include 'mysqlsetup.php';
     $test = new mysqlsetup();
     $test->setup(setup($_POST));
@@ -60,7 +61,7 @@ if (count($_POST) > 0) {
                         <div class="success-box hide">
                             <h2>Installation erfolgreich</h2>
                             <p>
-                                Die installation war erfolgreich und Sie können sich in die Anwendung mit den von Ihnen eingetragenen Adminuser einloggen. 
+                                Die installation war erfolgreich und Sie können sich in die Anwendung mit den von Ihnen eingetragenen Adminuser einloggen.
                                 Löschen Sie nun den Install Ordner aus dem Root-Verzeichnis der Anwendung.
                             </p>
                         </div>
