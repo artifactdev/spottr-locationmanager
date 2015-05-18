@@ -31,7 +31,7 @@
                             <td><input type="text" name="lastname" placeholder="Nachname" required/></td>
                             <td><input type="text" name="companyname" placeholder="Firmenname" required/></td>
                             <td>
-                                <select multiple name="roles" required> 
+                                <select multiple name="roles[]" required> 
                                     <option value="1">Administrator</option>
                                     <option value="2">User</option>
                                 </select>

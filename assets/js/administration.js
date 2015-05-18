@@ -135,7 +135,6 @@
                                 var form = $('#edit-form-image');
                                 spottr.global.submitImage(data.id, form);
                                 spottr.global.success('Location angelegt!');
-                                location.reload(true);
 
                             },
 

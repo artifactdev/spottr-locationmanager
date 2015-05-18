@@ -221,7 +221,7 @@ var spottr = {};;
                 var focal = exifObject.FocalLength;
                 var iso = exifObject.ISOSpeedRatings;
 
-                if (focal === undefined) {
+                if (focal === undefined || focal === 'NaN') {
                     var focal = 0;
                 }
 
