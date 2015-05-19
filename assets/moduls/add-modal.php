@@ -17,6 +17,8 @@
 
                 <div class="full-width" id="map-add"></div>
 
+                <a href="#" class="getLocation btn btn-default full-width">Aktuelle Position übernehmen</a>
+
                 <input type="text"  id="geocomplete-search" placeholder="Search Address" name="search_adress" autocomplete="false"/>
 
                 <input id="lng" name="longitude" data-geo="lng" type="text" value="" placeholder="Longitude" required>
