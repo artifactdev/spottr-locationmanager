@@ -17,9 +17,9 @@ class LocationManager
     public function createLocation(Location $location)
     {
         DatabaseUtils::query(
-            "INSERT INTO `locations` (`category`, `title`, `latitude`, `longitude`, `rating`, `date_created`, `gallery`, `aperture`, `focal`, `iso`,`anmerkung`, `type`) VALUES
+            "INSERT INTO `locations` (`category`, `title`, `latitude`, `longitude`, `rating`, `date_created`, `gallery`, `aperture`, `focal`, `iso`,`note`, `type`) VALUES
             ('{CATEGORY}', '{TITLE}', '{LATITUDE}', '{LONGITUDE}', '{RATING}', '" . date("Y-m-d") .
-                 "', '', '{APERTURE}', '{FOCAL}', '{ISO}', '{ANMERKUNG}', '{TYPE}');", $location->wrapModelToDatabase());
+                 "', '', '{APERTURE}', '{FOCAL}', '{ISO}', '{NOTE}', '{TYPE}');", $location->wrapModelToDatabase());
         $lastId = DatabaseUtils::insertId();
         return $this->findLocation($lastId);
     }
@@ -41,7 +41,7 @@ class LocationManager
                 `aperture` = '{APERTURE}',
                 `focal` = '{FOCAL}',
                 `iso` = '{ISO}',
-                `anmerkung` = '{ANMERKUNG}',
+                `note` = '{NOTE}',
                 `type` = '{TYPE}' WHERE `id`='{ID}';",
             $location->wrapModelToDatabase());
         return $this->findLocation($location->id);
@@ -118,33 +118,71 @@ class LocationManager
             $location->gallery = $fileName;
             $this->updateLocation($location);
         }
-        unlink(CONF_FS_TMP . $file);
+        //unlink(CONF_FS_TMP . $file);
         return true;
     }
 
     /**
-     * [uploadImage description]
-     * @param  string $file             [description]
-     * @return string
+     *
+     * @param  string $file Name of the file to upload.
+     * @return string uploaded filename.
      */
     private function uploadImage($file) {
         $newFileName = $this->getRandomFileName($file);
         
-        $imageContent = $this->resizeImage(CONF_FS_TMP . $file, 540, 600);
-        file_put_contents(CONF_FS_MEDIA_LOCATIONS . "org/" . $fileName, $imageContent);
-        $imageContentThumb = $this->resizeImage(CONF_FS_TMP . $file, 54, 60);
-        file_put_contents(CONF_FS_MEDIA_LOCATIONS . "thumb/" . $fileName, $imageContentThumb);
+        $sourceFile = $this->getDir(CONF_FS_TMP) . $file;
+        $this->createThumbnail($sourceFile, $newFileName);
+        $this->createLargeImage($sourceFile, $newFileName);
+        
         return $newFileName;
     }
+    
+    private function createThumbnail($sourceFileName, $destinationFileName) {
+        list($width, $height, $newWidth, $newHeight) = $this->getNewImageSize($sourceFileName, 150, 150);
+        
+        $thumb = imagecreatetruecolor($newWidth, $newHeight);
+        $source = imagecreatefromjpeg($sourceFileName);
+        
+        imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        
+        $imgFolder = $this->getDir(CONF_FS_MEDIA_LOCATIONS_THUMB);
+        imagejpeg($thumb, $imgFolder . $destinationFileName);
+    }
+    
+    /**
+     * Calculates the new image size.
+     * @param string $sourceFileName Path of the source file.
+     * @param int $maxWidth Max width.
+     * @param int $maxHeight Max height.
+     * @return multitype:unknown Ambigous <number, unknown> multitype:
+     */
+    private function getNewImageSize($sourceFileName, $maxWidth, $maxHeight) {
+        list($width, $height) = getimagesize($sourceFileName);
+        
+        $maxWidth = $width > $maxWidth ? $maxWidth : $width;
+        $maxHeight= $height > $maxHeight? $maxHeight: $height;
+        
+        if ($width > $height) {
+            $newWidth = $maxWidth;
+            $newHeight = $newWidth * $height / $width;
+        } else {
+            $newHeight = $maxHeight;
+            $newWidth = $newHeight * $width / $height;
+        }
 
-    private function resizeImage($imagePath, $width, $height) {
-        $imagick = new \Imagick(realpath($imagePath));
-        $imagick->resizeImage($width, $height, \Imagick::COMPOSITE_SRC, 1);
+        return array($width, $height, $newWidth, $newHeight);
+    }
 
-        $cropWidth = $imagick->getImageWidth();
-        $cropHeight = $imagick->getImageHeight();
-
-        return $imagick->getImageBlob();
+    private function createLargeImage($sourceFileName, $destinationFileName) {
+        list($width, $height, $newWidth, $newHeight) = $this->getNewImageSize($sourceFileName, 560, 560);
+        
+        $thumb = imagecreatetruecolor($newWidth, $newHeight);
+        $source = imagecreatefromjpeg($sourceFileName);
+        
+        imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        
+        $imgFolder = $this->getDir(CONF_FS_MEDIA_LOCATIONS_ORG);
+        imagejpeg($thumb, $imgFolder . $destinationFileName);
     }
 
     /**
@@ -158,9 +196,26 @@ class LocationManager
         $randomPath = rand(100);
         $fileName = md5($filePath . $randomPath) . $fileType;
         
-        if (file_exists(CONF_FS_MEDIA_LOCATIONS . "org/" . $fileName)) {
+        if (file_exists(CONF_FS_MEDIA_LOCATIONS_ORG . $fileName)) {
             return $this->getRandomFileName($fileName);
         }
         return $fileName;
+    }
+    
+    /**
+     *
+     * @param string $dirPath
+     */
+    private static function getDir($dirPath)
+    {
+        if (StringUtils::isBlank($dirPath)) {
+            return "";
+        }
+    
+        if (file_exists($dirPath)) {
+            return $dirPath;
+        }
+        mkdir($dirPath, 0755, true);
+        return $dirPath;
     }
 }

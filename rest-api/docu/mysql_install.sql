@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `locations` (
   `aperture` decimal(1,0) NOT NULL,
   `focal` int(1) NOT NULL,
   `iso` int(7) NOT NULL,
-  `anmerkung` text NOT NULL,
+  `note` text NOT NULL,
   `type` varchar(255) NOT NULL
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

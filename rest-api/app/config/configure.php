@@ -18,6 +18,8 @@ define("CONF_DATABASE_PASSWORD", "root");
 define("CONF_DATABASE_SCHEMA", "spottr");
 
 define("CONF_FS_MEDIA_LOCATIONS", CONF_FS_ROOT . "media/locations/");
+define("CONF_FS_MEDIA_LOCATIONS_ORG", CONF_FS_MEDIA_LOCATIONS . "org/");
+define("CONF_FS_MEDIA_LOCATIONS_THUMB", CONF_FS_MEDIA_LOCATIONS . "thumb/");
 
 /**
  * ***********************************************************

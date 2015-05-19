@@ -1,5 +1,4 @@
 <?php
-
 use FlorianWolters\Component\Core\StringUtils;
 
 /**
@@ -50,10 +49,10 @@ class HTTPRequestHelper
     public static function getHeaderParam($parameterName, $className = "")
     {
         $headers = getallheaders();
-        if ($headers === false || !is_array($headers)) {
+        if ($headers === false || ! is_array($headers)) {
             return null;
         }
-
+        
         $value = "";
         $found = false;
         foreach ($headers as $headerKey => $headerValue) {
@@ -63,24 +62,23 @@ class HTTPRequestHelper
                 break;
             }
         }
-
-        if (!$found) {
+        
+        if (! $found) {
             return null;
         }
-
+        
         if (StringUtils::startsWith($value, "{") && StringUtils::endsWith($value, "}")) {
             $result = json_decode($value);
         } else {
             $result = $value;
         }
-
-        if (!StringUtils::isBlank($className)) {
+        
+        if (! StringUtils::isBlank($className)) {
             $instance = new $className();
             $result = $instance->wrapJSONDecode($result);
         }
         return $result;
     }
-
 
     /**
      * Search the given parameter name in the request cookie data and returns it.
@@ -96,22 +94,22 @@ class HTTPRequestHelper
      */
     public static function getCookieParam($parameterName, $className = "")
     {
-        if (!isset($_COOKIE) || !array_key_exists($parameterName, $_COOKIE)) {
+        if (! isset($_COOKIE) || ! array_key_exists($parameterName, $_COOKIE)) {
             return null;
         }
-
+        
         $value = $_COOKIE[$parameterName];
-        if (!isset($value)) {
+        if (! isset($value)) {
             return null;
         }
-
+        
         if (StringUtils::startsWith($value, "{") && StringUtils::endsWith($value, "}")) {
             $result = json_decode($value);
         } else {
             $result = $value;
         }
-
-        if (!StringUtils::isBlank($className)) {
+        
+        if (! StringUtils::isBlank($className)) {
             $instance = new $className();
             $result = $instance->wrapJSONDecode($result);
         }
@@ -136,19 +134,19 @@ class HTTPRequestHelper
         }
         $modelClassName = get_class($modelClass);
         $attributes = get_class_vars($modelClassName);
-
+        
         if (count($attributes) == 0) {
             return $modelClass;
         }
         foreach ($attributes as $attributeKey => $attributeVal) {
             $value = HTTPRequestHelper::getRequestParam($attributeKey, "", $parameterPrefix);
-            if (StringUtils::isBlank($value) && !is_numeric($value)) {
+            if (StringUtils::isBlank($value) && ! is_numeric($value)) {
                 $modelClass->$attributeKey = "";
             } else {
                 $modelClass->$attributeKey = $value;
             }
         }
-
+        
         return $modelClass;
     }
 
@@ -162,12 +160,29 @@ class HTTPRequestHelper
         $files = array();
         foreach ($_FILES as $parameter => $file) {
             $newFileName = date("Y-m-d_H-i-s") . "_" . $file['name'];
-            if (!move_uploaded_file($file['tmp_name'], CONF_FS_TMP . $newFileName)) {
+            if (! move_uploaded_file($file['tmp_name'], self::getDir(CONF_FS_TMP) . $newFileName)) {
                 continue;
             }
             $files[] = $newFileName;
         }
         return $files;
+    }
+
+    /**
+     *
+     * @param unknown $dirPath
+     */
+    private static function getDir($dirPath)
+    {
+        if (StringUtils::isBlank($dirPath)) {
+            return "";
+        }
+        
+        if (file_exists($dirPath)) {
+            return $dirPath;
+        }
+        mkdir($dirPath, 0755, true);
+        return $dirPath;
     }
 }
 

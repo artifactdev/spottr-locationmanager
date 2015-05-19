@@ -22,6 +22,8 @@ class Location extends AbstractDatabaseModel
 
     public $gallery = "";
 
+    public $thumb = "";
+
     public $dateCreated = "";
 
     public $aperture = 0;
@@ -30,7 +32,7 @@ class Location extends AbstractDatabaseModel
 
     public $iso = 0;
 
-    public $anmerkung = "";
+    public $note = "";
 
     public $type = "";
 
@@ -110,12 +112,12 @@ class Location extends AbstractDatabaseModel
         return TranslationUtils::translate("Der Typ darf maximal 255 Zeichen lang sein.");
     }
 
-    public function isValidAnmerkung()
+    public function isValidNote()
     {
-        if (StringUtils::length($this->anmerkung) <= 568) {
+        if (StringUtils::length($this->note) <= 568) {
             return true;
         }
-        return TranslationUtils::translate("Die Anmerkung maximal 568 Zeichen lang sein.");
+        return TranslationUtils::translate("Die Anmerkung darf maximal 568 Zeichen lang sein.");
     }
 
     /**
@@ -133,14 +135,15 @@ class Location extends AbstractDatabaseModel
         $this->rating = $dbRow['rating'];
         
         if (StringUtils::isNotBlank($dbRow['gallery'])) {
-            $this->gallery = "rest-api/media/locations/" . $dbRow['gallery'];
+            $this->gallery = "rest-api/media/locations/org/" . $dbRow['gallery'];
+            $this->thumb = "rest-api/media/locations/thumb/" . $dbRow['gallery'];
         }
         
         $this->date = $dbRow['date_created'];
         $this->aperture = $dbRow['aperture'];
         $this->focal = $dbRow['focal'];
         $this->iso = $dbRow['iso'];
-        $this->anmerkung = $dbRow['anmerkung'];
+        $this->note = $dbRow['note'];
         $this->type = $dbRow['type'];
     }
 
