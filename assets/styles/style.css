@@ -1485,6 +1485,13 @@ textarea {
   font-size: 14px;
   padding: 10px 9px 9px; }
 
+p.anmerkung {
+  max-width: 500px;
+  overflow: hidden;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: #353535; }
+
 .header {
   -webkit-transition: 0.4s ease-in-out all;
   transition: 0.4s ease-in-out all;
@@ -2115,7 +2122,8 @@ body.map-fullscreen #map {
 #map-add,
 #map-edit {
   width: 100% !important;
-  height: 200px !important; }
+  height: 200px !important;
+  margin-bottom: 10px; }
 
 .map-canvas {
   position: relative;

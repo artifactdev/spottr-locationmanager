@@ -840,3 +840,11 @@ textarea {
     font-size: 14px;
     padding: 10px 9px 9px;
 }
+
+p.anmerkung {
+    max-width: 500px;
+    overflow: hidden;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: $base-grey-dark;
+}

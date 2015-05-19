@@ -299,6 +299,7 @@ var spottr = {};;
 
             $('.getLocation').on('click', function(e){
                 e.preventDefault;
+                console.log('clicked');
                 spottr.global.getLocation(addForm);
             });
 
@@ -342,6 +343,10 @@ var spottr = {};;
                 var latitude = position.coords.latitude;
                 var longitude = position.coords.longitude;
 
+                console.log(latitude);
+                console.log(longitude);
+                console.log(position);
+
                 spottr.global.markerToPosition(addForm, '#map-add',latitude,longitude);
 
                 var formLat = $(addForm).find('#lat');
@@ -360,12 +365,11 @@ var spottr = {};;
                 }
              }
 
-            if(navigator.geolocation){
-               // timeout at 60000 milliseconds (60 seconds)
-               var options = {timeout:60000};
-               navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options);
-               console.log(navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options));
-            } else{
+            if( navigator.geolocation) {
+                var options = { enableHighAccuracy: true, maximumAge: 100, timeout: 60000 };
+                var watchID = navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options);
+                var timeout = setTimeout( function() { navigator.geolocation.clearWatch( watchID ); }, 5000 );
+            } else {
                alert("Sorry, browser does not support geolocation!");
             }
          },
