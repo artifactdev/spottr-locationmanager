@@ -33,6 +33,8 @@
 
                 <input id="rating" type="number" placeholder="Rating 1-5" name="rating" required min="1" max="5" maxlength="1"/>
 
+                <textarea id="anmerkung" type="text" placeholder="Anmerkungen" name="anmerkung"></textarea>
+
                 <input id="aperture" type="hidden" name="aperture"/>
 
                 <input id="focal" type="hidden" name="focal"/>

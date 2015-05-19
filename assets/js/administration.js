@@ -54,7 +54,7 @@
                     '</div>' +
                     '<div class="col-md-12 item-footer">' +
                     '<div class="col-md-6">' +
-                    '<span class="meta-element hidden" id="' + json.items[i].id + '" data-gallery="' + json.items[i].gallery + '" data-longitude="' + json.items[i].longitude + '" data-latitude="' + json.items[i].latitude + '" data-title="' + json.items[i].title + '" data-type="' + json.items[i].type + '"  data-category="' + json.items[i].category + '" data-location="' + json.items[i].location + '" data-aperture="' + json.items[i].aperture + '" data-date="' + json.items[i].dateCreated + '" data-focal="' + json.items[i].focal + '" data-iso="' + json.items[i].iso + '" data-rating="' + json.items[i].rating + '"><h3>' + json.items[i].title + '</h3></span>' +
+                    '<span class="meta-element hidden" id="' + json.items[i].id + '" data-gallery="' + json.items[i].gallery + '" data-longitude="' + json.items[i].longitude + '" data-latitude="' + json.items[i].latitude + '" data-title="' + json.items[i].title + '" data-type="' + json.items[i].type + '"  data-category="' + json.items[i].category + '" data-location="' + json.items[i].location + '" data-aperture="' + json.items[i].aperture + '" data-date="' + json.items[i].dateCreated + '" data-focal="' + json.items[i].focal + '" data-iso="' + json.items[i].iso + '" data-anmerkung="' + json.items[i].anmerkung + '" data-rating="' + json.items[i].rating + '"><h3>' + json.items[i].title + '</h3></span>' +
 
                     '<a href="#" class="btn btn-default btn-edit">Edit</a>' +
                     '</div>' +
@@ -106,6 +106,7 @@
                 var aperture = metaElement.data('aperture');
                 var focal = metaElement.data('focal');
                 var iso = metaElement.data('iso');
+                var anmerkung = metaElement.data('anmerkung');
                 var rating = metaElement.data('rating');
                 var id = metaElement.attr('id');
 
@@ -118,6 +119,7 @@
                 modal.find('#iso').val(iso);
                 modal.find('#lng').val(longitude);
                 modal.find('#lat').val(latitude);
+                modal.find('#anmerkung').val(anmerkung);
                 modal.find('#rating').val(rating);
 
                 spottr.global.markerToPosition(modal.find('#edit-location-form'), '#map-edit', latitude, longitude);

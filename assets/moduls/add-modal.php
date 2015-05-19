@@ -34,6 +34,8 @@
 
                 <input type="number" placeholder="Zugänglichkeit 1-5" name="rating" required min="1" max="5" maxlength="1"/>
 
+                <textarea id="anmerkung" type="text" placeholder="Anmerkungen" name="anmerkung"></textarea>
+
                 <input id="aperture" type="hidden" name="aperture" value="0"/>
 
                 <input id="focal" type="hidden" name="focal" value="0"/>

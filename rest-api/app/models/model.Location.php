@@ -30,6 +30,8 @@ class Location extends AbstractDatabaseModel
 
     public $iso = 0;
 
+    public $anmerkung = "";
+
     public $type = "";
 
     public function isValidCategory()
@@ -108,6 +110,14 @@ class Location extends AbstractDatabaseModel
         return TranslationUtils::translate("Der Typ darf maximal 255 Zeichen lang sein.");
     }
 
+    public function isValidAnmerkung()
+    {
+        if (StringUtils::length($this->anmerkung) <= 568) {
+            return true;
+        }
+        return TranslationUtils::translate("Die Anmerkung maximal 568 Zeichen lang sein.");
+    }
+
     /**
      * (non-PHPdoc)
      *
@@ -130,6 +140,7 @@ class Location extends AbstractDatabaseModel
         $this->aperture = $dbRow['aperture'];
         $this->focal = $dbRow['focal'];
         $this->iso = $dbRow['iso'];
+        $this->anmerkung = $dbRow['anmerkung'];
         $this->type = $dbRow['type'];
     }
 

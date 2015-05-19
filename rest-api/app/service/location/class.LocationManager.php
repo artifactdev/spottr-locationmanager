@@ -17,9 +17,9 @@ class LocationManager
     public function createLocation(Location $location)
     {
         DatabaseUtils::query(
-            "INSERT INTO `locations` (`category`, `title`, `latitude`, `longitude`, `rating`, `date_created`, `gallery`, `aperture`, `focal`, `iso`, `type`) VALUES
+            "INSERT INTO `locations` (`category`, `title`, `latitude`, `longitude`, `rating`, `date_created`, `gallery`, `aperture`, `focal`, `iso`,`anmerkung`, `type`) VALUES
             ('{CATEGORY}', '{TITLE}', '{LATITUDE}', '{LONGITUDE}', '{RATING}', '" . date("Y-m-d") .
-                 "', '', '{APERTURE}', '{FOCAL}', '{ISO}', '{TYPE}');", $location->wrapModelToDatabase());
+                 "', '', '{APERTURE}', '{FOCAL}', '{ISO}', '{ANMERKUNG}', '{TYPE}');", $location->wrapModelToDatabase());
         $lastId = DatabaseUtils::insertId();
         return $this->findLocation($lastId);
     }
@@ -41,6 +41,7 @@ class LocationManager
                 `aperture` = '{APERTURE}',
                 `focal` = '{FOCAL}',
                 `iso` = '{ISO}',
+                `anmerkung` = '{ANMERKUNG}',
                 `type` = '{TYPE}' WHERE `id`='{ID}';",
             $location->wrapModelToDatabase());
         return $this->findLocation($location->id);
@@ -132,7 +133,7 @@ class LocationManager
         $imageContent = $this->resizeImage(CONF_FS_TMP . $file, 540, 600);
         file_put_contents(CONF_FS_MEDIA_LOCATIONS . "org/" . $fileName, $imageContent);
         $imageContentThumb = $this->resizeImage(CONF_FS_TMP . $file, 54, 60);
-        file_put_contents(CONF_FS_MEDIA_LOCATIONS . "thumb/" . $fileName, $imageContent);
+        file_put_contents(CONF_FS_MEDIA_LOCATIONS . "thumb/" . $fileName, $imageContentThumb);
         return $newFileName;
     }
 

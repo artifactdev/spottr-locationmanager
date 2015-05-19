@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `locations` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `category` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   `latitude` varchar(60) NOT NULL,
@@ -35,10 +35,11 @@ CREATE TABLE IF NOT EXISTS `locations` (
   `rating` int(1) NOT NULL,
   `gallery` varchar(255) NOT NULL,
   `date_created` date NOT NULL,
-  `aperture` DECIMAL(11,6) NOT NULL,
+  `aperture` decimal(1,0) NOT NULL,
   `focal` int(1) NOT NULL,
   `iso` int(7) NOT NULL,
-  `type` varchar(255) NOT NULL,
+  `anmerkung` text NOT NULL,
+  `type` varchar(255) NOT NULL
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
