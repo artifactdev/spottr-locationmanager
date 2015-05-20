@@ -138,7 +138,7 @@ class LocationManager
     }
     
     private function createThumbnail($sourceFileName, $destinationFileName) {
-        list($width, $height, $newWidth, $newHeight) = $this->getNewImageSize($sourceFileName, 150, 150);
+        list($width, $height, $newWidth, $newHeight) = $this->getNewImageSize($sourceFileName, 560, 560);
         
         $thumb = imagecreatetruecolor($newWidth, $newHeight);
         $source = imagecreatefromjpeg($sourceFileName);
@@ -176,7 +176,7 @@ class LocationManager
     }
 
     private function createLargeImage($sourceFileName, $destinationFileName) {
-        list($width, $height, $newWidth, $newHeight) = $this->getNewImageSize($sourceFileName, 560, 560);
+        list($width, $height, $newWidth, $newHeight) = $this->getNewImageSize($sourceFileName, 1024, 1024);
         
         $thumb = imagecreatetruecolor($newWidth, $newHeight);
         $source = imagecreatefromjpeg($sourceFileName);
