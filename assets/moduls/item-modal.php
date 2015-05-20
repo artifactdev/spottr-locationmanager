@@ -29,7 +29,7 @@
                         <span class="col-md-5 control-label">Zugänglichkeit:</span><span class="col-md-7"><input type="nubmer" class="rating-item-modal" readonly/></span>
                     </div>
                     <div class="row">
-                        <span class="col-md-5 control-label">Anmerkung:</span><span class="col-md-7"><p class="anmerkung"></p></span>
+                        <span class="col-md-5 control-label">Notiz:</span><span class="col-md-7"><p class="anmerkung"></p></span>
                     </div>
                     <div class="row">
                         <span class="col-md-5 control-label">Navigationslink:</span><span class="col-md-7"><a class="nav-link" href="" target="blank">In Google Maps öffnen</a></span>

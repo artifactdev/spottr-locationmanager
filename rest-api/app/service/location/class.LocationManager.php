@@ -142,8 +142,10 @@ class LocationManager
         
         $thumb = imagecreatetruecolor($newWidth, $newHeight);
         $source = imagecreatefromjpeg($sourceFileName);
+
+        imagesetinterpolation($thumb, IMG_BICUBIC);
         
-        imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        imagecopyresampled($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
         
         $imgFolder = $this->getDir(CONF_FS_MEDIA_LOCATIONS_THUMB);
         imagejpeg($thumb, $imgFolder . $destinationFileName);
@@ -178,8 +180,10 @@ class LocationManager
         
         $thumb = imagecreatetruecolor($newWidth, $newHeight);
         $source = imagecreatefromjpeg($sourceFileName);
+
+        imagesetinterpolation($thumb, IMG_BICUBIC);
         
-        imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        imagecopyresampled($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
         
         $imgFolder = $this->getDir(CONF_FS_MEDIA_LOCATIONS_ORG);
         imagejpeg($thumb, $imgFolder . $destinationFileName);

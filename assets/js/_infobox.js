@@ -32,8 +32,8 @@ function drawInfobox(category, infoboxContent, json, i){
         else                            { iso = '' }
     if(json.items[i].rating)             { var rating = json.items[i].rating }
         else                            { rating = '' }
-    if(json.items[i].anmerkung)             { var anmerkung = json.items[i].anmerkung }
-        else                            { anmerkung = '' }
+    if(json.items[i].notiz)             { var notiz = json.items[i].note }
+        else                            { notiz = '' }
     if(json.items[i].gallery)         { var gallery = json.items[i].gallery }
         else                            { gallery = 'rest-api/media/locations/default-item.png' }
 
@@ -46,7 +46,7 @@ function drawInfobox(category, infoboxContent, json, i){
             '<div class="image">' +
                 '<div class="overlay">' +
                     '<div class="wrapper">' +
-                        '<a href="#" class="quick-view" data-id="' + id + '" data-gallery="' + path + gallery + '" data-title="' + title +'" data-type="' + type +'"  data-category="' + category +'" data-location="' + location +'" data-aperture="' + aperture +'" data-date="' + date +'" data-focal="' + focal +'" data-iso="' + iso +'" data-anmerkung="' + anmerkung +'" data-rating="' + rating +'">Quick View</a>' +
+                        '<a href="#" class="quick-view" data-id="' + id + '" data-gallery="' + path + gallery + '" data-title="' + title +'" data-type="' + type +'"  data-category="' + category +'" data-location="' + location +'" data-aperture="' + aperture +'" data-date="' + date +'" data-focal="' + focal +'" data-iso="' + iso +'" data-notiz="' + notiz +'" data-rating="' + rating +'">Quick View</a>' +
                     '</div>' +
                 '</div>' +
                 '<a href="#" class="quick-view">' +
