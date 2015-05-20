@@ -134,7 +134,7 @@ $(document).ready(function() {
             var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
 
             if (json.items[a].gallery) {
-                var gallery = json.items[a].gallery
+                var gallery = json.items[a].thumb
             } else {
                 gallery = 'rest-api/media/locations/default-item.png'
             }

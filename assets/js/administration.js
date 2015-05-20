@@ -35,10 +35,12 @@
         fillVerwaltung: function(json) {
             var itemsList = $('body').find('.items-list');
 
+            console.log(json);
+
             for (var i = 0; i < json.items.length; i++) {
                 var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
                 if (json.items[i].gallery) {
-                    var gallery = json.items[i].gallery
+                    var gallery = json.items[i].thumb
                 } else {
                     gallery = path + 'rest-api/media/locations/default-item.png'
                 }

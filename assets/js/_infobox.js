@@ -36,6 +36,8 @@ function drawInfobox(category, infoboxContent, json, i){
         else                            { notiz = '' }
     if(json.items[i].gallery)         { var gallery = json.items[i].gallery }
         else                            { gallery = 'rest-api/media/locations/default-item.png' }
+    if(json.items[i].thumb)         { var thumb = json.items[i].thumb }
+        else                            { thumb = 'rest-api/media/locations/default-item.png' }
 
     var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
     
@@ -46,7 +48,7 @@ function drawInfobox(category, infoboxContent, json, i){
             '<div class="image">' +
                 '<div class="overlay">' +
                     '<div class="wrapper">' +
-                        '<a href="#" class="quick-view" data-id="' + id + '" data-gallery="' + path + "org/"+ gallery + '" data-title="' + title +'" data-type="' + type +'"  data-category="' + category +'" data-location="' + location +'" data-aperture="' + aperture +'" data-date="' + date +'" data-focal="' + focal +'" data-iso="' + iso +'" data-notiz="' + notiz +'" data-rating="' + rating +'">Quick View</a>' +
+                        '<a href="#" class="quick-view" data-id="' + id + '" data-gallery="' + path + gallery + '" data-title="' + title +'" data-type="' + type +'"  data-category="' + category +'" data-location="' + location +'" data-aperture="' + aperture +'" data-date="' + date +'" data-focal="' + focal +'" data-iso="' + iso +'" data-notiz="' + notiz +'" data-rating="' + rating +'">Quick View</a>' +
                     '</div>' +
                 '</div>' +
                 '<a href="#" class="quick-view">' +
@@ -56,7 +58,7 @@ function drawInfobox(category, infoboxContent, json, i){
                     '</div>' +
                 '</a>' +
                 '<div class="imageWrapper">' +
-                    '<img src="' + "thumb/" + gallery +  '" width="50px">' +
+                    '<img src="' + thumb +  '" width="50px">' +
                 '</div>' +
             '</div>' +
             '<a class="nav-link" target="blank" href="http://maps.google.com/?daddr=' + latitude + ',' + longitude + '">In GoogleMaps öffnen</a>' +
