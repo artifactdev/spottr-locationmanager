@@ -138,12 +138,10 @@ class LocationManager
     }
     
     private function createThumbnail($sourceFileName, $destinationFileName) {
-        list($width, $height, $newWidth, $newHeight) = $this->getNewImageSize($sourceFileName, 560, 560);
+        list($width, $height, $newWidth, $newHeight) = $this->getNewImageSize($sourceFileName, 840, 840);
         
         $thumb = imagecreatetruecolor($newWidth, $newHeight);
         $source = imagecreatefromjpeg($sourceFileName);
-
-        imagesetinterpolation($thumb, IMG_SINC);
         
         imagecopyresampled($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
         
@@ -180,8 +178,6 @@ class LocationManager
         
         $thumb = imagecreatetruecolor($newWidth, $newHeight);
         $source = imagecreatefromjpeg($sourceFileName);
-
-        imagesetinterpolation($thumb, IMG_SINC);
         
         imagecopyresampled($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
         

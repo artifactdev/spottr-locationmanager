@@ -39,8 +39,9 @@
 
             for (var i = 0; i < json.items.length; i++) {
                 var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
-                if (json.items[i].gallery) {
-                    var gallery = json.items[i].thumb
+                if (json.items[i].thumb) {
+                    var gallery = json.items[i].thumb;
+                    console.log(gallery);
                 } else {
                     gallery = path + 'rest-api/media/locations/default-item.png'
                 }
@@ -56,7 +57,7 @@
                     '</div>' +
                     '<div class="col-md-12 item-footer">' +
                     '<div class="col-md-6">' +
-                    '<span class="meta-element hidden" id="' + json.items[i].id + '" data-gallery="' + json.items[i].gallery + '" data-longitude="' + json.items[i].longitude + '" data-latitude="' + json.items[i].latitude + '" data-title="' + json.items[i].title + '" data-type="' + json.items[i].type + '"  data-category="' + json.items[i].category + '" data-location="' + json.items[i].location + '" data-aperture="' + json.items[i].aperture + '" data-date="' + json.items[i].dateCreated + '" data-focal="' + json.items[i].focal + '" data-iso="' + json.items[i].iso + '" data-notiz="' + json.items[i].note + '" data-rating="' + json.items[i].rating + '"><h3>' + json.items[i].title + '</h3></span>' +
+                    '<span class="meta-element hidden" id="' + json.items[i].id + '" data-gallery="' + json.items[i].thumb + '" data-longitude="' + json.items[i].longitude + '" data-latitude="' + json.items[i].latitude + '" data-title="' + json.items[i].title + '" data-type="' + json.items[i].type + '"  data-category="' + json.items[i].category + '" data-location="' + json.items[i].location + '" data-aperture="' + json.items[i].aperture + '" data-date="' + json.items[i].dateCreated + '" data-focal="' + json.items[i].focal + '" data-iso="' + json.items[i].iso + '" data-notiz="' + json.items[i].note + '" data-rating="' + json.items[i].rating + '"><h3>' + json.items[i].title + '</h3></span>' +
 
                     '<a href="#" class="btn btn-default btn-edit">Edit</a>' +
                     '</div>' +
