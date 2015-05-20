@@ -135,9 +135,8 @@
                             success: function(data) {
                                 spottr.global.loading();
                                 var form = $('#edit-form-image');
-                                spottr.administration.editImage(data.id, form);
+                                spottr.global.submitImage(data.id, form);
                                 spottr.global.success('Location angelegt!');
-
                             },
 
                             error: function(data) {
@@ -163,30 +162,6 @@
 
 
             });
-        },
-
-        /**
-         * submits the location image to the backend on success the window will be reloaded
-         * @param  {ID} locationId the given locationID where image should be added to
-         * @param  {ID} attForm    The form where it gets the image from
-         */
-        editImage: function(locationId, attForm) {
-            var $file = attForm.find("input[type='file']");
-            if ($file.val() == "" || locationId == undefined) {
-                location.reload(true);
-                return;
-            }
-
-            attForm.attr("action", "rest-api/locations/" + locationId + "/image");
-
-            var $iframe = $("#js_iframe_edit_location_attachment");
-            $iframe.unbind().load(function(event) {
-                event.preventDefault();
-                spottr.global.loading();
-                location.reload(true);
-            });
-
-            attForm.submit();
         },
 
         /**
