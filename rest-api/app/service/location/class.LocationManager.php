@@ -143,7 +143,7 @@ class LocationManager
         $thumb = imagecreatetruecolor($newWidth, $newHeight);
         $source = imagecreatefromjpeg($sourceFileName);
 
-        imagesetinterpolation($thumb, IMG_BICUBIC);
+        imagesetinterpolation($thumb, IMG_SINC);
         
         imagecopyresampled($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
         
@@ -181,7 +181,7 @@ class LocationManager
         $thumb = imagecreatetruecolor($newWidth, $newHeight);
         $source = imagecreatefromjpeg($sourceFileName);
 
-        imagesetinterpolation($thumb, IMG_BICUBIC);
+        imagesetinterpolation($thumb, IMG_SINC);
         
         imagecopyresampled($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
         
