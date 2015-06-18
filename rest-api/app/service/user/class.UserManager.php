@@ -53,7 +53,7 @@ class UserManager
 
         $sqlArgs = $user->wrapModelToDatabase();
         DatabaseUtils::query(
-            "INSERT INTO `users` (`email`, `password`, `first_name`, `last_name`, `company_name`) VALUES ('{EMAIL}', '{PASSWORD}', '{FIRSTNAME}', '{LASTNAME}', '{COMPANYNAME}')",
+            "INSERT INTO `users` (`email`, `password`, `first_name`, `last_name`, `search_address`, `longitude`, `latitude`) VALUES ('{EMAIL}', '{PASSWORD}', '{FIRSTNAME}', '{LASTNAME}', '{SEARCHADDRESS}', '{LONGITUDE}', '{LATITUDE}')",
             $sqlArgs);
 
         $userId = DatabaseUtils::insertId();
@@ -154,11 +154,11 @@ class UserManager
 
         $sqlArgs = $user->wrapModelToDatabase();
 
-        $query = "UPDATE `users` SET `first_name` = '{FIRSTNAME}', `last_name`  = '{LASTNAME}', `company_name` = '{COMPANYNAME}' ";
+        $query = "UPDATE `users` SET `first_name` = '{FIRSTNAME}', `last_name`  = '{LASTNAME}', `search_address` = '{SEARCHADDRESS}', `longitude` = '{LONGITUDE}', `latitude` = '{LATITUDE}'";
         if (! StringUtils::isBlank($user->password)) {
             $query .= ", `password` = '{PASSWORD}' ";
         }
-        $query .= "WHERE `uuid` = {ID}";
+        $query .= " WHERE `uuid` = {ID}";
 
         DatabaseUtils::query($query, $sqlArgs);
 

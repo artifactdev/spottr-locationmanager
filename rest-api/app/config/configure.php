@@ -12,9 +12,9 @@
  * ***********************************************************
  * Database configuration.
  */
-define("CONF_DATABASE_SERVER", "localhost");
+define("CONF_DATABASE_SERVER", "localhost:3306");
 define("CONF_DATABASE_USERNAME", "root");
-define("CONF_DATABASE_PASSWORD", "root");
+define("CONF_DATABASE_PASSWORD", "");
 define("CONF_DATABASE_SCHEMA", "spottr");
 
 define("CONF_FS_MEDIA_LOCATIONS", CONF_FS_ROOT . "media/locations/");

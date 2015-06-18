@@ -1,6 +1,19 @@
 var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
+
+// Default,
 var _latitude = 51.0545032;
 var _longitude = 13.7416008;
+
+$(document).ready(function() {
+    var cookieValue = $.cookie("X-SPOTTR-USER");
+    if (cookieValue === undefined || cookieValue == null || cookieValue == "null") {
+        return;
+    }
+    cookieValue = $.parseJSON(cookieValue);
+    _longitude = cookieValue.longitude;
+    _latitude = cookieValue.latitude;
+});
+
 var mapStyles = [{
     "featureType": "road",
     "elementType": "labels",
@@ -518,7 +531,11 @@ var spottr = {};;
         /**
          * goes to index page
          */
-        goToIndex: function() {
+        goToIndex: function(currentUser) {
+            $.cookie("X-SPOTTR-USER", JSON.stringify(currentUser), {
+                expires: (1 / 24),
+                path: "/"
+            });
             var currentPage = window.location.href;
             var indexPath = path + 'index.php';
             var loginPath = path + 'login.php';

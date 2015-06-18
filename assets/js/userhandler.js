@@ -97,7 +97,7 @@
                     '<td class="id">' + json.items[i].email + '</td>' +
                     '<td class="id">' + json.items[i].firstName + '</td>' +
                     '<td class="id">' + json.items[i].lastName + '</td>' +
-                    '<td class="id">' + json.items[i].mapCenter + '</td>' +
+                    '<td class="id">' + json.items[i].searchAddress + '</td>' +
                     '<td class="id">' + json.items[i].roles + '</td>' +
                     '<td class="id">' +
                     '<button type="button" class="btn btn-default edit-user" data-id="' + json.items[i].id + '" aria-label="Left Align">' +
@@ -166,9 +166,9 @@
                         editUserForm.find('#email').val(data.email);
                         editUserForm.find('#firstname').val(data.firstName);
                         editUserForm.find('#lastname').val(data.lastName);
-                        editUserForm.find('#mapCenter').val(data.mapCenter);
-                        editUserForm.find('#lng').val(data.mapLongitude);
-                        editUserForm.find('#lat').val(data.mapLatitude);
+                        editUserForm.find('#mapCenter').val(data.searchAddress);
+                        editUserForm.find('#lng').val(data.longitude);
+                        editUserForm.find('#lat').val(data.latitude);
                         editUserForm.find('select').val(data.roles);
                         editUserForm.find('select').selectpicker('render');
 
@@ -207,6 +207,15 @@
                             editUserForm.addClass('hide');
                             addUserForm.removeClass('hide');
                             spottr.userAdministration.loadUsers();
+
+                            var currentUser = AuthenticationHelper.loadCurrentUser();
+                            if (currentUser.id == data.id) {
+                                $.cookie("X-SPOTTR-USER", JSON.stringify(data), {
+                                    expires: (1 / 24),
+                                    path: "/"
+                                });
+                            }
+
 
                         },
 
