@@ -20,3 +20,8 @@ assets/styles/.sass-cache/1128ad39d7fee60e6277f9d0e1f72baccf5c24ca/_universal-he
 assets/styles/.sass-cache/1128ad39d7fee60e6277f9d0e1f72baccf5c24ca/_variables.scssc
 assets/styles/.sass-cache/1128ad39d7fee60e6277f9d0e1f72baccf5c24ca/_verwaltung.scssc
 .idea/
+rest-api/log
+rest-api/tmp/
+rest-api/media/locations/thumb/
+rest-api/media/locations/org/
+assets/styles/.sass-cache/
