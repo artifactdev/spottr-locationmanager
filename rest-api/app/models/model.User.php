@@ -77,7 +77,6 @@ class User extends AbstractDatabaseModel
      */
     public function wrapDBResult($dbRow)
     {
-        $this->companyName = $dbRow['company_name'];
         $this->firstName = $dbRow['first_name'];
         $this->lastName = $dbRow['last_name'];
         $this->email = $dbRow['email'];
