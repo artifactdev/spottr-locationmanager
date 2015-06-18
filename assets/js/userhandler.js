@@ -16,6 +16,12 @@
                 spottr.userAdministration.loadUsers();
                 spottr.userAdministration.saveUser(modal);
 
+                $("#geocomplete-karte").geocomplete({
+                    details: "#user-form",
+                    types: ["geocode", "establishment"],
+                    detailsAttribute: "data-geo"
+                });
+
                 $('#user-modal .modal-close').on('click', function() {
                     modal.find('input').val('');
                     modal.find('select').val('');
@@ -91,7 +97,7 @@
                     '<td class="id">' + json.items[i].email + '</td>' +
                     '<td class="id">' + json.items[i].firstName + '</td>' +
                     '<td class="id">' + json.items[i].lastName + '</td>' +
-                    '<td class="id">' + json.items[i].companyName + '</td>' +
+                    '<td class="id">' + json.items[i].mapCenter + '</td>' +
                     '<td class="id">' + json.items[i].roles + '</td>' +
                     '<td class="id">' +
                     '<button type="button" class="btn btn-default edit-user" data-id="' + json.items[i].id + '" aria-label="Left Align">' +
@@ -150,11 +156,19 @@
                         var editUserForm = $('#user-modal').find('.edit-user');
                         editUserForm.removeClass('hide');
 
+                        $("#geocomplete-karte-edit").geocomplete({
+                            details: "#edit-user-form",
+                            types: ["geocode", "establishment"],
+                            detailsAttribute: "data-geo"
+                        });
+
                         editUserForm.find('#id').val(data.id);
                         editUserForm.find('#email').val(data.email);
                         editUserForm.find('#firstname').val(data.firstName);
                         editUserForm.find('#lastname').val(data.lastName);
-                        editUserForm.find('#companyname').val(data.companyName);
+                        editUserForm.find('#mapCenter').val(data.mapCenter);
+                        editUserForm.find('#lng').val(data.mapLongitude);
+                        editUserForm.find('#lat').val(data.mapLatitude);
                         editUserForm.find('select').val(data.roles);
                         editUserForm.find('select').selectpicker('render');
 
