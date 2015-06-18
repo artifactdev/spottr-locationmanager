@@ -30,7 +30,7 @@
                             <td><input type="text" name="firstname" placeholder="Vorname" required/></td>
                             <td><input type="text" name="lastname" placeholder="Nachname" required/></td>
                             <td>
-                                <input type="text"  id="geocomplete-karte" placeholder="Standard Kartenausschnitt" name="search_adress" autocomplete="false"/>
+                                <input type="text"  id="geocomplete-karte" placeholder="Standard Kartenausschnitt" name="search_address" autocomplete="false"/>
                                 <input id="lng" name="longitude" data-geo="lng" type="hidden" value="" placeholder="Longitude">
                                 <input id="lat" name="latitude" data-geo="lat" type="hidden" value="" placeholder="Latitude">
                             </td>
@@ -59,7 +59,7 @@
                             <td><input id="firstname" type="text" name="firstname" placeholder="Vorname" required/></td>
                             <td><input id="lastname" type="text" name="lastname" placeholder="Nachname" required/></td>
                             <td>
-                                <input type="text"  id="geocomplete-karte-edit" placeholder="Standard Kartenausschnitt" name="search_adress" autocomplete="false"/>
+                                <input type="text"  id="geocomplete-karte-edit" placeholder="Standard Kartenausschnitt" name="search_address" autocomplete="false"/>
                                 <input id="lng" name="longitude" data-geo="lng" type="hidden" value="" placeholder="Longitude">
                                 <input id="lat" name="latitude" data-geo="lat" type="hidden" value="" placeholder="Latitude">
                             </td>
