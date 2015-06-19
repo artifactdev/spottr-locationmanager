@@ -29,7 +29,7 @@ $(document).ready(function() {
             if ($body.hasClass('map-fullscreen')) {
                 if ($(window).width() > 768) {
 
-                    $('.map-canvas').height($(window).height() - $('.header').height());
+                    $('.map-canvas').height($(window).height() - $('.header').height() - 15);
                 } else {
                     $('.map-canvas #map').height($(window).height() - $('.header').height());
                 }
