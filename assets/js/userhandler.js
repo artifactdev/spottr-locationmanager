@@ -94,12 +94,12 @@
                 userTable.append(
                     '<tr>' +
                     '<td class="id">' + json.items[i].id + '</td>' +
-                    '<td class="id">' + json.items[i].email + '</td>' +
-                    '<td class="id">' + json.items[i].firstName + '</td>' +
-                    '<td class="id">' + json.items[i].lastName + '</td>' +
-                    '<td class="id">' + json.items[i].searchAddress + '</td>' +
-                    '<td class="id">' + json.items[i].roles + '</td>' +
-                    '<td class="id">' +
+                    '<td class="mail">' + json.items[i].email + '</td>' +
+                    '<td class="firstName">' + json.items[i].firstName + '</td>' +
+                    '<td class="lastName">' + json.items[i].lastName + '</td>' +
+                    '<td class="card">' + json.items[i].searchAddress + '</td>' +
+                    '<td class="roles">' + json.items[i].roles + '</td>' +
+                    '<td class="buttons">' +
                     '<button type="button" class="btn btn-default edit-user" data-id="' + json.items[i].id + '" aria-label="Left Align">' +
                     '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
                     '</button>' +

@@ -6,12 +6,12 @@
                 <table class="userlist">
                     <thead>
                         <tr>
-                            <td>ID</td>
-                            <td>E-Mail</td>
-                            <td>Vorname</td>
-                            <td>Nachname</td>
-                            <td>Kartenausschnitt</td>
-                            <td>Rolle</td>
+                            <td class="id">ID</td>
+                            <td class="mail">E-Mail</td>
+                            <td class="firstName">Vorname</td>
+                            <td class="lastName">Nachname</td>
+                            <td class="card">Kartenausschnitt</td>
+                            <td class="roles">Rolle</td>
 
                         </tr>
                     </thead>

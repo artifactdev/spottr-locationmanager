@@ -20,6 +20,36 @@
         td {
             padding: 3px 8px;
             border: 1px solid $base-grey-light;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+
+            &.id {
+                max-width: 40px;
+                width: 40px;
+            }
+
+            &.mail,
+            &.card {
+                max-width: 315px;
+                width: 315px;
+            }
+
+            &.firstName,
+            &.lastName {
+                max-width: 220px;
+                width: 220px;
+            }
+
+            &.roles {
+                max-width: 60px;
+                width: 60px;
+            }
+
+            &.buttons {
+                max-width: 85px;
+                width: 85px;
+            }
 
             input {
                 background:  $base-grey-light;
@@ -34,5 +64,16 @@
             border: none;
         }
     }  
+
+    .add-user,
+    .edit-user {
+        table {
+            td {
+                max-width: 16.666666%;
+                width: 16.666666%;
+                overflow: visible !important;
+            }
+        }
+    }
 }
 

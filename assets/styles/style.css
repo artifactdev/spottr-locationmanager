@@ -4357,6 +4357,29 @@ body.page-verwaltung ul.items-list .item .item-footer a.btn {
 #user-modal table td {
   padding: 3px 8px;
   border: 1px solid #f4f4f2;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+#user-modal table td.id {
+  max-width: 40px;
+  width: 40px;
+}
+#user-modal table td.mail, #user-modal table td.card {
+  max-width: 315px;
+  width: 315px;
+}
+#user-modal table td.firstName, #user-modal table td.lastName {
+  max-width: 220px;
+  width: 220px;
+}
+#user-modal table td.roles {
+  max-width: 60px;
+  width: 60px;
+}
+#user-modal table td.buttons {
+  max-width: 85px;
+  width: 85px;
 }
 #user-modal table td input {
   background: #f4f4f2;
@@ -4366,6 +4389,12 @@ body.page-verwaltung ul.items-list .item .item-footer a.btn {
 }
 #user-modal #user-form td {
   border: none;
+}
+#user-modal .add-user table td,
+#user-modal .edit-user table td {
+  max-width: 16.666666%;
+  width: 16.666666%;
+  overflow: visible !important;
 }
 
 .ui-ios-overlay {
