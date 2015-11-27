@@ -177,26 +177,8 @@ var spottr = {};;
          * converts select elements to bootstrap selects
          */
         fancySelect: function() {
-            var select = $('select');
-            if (select.length > 0) {
-                select.selectpicker();
-            }
-            var bootstrapSelect = $('.bootstrap-select');
-            var dropDownMenu = $('.dropdown-menu');
-            bootstrapSelect.on('shown.bs.dropdown', function() {
-                dropDownMenu.removeClass('animation-fade-out');
-                dropDownMenu.addClass('animation-fade-in');
-            });
-            bootstrapSelect.on('hide.bs.dropdown', function() {
-                dropDownMenu.removeClass('animation-fade-in');
-                dropDownMenu.addClass('animation-fade-out');
-            });
-            bootstrapSelect.on('hidden.bs.dropdown', function() {
-                var _this = $(this);
-                $(_this).addClass('open');
-                setTimeout(function() {
-                    $(_this).removeClass('open');
-                }, 100);
+            $(document).ready(function() {
+                $('select').material_select();
             });
         },
 
@@ -551,9 +533,9 @@ var spottr = {};;
             var currentPage = window.location.href;
             var loginPath = path + 'login.php';
             if (currentPage != loginPath) {
-                //window.location.replace(loginPath);
+                window.location.replace(loginPath);
             };
-            //spottr.global.logout();
+            spottr.global.logout();
         },
 
         /**
