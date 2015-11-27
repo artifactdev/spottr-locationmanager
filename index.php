@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./assets/styles/bootstrap.css" type="text/css">
+        <link rel="stylesheet" href="./assets/styles/materialize.css" type="text/css">
         <link rel="stylesheet" href="./assets/styles/bootstrap-select.min.css" type="text/css">
         <link rel="stylesheet" href="./assets/styles/font-awesome.css" type="text/css">
         <link rel="stylesheet" href="./assets/styles/style.css" type="text/css">
@@ -15,7 +16,7 @@
             <!-- Inner Wrapper -->
             <div id="inner-wrapper">
                 <!-- Navigation-->
-                <?php 
+                <?php
                     include 'assets/moduls/header.php';
                 ?>
                 <!-- end Navigation-->
@@ -36,13 +37,13 @@
                                 </div>
                                 <div id="map" class="has-parallax"></div>
                                 <!--/#map-->
-                                <?php 
+                                <?php
                                     #include 'assets/moduls/searchbar.php';
                                 ?>
                             </div>
                             <!-- end Map -->
                             <!--Items List-->
-                            <?php 
+                            <?php
                                 include 'assets/moduls/sidebar.php';
                             ?>
                             <!--end Items List-->
@@ -58,6 +59,8 @@
             <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true&amp;libraries=places"></script>
             <script type="text/javascript" src="./assets/js/libs/jquery-2.1.0.min.js"></script>
             <script type="text/javascript" src="./assets/js/libs/bootstrap.min.js"></script>
+            <script type="text/javascript" src="./assets/js/libs/materialize.min.js"></script>
+
 
             <!-- end libs -->
 
@@ -73,8 +76,8 @@
             <script type="text/javascript" src="./assets/js/plugins/jquery.validate.js"></script>
             <script type="text/javascript" src="./assets/js/plugins/jquery.validate.bootstrap.js"></script>
             <script type="text/javascript" src="./assets/js/plugins/star-rating.js"></script>
-            <script type="text/javascript" src="./assets/js/plugins/filterJSON.plugin.js"></script> 
-            <script type="text/javascript" src="./assets/js/plugins/spin.min.js"></script> 
+            <script type="text/javascript" src="./assets/js/plugins/filterJSON.plugin.js"></script>
+            <script type="text/javascript" src="./assets/js/plugins/spin.min.js"></script>
             <script type="text/javascript" src="./assets/js/plugins/iosOverlay.js"></script>
 
 
@@ -86,14 +89,14 @@
             <script type="text/javascript" src="./assets/js/authenticationHelper.js"></script>
             <script type="text/javascript" src="./assets/js/infobox.js"></script>
             <script type="text/javascript" src="./assets/js/maps.js"></script>
-            <script type="text/javascript" src="./assets/js/main.js"></script> 
+            <script type="text/javascript" src="./assets/js/main.js"></script>
 
             <!-- end application -->
- 
-            
+
+
         </div>
         <div class="pac-container hdpi" style="display: none;"></div>
-        <?php 
+        <?php
             include 'assets/moduls/add-modal.php';
             include 'assets/moduls/item-modal.php';
         ?>

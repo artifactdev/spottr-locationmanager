@@ -551,9 +551,9 @@ var spottr = {};;
             var currentPage = window.location.href;
             var loginPath = path + 'login.php';
             if (currentPage != loginPath) {
-                window.location.replace(loginPath);
+                //window.location.replace(loginPath);
             };
-            spottr.global.logout();
+            //spottr.global.logout();
         },
 
         /**
@@ -662,7 +662,7 @@ var spottr = {};;
         /**
          * hide alert
          */
-        
+
         hideAlert: function() {
             $('.ui-ios-overlay').hide();
         },

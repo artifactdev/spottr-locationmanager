@@ -1,1 +1,673 @@
-var path=null!=window.location.href.match(/^(http.+\/)[^\/]+$/)?window.location.href.match(/^(http.+\/)[^\/]+$/)[1]:window.location,_latitude=51.0545032,_longitude=13.7416008,spottr={};!function($,t,a){spottr.global={showEditModal:function(){$("body").on("click",".btn-edit",function(t){var a=$(this).closest(".item").find(".meta-element"),o=$("#edit-modal");spottr.global.modalHandler(o),spottr.administration.editModal(a)})},modalHandler:function(t){var a=t;a.removeClass("hide"),a.addClass("fade-in");var o=a.find("form"),n=o.length;n>=1&&o.validate(),a.find(".modal-close").on("click",function(){a.addClass("hide"),a.removeClass("fade-in"),n>=1&&(o.validate().resetForm(),o.find(".tooltip").addClass("hide"))})},fancySelect:function(){var t=$("select");t.length>0&&t.selectpicker();var a=$(".bootstrap-select"),o=$(".dropdown-menu");a.on("shown.bs.dropdown",function(){o.removeClass("animation-fade-out"),o.addClass("animation-fade-in")}),a.on("hide.bs.dropdown",function(){o.removeClass("animation-fade-in"),o.addClass("animation-fade-out")}),a.on("hidden.bs.dropdown",function(){var t=$(this);$(t).addClass("open"),setTimeout(function(){$(t).removeClass("open")},100)})},menuItemHandler:function(){var t=$("body.page-verwaltung").length,a=$("body.page-homepage").length;t&&$("#useradmin-link").removeClass("hide"),a&&$("#admin-link").removeClass("hide")},loadExifData:function(){var t=function(t){if(t){var a=t.GPSLatitude,o=t.GPSLongitude,n=t.ApertureValue,e=t.FocalLength,i=t.ISOSpeedRatings;$("#lng").val(o),$("#lat").val(a),$("#aperture").val(n),$("#focal").val(e),$("#iso").val(i),console.log(t)}};try{$("#file").change(function(){$(this).fileExif(t)})}catch(a){console.log(a)}},searchFilter:function(){},submitItem:function(){var t=$("body").find("#add-modal"),a=$("#add-form");$(".submit-item").on("click",function(){spottr.global.modalHandler(t),spottr.global.fancySelect()}),spottr.global.loadExifData(),spottr.global.markerToPosition("#map-add"),$("#geocomplete-search").geocomplete({details:"#add-form",types:["geocode","establishment"],detailsAttribute:"data-geo"}),t.find("#add-form").on("submit",function(t){t.preventDefault(),AjaxHandler.request({method:"POST",cache:!1,url:$(this).attr("action"),data:$(this).serializeObject(),success:function(t){var a=$("#add-form-image");spottr.global.submitImage(t.id,a)},error:function(t){console.log(t)}})})},submitImage:function(t,o){var n=o.find("input[type='file']");if(""==n.val()||t==a)return void location.reload(!0);o.attr("action","rest-api/locations/"+t+"/image");var e=$("#js_iframe_location_attachment");e.unbind().load(function(t){t.preventDefault(),location.reload(!0)}),o.submit()},markerToPosition:function(t){var a;$(document).ready(function(){a=new GMaps({div:t,lat:_latitude,lng:_longitude}),GMaps.on("click",a.map,function(t){var o=a.markers.length,n=t.latLng.lat(),e=t.latLng.lng(),i=template.replace(/{{index}}/g,o).replace(/{{lat}}/g,n).replace(/{{lng}}/g,e);console.log(n),console.log(e),a.addMarker({lat:n,lng:e,title:"Marker #"+o,infoWindow:{content:i}})})})},setInputsWidth:function(){for(var t=$(".search-bar.horizontal .input-row"),a=0;a<t.length;a++)t.find($('button[type="submit"]')).length&&t.find(".form-group:last").css("width","initial");for(var o=$(".search-bar.horizontal .form-group"),n=0;n<o.length;n++)$(".main-search").addClass(o.length<=2?"inputs-1":o.length<=3?"inputs-2":o.length<=4?"inputs-3":o.length<=5?"inputs-4":o.length<=6?"inputs-5":"inputs-4"),$(".search-bar.horizontal .form-group label").length>0&&$(".search-bar.horizontal .form-group:last-child button").css("margin-top",25)},goToIndex:function(){var a=t.location.href,o=path+"index.php",n=path+"login.php";a===n&&t.location.replace(o)},goToLogin:function(){var a=t.location.href,o=path+"login.php";a!=o&&t.location.replace(o)}}}(jQuery,this);
+var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
+
+// Default,
+var _latitude = 51.0545032;
+var _longitude = 13.7416008;
+
+$(document).ready(function() {
+    var cookieValue = $.cookie("X-SPOTTR-USER");
+    if (cookieValue === undefined || cookieValue == null || cookieValue == "null") {
+        return;
+    }
+    cookieValue = $.parseJSON(cookieValue);
+    _longitude = cookieValue.longitude;
+    _latitude = cookieValue.latitude;
+});
+
+var mapStyles = [{
+    "featureType": "road",
+    "elementType": "labels",
+    "stylers": [{
+        "visibility": "simplified"
+    }, {
+        "lightness": 20
+    }]
+}, {
+    "featureType": "administrative.land_parcel",
+    "elementType": "all",
+    "stylers": [{
+        "visibility": "off"
+    }]
+}, {
+    "featureType": "landscape.man_made",
+    "elementType": "all",
+    "stylers": [{
+        "visibility": "on"
+    }]
+}, {
+    "featureType": "transit",
+    "elementType": "all",
+    "stylers": [{
+        "saturation": -100
+    }, {
+        "visibility": "on"
+    }, {
+        "lightness": 10
+    }]
+}, {
+    "featureType": "road.local",
+    "elementType": "all",
+    "stylers": [{
+        "visibility": "on"
+    }]
+}, {
+    "featureType": "road.local",
+    "elementType": "all",
+    "stylers": [{
+        "visibility": "on"
+    }]
+}, {
+    "featureType": "road.highway",
+    "elementType": "labels",
+    "stylers": [{
+        "visibility": "simplified"
+    }]
+}, {
+    "featureType": "poi",
+    "elementType": "labels",
+    "stylers": [{
+        "visibility": "off"
+    }]
+}, {
+    "featureType": "road.arterial",
+    "elementType": "labels",
+    "stylers": [{
+        "visibility": "on"
+    }, {
+        "lightness": 50
+    }]
+}, {
+    "featureType": "water",
+    "elementType": "all",
+    "stylers": [{
+        "hue": "#a1cdfc"
+    }, {
+        "saturation": 30
+    }, {
+        "lightness": 49
+    }]
+}, {
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [{
+        "hue": "#f49935"
+    }]
+}, {
+    "featureType": "road.arterial",
+    "elementType": "geometry",
+    "stylers": [{
+        "hue": "#fad959"
+    }]
+}, {
+    featureType: 'road.highway',
+    elementType: 'all',
+    stylers: [{
+        hue: '#dddbd7'
+    }, {
+        saturation: -92
+    }, {
+        lightness: 60
+    }, {
+        visibility: 'on'
+    }]
+}, {
+    featureType: 'landscape.natural',
+    elementType: 'all',
+    stylers: [{
+        hue: '#c8c6c3'
+    }, {
+        saturation: -71
+    }, {
+        lightness: -18
+    }, {
+        visibility: 'on'
+    }]
+}, {
+    featureType: 'poi',
+    elementType: 'all',
+    stylers: [{
+        hue: '#d9d5cd'
+    }, {
+        saturation: -70
+    }, {
+        lightness: 20
+    }, {
+        visibility: 'on'
+    }]
+}];
+
+;
+var spottr = {};;
+(function($, window, undefined) {
+    spottr.global = {
+        /**
+         * general modal handling opens the modal with the given modalID
+         * @param  {ID} modalID the given modal ID
+         */
+        modalHandler: function(modalID) {
+            var modal = modalID;
+
+            modal.removeClass('hide');
+            modal.addClass('fade-in');
+
+            var modalForm = modal.find('form');
+            var hasForm = modalForm.length;
+
+            if (hasForm >= 1) {
+                modalForm.validate();
+            }
+
+            modal.find('.modal-close').on('click', function() {
+
+                modal.addClass('hide');
+                modal.removeClass('fade-in');
+
+                modal.find('input').each(function() {
+                    $(this).val('');
+                });
+
+                if (hasForm >= 1) {
+                    modalForm.validate().resetForm();
+                    modalForm.find('.tooltip').addClass('hide');
+                }
+            });
+        },
+
+        /**
+         * converts select elements to bootstrap selects
+         */
+        fancySelect: function() {
+            var select = $('select');
+            if (select.length > 0) {
+                select.selectpicker();
+            }
+            var bootstrapSelect = $('.bootstrap-select');
+            var dropDownMenu = $('.dropdown-menu');
+            bootstrapSelect.on('shown.bs.dropdown', function() {
+                dropDownMenu.removeClass('animation-fade-out');
+                dropDownMenu.addClass('animation-fade-in');
+            });
+            bootstrapSelect.on('hide.bs.dropdown', function() {
+                dropDownMenu.removeClass('animation-fade-in');
+                dropDownMenu.addClass('animation-fade-out');
+            });
+            bootstrapSelect.on('hidden.bs.dropdown', function() {
+                var _this = $(this);
+                $(_this).addClass('open');
+                setTimeout(function() {
+                    $(_this).removeClass('open');
+                }, 100);
+            });
+        },
+
+        /**
+         * handles the menuItems and shows them where they should appear
+         */
+        menuItemHandler: function() {
+            var isVerwaltung = $('body.page-verwaltung').length;
+            var isHome = $('body.page-homepage').length;
+
+            if (isVerwaltung) {
+                $('#useradmin-link').removeClass('hide');
+            }
+            if (isHome) {
+                $('#admin-link').removeClass('hide');
+            }
+            if (isHome || isVerwaltung) {
+                $('.submit-item ').removeClass('hide');
+            }
+        },
+
+        /**
+         * loads the exif data of location image in formelements on location edit and add
+         */
+        loadExifData: function() {
+            var someCallback = function(exifObject) {
+
+                if (!exifObject) {
+                    return
+                }
+                var latitude = exifObject.GPSLatitude;
+                var longitude = exifObject.GPSLongitude;
+                var aperture = exifObject.ApertureValue;
+                //var date = exifObject.DateTimeOriginal;
+                var focal = exifObject.FocalLength;
+                var iso = exifObject.ISOSpeedRatings;
+
+                if (focal === undefined || focal === 'NaN') {
+                    var focal = 0;
+                }
+
+                var focalRounded = Math.round(focal);
+
+                $('#lng').val(longitude);
+                $('#lat').val(latitude);
+                $('#aperture').val(aperture);
+                //$('#date').val(date);
+                $('#focal').val(focalRounded);
+                $('#iso').val(iso);
+
+                // Uncomment the line below to examine the
+                // EXIF object in console to read other values
+                console.log(exifObject);
+
+            };
+
+            try {
+                $('#file').change(function() {
+                    $(this).fileExif(someCallback);
+                });
+            } catch (e) {
+                console.log(e);
+            }
+        },
+
+        /**
+         * converts rating input to stars
+         * @param  {DOM Element} element     The element which should be converted
+         * @param  {String} size        the size of the stars
+         * @param  {Boolean} showCaption Should the stars have an caption
+         * @param  {Boolean} showClear   should the stars have an clear button
+         */
+        rating: function(element, size, showCaption, showClear) {
+            element = typeof element !== 'undefined' ? element : $(".rating");
+            size = typeof size !== 'undefined' ? size : 'xs';
+            showCaption = typeof showCaption !== 'undefined' ? showCaption : false;
+            showClear = typeof showClear !== 'undefined' ? showClear : false;
+
+            element.rating({
+                'size': size,
+                'showCaption': showCaption,
+                'showClear': showClear
+            });
+        },
+
+        searchFilter: function() {
+
+        },
+
+        /**
+         * shows the add location modal and initialises all data and functions which are needed there
+         * also it handles the submit of a new location
+         */
+        submitItem: function() {
+            var addModal = $('body').find('#add-modal');
+            var addForm = $('#add-form');
+
+            $('.submit-item').on('click', function() {
+                spottr.global.modalHandler(addModal);
+                spottr.global.fancySelect();
+            });
+
+            spottr.global.loadExifData();
+
+            $("#geocomplete-search").geocomplete({
+                details: "#add-form",
+                types: ["geocode", "establishment"],
+                detailsAttribute: "data-geo"
+            });
+
+
+            spottr.global.markerToPosition(addForm, '#map-add');
+
+            $('.getLocation').on('click', function(e){
+                e.preventDefault;
+                console.log('clicked');
+                spottr.global.getLocation(addForm);
+            });
+
+            addModal.find('#add-form').on('submit', function(e) {
+                e.preventDefault();
+                spottr.global.loading();
+                addForm.validate();
+                if (addForm.valid()) {
+                    AjaxHandler.request({
+                        method: "POST",
+                        cache: false,
+                        url: $(this).attr('action'),
+                        data: $(this).serializeObject(),
+                        success: function(data) {
+                            var form = $('#add-form-image');
+                            spottr.global.submitImage(data.id, form);
+                        },
+                        error: function(data) {
+                            spottr.global.error('Fehler beim hinzufügen');
+                            console.log(data);
+                        }
+                    });
+                }
+            });
+
+            // fix for strange loading issue
+            $('body').find('.submit-item').on('click', function() {
+                setTimeout(function() {
+                    spottr.global.markerToPosition(addForm, '#map-add');
+                }, 500);
+            });
+        },
+
+        /**
+         * gets the current location from gps
+         * @return {[type]} [description]
+         */
+        getLocation: function(addForm){
+
+            function showLocation(position) {
+                var latitude = position.coords.latitude;
+                var longitude = position.coords.longitude;
+
+                console.log(latitude);
+                console.log(longitude);
+                console.log(position);
+
+                spottr.global.markerToPosition(addForm, '#map-add',latitude,longitude);
+
+                var formLat = $(addForm).find('#lat');
+                var formLng = $(addForm).find('#lng');
+
+                formLat.val(latitude);
+                formLng.val(longitude);
+
+             }
+
+             function errorHandler(err) {
+                if(err.code == 1) {
+                   alert("Error: Access is denied!");
+                }else if( err.code == 2) {
+                   alert("Error: Position is unavailable!");
+                }
+             }
+
+            if( navigator.geolocation) {
+                var options = { enableHighAccuracy: true, maximumAge: 100, timeout: 60000 };
+                var watchID = navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options);
+                var timeout = setTimeout( function() { navigator.geolocation.clearWatch( watchID ); }, 5000 );
+            } else {
+               alert("Sorry, browser does not support geolocation!");
+            }
+         },
+
+        /**
+         * submits the location image to the backend on success the window will be reloaded
+         * @param  {ID} locationId the given locationID where image should be added to
+         * @param  {ID} attForm    The form where it gets the image from
+         */
+        submitImage: function(locationId, attForm) {
+            var $file = attForm.find("input[type='file']");
+            if ($file.val() == "" || locationId == undefined) {
+                location.reload(true);
+                return;
+            }
+
+            attForm.attr("action", "rest-api/locations/" + locationId + "/image");
+
+            var $iframe = $("#js_iframe_location_attachment");
+            $iframe.unbind().load(function(event) {
+                event.preventDefault();
+                spottr.global.loading();
+                location.reload(true);
+            });
+
+            attForm.submit();
+        },
+
+        /**
+         * adds a marker to a given map or handles the setting of a marker
+         * @param  {Object} form      The form where it should fired
+         * @param  {ID} element   The element where the map should be added
+         * @param  {String} latitude  The Latitude if an marker should be shown on initialize
+         * @param  {String} longitude The Longitude if an marker should be shown on initialize
+         */
+        markerToPosition: function(form, element, latitude, longitude) {
+            var map;
+
+            $(document).ready(function() {
+
+                if (latitude != undefined && longitude != undefined) {
+                    _latitude = latitude;
+                    _longitude = longitude;
+                }
+
+                var map = new GMaps({
+                    div: element,
+                    lat: _latitude,
+                    lng: _longitude,
+                    width: '500px',
+                    height: '250px',
+                    zoom: 12,
+                    styles: mapStyles,
+                    zoomControl: true,
+                    zoomControlOpt: {
+                        style: 'SMALL',
+                        position: 'TOP_RIGHT'
+                    },
+                    panControl: false
+                });
+
+                if (latitude === undefined && longitude === undefined) {
+                    GMaps.on('click', map.map, function(event) {
+                        var index = map.markers.length;
+                        var lat = event.latLng.lat();
+                        var lng = event.latLng.lng();
+                        var formLat = $(form).find('#lat');
+                        var formLng = $(form).find('#lng');
+                        var completeInput = $(form).find('#geocomplete-search');
+
+                        if (index <= 0) {
+                            var marker;
+                            marker = map.addMarker({
+                                lat: lat,
+                                lng: lng,
+                                draggable: true
+                            });
+                            formLat.attr('value', lat);
+                            formLng.attr('value', lng);
+                            completeInput.attr('disabled', 'disabled');
+                        } else {
+                            spottr.global.error('Bitte den Marker zur Position ziehen.',3e3);
+                        }
+
+                        google.maps.event.addListener(
+                            marker,
+                            'drag',
+                            function() {
+                                formLat.attr('value', marker.position.lat());
+                                formLng.attr('value', marker.position.lng());
+                            }
+                        );
+
+                        $('body').find('.modal-close').on('click', function() {
+                            completeInput.removeAttr('disabled');
+                            map.removeMarkers();
+                            formLat.attr('value', '');
+                            formLng.attr('value', '');
+                        });
+                    });
+
+                } else {
+                    var marker;
+                    marker = map.addMarker({
+                        lat: latitude,
+                        lng: longitude,
+                        draggable: false
+                    });
+                }
+            });
+
+        },
+
+        /**
+         * Sets input widths for searchbar
+         */
+        setInputsWidth: function() {
+            var $inputRow = $('.search-bar.horizontal .input-row');
+            for (var i = 0; i < $inputRow.length; i++) {
+                if ($inputRow.find($('button[type="submit"]')).length) {
+                    $inputRow.find('.form-group:last').css('width', 'initial');
+                }
+            }
+
+            var searchBar = $('.search-bar.horizontal .form-group');
+            for (var a = 0; a < searchBar.length; a++) {
+                if (searchBar.length <= (1 + 1)) {
+                    $('.main-search').addClass('inputs-1');
+                } else if (searchBar.length <= (2 + 1)) {
+                    $('.main-search').addClass('inputs-2');
+                } else if (searchBar.length <= (3 + 1)) {
+                    $('.main-search').addClass('inputs-3');
+                } else if (searchBar.length <= (4 + 1)) {
+                    $('.main-search').addClass('inputs-4');
+                } else if (searchBar.length <= (5 + 1)) {
+                    $('.main-search').addClass('inputs-5');
+                } else {
+                    $('.main-search').addClass('inputs-4');
+                }
+                if ($('.search-bar.horizontal .form-group label').length > 0) {
+                    $('.search-bar.horizontal .form-group:last-child button').css('margin-top', 25)
+                }
+            }
+        },
+
+        /**
+         * goes to index page
+         */
+        goToIndex: function(currentUser) {
+            $.cookie("X-SPOTTR-USER", JSON.stringify(currentUser), {
+                expires: (1 / 24),
+                path: "/"
+            });
+            var currentPage = window.location.href;
+            var indexPath = path + 'index.php';
+            var loginPath = path + 'login.php';
+            if (currentPage === loginPath) {
+                window.location.replace(indexPath);
+            }
+        },
+
+        /**
+         * goes to login page
+         */
+        goToLogin: function() {
+            var currentPage = window.location.href;
+            var loginPath = path + 'login.php';
+            if (currentPage != loginPath) {
+                //window.location.replace(loginPath);
+            };
+            //spottr.global.logout();
+        },
+
+        /**
+         * deletes the authentication cookie if logout button is clicked and reloads the page
+         */
+        logout: function() {
+            var currentPage = window.location.href;
+            var loginPath = path + 'login.php';
+            if (currentPage != loginPath) {
+                var logoutButton = $('body').find('#logout');
+                logoutButton.removeClass('hide');
+                logoutButton.on('click', function() {
+                    AuthenticationHelper.deleteAuthenticationToken();
+                    window.location.reload();
+                });
+
+            }
+        },
+
+        /**
+         * adds a loadingspinner
+         */
+        loading: function(duration) {
+            var durationTime = null;
+
+            if (duration != undefined) {
+                durationTime = duration;
+            }
+
+            var opts = {
+                lines: 13, // The number of lines to draw
+                length: 11, // The length of each line
+                width: 5, // The line thickness
+                radius: 17, // The radius of the inner circle
+                corners: 1, // Corner roundness (0..1)
+                rotate: 0, // The rotation offset
+                color: '#FFF', // #rgb or #rrggbb
+                speed: 1, // Rounds per second
+                trail: 60, // Afterglow percentage
+                shadow: false, // Whether to render a shadow
+                hwaccel: false, // Whether to use hardware acceleration
+                className: 'spinner', // The CSS class to assign to the spinner
+                zIndex: 2e9, // The z-index (defaults to 2000000000)
+                top: 'auto', // Top position relative to parent in px
+                left: 'auto' // Left position relative to parent in px
+            };
+            var target = document.createElement("div");
+            document.body.appendChild(target);
+            var spinner = new Spinner(opts).spin(target);
+            iosOverlay({
+                text: "Loading",
+                duration: durationTime,
+                spinner: spinner
+            });
+            return false;
+        },
+
+        /**
+         * shows an error alert
+         */
+
+        error: function(message,duration) {
+            var errorMessage = 'Error!',
+                durationTime = 5e3;
+
+            if (message != undefined) {
+                errorMessage = message;
+            }
+
+            if (duration != undefined) {
+                durationTime = duration;
+            }
+
+            iosOverlay({
+                text: errorMessage,
+                duration: durationTime,
+                icon: "assets/img/cross.png"
+            });
+            return false;
+        },
+
+        /**
+         * shows a success alert
+         */
+
+        success: function(message,duration) {
+            var successMessage = 'Success!',
+                durationTime = 5e3;
+
+            if (message != undefined) {
+                successMessage = message;
+            }
+
+            if (duration != undefined) {
+                durationTime = duration;
+            }
+
+            iosOverlay({
+                text: successMessage,
+                duration: durationTime,
+                icon: "assets/img/check.png"
+            });
+            return false;
+        },
+
+        /**
+         * hide alert
+         */
+
+        hideAlert: function() {
+            $('.ui-ios-overlay').hide();
+        },
+
+    };
+})(jQuery, this);
+
+
