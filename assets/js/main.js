@@ -26,12 +26,8 @@ $(document).ready(function() {
          */
         initMap: function() {
             var $body = $('body');
-                if ($(window).width() > 768) {
 
-                    $('.map-canvas').height($(window).height() - $('.header').height() - 15);
-                } else {
-                    $('.map-canvas #map').height($(window).height() - $('.header').height());
-                }
+            $('#map').height($(window).height() - $('header').height());
 
             var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
 
@@ -54,7 +50,7 @@ $(document).ready(function() {
          */
         mobileNavigation: function() {
             $(".button-collapse").sideNav({
-                menuWidth: 380, // Default is 240
+                menuWidth: 350, // Default is 240
                 edge: 'left', // Choose the horizontal origin
                 closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
               }
@@ -68,8 +64,8 @@ $(document).ready(function() {
             var metaItem = $(this).find('.quick-preview');
             var modal = $('#modal');
 
-            $('body').on('click', '.results li', function(id) {
-                var metaItem = $(this).find('.quick-preview');
+            $('body').on('click', '.results .result-card', function(id) {
+                var metaItem = $(this);
                 spottr.global.modalHandler(modal);
                 spottr.main.fillModal(metaItem);
 
@@ -134,7 +130,8 @@ $(document).ready(function() {
             }
 
             visibleItemsArray.push(
-                '<li>' +
+                /* TODO */
+                /*'<li>' +
                 '<div class="item" id="' + json.items[a].id + '">' +
                 '<a href="#" class="image">' +
                 '<div class="inner">' +
@@ -160,7 +157,26 @@ $(document).ready(function() {
                 '</div>' +
                 '</div>' +
                 '</div>' +
-                '</li>'
+                '</li>'*/
+                '<div class="card result-card" id="' + json.items[a].id + '" data-gallery="' + json.items[a].gallery + '" data-title="' + json.items[a].title + '" data-type="' + json.items[a].type + '"  data-category="' + json.items[a].category + '" data-location="' + json.items[a].latitude + ','+ json.items[a].longitude + '" data-aperture="' + json.items[a].aperture + '" data-date="' + json.items[a].date + '" data-focal="' + json.items[a].focal + '" data-iso="' + json.items[a].iso + '" data-notiz="' + json.items[a].note + '" data-rating="' + json.items[a].rating + '">'+
+                '<div class="card-image">'+
+                  '<img src="' + path + gallery + '" alt="">' +
+                  '<span class="card-title">' + json.items[a].title + '</span>' +
+                '</div>' +
+                '<div class="card-content">'+
+                    '<div class="col s6 no-padding">' +
+                        '<div class="type">' +
+                            '<i><img src="' + path + json.items[a].type + '" alt=""></i>' +
+                            '<span>' + json.items[a].category + '</span>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="col s6 no-padding">' +
+                        '<span class="rating-label">Zugänglichkeit</span>' +
+                        '<input class="rating" type="number" readonly value="' + json.items[a].rating + '"/>' +
+                    '</div>' +
+                    '<span class="clearfix"></span>' +
+                '</div>'+
+              '</div>'
             );
         },
 

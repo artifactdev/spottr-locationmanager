@@ -6,11 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./assets/styles/bootstrap.css" type="text/css">
         <link rel="stylesheet" href="./assets/styles/bootstrap-select.min.css" type="text/css">
-        <link rel="stylesheet" href="./assets/styles/materialize.css" type="text/css">
         <link rel="stylesheet" href="./assets/styles/font-awesome.css" type="text/css">
         <link rel="stylesheet" href="./assets/styles/style.css" type="text/css">
         <title>Spottr</title>
-    <body onunload="" class="page-login navigation-off-canvas page-fade-in" id="page-top" data-feedly-mini="yes">
+    <body onunload="" class="page-login navigation-off-canvas page-fade-in" id="page-top">
         <!-- Outer Wrapper-->
         <div id="outer-wrapper">
             <!-- Inner Wrapper -->
@@ -70,10 +69,5 @@
 
             <!-- end application -->
         </div>
-        <div class="pac-container hdpi" style="display: none;"></div>
-        <?php
-            include 'assets/moduls/add-modal.php';
-            include 'assets/moduls/item-modal.php';
-        ?>
     </body>
 </html>

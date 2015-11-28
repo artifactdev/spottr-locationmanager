@@ -205,7 +205,7 @@ function createHomepageGoogleMap(_latitude, _longitude, json) {
 
             // Create list of items in Results sidebar ---------------------------------------------------------------------
 
-            $('.items-list .results').html(visibleItemsArray);
+            $('.results').html(visibleItemsArray);
 
             // Check if images are cached, so will not be loaded again
 

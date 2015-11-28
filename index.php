@@ -15,7 +15,7 @@
                   <div class="nav-wrapper">
                     <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
                     <a href="index.php" class="brand-logo left"><img src="assets/img/logo.png" alt="logo"></a>
-                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <ul id="nav-mobile" class="right">
                       <li><a href="#">Users</a></li>
                       <li><a href="verwaltung.php">Verwaltung</a></li>
                       <li><a href="#">Logout</a></li>
@@ -25,25 +25,28 @@
                 </nav>
             </header>
             <!-- Page Layout here -->
-            <div class="row">
-                <div id="slide-out" class="side-nav fixed">
-                  <h3 class="center">Results</h3>
-                  <div class="input-field col s12">
-                        <select class="icons">
-                          <option value="0" disabled selected>Choose your option</option>
-                          <option value="1" >example 1</option>
-                          <option value="2" >example 2</option>
-                          <option value="3" >example 1</option>
-                        </select>
-                        <label>Filter</label>
-                      </div>
-                </div>
-                <div class="col s12">
-                  <!-- Teal page content  -->
-                  <div id="map" class="map"></div>
-                </div>
+            <main>
+                <div class="row">
+                    <div id="slide-out" class="side-nav fixed">
+                      <h3 class="center">Results</h3>
+                      <div class="input-field col s12">
+                            <select class="icons">
+                              <option value="0" disabled selected>Choose your option</option>
+                              <option value="1" >example 1</option>
+                              <option value="2" >example 2</option>
+                              <option value="3" >example 1</option>
+                            </select>
+                            <label>Filter</label>
+                          </div>
+                          <div class="col s12 results"></div>
+                    </div>
+                    <div class="no-padding col s12">
+                      <!-- Teal page content  -->
+                      <div id="map"></div>
+                    </div>
 
-            </div>
+                </div>
+            </main>
             <!-- start libs -->
             <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true&amp;libraries=places"></script>
             <script type="text/javascript" src="./assets/js/libs/jquery-2.1.0.min.js"></script>
