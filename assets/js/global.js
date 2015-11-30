@@ -148,6 +148,7 @@ var spottr = {};;
             var modal = modalID;
 
             modal.openModal();
+            modal.find('.modal-content').scrollTop(0);
 
             var modalForm = modal.find('form');
             var hasForm = modalForm.length;

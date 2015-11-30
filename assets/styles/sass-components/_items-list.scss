@@ -1,4 +1,5 @@
-.results {
+.results,
+.items-list {
     .card {
         cursor: pointer;
         .card-image {
@@ -53,5 +54,14 @@
         .clearfix {
             display: block;
         }
+    }
+}
+
+.items-list {
+    .card {
+        float: left;
+
+        width: 31%;
+        margin: 1%;
     }
 }
