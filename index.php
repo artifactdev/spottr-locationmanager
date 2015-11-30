@@ -18,8 +18,7 @@
                     <ul id="nav-mobile" class="right">
                       <li><a href="#">Users</a></li>
                       <li><a href="verwaltung.php">Verwaltung</a></li>
-                      <li><a href="#">Logout</a></li>
-                      <li><a href="#" class="submit-item">Spot hinzufügen</a></li>
+                      <li><a href="#" id="logout">Logout</a></li>
                     </ul>
                   </div>
                 </nav>
@@ -31,6 +30,11 @@
                     <div class="no-padding col s12">
                       <!-- Teal page content  -->
                       <div id="map"></div>
+                    </div>
+                    <div class="fixed-action-btn">
+                          <a class="btn-floating submit-item btn-large">
+                            <i class="material-icons mdi-av-playlist-add">playlist_add</i>
+                          </a>
                     </div>
 
                 </div>
