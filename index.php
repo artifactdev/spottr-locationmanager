@@ -27,19 +27,7 @@
             <!-- Page Layout here -->
             <main>
                 <div class="row">
-                    <div id="slide-out" class="side-nav fixed">
-                      <h3 class="center">Results</h3>
-                      <div class="input-field col s12">
-                            <select class="icons">
-                              <option value="0" disabled selected>Choose your option</option>
-                              <option value="1" >example 1</option>
-                              <option value="2" >example 2</option>
-                              <option value="3" >example 1</option>
-                            </select>
-                            <label>Filter</label>
-                          </div>
-                          <div class="col s12 results"></div>
-                    </div>
+                    <?php include 'assets/moduls/sidebar.php'; ?>
                     <div class="no-padding col s12">
                       <!-- Teal page content  -->
                       <div id="map"></div>
@@ -64,7 +52,6 @@
             <script type="text/javascript" src="./assets/js/plugins/richmarker.js"></script>
             <script type="text/javascript" src="./assets/js/plugins/markerclusterer.js"></script>
             <script type="text/javascript" src="./assets/js/plugins/jquery.validate.js"></script>
-            <script type="text/javascript" src="./assets/js/plugins/jquery.validate.bootstrap.js"></script>
             <script type="text/javascript" src="./assets/js/plugins/star-rating.js"></script>
             <script type="text/javascript" src="./assets/js/plugins/filterJSON.plugin.js"></script>
             <script type="text/javascript" src="./assets/js/plugins/spin.min.js"></script>

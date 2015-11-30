@@ -1,16 +1,44 @@
 .results {
     .card {
+        cursor: pointer;
         .card-image {
             overflow: hidden;
 
-            max-height: 200px !important;
+            height: 220px !important;
+            > img {
+                position: absolute;
+                top: 50%;
+
+                transform: translateY(-50%);
+            }
             .card-title {
+                top: 0;
+                bottom: auto;
+
                 width: 100%;
 
                 background: $black-transparent;
+                .rating {
+                    font-size: 84px;
+                    line-height: 84px;
+
+                    position: absolute;
+                    top: 0;
+                    right: -8px;
+
+                    opacity: 0.2;
+                }
             }
         }
-        .card-content {
+        .card-info {
+            position: absolute;
+            bottom: 0;
+
+            width: 100%;
+            padding: 2px 20px;
+
+            color: $base-white;
+            background: $black-transparent;
             .type {
                 i {
                     float: left;

@@ -147,8 +147,7 @@ var spottr = {};;
         modalHandler: function(modalID) {
             var modal = modalID;
 
-            modal.removeClass('hide');
-            modal.addClass('fade-in');
+            modal.openModal();
 
             var modalForm = modal.find('form');
             var hasForm = modalForm.length;
@@ -156,21 +155,6 @@ var spottr = {};;
             if (hasForm >= 1) {
                 modalForm.validate();
             }
-
-            modal.find('.modal-close').on('click', function() {
-
-                modal.addClass('hide');
-                modal.removeClass('fade-in');
-
-                modal.find('input').each(function() {
-                    $(this).val('');
-                });
-
-                if (hasForm >= 1) {
-                    modalForm.validate().resetForm();
-                    modalForm.find('.tooltip').addClass('hide');
-                }
-            });
         },
 
         /**
@@ -242,26 +226,6 @@ var spottr = {};;
             } catch (e) {
                 console.log(e);
             }
-        },
-
-        /**
-         * converts rating input to stars
-         * @param  {DOM Element} element     The element which should be converted
-         * @param  {String} size        the size of the stars
-         * @param  {Boolean} showCaption Should the stars have an caption
-         * @param  {Boolean} showClear   should the stars have an clear button
-         */
-        rating: function(element, size, showCaption, showClear) {
-            element = typeof element !== 'undefined' ? element : $(".rating");
-            size = typeof size !== 'undefined' ? size : 'xs';
-            showCaption = typeof showCaption !== 'undefined' ? showCaption : false;
-            showClear = typeof showClear !== 'undefined' ? showClear : false;
-
-            element.rating({
-                'size': size,
-                'showCaption': showCaption,
-                'showClear': showClear
-            });
         },
 
         searchFilter: function() {

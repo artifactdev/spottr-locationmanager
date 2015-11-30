@@ -1,7 +1,7 @@
 /**
  * drawInfobox adds the infobox to each marker
  * @param  {string} category       gets the category of item
- * @param  {} infoboxContent 
+ * @param  {} infoboxContent
  * @param  {json} json           gets the json for each item
  * @param  {int} i              gets the number of the item in the json tree
  * @return {html}                returns html to add to the marker
@@ -40,7 +40,7 @@ function drawInfobox(category, infoboxContent, json, i){
         else                            { thumb = 'rest-api/media/locations/default-item.png' }
 
     var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
-    
+
     var ibContent = '';
     ibContent =
     '<div class="infobox">' +
@@ -48,7 +48,7 @@ function drawInfobox(category, infoboxContent, json, i){
             '<div class="image">' +
                 '<div class="overlay">' +
                     '<div class="wrapper">' +
-                        '<a href="#" class="quick-view" data-id="' + id + '" data-gallery="' + path + gallery + '" data-title="' + title +'" data-type="' + type +'"  data-category="' + category +'" data-location="' + location +'" data-aperture="' + aperture +'" data-date="' + date +'" data-focal="' + focal +'" data-iso="' + iso +'" data-notiz="' + notiz +'" data-rating="' + rating +'">Quick View</a>' +
+                        '<a href="#" class="quick-view showModal" data-id="' + id + '" data-gallery="' + path + gallery + '" data-title="' + title +'" data-type="' + type +'"  data-category="' + category +'" data-location="' + location +'" data-aperture="' + aperture +'" data-date="' + date +'" data-focal="' + focal +'" data-iso="' + iso +'" data-notiz="' + notiz +'" data-rating="' + rating +'">Quick View</a>' +
                     '</div>' +
                 '</div>' +
                 '<a href="#" class="quick-view">' +

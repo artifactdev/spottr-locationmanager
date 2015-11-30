@@ -207,6 +207,8 @@ function createHomepageGoogleMap(_latitude, _longitude, json) {
 
             $('.results').html(visibleItemsArray);
 
+            spottr.main.addResultListener();
+
             // Check if images are cached, so will not be loaded again
 
             $.each(json.items, function(a) {
@@ -215,9 +217,6 @@ function createHomepageGoogleMap(_latitude, _longitude, json) {
                 }
             });
 
-            // Call Rating function ----------------------------------------------------------------------------------------
-
-            spottr.global.rating();
             spottr.global.hideAlert();
         });
 
