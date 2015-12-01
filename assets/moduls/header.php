@@ -19,15 +19,15 @@
     </div>
 </div>-->
 
-<header class="header">
+ <header class="header">
     <nav>
       <div class="nav-wrapper">
-        <a href="index.php" class="brand-logo center"><img src="assets/img/logo.png" alt="logo"></a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+        <a href="index.php" class="brand-logo left"><img src="assets/img/logo.png" alt="logo"></a>
+        <ul id="nav-mobile" class="right">
           <li><a href="#">Users</a></li>
           <li><a href="verwaltung.php">Verwaltung</a></li>
-          <li><a href="#">Logout</a></li>
-          <li><a href="#" class="submit-item">Spot hinzufügen</a></li>
+          <li><a href="#" id="logout">Logout</a></li>
         </ul>
       </div>
     </nav>

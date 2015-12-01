@@ -10,19 +10,7 @@
     <body onunload="" class=" page-homepage navigation-off-canvas page-fade-in login" id="page-top">
 
             <!-- Navbar goes here -->
-            <header class="header">
-                <nav>
-                  <div class="nav-wrapper">
-                    <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-                    <a href="index.php" class="brand-logo left"><img src="assets/img/logo.png" alt="logo"></a>
-                    <ul id="nav-mobile" class="right">
-                      <li><a href="#">Users</a></li>
-                      <li><a href="verwaltung.php">Verwaltung</a></li>
-                      <li><a href="#" id="logout">Logout</a></li>
-                    </ul>
-                  </div>
-                </nav>
-            </header>
+           <?php include 'assets/moduls/header.php' ?>
             <!-- Page Layout here -->
             <main>
                 <div class="row">
