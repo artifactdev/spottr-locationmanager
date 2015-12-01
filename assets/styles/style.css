@@ -9050,9 +9050,17 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 
 .items-list .card {
   float: left;
-  width: 31%;
   margin: 1%; }
 
+@media only screen and (min-width: 1024px) {
+  .items-list .card {
+    width: 23%; } }
+@media only screen and (max-width: 1023px) {
+  .items-list .card {
+    width: 31%; } }
+@media only screen and (max-width: 768px) {
+  .items-list .card {
+    width: 48%; } }
 .modal {
   width: 95%; }
 
