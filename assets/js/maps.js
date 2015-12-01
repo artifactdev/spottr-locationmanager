@@ -216,8 +216,6 @@ function createHomepageGoogleMap(_latitude, _longitude, json) {
                     is_cached(json.items[a].thumb, a);
                 }
             });
-
-            spottr.global.hideAlert();
         });
 
         redrawMap('google', map);

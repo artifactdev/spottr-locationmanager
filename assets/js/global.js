@@ -549,7 +549,8 @@ var spottr = {};;
             };
             var target = document.createElement("div");
             document.body.appendChild(target);
-            Materialize.toast('Loading', 3000);
+            var $toastContent = $('<div class="preloader-wrapper small active"><div class="spinner-layer spinner-green-only"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div></div>');
+            Materialize.toast($toastContent, 3000);
             return false;
         },
 
