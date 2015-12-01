@@ -549,12 +549,7 @@ var spottr = {};;
             };
             var target = document.createElement("div");
             document.body.appendChild(target);
-            var spinner = new Spinner(opts).spin(target);
-            iosOverlay({
-                text: "Loading",
-                duration: durationTime,
-                spinner: spinner
-            });
+            Materialize.toast('Loading', 3000);
             return false;
         },
 
@@ -564,7 +559,7 @@ var spottr = {};;
 
         error: function(message,duration) {
             var errorMessage = 'Error!',
-                durationTime = 5e3;
+                durationTime = 4000;
 
             if (message != undefined) {
                 errorMessage = message;
@@ -574,11 +569,7 @@ var spottr = {};;
                 durationTime = duration;
             }
 
-            iosOverlay({
-                text: errorMessage,
-                duration: durationTime,
-                icon: "assets/img/cross.png"
-            });
+            Materialize.toast(errorMessage, durationTime);
             return false;
         },
 
@@ -588,7 +579,7 @@ var spottr = {};;
 
         success: function(message,duration) {
             var successMessage = 'Success!',
-                durationTime = 5e3;
+                durationTime = 3000;
 
             if (message != undefined) {
                 successMessage = message;
@@ -598,21 +589,9 @@ var spottr = {};;
                 durationTime = duration;
             }
 
-            iosOverlay({
-                text: successMessage,
-                duration: durationTime,
-                icon: "assets/img/check.png"
-            });
+            Materialize.toast(successMessage, durationTime);
             return false;
-        },
-
-        /**
-         * hide alert
-         */
-
-        hideAlert: function() {
-            $('.ui-ios-overlay').hide();
-        },
+        }
 
     };
 })(jQuery, this);

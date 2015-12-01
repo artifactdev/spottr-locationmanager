@@ -90,7 +90,6 @@
                       '</div>'
                 );
             };
-            spottr.global.hideAlert();
         },
 
 
