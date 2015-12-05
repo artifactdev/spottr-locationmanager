@@ -18,8 +18,16 @@
             <div class="row">
                 <div class="login-box">
                     <form action="authentication">
-                        <input type="text" id="email" name="email" placeholder="Username" />
-                        <input type="password" id="password" name="password" placeholder="Password" />
+                        <div class="input-field">
+                            <input type="text" id="email" name="email" class="validate"/>
+                            <label for="email">E-Mail</label>
+                        </div>
+
+                        <div class="input-field">
+                            <input type="password" id="password" name="password" class="validate"/>
+                            <label for="password">Passwort</label>
+                        </div>
+
                         <button type="submit" class="btn btn-default pull-right">Login</button>
                     </form>
                 </div>

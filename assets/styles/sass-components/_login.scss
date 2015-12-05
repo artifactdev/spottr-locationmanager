@@ -22,13 +22,8 @@ body {
                 border: 1px solid $base-grey-light;
                 background: $base-white;
                 input {
-                    width: 100%;
-                    margin: 10px 0;
-
-                    border: 1px solid $base-grey-middle;
-                    -webkit-box-shadow: 0 0 0;
-                       -moz-box-shadow: 0 0 0;
-                            box-shadow: 0 0 0;
+                    box-sizing: border-box;
+                    padding: 2px 8px;
                 }
             }
         }

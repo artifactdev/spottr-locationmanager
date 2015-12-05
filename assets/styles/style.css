@@ -9410,12 +9410,8 @@ body.page-login main {
     border: 1px solid #f4f4f2;
     background: white; }
     body.page-login main .login-box input {
-      width: 100%;
-      margin: 10px 0;
-      border: 1px solid #8d8d8d;
-      -webkit-box-shadow: 0 0 0;
-      -moz-box-shadow: 0 0 0;
-      box-shadow: 0 0 0; }
+      box-sizing: border-box;
+      padding: 2px 8px; }
 body.page-login footer {
   margin-top: 0; }
 
