@@ -22,3 +22,22 @@
         }
     }
 }
+
+#user-modal {
+    width: 98%;
+    .modal-close {
+        float: left;
+    }
+    .multiple-select-dropdown {
+        li {
+            &.disabled {
+                display: none;
+            }
+        }
+    }
+    .modal-footer {
+        .btn-default {
+            margin-left: 8px;
+        }
+    }
+}

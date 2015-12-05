@@ -62,6 +62,12 @@
         float: left;
 
         margin: 1%;
+        .card-title {
+            font-size: 18px;
+        }
+        .btn {
+            width: 48%;
+        }
     }
 }
 
@@ -85,6 +91,20 @@
     .items-list {
         .card {
             width: 48%;
+        }
+    }
+}
+
+@media only screen and (max-width : 600px) {
+    .items-list {
+        .card {
+            .btn {
+                display: block;
+                clear: both;
+
+                width: 100%;
+                margin-bottom: 8px;
+            }
         }
     }
 }

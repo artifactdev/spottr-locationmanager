@@ -5,21 +5,23 @@ body {
             background-size: cover;
             #page-content {
                 .login-box {
-                    margin: 100px 0 100px -250px ;
-                    background: $base-white;
-                    border: 1px solid $base-grey-light;
-                    width: 500px;
-                    padding: 20px;
+                    position: absolute;
                     left: 50%;
-                    position: relative;
 
+                    width: 500px;
+                    margin: 100px 0 100px -250px ;
+                    padding: 20px;
+
+                    border: 1px solid $base-grey-light;
+                    background: $base-white;
                     input {
-                        margin: 10px 0;
-                        box-shadow: 0 0 0;
-                        -webkit-box-shadow: 0 0 0;
-                        -moz-box-shadow: 0 0 0;
-                        border: 1px solid $base-grey-middle;
                         width: 100%;
+                        margin: 10px 0;
+
+                        border: 1px solid $base-grey-middle;
+                        -webkit-box-shadow: 0 0 0;
+                           -moz-box-shadow: 0 0 0;
+                                box-shadow: 0 0 0;
                     }
                 }
             }
@@ -27,20 +29,20 @@ body {
     }
 }
 
-@include max-screen($mobile-width) { 
+@include max-screen($mobile-width) {
     body {
         &.page-login {
             #page-canvas {
                 #page-content {
                     .login-box {
-                        margin: 50px 0 50px 0 ;
-                        width: 100%;
-                        padding: 20px;
                         left: 0;
+
+                        width: 100%;
+                        margin: 50px 0 50px 0 ;
+                        padding: 20px;
                     }
                 }
             }
         }
     }
 }
-

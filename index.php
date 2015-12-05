@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="./assets/styles/font-awesome.css" type="text/css">
         <link rel="stylesheet" href="./assets/styles/style.css" type="text/css">
         <title>Spottr</title>
+    </head>
     <body onunload="" class=" page-homepage navigation-off-canvas page-fade-in login" id="page-top">
 
             <!-- Navbar goes here -->
