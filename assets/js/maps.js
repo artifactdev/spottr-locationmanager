@@ -205,7 +205,9 @@ function createHomepageGoogleMap(_latitude, _longitude, json) {
 
             // Create list of items in Results sidebar ---------------------------------------------------------------------
 
-            $('.items-list .results').html(visibleItemsArray);
+            $('.results').html(visibleItemsArray);
+
+            spottr.main.addResultListener();
 
             // Check if images are cached, so will not be loaded again
 
@@ -214,11 +216,6 @@ function createHomepageGoogleMap(_latitude, _longitude, json) {
                     is_cached(json.items[a].thumb, a);
                 }
             });
-
-            // Call Rating function ----------------------------------------------------------------------------------------
-
-            spottr.global.rating();
-            spottr.global.hideAlert();
         });
 
         redrawMap('google', map);

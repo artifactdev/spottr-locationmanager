@@ -11,7 +11,7 @@
             <controller_method>authenticate</controller_method>
             <secure>false</secure>
         </route>
-        
+
         <!-- Locations-->
         <route>
             <url>locations</url>
@@ -55,7 +55,7 @@
             <controller_method>addImage</controller_method>
             <secure>false</secure>
         </route>
-        
+
         <!-- Nutzerverwaltung -->
         <route>
             <url>users</url>

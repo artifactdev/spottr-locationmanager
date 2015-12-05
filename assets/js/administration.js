@@ -46,7 +46,7 @@
                     gallery = path + 'rest-api/media/locations/default-item.png'
                 }
                 itemsList.append(
-                    '<li>' +
+                    /*'<li>' +
                     '<div class="item" id="' + json.items[i].id + '">' +
                     '<a href="#" class="image">' +
                     '<img src="' + gallery + '" alt="">' +
@@ -66,10 +66,30 @@
                     '</div>' +
                     '</div>' +
                     '</div>' +
-                    '</li>'
+                    '</li>'*/
+                    '<div class="card col s3" id="' + json.items[i].id + '" data-gallery="' + json.items[i].gallery + '" data-title="' + json.items[i].title + '" data-type="' + json.items[i].type + '"  data-category="' + json.items[i].category + '" data-location="' + json.items[i].latitude + ','+ json.items[i].longitude + '" data-aperture="' + json.items[i].aperture + '" data-date="' + json.items[i].date + '" data-focal="' + json.items[i].focal + '" data-iso="' + json.items[i].iso + '" data-notiz="' + json.items[i].note + '" data-rating="' + json.items[i].rating + '">'+
+                        '<div class="card-image">'+
+                          '<img src="' + path + gallery + '" alt="">' +
+                          '<span class="card-title">' + json.items[i].title + '<span class="rating">' + json.items[i].rating + '</span>' + '</span>' +
+                          '<div class="card-info">' +
+                              '<div class="col s12 no-padding">' +
+                                    '<div class="type">' +
+                                        '<i><img src="' + path + json.items[i].type + '" alt=""></i>' +
+                                        '<span>' + json.items[i].category + '</span>' +
+                                    '</div>' +
+                                '</div>' +
+                                '<span class="clearfix"></span>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="card-content">' +
+                          '<a href="#" class="btn btn-edit pull-right">Edit</a>' +
+                          '<a href="#" class="btn red btn-delete pull-left">Delete</a>' +
+                          '<span class="clearfix"></span>' +
+                        '</div>' +
+                        '<span class="meta-element hide" id="' + json.items[i].id + '" data-gallery="' + json.items[i].thumb + '" data-longitude="' + json.items[i].longitude + '" data-latitude="' + json.items[i].latitude + '" data-title="' + json.items[i].title + '" data-type="' + json.items[i].type + '"  data-category="' + json.items[i].category + '" data-location="' + json.items[i].location + '" data-aperture="' + json.items[i].aperture + '" data-date="' + json.items[i].dateCreated + '" data-focal="' + json.items[i].focal + '" data-iso="' + json.items[i].iso + '" data-notiz="' + json.items[i].note + '" data-rating="' + json.items[i].rating + '"><h3>' + json.items[i].title + '</h3></span>' +
+                      '</div>'
                 );
             };
-            spottr.global.hideAlert();
         },
 
 
@@ -78,7 +98,7 @@
          */
         showDeleteModal: function() {
             $('body').on('click', '.btn-delete', function(id) {
-                var metaItem = $(this).closest('.item').find('.meta-element');
+                var metaItem = $(this).closest('.card').find('.meta-element');
                 var modal = $('#delete-modal');
                 spottr.administration.deleteModal(metaItem);
 
@@ -90,7 +110,7 @@
          */
         editModal: function() {
             $('body').on('click', '.btn-edit', function(id) {
-                var metaElement = $(this).closest('.item').find('.meta-element');
+                var metaElement = $(this).closest('.card').find('.meta-element');
                 var modal = $('#edit-modal');
                 var actionURL = 'locations/';
 
@@ -210,7 +230,7 @@
  * spottr.global.menuItemHandler()
  * spottr.global.submitItem()
  * spottr.global.setInputsWidth()
- * spottr.global.fancySelect();} 
+ * spottr.global.fancySelect();}
  */
 $(document).ready(function() {
     spottr.administration.initItems();
