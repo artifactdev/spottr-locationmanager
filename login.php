@@ -11,6 +11,7 @@
         <title>Spottr</title>
     </head>
     <body onunload="" class="page-login navigation-off-canvas page-fade-in" id="page-top">
+        <?php include 'languageloader.php' ?>
         <?php
             include 'assets/moduls/header.php';
         ?>
@@ -20,15 +21,15 @@
                     <form action="authentication">
                         <div class="input-field">
                             <input type="text" id="email" name="email" class="validate"/>
-                            <label for="email">E-Mail</label>
+                            <label for="email"><?php echo "$email" ?></label>
                         </div>
 
                         <div class="input-field">
                             <input type="password" id="password" name="password" class="validate"/>
-                            <label for="password">Passwort</label>
+                            <label for="password"><?php echo "$password" ?></label>
                         </div>
 
-                        <button type="submit" class="btn btn-default pull-right">Login</button>
+                        <button type="submit" class="btn btn-default pull-right"><?php echo "$login" ?></button>
                     </form>
                 </div>
 

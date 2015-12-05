@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="./assets/styles/style.css" type="text/css">
         <title>Spottr</title>
     <body onunload="" class="page-verwaltung navigation-off-canvas page-fade-in" id="page-top" data-feedly-mini="yes">
+    <?php include 'languageloader.php' ?>
         <!-- Outer Wrapper-->
         <div id="outer-wrapper">
             <!-- Inner Wrapper -->

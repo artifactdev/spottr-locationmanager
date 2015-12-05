@@ -9,7 +9,7 @@
         <title>Spottr</title>
     </head>
     <body onunload="" class=" page-homepage navigation-off-canvas page-fade-in login" id="page-top">
-
+            <?php include 'languageloader.php' ?>
             <!-- Navbar goes here -->
            <?php include 'assets/moduls/header.php' ?>
             <!-- Page Layout here -->

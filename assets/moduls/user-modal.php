@@ -6,11 +6,11 @@
                     <thead>
                         <tr>
                             <td class="id">ID</td>
-                            <td class="mail">E-Mail</td>
-                            <td class="firstName">Vorname</td>
-                            <td class="lastName">Nachname</td>
-                            <td class="table-card">Kartenausschnitt</td>
-                            <td class="roles">Rolle</td>
+                            <td class="mail"><?php echo "$email" ?></td>
+                            <td class="firstName"><?php echo "$firstname" ?></td>
+                            <td class="lastName"><?php echo "$lastname" ?></td>
+                            <td class="table-card"><?php echo "$cardview" ?></td>
+                            <td class="roles"><?php echo "$role" ?></td>
 
                         </tr>
                     </thead>
@@ -28,25 +28,25 @@
                                 <input id="id" type="hidden" name="id"/>
                                 <div class="input-field">
                                   <input id="email" type="email" name="email" class="validate">
-                                  <label for="email">E-Mail</label>
+                                  <label for="email"><?php echo "$email" ?></label>
                                 </div>
                             </td>
                             <td>
                                 <div class="input-field">
                                   <input type="password" name="password" class="validate" required>
-                                  <label for="password">Passwort</label>
+                                  <label for="password"><?php echo "$password" ?></label>
                                 </div>
                             </td>
                             <td>
                                 <div class="input-field">
                                   <input id="firstname" type="text" name="firstname" required class="validate">
-                                  <label for="firstname">Vorname</label>
+                                  <label for="firstname"><?php echo "$firstname" ?></label>
                                 </div>
                             </td>
                             <td>
                                 <div class="input-field">
                                   <input id="lastname" type="text" name="lastname"  required class="validate">
-                                  <label for="lastname">Nachname</label>
+                                  <label for="lastname"><?php echo "$lastname" ?></label>
                                 </div>
                             </td>
                             <td>
@@ -60,7 +60,7 @@
                                 <div class="input-field">
                                     <select multiple name="roles[]" required>
                                         <option value="" disabled selected></option>
-                                        <option value="1">Administrator</option>
+                                        <option value="1"><?php echo "$admin" ?></option>
                                         <option value="2">User</option>
                                     </select>
                                 </div>
@@ -79,31 +79,31 @@
                         <tr>
                             <td>
                                 <div class="input-field">
-                                  <input id="email" type="email" name="email" placeholder="E-Mail" disabled class="validate">
-                                  <label for="email">E-Mail</label>
+                                  <input id="email" type="email" name="email" placeholder="<?php echo "$email" ?>" disabled class="validate">
+                                  <label for="email"><?php echo "$email" ?></label>
                                 </div>
                             </td>
                             <td>
                                 <div class="input-field">
-                                  <input type="password" name="password" placeholder="Passwort" class="validate" required>
-                                  <label for="password">Passwort</label>
+                                  <input type="password" name="password" placeholder="<?php echo "$password" ?>" class="validate" required>
+                                  <label for="password"><?php echo "$password" ?></label>
                                 </div>
                             </td>
                             <td>
                                 <div class="input-field">
-                                  <input id="firstname" type="text" placeholder="Vorname" name="firstname" required class="validate">
-                                  <label for="firstname">Vorname</label>
+                                  <input id="firstname" type="text" placeholder="<?php echo "$firstname" ?>" name="firstname" required class="validate">
+                                  <label for="firstname"><?php echo "$firstname" ?></label>
                                 </div>
                             </td>
                             <td>
                                 <div class="input-field">
-                                  <input id="lastname" type="text" placeholder="Nachname" name="lastname"  required class="validate">
-                                  <label for="lastname">Nachname</label>
+                                  <input id="lastname" type="text" placeholder="<?php echo "$lastname" ?>" name="lastname"  required class="validate">
+                                  <label for="lastname"><?php echo "$lastname" ?></label>
                                 </div>
                             </td>
                             <td>
                                 <div class="input-field">
-                                  <input type="text"  id="geocomplete-karte-edit" placeholder="Kartenausschnitt" name="searchAddress" autocomplete="false">
+                                  <input type="text"  id="geocomplete-karte-edit" placeholder="<?php echo "$cardview" ?>" name="searchAddress" autocomplete="false">
                                 </div>
                                 <input id="lng" name="longitude" data-geo="lng" type="hidden" value="">
                                 <input id="lat" name="latitude" data-geo="lat" type="hidden" value="">
@@ -112,7 +112,7 @@
                                 <div class="input-field">
                                     <select multiple name="roles[]" placeholder="Userrole wählen" required>
                                         <option value="" disabled selected>Choose Userrole</option>
-                                        <option value="1">Administrator</option>
+                                        <option value="1"><?php echo "$admin" ?></option>
                                         <option value="2">User</option>
                                     </select>
                                 </div>
@@ -129,9 +129,9 @@
     </div>
     <div class="clearfix"></div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-default btn-change-user pull-right hide">Nutzer ändern</button>
-        <button type="submit" class="btn btn-default btn-add-user pull-right">Nutzer anlegen</button>
-        <a href="#!" class="pull-left modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        <button type="submit" class="btn btn-default btn-change-user pull-right hide"><?php echo "$editUser" ?></button>
+        <button type="submit" class="btn btn-default btn-add-user pull-right"><?php echo "$saveUser" ?></button>
+        <a href="#!" class="pull-left modal-action modal-<?php echo "$close" ?> waves-effect waves-green btn-flat"><?php echo "$close" ?></a>
     </div>
   </div>
 
