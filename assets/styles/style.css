@@ -9003,6 +9003,13 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 .show {
   visibility: visible; }
 
+footer.page-footer {
+  padding-top: 0;
+  background: white; }
+  footer.page-footer .footer-copyright {
+    color: #4187c9;
+    background-color: transparent; }
+
 .results .card,
 .items-list .card {
   cursor: pointer; }
