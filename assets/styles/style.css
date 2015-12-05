@@ -9092,8 +9092,8 @@ footer.page-footer {
 #itemModal .col h4 {
   color: #4187c9; }
 
-#addModal .modal-footer .btn-flat {
-  float: left !important; }
+#add-modal .modal-footer .btn-flat {
+  float: left; }
 
 #user-modal {
   width: 98%; }
