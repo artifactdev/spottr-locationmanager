@@ -9051,6 +9051,10 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 .items-list .card {
   float: left;
   margin: 1%; }
+  .items-list .card .card-title {
+    font-size: 18px; }
+  .items-list .card .btn, .items-list .card .btn-large {
+    width: 48%; }
 
 @media only screen and (min-width: 1024px) {
   .items-list .card {
@@ -9061,6 +9065,12 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 @media only screen and (max-width: 768px) {
   .items-list .card {
     width: 48%; } }
+@media only screen and (max-width: 600px) {
+  .items-list .card .btn, .items-list .card .btn-large {
+    display: block;
+    clear: both;
+    width: 100%;
+    margin-bottom: 8px; } }
 .modal {
   width: 95%; }
 
@@ -9074,6 +9084,15 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   width: 100%; }
 #itemModal .col h4 {
   color: #4187c9; }
+
+#user-modal {
+  width: 98%; }
+  #user-modal .modal-close {
+    float: left; }
+  #user-modal .multiple-select-dropdown li.disabled {
+    display: none; }
+  #user-modal .modal-footer .btn-default {
+    margin-left: 8px; }
 
 header,
 main,
@@ -9098,6 +9117,9 @@ footer {
     left: 60px !important; }
   nav .button-collapse {
     margin-left: 10px; } }
+.page-homepage #useradmin-link {
+  display: none; }
+
 .cluster > div, .marker-cluster > div {
   color: white !important;
   text-align: center !important;
@@ -9366,27 +9388,27 @@ body.page-login #page-canvas {
   background: url(../img/map.gif) no-repeat;
   background-size: cover; }
   body.page-login #page-canvas #page-content .login-box {
-    margin: 100px 0 100px -250px;
-    background: white;
-    border: 1px solid #f4f4f2;
-    width: 500px;
-    padding: 20px;
+    position: absolute;
     left: 50%;
-    position: relative; }
+    width: 500px;
+    margin: 100px 0 100px -250px;
+    padding: 20px;
+    border: 1px solid #f4f4f2;
+    background: white; }
     body.page-login #page-canvas #page-content .login-box input {
+      width: 100%;
       margin: 10px 0;
-      box-shadow: 0 0 0;
+      border: 1px solid #8d8d8d;
       -webkit-box-shadow: 0 0 0;
       -moz-box-shadow: 0 0 0;
-      border: 1px solid #8d8d8d;
-      width: 100%; }
+      box-shadow: 0 0 0; }
 
 @media screen and (max-width: 640px) {
   body.page-login #page-canvas #page-content .login-box {
-    margin: 50px 0 50px 0;
+    left: 0;
     width: 100%;
-    padding: 20px;
-    left: 0; } }
+    margin: 50px 0 50px 0;
+    padding: 20px; } }
 body.page-verwaltung #outer-wrapper,
 body.page-login #outer-wrapper {
   background: #f4f4f2; }
@@ -9403,39 +9425,41 @@ body.page-login header {
   #user-modal table tbody {
     margin-top: 8px; }
   #user-modal table thead tr {
-    background-color: #f4f4f2;
-    font-weight: bold; }
+    font-weight: bold;
+    background-color: #f4f4f2; }
     #user-modal table thead tr td:not(:last-child) {
       border-right: 1px solid white; }
   #user-modal table td {
-    padding: 3px 8px;
-    border: 1px solid #f4f4f2;
-    text-overflow: ellipsis;
     overflow: hidden;
-    white-space: nowrap; }
+    padding: 3px 8px;
+    white-space: inherit;
+    text-overflow: ellipsis;
+    border: 1px solid #f4f4f2; }
     #user-modal table td.id {
-      max-width: 40px;
-      width: 40px; }
+      width: 40px;
+      max-width: 40px; }
     #user-modal table td.mail, #user-modal table td.card {
-      max-width: 315px;
-      width: 315px; }
+      width: 315px;
+      max-width: 315px; }
     #user-modal table td.firstName, #user-modal table td.lastName {
-      max-width: 220px;
-      width: 220px; }
+      width: 220px;
+      max-width: 220px; }
     #user-modal table td.roles {
-      max-width: 60px;
-      width: 60px; }
+      width: 60px;
+      max-width: 60px; }
     #user-modal table td.buttons {
-      max-width: 85px;
-      width: 85px; }
+      width: 85px;
+      max-width: 85px; }
     #user-modal table td input {
-      background: #f4f4f2; }
+      box-sizing: border-box;
+      padding: 2px 8px; }
 #user-modal #user-form {
   margin-top: 12px; }
   #user-modal #user-form td {
     border: none; }
 #user-modal .add-user table td,
 #user-modal .edit-user table td {
-  max-width: 16.666666%;
+  overflow: visible !important;
   width: 16.666666%;
-  overflow: visible !important; }
+  max-width: 16.666666%;
+  white-space: inherit; }
