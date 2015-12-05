@@ -9092,6 +9092,9 @@ footer.page-footer {
 #itemModal .col h4 {
   color: #4187c9; }
 
+#addModal .modal-footer .btn-flat {
+  float: left !important; }
+
 #user-modal {
   width: 98%; }
   #user-modal .modal-close {
@@ -9391,10 +9394,14 @@ footer {
       padding: 4px 8px;
       color: white; }
 
-body.page-login #page-canvas {
+body.page-login #nav-mobile {
+  display: none; }
+body.page-login header .brand-logo {
+  top: 0; }
+body.page-login main {
   background: url(../img/map.gif) no-repeat;
   background-size: cover; }
-  body.page-login #page-canvas #page-content .login-box {
+  body.page-login main .login-box {
     position: absolute;
     left: 50%;
     width: 500px;
@@ -9402,16 +9409,18 @@ body.page-login #page-canvas {
     padding: 20px;
     border: 1px solid #f4f4f2;
     background: white; }
-    body.page-login #page-canvas #page-content .login-box input {
+    body.page-login main .login-box input {
       width: 100%;
       margin: 10px 0;
       border: 1px solid #8d8d8d;
       -webkit-box-shadow: 0 0 0;
       -moz-box-shadow: 0 0 0;
       box-shadow: 0 0 0; }
+body.page-login footer {
+  margin-top: 0; }
 
 @media screen and (max-width: 640px) {
-  body.page-login #page-canvas #page-content .login-box {
+  body.page-login main .login-box {
     left: 0;
     width: 100%;
     margin: 50px 0 50px 0;

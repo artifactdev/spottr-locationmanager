@@ -23,6 +23,14 @@
     }
 }
 
+#addModal {
+    .modal-footer {
+        .btn-flat {
+            float: left !important;
+        }
+    }
+}
+
 #user-modal {
     width: 98%;
     .modal-close {

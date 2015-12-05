@@ -1,30 +1,39 @@
 body {
     &.page-login {
-        #page-canvas {
+        #nav-mobile {
+            display: none;
+        }
+        header {
+            .brand-logo {
+                top: 0;
+            }
+        }
+        main {
             background: url(../img/map.gif) no-repeat;
             background-size: cover;
-            #page-content {
-                .login-box {
-                    position: absolute;
-                    left: 50%;
+            .login-box {
+                position: absolute;
+                left: 50%;
 
-                    width: 500px;
-                    margin: 100px 0 100px -250px ;
-                    padding: 20px;
+                width: 500px;
+                margin: 100px 0 100px -250px ;
+                padding: 20px;
 
-                    border: 1px solid $base-grey-light;
-                    background: $base-white;
-                    input {
-                        width: 100%;
-                        margin: 10px 0;
+                border: 1px solid $base-grey-light;
+                background: $base-white;
+                input {
+                    width: 100%;
+                    margin: 10px 0;
 
-                        border: 1px solid $base-grey-middle;
-                        -webkit-box-shadow: 0 0 0;
-                           -moz-box-shadow: 0 0 0;
-                                box-shadow: 0 0 0;
-                    }
+                    border: 1px solid $base-grey-middle;
+                    -webkit-box-shadow: 0 0 0;
+                       -moz-box-shadow: 0 0 0;
+                            box-shadow: 0 0 0;
                 }
             }
+        }
+        footer {
+            margin-top: 0;
         }
     }
 }
@@ -32,15 +41,13 @@ body {
 @include max-screen($mobile-width) {
     body {
         &.page-login {
-            #page-canvas {
-                #page-content {
-                    .login-box {
-                        left: 0;
+            main {
+                .login-box {
+                    left: 0;
 
-                        width: 100%;
-                        margin: 50px 0 50px 0 ;
-                        padding: 20px;
-                    }
+                    width: 100%;
+                    margin: 50px 0 50px 0 ;
+                    padding: 20px;
                 }
             }
         }
