@@ -169,13 +169,13 @@
                         $('.btn-add-user').addClass('hide');
                         $('.btn-change-user').removeClass('hide');
 
-                        editUserForm.find('#id').val(data.id);
-                        editUserForm.find('#email').val(data.email);
-                        editUserForm.find('#firstname').val(data.firstName);
-                        editUserForm.find('#lastname').val(data.lastName);
+                        editUserForm.find('#idEdit').val(data.id);
+                        editUserForm.find('#emailEdit').val(data.email);
+                        editUserForm.find('#firstnameEdit').val(data.firstName);
+                        editUserForm.find('#lastnameEdit').val(data.lastName);
                         editUserForm.find('#mapCenter').val(data.searchAddress);
-                        editUserForm.find('#lng').val(data.longitude);
-                        editUserForm.find('#lat').val(data.latitude);
+                        editUserForm.find('#lngEdit').val(data.longitude);
+                        editUserForm.find('#latEdit').val(data.latitude);
                         editUserForm.find('select').val(data.roles);
 
                         spottr.userAdministration.editHandler(data.id);
@@ -236,7 +236,6 @@
 
                         error: function(data) {
                             spottr.global.error('Fehler beim editieren des Users');
-                            console.log(data);
                         }
                     });
                 }

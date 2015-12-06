@@ -78,8 +78,9 @@
                     <tbody>
                         <tr>
                             <td>
+                                <input type="hidden" id="idEdit">
                                 <div class="input-field">
-                                  <input id="email" type="email" name="email" placeholder="<?php echo "$email" ?>" disabled class="validate">
+                                  <input id="emailEdit" type="email" name="email" placeholder="<?php echo "$email" ?>" disabled class="validate">
                                   <label for="email"><?php echo "$email" ?></label>
                                 </div>
                             </td>
@@ -91,13 +92,13 @@
                             </td>
                             <td>
                                 <div class="input-field">
-                                  <input id="firstname" type="text" placeholder="<?php echo "$firstname" ?>" name="firstname" required class="validate">
+                                  <input id="firstnameEdit" type="text" placeholder="<?php echo "$firstname" ?>" name="firstname" required class="validate">
                                   <label for="firstname"><?php echo "$firstname" ?></label>
                                 </div>
                             </td>
                             <td>
                                 <div class="input-field">
-                                  <input id="lastname" type="text" placeholder="<?php echo "$lastname" ?>" name="lastname"  required class="validate">
+                                  <input id="lastnameEdit" type="text" placeholder="<?php echo "$lastname" ?>" name="lastname"  required class="validate">
                                   <label for="lastname"><?php echo "$lastname" ?></label>
                                 </div>
                             </td>
@@ -105,8 +106,8 @@
                                 <div class="input-field">
                                   <input type="text"  id="geocomplete-karte-edit" placeholder="<?php echo "$cardview" ?>" name="searchAddress" autocomplete="false">
                                 </div>
-                                <input id="lng" name="longitude" data-geo="lng" type="hidden" value="">
-                                <input id="lat" name="latitude" data-geo="lat" type="hidden" value="">
+                                <input id="lngEdit" name="longitude" data-geo="lng" type="hidden" value="">
+                                <input id="latEdit" name="latitude" data-geo="lat" type="hidden" value="">
                             </td>
                             <td>
                                 <div class="input-field">

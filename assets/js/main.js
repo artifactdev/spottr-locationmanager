@@ -62,9 +62,7 @@ $(document).ready(function() {
             var modal = $('#itemModal');
 
             $('body').find('.result-card').each(function(e) {
-                console.log($(this));
                 $(this).on('click', function(){
-                    console.log($(this));
                     var metaItem = $(this);
                     spottr.global.modalHandler(modal);
                     spottr.main.fillModal(metaItem);
