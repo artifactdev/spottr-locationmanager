@@ -110,4 +110,4 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`uuid`, `email`, `password`, `first_name`, `last_name`, `search_address`, `latitude`, `longitude`) VALUES
-(1, 'markus.jahn@fairnet-medien.de', 'fe6fa98138ffab6339e4adeee157538c', 'Markus', 'Jahn', '', '', '');
+(1, 'spottr@spottr-fotolocations.de', 'ca9a72fa566946554b9452af29787bac', 'Markus', 'Jahn', '', '', '');
