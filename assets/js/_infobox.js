@@ -61,7 +61,7 @@ function drawInfobox(category, infoboxContent, json, i){
                     '<img src="' + thumb +  '" width="50px">' +
                 '</div>' +
             '</div>' +
-            '<a class="nav-link" target="blank" href="http://maps.google.com/?daddr=' + latitude + ',' + longitude + '">In GoogleMaps öffnen</a>' +
+            '<a class="nav-link" target="blank" href="http://maps.google.com/?daddr=' + latitude + ',' + longitude + '">'+ openInMaps +'</a>' +
         '</div>' +
     '</div>';
     spottr.main.showModal();

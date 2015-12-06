@@ -411,7 +411,7 @@ var spottr = {};;
                             formLng.attr('value', lng);
                             completeInput.attr('disabled', 'disabled');
                         } else {
-                            spottr.global.error('Bitte den Marker zur Position ziehen.',3e3);
+                            spottr.global.error(putMarker,3e3);
                         }
 
                         google.maps.event.addListener(
@@ -559,7 +559,7 @@ var spottr = {};;
          */
 
         error: function(message,duration) {
-            var errorMessage = 'Error!',
+            var errorMessage = errorAppeared,
                 durationTime = 4000;
 
             if (message != undefined) {
@@ -579,7 +579,7 @@ var spottr = {};;
          */
 
         success: function(message,duration) {
-            var successMessage = 'Success!',
+            var successMessage = success,
                 durationTime = 3000;
 
             if (message != undefined) {

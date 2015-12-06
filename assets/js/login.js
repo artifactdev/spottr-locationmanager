@@ -30,7 +30,7 @@ $(document).ready(function() {
                         AuthenticationHelper.runAuthenticationCheck(data);
                     },
                     error: function() {
-                        spottr.global.error('Fehler beim Login!');
+                        spottr.global.error(loginError);
                     }
                 });
 

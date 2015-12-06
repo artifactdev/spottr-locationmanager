@@ -60,6 +60,7 @@
         <!-- end plugins -->
 
         <!-- start application -->
+        <script type="text/javascript" src="./assets/js/language.js"></script>
         <script type="text/javascript" src="./assets/js/global.js"></script>
         <script type="text/javascript" src="./assets/js/ajaxHandler.js"></script>
         <script type="text/javascript" src="./assets/js/authenticationHelper.js"></script>

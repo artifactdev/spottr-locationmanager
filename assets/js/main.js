@@ -138,33 +138,6 @@ $(document).ready(function() {
 
             visibleItemsArray.push(
                 /* TODO */
-                /*'<li>' +
-                '<div class="item" id="' + json.items[a].id + '">' +
-                '<a href="#" class="image">' +
-                '<div class="inner">' +
-                '<div class="item-specific">' +
-                spottr.main.drawItemSpecific(category, json, a) +
-                '</div>' +
-                '<img src="' + path + gallery + '" alt="">' +
-                '</div>' +
-                '</a>' +
-                '<div class="wrapper">' +
-                '<a href="#" class="quick-preview" id="' + json.items[a].id + '" data-gallery="' + json.items[a].gallery + '" data-title="' + json.items[a].title + '" data-type="' + json.items[a].type + '"  data-category="' + json.items[a].category + '" data-location="' + json.items[a].latitude + ','+ json.items[a].longitude + '" data-aperture="' + json.items[a].aperture + '" data-date="' + json.items[a].date + '" data-focal="' + json.items[a].focal + '" data-iso="' + json.items[a].iso + '" data-notiz="' + json.items[a].note + '" data-rating="' + json.items[a].rating + '"><h3>' + json.items[a].title + '</h3></a>' +
-                '<div class="info">' +
-                '<div class="col-md-12 no-padding">' +
-                '<figure>' + json.items[a].category + '</figure>' +
-                '<div class="type">' +
-                '<i><img src="' + path + json.items[a].type + '" alt=""></i>' +
-                '</div>' +
-                '</div>' +
-                '<div class="col-md-12 no-padding">' +
-                '<figure class="rating-label">Zugänglichkeit</figure>' +
-                '<input class="rating" type="number" readonly value="' + json.items[a].rating + '"/>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '</li>'*/
                 '<div class="card result-card" id="' + json.items[a].id + '" data-gallery="' + json.items[a].gallery + '" data-title="' + json.items[a].title + '" data-type="' + json.items[a].type + '"  data-category="' + json.items[a].category + '" data-location="' + json.items[a].latitude + ','+ json.items[a].longitude + '" data-aperture="' + json.items[a].aperture + '" data-date="' + json.items[a].date + '" data-focal="' + json.items[a].focal + '" data-iso="' + json.items[a].iso + '" data-notiz="' + json.items[a].note + '" data-rating="' + json.items[a].rating + '">'+
                 '<div class="card-image">'+
                   '<img src="' + path + gallery + '" alt="">' +

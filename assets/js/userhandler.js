@@ -62,7 +62,7 @@
                             });
                         },
                         error: function() {
-                            spottr.global.error('Fehler beim anlegen des Users!');
+                            spottr.global.error(userError);
                             spottr.userAdministration.loadUsers();
                         }
                     });
@@ -133,7 +133,7 @@
                     success: function(data) {
                         var userTable = $('#user-modal table.userlist tbody');
                         userTable.empty();
-                        spottr.global.success('User wurde gelöscht!');
+                        spottr.global.success(userDeleted);
                         spottr.userAdministration.loadUsers();
                     }
                 });
@@ -208,7 +208,7 @@
                         url: $(this).attr('action') + "/" + id,
                         data: $(this).serializeObject(),
                         success: function(data) {
-                            spottr.global.success('User wurde editiert!');
+                            spottr.global.success(userEdited);
                             $('#user-modal').find('.add-user').addClass('hide');
                             var editUserForm = $('#user-modal').find('.edit-user');
                             var addUserForm = $('#user-modal').find('.add-user');
