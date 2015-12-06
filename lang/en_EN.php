@@ -9,6 +9,8 @@
     $ruine           = "Ruine";
     $outdoor         = "Outdoor";
     $actualPosition  = "Take your position";
+    $searchAdress    = "Search Address";
+    $openInMaps      = "Open in GoogleMaps";
     $house           = "building";
     $fabrik          = "factory";
     $denkmal         = "monument";
@@ -19,7 +21,7 @@
     $note            = "note";
     $saveEntry       = "save entry";
     $locationDelete1 = "Do you really want delete ";
-    $locationDelete2 = "?"
+    $locationDelete2 = "?";
     $yes             = "Yes";
     $cancel          = "abort";
     $changeLocation  = "change location";
@@ -42,6 +44,7 @@
     $chooseRole      = "Userrole";
     $editUser        = "Change user";
     $saveUser        = "Add user";
+    $results         = "Results";
 
 
 

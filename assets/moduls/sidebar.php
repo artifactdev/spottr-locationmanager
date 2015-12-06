@@ -1,5 +1,5 @@
 <div id="slide-out" class="side-nav fixed">
-  <h3 class="center">Results</h3>
+  <h3 class="center"><?php echo "$results" ?></h3>
   <div class="input-field col s12">
         <select id="category-filter" class="icons">
           <option value="nothing" disabled selected><?php echo "$categoryFilter" ?></option>

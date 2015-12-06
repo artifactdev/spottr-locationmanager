@@ -44,6 +44,7 @@
     $chooseRole      = "Nutzerrolle";
     $editUser        = "Nutzer ändern";
     $saveUser        = "Nutzer anlegen";
+    $results         = "Ergebnisse";
 
 
 
