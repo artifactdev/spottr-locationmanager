@@ -48,7 +48,7 @@ function drawInfobox(category, infoboxContent, json, i){
             '<div class="image">' +
                 '<div class="overlay">' +
                     '<div class="wrapper">' +
-                        '<a href="#" class="quick-view showModal" data-id="' + id + '" data-gallery="' + path + gallery + '" data-title="' + title +'" data-type="' + type +'"  data-category="' + category +'" data-location="' + location +'" data-aperture="' + aperture +'" data-date="' + date +'" data-focal="' + focal +'" data-iso="' + iso +'" data-notiz="' + notiz +'" data-rating="' + rating +'">Quick View</a>' +
+                        '<a href="#" class="quick-view showModal" data-id="' + id + '" data-gallery="' + path + gallery + '" data-title="' + title +'" data-type="' + type +'"  data-category="' + category +'" data-location="' + location +'" data-aperture="' + aperture +'" data-date="' + date +'" data-focal="' + focal +'" data-iso="' + iso +'" data-notiz="' + notiz +'" data-rating="' + rating +'">'+quickview+'</a>' +
                     '</div>' +
                 '</div>' +
                 '<a href="#" class="quick-view">' +

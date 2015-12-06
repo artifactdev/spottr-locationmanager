@@ -12,6 +12,7 @@ if (userLang === 'de') {
     var userError     = 'Fehler beim anlegen des Users!';
     var userDeleted   = 'Benutzer wurde gelöscht!';
     var userEdited    = 'Benutzer wurde editiert!';
+    var quickview     = 'Ansehen';
 
 }
 
@@ -26,5 +27,6 @@ if (userLang === 'en') {
     var userError     = 'Failure on user adding!';
     var userDeleted   = 'User deleted!';
     var userEdited    = 'User edited!';
+    var quickview     = 'Quick view';
 }
 

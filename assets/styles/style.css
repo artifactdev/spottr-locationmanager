@@ -9061,17 +9061,22 @@ footer.page-footer {
   .items-list .card .card-title {
     font-size: 18px; }
   .items-list .card .btn, .items-list .card .btn-large {
-    width: 48%; }
+    width: 48%;
+    padding: 0 0.5rem; }
 
 @media only screen and (min-width: 1024px) {
   .items-list .card {
-    width: 23%; } }
+    width: 23%; }
+  .items-list .btn, .items-list .btn-large {
+    padding: 0 0.5rem; } }
 @media only screen and (max-width: 1023px) {
   .items-list .card {
     width: 31%; } }
 @media only screen and (max-width: 768px) {
   .items-list .card {
-    width: 48%; } }
+    width: 48%; }
+  .items-list .btn, .items-list .btn-large {
+    padding: 0 0.5rem; } }
 @media only screen and (max-width: 600px) {
   .items-list .card .btn, .items-list .card .btn-large {
     display: block;
