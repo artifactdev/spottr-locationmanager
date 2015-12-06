@@ -1,3 +1,5 @@
+![image](http://www.spottr-fotolocations.de/wp-content/uploads/2015/12/spottr-screens.png)
+
 # spottr-locationmanager
 Spottr is a locationmanager build for photographers and urbexer. Find out more at [www.spottr-fotolocations.de](http://www.spottr-fotolocations.de)
 
