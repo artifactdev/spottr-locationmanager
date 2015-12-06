@@ -1,6 +1,10 @@
 # spottr-locationmanager
 Spottr is a locationmanager build for photographers and urbexer. Find out more at [www.spottr-fotolocations.de](http://www.spottr-fotolocations.de)
 
+# Demo
+
+[Have a look at our Demo](http://dev.art-ifact.de/spottr-demo/)
+
 # Requirements
 
 - PHP >5.5
