@@ -17,7 +17,7 @@ if (userLang === 'de') {
 }
 
 if (userLang === 'en') {
-    var openInMaps    = 'open in googlemaps';
+    var openInMaps    = 'open in GoogleMaps';
     var edit          = 'edit';
     var deleteIt      = 'delete';
     var putMarker     = 'Please drag the marker to the desired position.';
