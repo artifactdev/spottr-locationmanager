@@ -1,38 +1,73 @@
 #user-modal {
     table {
         width: 100%;
-
         tbody {
             margin-top: 8px;
         }
-
         thead {
             tr {
-                background-color: $base-grey-light;
                 font-weight: bold;
 
+                background-color: $base-grey-light;
                 td:not(:last-child) {
                     border-right: 1px solid $base-white;
                 }
             }
         }
-
         td {
-            padding: 3px 8px;
-            border: 1px solid $base-grey-light;
+            overflow: hidden;
 
+            padding: 3px 8px;
+
+            white-space: inherit;
+            text-overflow: ellipsis;
+
+            border: 1px solid $base-grey-light;
+            &.id {
+                width: 40px;
+                max-width: 40px;
+            }
+            &.mail,
+            &.card {
+                width: 315px;
+                max-width: 315px;
+            }
+            &.firstName,
+            &.lastName {
+                width: 220px;
+                max-width: 220px;
+            }
+            &.roles {
+                width: 60px;
+                max-width: 60px;
+            }
+            &.buttons {
+                width: 85px;
+                max-width: 85px;
+            }
             input {
-                background:  $base-grey-light;
+                box-sizing: border-box;
+                padding: 2px 8px;
             }
         }
-    }   
-
+    }
     #user-form {
         margin-top: 12px;
-
         td {
             border: none;
         }
-    }  
-}
+    }
+    .add-user,
+    .edit-user {
+        table {
+            td {
+                overflow: visible !important;
 
+                width: 16.666666%;
+                max-width: 16.666666%;
+
+                white-space: inherit;
+            }
+        }
+    }
+}

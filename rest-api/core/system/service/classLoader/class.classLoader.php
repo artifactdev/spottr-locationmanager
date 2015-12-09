@@ -35,6 +35,10 @@ class ClassLoader
         $importedFiles = array();
 
         $filesArray = array();
+        if (!file_exists($location)) {
+            return array();
+        }
+
         // iterate over the include dir
         $dir = new RecursiveDirectoryIterator($location);
         foreach (new RecursiveIteratorIterator($dir) as $file) {

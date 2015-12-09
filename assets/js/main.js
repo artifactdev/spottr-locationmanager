@@ -26,14 +26,8 @@ $(document).ready(function() {
          */
         initMap: function() {
             var $body = $('body');
-            if ($body.hasClass('map-fullscreen')) {
-                if ($(window).width() > 768) {
 
-                    $('.map-canvas').height($(window).height() - $('.header').height());
-                } else {
-                    $('.map-canvas #map').height($(window).height() - $('.header').height());
-                }
-            }
+            $('#map').height($(window).height() - $('header').height());
 
             var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
 
@@ -45,7 +39,7 @@ $(document).ready(function() {
                     createHomepageGoogleMap(_latitude, _longitude, json);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
-                    spottr.global.error(errorThrownr,'5e3')                 
+                    spottr.global.error(errorThrownr,'5e3')
                     console.log(errorThrownr);
                 }
             });
@@ -55,50 +49,51 @@ $(document).ready(function() {
          * handles the mobile navigation which closes the result list on screens < 979 px
          */
         mobileNavigation: function() {
-            if ($(window).width() < 979) {
-                $(".main-navigation.navigation-top-header").remove();
-                $("body").removeClass("navigation-top-header");
-                $("body").addClass("navigation-off-canvas");
+            $(".button-collapse").sideNav({
+                menuWidth: 350, // Default is 240
+                edge: 'left', // Choose the horizontal origin
+                closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+              }
+            );
+        },
 
-                $('.items-list .toggle-navigation').click(function() {
-                    $('.map-canvas').toggleClass('results-collapsed');
-                    
+        /* TODO */
+        addResultListener: function() {
+            var modal = $('#itemModal');
+
+            $('body').find('.result-card').each(function(e) {
+                $(this).on('click', function(){
+                    var metaItem = $(this);
+                    spottr.global.modalHandler(modal);
+                    spottr.main.fillModal(metaItem);
                 });
-            }
+            });
         },
 
         /**
          * shows item modal and gets the metaItem to get the data from when clicked on a location(quick-link)
          */
         showModal: function() {
-            var metaItem = $(this).find('.quick-preview');
-            var modal = $('#modal');
+            var modal = $('#itemModal');
 
-            $('body').on('click', '.results li', function(id) {
-                var metaItem = $(this).find('.quick-preview');
-                spottr.global.modalHandler(modal);
-                spottr.main.fillModal(metaItem);
-
-            });
-
-            $('body').on('mouseover', '.results li', function(id) {
-                var metaItem = $(this).find('.quick-preview');
+            $('body').on('mouseover', '.results .result-card', function(id) {
+                var metaItem = $(this);
                 var id = metaItem.attr('id');
                 spottr.main.highlightMarker(id, 'add');
 
             });
 
-            $('body').on('mouseout', '.results li', function(id) {
-                var metaItem = $(this).find('.item');
+            $('body').on('mouseout', '.results .result-card', function(id) {
+                var metaItem = $(this);
                 var id = metaItem.attr('id');
                 spottr.main.highlightMarker(id, 'remove');
             });
 
-            $('body').on('click', '.infobox a:not(.nav-link)', function(e) {
+            $('body').unbind().on('click', '.infobox a:not(.nav-link)', function(e) {
+
                 e.preventDefault;
                 spottr.global.modalHandler(modal);
                 spottr.main.fillModal($(this));
-
             });
 
 
@@ -140,33 +135,22 @@ $(document).ready(function() {
             }
 
             visibleItemsArray.push(
-                '<li>' +
-                '<div class="item" id="' + json.items[a].id + '">' +
-                '<a href="#" class="image">' +
-                '<div class="inner">' +
-                '<div class="item-specific">' +
-                spottr.main.drawItemSpecific(category, json, a) +
+                /* TODO */
+                '<div class="card result-card" id="' + json.items[a].id + '" data-gallery="' + json.items[a].gallery + '" data-title="' + json.items[a].title + '" data-type="' + json.items[a].type + '"  data-category="' + json.items[a].category + '" data-location="' + json.items[a].latitude + ','+ json.items[a].longitude + '" data-aperture="' + json.items[a].aperture + '" data-date="' + json.items[a].date + '" data-focal="' + json.items[a].focal + '" data-iso="' + json.items[a].iso + '" data-notiz="' + json.items[a].note + '" data-rating="' + json.items[a].rating + '">'+
+                '<div class="card-image">'+
+                  '<img src="' + path + gallery + '" alt="">' +
+                  '<span class="card-title">' + json.items[a].title + '<span class="rating">' + json.items[a].rating + '</span>' + '</span>' +
+                  '<div class="card-info">' +
+                      '<div class="col s12 no-padding">' +
+                            '<div class="type">' +
+                                '<i><img src="' + path + json.items[a].type + '" alt=""></i>' +
+                                '<span>' + json.items[a].category + '</span>' +
+                            '</div>' +
+                        '</div>' +
+                        '<span class="clearfix"></span>' +
+                    '</div>' +
                 '</div>' +
-                '<img src="' + path + gallery + '" alt="">' +
-                '</div>' +
-                '</a>' +
-                '<div class="wrapper">' +
-                '<a href="#" class="quick-preview" id="' + json.items[a].id + '" data-gallery="' + json.items[a].gallery + '" data-title="' + json.items[a].title + '" data-type="' + json.items[a].type + '"  data-category="' + json.items[a].category + '" data-location="' + json.items[a].latitude + ','+ json.items[a].longitude + '" data-aperture="' + json.items[a].aperture + '" data-date="' + json.items[a].date + '" data-focal="' + json.items[a].focal + '" data-iso="' + json.items[a].iso + '" data-notiz="' + json.items[a].note + '" data-rating="' + json.items[a].rating + '"><h3>' + json.items[a].title + '</h3></a>' +
-                '<div class="info">' +
-                '<div class="col-md-12 no-padding">' +
-                '<figure>' + json.items[a].category + '</figure>' +
-                '<div class="type">' +
-                '<i><img src="' + path + json.items[a].type + '" alt=""></i>' +
-                '</div>' +
-                '</div>' +
-                '<div class="col-md-12 no-padding">' +
-                '<figure class="rating-label">Zugänglichkeit</figure>' +
-                '<input class="rating" type="number" readonly value="' + json.items[a].rating + '"/>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '</li>'
+              '</div>'
             );
         },
 
@@ -176,7 +160,7 @@ $(document).ready(function() {
          */
         fillModal: function(metaElement) {
 
-            var modal = $('#modal');
+            var modal = $('#itemModal');
 
             var title = metaElement.data('title');
             var gallery = metaElement.data('gallery');
@@ -191,8 +175,6 @@ $(document).ready(function() {
 
             var navlink = 'http://maps.google.com/?daddr=' + location;
 
-            var ratingItem = modal.find('.rating-item-modal');
-
             modal.find('.title').text(title);
             modal.find('.gallery-image').attr('src', gallery);
             modal.find('.category').text(category);
@@ -202,9 +184,7 @@ $(document).ready(function() {
             modal.find('.iso').text(iso);
             modal.find('.anmerkung').text(notiz);
             modal.find('.nav-link').attr('href', navlink);
-            ratingItem.attr('value', rating);
-
-            spottr.global.rating(ratingItem);
+            modal.find('.rating-item-modal').text(rating);
 
         },
 
@@ -214,8 +194,8 @@ $(document).ready(function() {
         categoryFilter: function() {
             $("#category-filter").change(function(e) {
                 e.preventDefault();
-                var filter = $('.category-filter').find('button').attr('title');
-                if (filter != 'Kein Filter gesetzt') {
+                var filter = $('#category-filter').val();
+                if (filter != 'nothing') {
                     spottr.main.loadFilteredItems(filter, 'category');
                 } else {
                     spottr.main.initMap();
@@ -231,12 +211,12 @@ $(document).ready(function() {
          * @param  {String} searchProperty where in the json should be searched
          */
         loadFilteredItems: function(filter, searchProperty) {
+            console.log(filter, searchProperty);
 
             AjaxHandler.request({
                 url: "locations",
                 method: "GET",
                 success: function(json) {
-                    console.log(json);
                     var config = {
                             property: searchProperty,
                             wrapper: true,
@@ -248,10 +228,10 @@ $(document).ready(function() {
                         },
 
                         itemsToload = $.fn.filterJSON(json, config);
-                    console.log(itemsToload);
+                        console.log(itemsToload);
                     var items = {};
                     items['items'] = itemsToload;
-                    console.log(items);
+                    console.log(itemsToload);
                     createHomepageGoogleMap(_latitude, _longitude, items);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {

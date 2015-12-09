@@ -30,11 +30,25 @@ class User extends AbstractDatabaseModel
     public $lastName = "";
 
     /**
-     * Companyname of the user.
+     * Addressname of the user.
      *
      * @var string
      */
-    public $companyName = "";
+    public $searchAddress = "";
+
+    /**
+     * Longitude of users home.
+     *
+     * @var string
+     */
+    public $longitude = "";
+
+    /**
+     * Latitude of users home.
+     *
+     * @var string
+     */
+    public $latitude = "";
 
     /**
      * Emailaddress of the user.
@@ -63,10 +77,12 @@ class User extends AbstractDatabaseModel
      */
     public function wrapDBResult($dbRow)
     {
-        $this->companyName = $dbRow['company_name'];
         $this->firstName = $dbRow['first_name'];
         $this->lastName = $dbRow['last_name'];
         $this->email = $dbRow['email'];
+        $this->searchAddress= $dbRow['search_address'];
+        $this->longitude = $dbRow['longitude'];
+        $this->latitude = $dbRow['latitude'];
         $this->id = $dbRow['uuid'];
         return $this;
     }
@@ -184,5 +200,30 @@ class User extends AbstractDatabaseModel
         }
 
         return TranslationUtils::translate("The password must have a length of 8-255 characters.");
+    }
+
+
+    public function isValidLatitude()
+    {
+        if (StringUtils::length($this->latitude) <= 60) {
+            return true;
+        }
+        return TranslationUtils::translate("Die Latitude darf maximal 60 Zeichen lang sein.");
+    }
+
+    public function isValidLongitude()
+    {
+        if (StringUtils::length($this->longitude) <= 60) {
+            return true;
+        }
+        return TranslationUtils::translate("Die Longitude darf maximal 60 Zeichen lang sein.");
+    }
+
+    public function isValidSearchAddress()
+    {
+        if (StringUtils::length($this->searchAddress) <= 200) {
+            return true;
+        }
+        return TranslationUtils::translate("Die Suchaddress darf maximal 200 Zeichen lang sein.");
     }
 }

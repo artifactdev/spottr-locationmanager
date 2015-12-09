@@ -1,26 +1,13 @@
-<div class="items-list">
-    <div class="inner">
-        <header>
-            <h3 class="pull-left">Results</h3>
-            <div class="pull-left category-filter">
-                <select name="category" id="category-filter" title="Select Category" data-live-search="true">
-                    <option value="nothing">Kein Filter gesetzt</option>
-                    <option value="industrie">Industrie</option>
-                    <option value="ruine">Ruine</option>
-                    <option value="outdoor">Outdoor</option>
-                </select>
-            </div>
-            <div class="toggle-navigation pull-right">
-                <div class="icon">
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                </div>
-            </div>
-        </header>
-        <ul class="results list">
-
-        </ul>
-    </div>
-    <!--results-->
+<div id="slide-out" class="side-nav fixed">
+  <h3 class="center"><?php echo "$results" ?></h3>
+  <div class="input-field col s12">
+        <select id="category-filter" class="icons">
+          <option value="nothing" disabled selected><?php echo "$categoryFilter" ?></option>
+          <option value="Industrie" ><?php echo "$industry" ?></option>
+          <option value="Ruine" ><?php echo "$ruine" ?></option>
+          <option value="Outdoor" ><?php echo "$outdoor" ?></option>
+        </select>
+        <label><?php echo "$filter" ?></label>
+      </div>
+      <div class="col s12 results"></div>
 </div>

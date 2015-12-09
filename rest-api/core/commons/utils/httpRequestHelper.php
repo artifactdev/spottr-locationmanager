@@ -28,6 +28,10 @@ class HTTPRequestHelper
     public static function getRequestParam($parameterName, $default = "", $parameterPrefix = "")
     {
         $requestedContentType = HTTPRequestHelper::getHeaderParam("content-type");
+
+        // TODO : this is just a Workaround to make the application working on php-fpm 5.6.10 and should be fixed when it's clear why the content-type is empty
+        $requestedContentType = "application/json";
+        
         if (StringUtils::indexOf($requestedContentType, "application/json") >= 0) { // TODO
             return HTTPRequestJSONHelper::getRequestParam($parameterName, $default, $parameterPrefix);
         }

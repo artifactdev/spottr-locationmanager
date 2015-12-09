@@ -41,7 +41,10 @@
          * Lädt die Daten des aktuell eingeloggten Nutzers.
          */
         factory.loadCurrentUser = function(callback) {
-            if (currentUser != null || !this.isAuthenticated()) {
+            if (currentUser != null) {
+                return currentUser;
+            }
+            if (!this.isAuthenticated()) {
                 return;
             }
 
@@ -76,6 +79,9 @@
             $.removeCookie("X-MJRestApi-AuthInfo", {
                 path: '/'
             });
+            $.removeCookie("X-SPOTTR-USER", {
+                path: '/'
+            });
         };
 
         /**
@@ -100,7 +106,7 @@
 
                 }
 
-                spottr.global.goToIndex();
+                spottr.global.goToIndex(currentUser);
                 spottr.global.logout();
             })
         };

@@ -1,18 +1,18 @@
-<div id="delete-modal" class="modal-window hide">
-    <div class="modal-wrapper">
-        <h2>Location <span class="location"></span> wirklich löschen?</h2>
-        <div class="modal-body">
-            <form action="locations/" method="delete" id="delete-form" class="delete-location">
-               <div class="col-md-6">
-                    <a href="#" class="btn btn-default full-width modal-close mt5 relative">Abbrechen</a>
-               </div>
-               <div class="col-md-6">
-                    <button type="submit" class="btn btn-red full-width">Ja</button>
-               </div>
+<div id="delete-modal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <div class="row">
+              <h2><?php echo "$locationDelete1" ?> <span class="location"></span> <?php echo "$locationDelete2" ?></h2>
 
-            </form>
+
+          </div>
         </div>
-        <div class="modal-close"><img src="assets/img/close.png"></div>
+        <div class="clearfix"></div>
+    </form>
+    <div class="modal-footer">
+        <form action="locations/" method="delete" id="delete-form" class="delete-location">
+          <button type="submit" class="btn red pull-right"><?php echo "$yes" ?></button>
+          <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat pull-left"><?php echo "$cancel" ?></a>
+        </form>
     </div>
-    <div class="modal-background fade-in"></div>
-</div>
+  </div>
+

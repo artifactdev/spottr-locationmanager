@@ -25,7 +25,6 @@
                 $('#user-modal .modal-close').on('click', function() {
                     modal.find('input').val('');
                     modal.find('select').val('');
-                    modal.find('select').selectpicker('render');
                 });
             });
 
@@ -43,6 +42,9 @@
         saveUser: function(modal) {
             var form = modal.find('.add-user');
 
+            $('.btn-add-user').on('click', function(){
+                form.submit();
+            })
 
             form.on('submit', function(e) {
                 e.preventDefault();
@@ -55,9 +57,12 @@
                         data: $(this).serializeObject(),
                         success: function(data) {
                             spottr.userAdministration.loadUsers();
+                            form.find('input').each(function(){
+                                $(this).val('');
+                            });
                         },
                         error: function() {
-                            spottr.global.error('Fehler beim anlegen des Users!');
+                            spottr.global.error(userError);
                             spottr.userAdministration.loadUsers();
                         }
                     });
@@ -94,24 +99,23 @@
                 userTable.append(
                     '<tr>' +
                     '<td class="id">' + json.items[i].id + '</td>' +
-                    '<td class="id">' + json.items[i].email + '</td>' +
-                    '<td class="id">' + json.items[i].firstName + '</td>' +
-                    '<td class="id">' + json.items[i].lastName + '</td>' +
-                    '<td class="id">' + json.items[i].mapCenter + '</td>' +
-                    '<td class="id">' + json.items[i].roles + '</td>' +
-                    '<td class="id">' +
+                    '<td class="mail">' + json.items[i].email + '</td>' +
+                    '<td class="firstName">' + json.items[i].firstName + '</td>' +
+                    '<td class="lastName">' + json.items[i].lastName + '</td>' +
+                    '<td class="table-card">' + json.items[i].searchAddress + '</td>' +
+                    '<td class="roles">' + json.items[i].roles + '</td>' +
+                    '<td class="buttons">' +
                     '<button type="button" class="btn btn-default edit-user" data-id="' + json.items[i].id + '" aria-label="Left Align">' +
-                    '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
+                    '<i class="material-icons small mdi-action-assignment-ind"></i>' +
                     '</button>' +
-                    '<button type="button" class="btn btn-red delete-user" data-id="' + json.items[i].id + '" aria-label="Left Align">' +
-                    '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>' +
+                    '<button type="button" class="btn red delete-user" data-id="' + json.items[i].id + '" aria-label="Left Align">' +
+                    '<i class="material-icons small mdi-action-delete"></i>' +
                     '</button>' +
                     '</td>' +
                     '</tr>'
                 );
             }
             spottr.global.success('User wurden geladen');
-            spottr.global.hideAlert();
         },
 
         /**
@@ -129,7 +133,7 @@
                     success: function(data) {
                         var userTable = $('#user-modal table.userlist tbody');
                         userTable.empty();
-                        spottr.global.success('User wurde gelöscht!');
+                        spottr.global.success(userDeleted);
                         spottr.userAdministration.loadUsers();
                     }
                 });
@@ -162,19 +166,19 @@
                             detailsAttribute: "data-geo"
                         });
 
-                        editUserForm.find('#id').val(data.id);
-                        editUserForm.find('#email').val(data.email);
-                        editUserForm.find('#firstname').val(data.firstName);
-                        editUserForm.find('#lastname').val(data.lastName);
-                        editUserForm.find('#mapCenter').val(data.mapCenter);
-                        editUserForm.find('#lng').val(data.mapLongitude);
-                        editUserForm.find('#lat').val(data.mapLatitude);
+                        $('.btn-add-user').addClass('hide');
+                        $('.btn-change-user').removeClass('hide');
+
+                        editUserForm.find('#idEdit').val(data.id);
+                        editUserForm.find('#emailEdit').val(data.email);
+                        editUserForm.find('#firstnameEdit').val(data.firstName);
+                        editUserForm.find('#lastnameEdit').val(data.lastName);
+                        editUserForm.find('#mapCenter').val(data.searchAddress);
+                        editUserForm.find('#lngEdit').val(data.longitude);
+                        editUserForm.find('#latEdit').val(data.latitude);
                         editUserForm.find('select').val(data.roles);
-                        editUserForm.find('select').selectpicker('render');
 
                         spottr.userAdministration.editHandler(data.id);
-
-                        spottr.global.hideAlert();
 
                     }
                 });
@@ -190,6 +194,10 @@
         editHandler: function(id) {
             var form = $('#user-modal').find('#edit-user-form');
 
+            $('.btn-change-user').on('click', function(){
+                form.submit();
+            });
+
             form.on('submit', function(e) {
                 e.preventDefault();
                 form.validate();
@@ -200,7 +208,7 @@
                         url: $(this).attr('action') + "/" + id,
                         data: $(this).serializeObject(),
                         success: function(data) {
-                            spottr.global.success('User wurde editiert!');
+                            spottr.global.success(userEdited);
                             $('#user-modal').find('.add-user').addClass('hide');
                             var editUserForm = $('#user-modal').find('.edit-user');
                             var addUserForm = $('#user-modal').find('.add-user');
@@ -208,11 +216,26 @@
                             addUserForm.removeClass('hide');
                             spottr.userAdministration.loadUsers();
 
+                            var currentUser = AuthenticationHelper.loadCurrentUser();
+                            if (currentUser.id == data.id) {
+                                $.cookie("X-SPOTTR-USER", JSON.stringify(data), {
+                                    expires: (1 / 24),
+                                    path: "/"
+                                });
+                            }
+
+                            $('.btn-add-user').removeClass('hide');
+                            $('.btn-change-user').addClass('hide');
+
+                            form.find('input').each(function(){
+                                $(this).val('');
+                            });
+
+
                         },
 
                         error: function(data) {
                             spottr.global.error('Fehler beim editieren des Users');
-                            console.log(data);
                         }
                     });
                 }

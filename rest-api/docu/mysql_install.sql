@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `locations` (
   `focal` int(1) NOT NULL,
   `iso` int(7) NOT NULL,
   `note` text NOT NULL,
-  `type` varchar(255) NOT NULL
+  `type` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -98,7 +98,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(200) NOT NULL,
   `first_name` varchar(200) NOT NULL,
   `last_name` varchar(200) NOT NULL,
-  `company_name` varchar(200) NOT NULL,
+  `search_address` varchar(200) DEFAULT NULL,
+  `latitude` varchar(60) DEFAULT NULL,
+  `longitude` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`uuid`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
@@ -107,5 +109,5 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`uuid`, `email`, `password`, `first_name`, `last_name`, `company_name`) VALUES
-(1, 'markus.jahn@fairnet-medien.de', 'fe6fa98138ffab6339e4adeee157538c', 'Markus', 'Jahn', '-');
+INSERT INTO `users` (`uuid`, `email`, `password`, `first_name`, `last_name`, `search_address`, `latitude`, `longitude`) VALUES
+(1, 'spottr@spottr-fotolocations.de', 'f6850cc8c10ccb4cb444f139239fda07', 'Add your account', 'delete this user', '', '', '');

@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', '1');
+ini_set('error_reporting', E_ERROR);
 /**
  * The Restfacade Entry Point
  *
@@ -13,8 +15,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
-ini_set('display_errors', '1');
-ini_set('error_reporting', E_ERROR);
+
 
 ini_set('max_execution_time','600000');
 ini_set('memory_limit','2048M');

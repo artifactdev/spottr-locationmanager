@@ -1,46 +1,50 @@
 body {
     &.page-login {
-        #page-canvas {
+        #nav-mobile {
+            display: none;
+        }
+        header {
+            .brand-logo {
+                top: 0;
+            }
+        }
+        main {
             background: url(../img/map.gif) no-repeat;
             background-size: cover;
-            #page-content {
-                .login-box {
-                    margin: 100px 0 100px -250px ;
-                    background: $base-white;
-                    border: 1px solid $base-grey-light;
-                    width: 500px;
-                    padding: 20px;
-                    left: 50%;
-                    position: relative;
+            .login-box {
+                position: absolute;
+                left: 50%;
 
-                    input {
-                        margin: 10px 0;
-                        box-shadow: 0 0 0;
-                        -webkit-box-shadow: 0 0 0;
-                        -moz-box-shadow: 0 0 0;
-                        border: 1px solid $base-grey-middle;
-                        width: 100%;
-                    }
+                width: 500px;
+                margin: 100px 0 100px -250px ;
+                padding: 20px;
+
+                border: 1px solid $base-grey-light;
+                background: $base-white;
+                input {
+                    box-sizing: border-box;
+                    padding: 2px 8px;
                 }
             }
+        }
+        footer {
+            margin-top: 0;
         }
     }
 }
 
-@include max-screen($mobile-width) { 
+@include max-screen($mobile-width) {
     body {
         &.page-login {
-            #page-canvas {
-                #page-content {
-                    .login-box {
-                        margin: 50px 0 50px 0 ;
-                        width: 100%;
-                        padding: 20px;
-                        left: 0;
-                    }
+            main {
+                .login-box {
+                    left: 0;
+
+                    width: 100%;
+                    margin: 50px 0 50px 0 ;
+                    padding: 20px;
                 }
             }
         }
     }
 }
-

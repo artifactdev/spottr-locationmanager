@@ -1,395 +1,51 @@
 .modal {
-    overflow: hidden;
-    top: 50px;
-    .modal-dialog {
-        width: 750px;
-        margin: 80px auto;
-        .modal-content {
-            box-shadow: none;
-            border-radius: 0px;
-            border: none;
-            padding: 25px;
-            hr {
-                border-color: $base-grey-light;
-            }
-            h3 {
-                font-size: 14px;
-                font-weight: bold;
-                margin-top: 0;
-            }
-            dl {
-                font-size: 12px;
-            }
-            .modal-header {
-                border: none;
-                border-bottom: 1px solid $base-grey-light;
-                display: table;
-                margin-bottom: 20px;
-                padding: 0px;
-                padding-bottom: 10px;
-                width: 100%;
-                .close {
-                    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
-                    opacity: 1;
-                    right: 0px;
-                    position: absolute;
-                    top: 2px;
-                    z-index: 3;
-                }
-                .left {
-                    float: left;
-                }
-                .right {
-                    float: right;
-                    position: relative;
-                    top: 25px;
-                    .bookmark {
-                        border-radius: 50%;
-                        border: 2px solid $base-white;
-                        height: 25px;
-                        display: inline-block;
-                        margin-left: 10px;
-                        text-align: center;
-                        width: 25px;
-                        &:hover {
-                            border: 2px solid $base-blue;
-                        }
-                        &:after {
-                            text-shadow: none;
-                            -webkit-font-smoothing: antialiased;
-                            font-family: 'fontawesome';
-                            speak: none;
-                            font-weight: normal;
-                            font-variant: normal;
-                            line-height: 1;
-                            text-transform: none;
-                            color: $base-blue;
-                            content: "\f08a";
-                            display: block;
-                            line-height: 22px;
-                        }
-                    }
-                    .type {
-                        img {
-                            width: 20px;
-                        }
-                        span {
-                            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
-                            opacity: 0.6;
-                            font-size: 12px;
-                        }
-                    }
-                }
-                h2 {
-                    font-size: 18px;
-                    font-weight: bold;
-                    margin-bottom: 0px;
-                    margin-top: 0;
-                }
-                figure {
-                    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
-                    opacity: 0.6;
-                    margin-bottom: 5px;
-                }
-                .rating .fa-star.active {
-                    color: $base-blue;
-                }
-            }
-        }
-        .modal-body {
-            padding: 10px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid $base-grey-light;
-            margin-bottom: 20px;
-            input {
-                margin: 5px 0;
-            }
-            p {
-                font-size: 12px;
-            }
-            .image img {
-                width: 100%;
-            }
-            .features {
-                height: 70px;
-                margin-top: 20px;
-                overflow: hidden;
-                &.collapsed {
-                    height: 70px !important;
-                }
-            }
-            .row {
-                margin: 10px 0 !important;
-            }
-        }
-        .modal-footer {
-            border: none;
-            margin-top: 0;
-            padding: 0;
-        }
+    width: 95%;
+}
+
+.pac-container {
+    z-index: 9000;
+}
+
+@media only screen and (min-width: 1024px) {
+    .modal {
+        width: 70%;
     }
-    &.register-sign-in {
-        .checkbox {
-            margin: 0;
+}
+
+#itemModal {
+    .col {
+        img {
+            width: 100%;
         }
-        .modal-dialog {
-            width: 420px;
-        }
-        .modal-body {
-            border-bottom: 0;
-            margin-bottom: 0;
-            padding: 0;
-        }
-        .modal-footer {
-            text-align: left;
-            a {
-                color: $base-blue;
-            }
-        }
-        .lost-password {
-            position: relative;
-            top: 20px;
-        }
-        .btn {
-            margin-top: 10px;
+        h4 {
+            color: $primary-color;
         }
     }
 }
 
-.modal-window {
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-    opacity: 0;
-    height: 100%;
-    position: fixed;
-    z-index: 1000;
-    width: 100%;
-    top: 0;
-    left: 0;
-    text-align: center;
-    overflow-y: auto;
-    .modal-wrapper {
-        display: inline-block;
-        width: auto;
-        position: relative;
-        top: 100px;
-        z-index: 1000;
-        > {
-            h2, h3 {
-                color: $base-white;
-                text-align: left;
-            }
-            h2 {
-                font-size: 36px;
-                text-transform: none;
-                margin-bottom: 0px;
-                margin-top: 0;
-            }
-            figure {
-                filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
-                opacity: 0.6;
-                color: $base-white;
-                text-align: left;
-            }
+#add-modal {
+    .modal-footer {
+        .btn-flat {
+            float: left;
         }
-        .modal-body {
-            background-color: #3a3a3a;
-            display: table;
-            font-size: 18px;
-            margin-top: 30px;
-            padding: 10px;
-            text-align: left;
-            width: 820px;
-            h3 {
-                margin-top: 0;
-            }
-            input, button {
-                margin: 5px 0;
-            }
-            input.full-width, button.full-width {
-                width: 100%;
-            }
-            input[type="file"] {
-                background: white;
-                width: 100%;
-                padding: 12px;
-            }
-            .gallery {
-                width: 350px;
-                .features {
-                    padding: 30px;
-                    color: $base-white;
-                    ul {
-                        margin-bottom: 0;
-                    }
-                }
-                .image {
-                    position: relative;
-                    .price {
-                        border-radius: 0px;
-                        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
-                        background-color: $base-blue;
-                        color: $base-white;
-                        font-size: 18px;
-                        font-family: 'Montserrat', sans-serif;
-                        font-weight: bold;
-                        left: 10px;
-                        padding: 3px 8px;
-                        position: absolute;
-                        top: -4px;
-                        z-index: 2;
-                    }
-                    .type {
-                        background-color: $base-white;
-                        padding: 4px;
-                        position: absolute;
-                        bottom: 0;
-                        left: 0;
-                        z-index: 2;
-                        i {
-                            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
-                            opacity: 0.6;
-                            display: inline-block;
-                            img {
-                                width: 20px;
-                            }
-                        }
-                        span {
-                            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
-                            opacity: 0.6;
-                            display: inline-block;
-                            font-size: 9px;
-                            font-weight: bold;
-                            text-transform: uppercase;
-                            padding: 5px;
-                        }
-                    }
-                }
-            }
-            .modal-content {
-                box-shadow: none;
-                border-radius: 0px;
-                background-color: $base-white;
-                border: none;
-                display: table-cell;
-                vertical-align: top;
-                padding: 30px;
-                width: 100%;
-                section {
-                    margin-bottom: 30px;
-                    h3 {
-                        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-                        padding-bottom: 10px;
-                        margin-bottom: 10px;
-                    }
-                    .row {
-                        margin: 10px 0;
-                        .control-label {
-                            font-weight: bold;
-                        }
-                    }
-                }
-            }
-            .expandable-content {
-                margin-bottom: 10px;
-            }
-        }
-        .modal-close {
-            cursor: pointer;
-            position: absolute;
-            right: 0;
-            top: 0;
-            z-index: 3;
-            &:hover {
-                background: $base-blue !important;
-            }
-        }
-    }
-    &.multichoice .modal-wrapper {
-        > h3 {
-            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
-            opacity: 0.6;
-            font-size: 18px;
-            margin-bottom: 5px;
-            text-transform: none;
-        }
-        .modal-body {
-            background-color: transparent;
-            width: auto;
-        }
-        .items li {
-            display: inline-block;
-            margin-right: 20px;
-            width: 280px;
-            &:last-child {
-                margin-right: 0;
-            }
-        }
-    }
-    &.fade-in .modal-background {
-        filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-        opacity: 0;
-        background-color: rgba(0, 0, 0, 0.7);
-        height: 100%; 
-        position: fixed;
-        z-index: -1;
-        width: 100%;
-        top: 0;
-        left: 0;
-        text-align: center;
     }
 }
 
 #user-modal {
-    .modal-wrapper {
-        width: 80%;
-
-        .modal-body {
-            width: 100%;
-            background: $base-white;
+    width: 98%;
+    .modal-close {
+        float: left;
+    }
+    .multiple-select-dropdown {
+        li {
+            &.disabled {
+                display: none;
+            }
         }
     }
-}
-
-@include max-screen($mobile-width) {
-    .modal-window {
-        .modal-wrapper {
-            top: 8px !important;
-
-            > h2 {
-                font-size: 22px !important;
-                padding: 0 8px !important;
-            }
-        }
-        .modal-body {
-            width: 100% !important;
-            overflow: auto !important;
-            display: inline-block !important;
-
-            .gallery {
-                width: 100% !important;
-                overflow: hidden !important;
-            }
-
-            .modal-content {
-                padding: 0px !important;
-                width: 100% !important;
-                display: inline-block !important;
-                font-size: 15px !important;
-
-                .col-md-5 {
-                    width: 41.66666667% !important;
-                    float: left !important;
-                }
-
-                .col-md-7 {
-                    width: 58.33333333% !important;
-
-                    .star-rating {
-                        margin-top: -32px;
-                        margin-left: 8px;
-                    }
-                }
-            }
+    .modal-footer {
+        .btn-default {
+            margin-left: 8px;
         }
     }
 }

@@ -1,9 +1,10 @@
 $(document).ready(function() {
     var documentHeight = $(document).height();
     var header = $('.header').height();
-    var pageCanvas = documentHeight - header;
+    var footer = $('footer').height();
+    var pageCanvas = documentHeight - header - footer;
 
-    $('#page-canvas').height(pageCanvas);
+    $('main').height(pageCanvas);
 
     spottr.login.authenticateUser();
 
@@ -29,7 +30,7 @@ $(document).ready(function() {
                         AuthenticationHelper.runAuthenticationCheck(data);
                     },
                     error: function() {
-                        spottr.global.error('Fehler beim Login!');
+                        spottr.global.error(loginError);
                     }
                 });
 

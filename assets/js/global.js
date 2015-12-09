@@ -1,6 +1,19 @@
 var path = ((window.location.href.match(/^(http.+\/)[^\/]+$/) != null) ? window.location.href.match(/^(http.+\/)[^\/]+$/)[1] : window.location);
+
+// Default,
 var _latitude = 51.0545032;
 var _longitude = 13.7416008;
+
+$(document).ready(function() {
+    var cookieValue = $.cookie("X-SPOTTR-USER");
+    if (cookieValue === undefined || cookieValue == null || cookieValue == "null") {
+        return;
+    }
+    cookieValue = $.parseJSON(cookieValue);
+    _longitude = cookieValue.longitude;
+    _latitude = cookieValue.latitude;
+});
+
 var mapStyles = [{
     "featureType": "road",
     "elementType": "labels",
@@ -134,8 +147,8 @@ var spottr = {};;
         modalHandler: function(modalID) {
             var modal = modalID;
 
-            modal.removeClass('hide');
-            modal.addClass('fade-in');
+            modal.openModal();
+            modal.find('.modal-content').scrollTop(0);
 
             var modalForm = modal.find('form');
             var hasForm = modalForm.length;
@@ -143,47 +156,14 @@ var spottr = {};;
             if (hasForm >= 1) {
                 modalForm.validate();
             }
-
-            modal.find('.modal-close').on('click', function() {
-
-                modal.addClass('hide');
-                modal.removeClass('fade-in');
-
-                modal.find('input').each(function() {
-                    $(this).val('');
-                });
-
-                if (hasForm >= 1) {
-                    modalForm.validate().resetForm();
-                    modalForm.find('.tooltip').addClass('hide');
-                }
-            });
         },
 
         /**
          * converts select elements to bootstrap selects
          */
         fancySelect: function() {
-            var select = $('select');
-            if (select.length > 0) {
-                select.selectpicker();
-            }
-            var bootstrapSelect = $('.bootstrap-select');
-            var dropDownMenu = $('.dropdown-menu');
-            bootstrapSelect.on('shown.bs.dropdown', function() {
-                dropDownMenu.removeClass('animation-fade-out');
-                dropDownMenu.addClass('animation-fade-in');
-            });
-            bootstrapSelect.on('hide.bs.dropdown', function() {
-                dropDownMenu.removeClass('animation-fade-in');
-                dropDownMenu.addClass('animation-fade-out');
-            });
-            bootstrapSelect.on('hidden.bs.dropdown', function() {
-                var _this = $(this);
-                $(_this).addClass('open');
-                setTimeout(function() {
-                    $(_this).removeClass('open');
-                }, 100);
+            $(document).ready(function() {
+                $('select').material_select();
             });
         },
 
@@ -247,26 +227,6 @@ var spottr = {};;
             } catch (e) {
                 console.log(e);
             }
-        },
-
-        /**
-         * converts rating input to stars
-         * @param  {DOM Element} element     The element which should be converted
-         * @param  {String} size        the size of the stars
-         * @param  {Boolean} showCaption Should the stars have an caption
-         * @param  {Boolean} showClear   should the stars have an clear button
-         */
-        rating: function(element, size, showCaption, showClear) {
-            element = typeof element !== 'undefined' ? element : $(".rating");
-            size = typeof size !== 'undefined' ? size : 'xs';
-            showCaption = typeof showCaption !== 'undefined' ? showCaption : false;
-            showClear = typeof showClear !== 'undefined' ? showClear : false;
-
-            element.rating({
-                'size': size,
-                'showCaption': showCaption,
-                'showClear': showClear
-            });
         },
 
         searchFilter: function() {
@@ -451,7 +411,7 @@ var spottr = {};;
                             formLng.attr('value', lng);
                             completeInput.attr('disabled', 'disabled');
                         } else {
-                            spottr.global.error('Bitte den Marker zur Position ziehen.',3e3);
+                            spottr.global.error(putMarker,3e3);
                         }
 
                         google.maps.event.addListener(
@@ -518,7 +478,11 @@ var spottr = {};;
         /**
          * goes to index page
          */
-        goToIndex: function() {
+        goToIndex: function(currentUser) {
+            $.cookie("X-SPOTTR-USER", JSON.stringify(currentUser), {
+                expires: (1 / 24),
+                path: "/"
+            });
             var currentPage = window.location.href;
             var indexPath = path + 'index.php';
             var loginPath = path + 'login.php';
@@ -585,12 +549,8 @@ var spottr = {};;
             };
             var target = document.createElement("div");
             document.body.appendChild(target);
-            var spinner = new Spinner(opts).spin(target);
-            iosOverlay({
-                text: "Loading",
-                duration: durationTime,
-                spinner: spinner
-            });
+            var $toastContent = $('<div class="preloader-wrapper small active"><div class="spinner-layer spinner-green-only"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div></div>');
+            Materialize.toast($toastContent, 3000);
             return false;
         },
 
@@ -599,8 +559,8 @@ var spottr = {};;
          */
 
         error: function(message,duration) {
-            var errorMessage = 'Error!',
-                durationTime = 5e3;
+            var errorMessage = errorAppeared,
+                durationTime = 4000;
 
             if (message != undefined) {
                 errorMessage = message;
@@ -610,11 +570,7 @@ var spottr = {};;
                 durationTime = duration;
             }
 
-            iosOverlay({
-                text: errorMessage,
-                duration: durationTime,
-                icon: "assets/img/cross.png"
-            });
+            Materialize.toast(errorMessage, durationTime);
             return false;
         },
 
@@ -623,8 +579,8 @@ var spottr = {};;
          */
 
         success: function(message,duration) {
-            var successMessage = 'Success!',
-                durationTime = 5e3;
+            var successMessage = success,
+                durationTime = 3000;
 
             if (message != undefined) {
                 successMessage = message;
@@ -634,21 +590,9 @@ var spottr = {};;
                 durationTime = duration;
             }
 
-            iosOverlay({
-                text: successMessage,
-                duration: durationTime,
-                icon: "assets/img/check.png"
-            });
+            Materialize.toast(successMessage, durationTime);
             return false;
-        },
-
-        /**
-         * hide alert
-         */
-        
-        hideAlert: function() {
-            $('.ui-ios-overlay').hide();
-        },
+        }
 
     };
 })(jQuery, this);
