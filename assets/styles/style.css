@@ -9064,12 +9064,12 @@ footer.page-footer {
     width: 48%;
     padding: 0 0.5rem; }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1025px) {
   .items-list .card {
     width: 23%; }
   .items-list .btn, .items-list .btn-large {
     padding: 0 0.5rem; } }
-@media only screen and (max-width: 1023px) {
+@media only screen and (max-width: 1024px) {
   .items-list .card {
     width: 31%; } }
 @media only screen and (max-width: 768px) {
@@ -9133,6 +9133,10 @@ footer {
   nav .button-collapse {
     margin-left: 10px; } }
 .page-homepage #useradmin-link {
+  display: none; }
+
+.page-verwaltung .button-collapse,
+.page-login .button-collapse {
   display: none; }
 
 .cluster > div, .marker-cluster > div {
@@ -9434,7 +9438,7 @@ body.page-login header {
   padding-left: 0; }
   body.page-verwaltung header .brand-logo,
   body.page-login header .brand-logo {
-    left: 20px;
+    left: 10px !important;
     transform: translateX(0%); }
 
 #user-modal table {
