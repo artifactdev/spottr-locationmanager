@@ -1,7 +1,7 @@
 
 var userLang = navigator.language || navigator.userLanguage;
 
-if (userLang === 'de') {
+if (userLang === 'de' || userLang === 'de-de') {
     var openInMaps    = 'In GoogleMaps öffnen';
     var edit          = 'bearbeiten';
     var deleteIt      = 'löschen';
@@ -16,7 +16,7 @@ if (userLang === 'de') {
 
 }
 
-if (userLang === 'en') {
+if (userLang === 'en' || userLang === 'en-us' || userLang === 'en-gb') {
     var openInMaps    = 'open in GoogleMaps';
     var edit          = 'edit';
     var deleteIt      = 'delete';
