@@ -14,7 +14,7 @@ Spottr is a locationmanager build for photographers and urbexer. Find out more a
 
 # download 
 
-[v1.0 Alpha](https://github.com/artifactdev/spottr-locationmanager/archive/v1.0a.zip)
+[v1.0 Alpha](https://github.com/artifactdev/spottr-locationmanager/archive/v1.1a.zip)
 
 # Install instructions
 
